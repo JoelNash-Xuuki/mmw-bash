@@ -67,6 +67,14 @@ overlayTitle(){
   ffmpeg -i $1 -vf "movie=$2 [watermark]; [watermark]scale=202x36 [watermark2];[in][watermark2] overlay=(W/2)-(overlay_w/2):(H/2)-(overlay_h/2):enable='between(t,($4),($5))'[out]" $3
   mv $3 $1
 }
-"$@"
 
+createIGImages(){
+   convert $4 -crop 0x0+0+0 "$4-cropped.png"
+
+   x=$1
+   y=$2
+   convert -size 1080x1080 plasma:lightblue -swirl -180 $3 -swirl 50 -composite "$4" -crop 0x0+0+0 -scale 270x270 -gravity east -geometry +0+60 -composite $5
+}
+
+"$@"
 
