@@ -17,7 +17,7 @@ renderMix(){
 }
 
 audioToMP4(){
-  ffmpeg -ss 00:00:00 -i $1 -t $3 -filter_complex "[0:a]showspectrum=s=854x480:mode=combined:slide=scroll:saturation=0.2:scale=log,format=yuv420p[v]" -map "[v]" -map 0:a -b:v 700k -b:a 360k $2
+  ffmpeg -ss 00:00:00 -i $1 -t $3 -filter_complex "[0:a]showspectrum=s=854x480:mode=combined:slide=scroll:saturation=0.2:scale=log,format=yuv420p[v]" -map "[v]" -map 0:a -b:v 1920k -b:a 1080k $2
 }
 
 rotateMP4(){
@@ -36,7 +36,7 @@ rotateMP4(){
 createTextPNG(){
 convert -background transparent -fill lightblue \
         -extent 1920x1080\
-        -font ~/.fonts/xuukitype1.ttf -pointsize 144 label:$1 \
+        -font ~/.fonts/xuukitype1.ttf -pointsize 288 label:$1 \
          $HOME/images/$2.png
 
 convert -background transparent -fill lightblue \
@@ -59,12 +59,12 @@ animate(){
 
 
 overlayWatermark(){
-  ffmpeg -i $1 -vf "movie=$2 [watermark]; [watermark]scale=50x50 [watermark2];[in][watermark2] overlay=(W/1)-(overlay_w/1):(H/1)-(overlay_h/1):enable='between(t,($4),($5))'[out]" $3
+  ffmpeg -i $1 -vf "movie=$2 [watermark]; [watermark]scale=100x100 [watermark2];[in][watermark2] overlay=(W/1)-(overlay_w/1):(H/1)-(overlay_h/1):enable='between(t,($4),($5))'[out]" $3
   mv $3 $1
 }
 
 overlayTitle(){
-  ffmpeg -i $1 -vf "movie=$2 [watermark]; [watermark]scale=202x36 [watermark2];[in][watermark2] overlay=(W/2)-(overlay_w/2):(H/2)-(overlay_h/2):enable='between(t,($4),($5))'[out]" $3
+  ffmpeg -i $1 -vf "movie=$2 [layer]; [in][layer]overlay=t*64:t*64[out]" $3
   mv $3 $1
 }
 
