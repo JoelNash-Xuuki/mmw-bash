@@ -16,6 +16,10 @@ renderMix(){
   csound -o$1 $2
 }
 
+playMix(){
+  csound -odac $2
+}
+
 audioToMP4(){
   ffmpeg -ss 00:00:00 -i $1 -t $3 -filter_complex "[0:a]showspectrum=s=854x480:mode=combined:slide=scroll:saturation=0.2:scale=log,format=yuv420p[v]" -map "[v]" -map 0:a -b:v 1920k -b:a 1080k $2
 }
@@ -55,8 +59,6 @@ animate(){
   ffmpeg -i ~/motion-picture/sequence.mp4 -filter:v "setpts=5.712*PTS,minterpolate='fps=24:mb_size=16:search_param=1000:vsbmc=0:scd=none:mc_mode=obmc:me_mode=bidir:me=ds'" -r 120 ~/motion-picture/sequence-result.mp4
 
 }
-
-
 
 overlayWatermark(){
   ffmpeg -i $1 -vf "movie=$2 [watermark]; [watermark]scale=100x100 [watermark2];[in][watermark2] overlay=(W/1)-(overlay_w/1):(H/1)-(overlay_h/1):enable='between(t,($4),($5))'[out]" $3
