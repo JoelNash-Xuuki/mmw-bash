@@ -7,14 +7,18 @@ LENGTH=$(bc <<< "scale=2;$BAR*32")
 source $HOME/projects_/options
 IMAGE1="$HOME/images/1677385391650.jpg" 
 
-one(){
+mod1(){
   mmw.sh createLyScoreAndMidiFile $LILY $PROJPATH $PROJ
   mmw.sh renderScore $WAV $CSD
   csound -o /home/joel/audio/501.wav /home/joel/projects_/stepsequencer/501.orc /home/joel/projects_/stepsequencer/501.sco
 }
 
-playback(){
+play(){
   csound --realtime -odac -B512 -b256 -+rtaudio=jack /home/joel/projects_/stepsequencer/501.orc /home/joel/projects_/stepsequencer/501.sco  
+}
+
+rec(){
+  csound  --realtime -odac -iadc -B512 -b256 -+rtaudio=jack /home/joel/mmw/src/rec.csd 
 }
 
 getProjName(){
@@ -45,10 +49,6 @@ audioToMP4(){
 
 rotateMP4(){
   ffmpeg -i $1 -vf "transpose=1" $2
-}
-
-rec(){
-  csound --realtime -odac -iadc -B512 -b256 -+rtaudio=jack /home/joel/mmw/src/rec.csd
 }
 
 #imageOverVid(){
@@ -130,10 +130,6 @@ addTextToVid(){
 addTextToVidtt(){
   ffmpeg -i $1 -vf "drawtext=fontcolor=pink:fontsize=13.3:fontfile=/home/joel/.fonts/xuukitype1.ttf:x=W-(W/1.1):y=H-(H/1.4):enable='between(t,0,30):textfile=/home/joel/projects_/03102022180354/src/text.txt'" $2
   mv $2 $1
-}
-
-play(){
-  ffplay $1
 }
 
 
