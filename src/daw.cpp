@@ -12,7 +12,9 @@
 
 using namespace std;
 string readFileContentsIntoString(const string& path);
-FILE *createFile(string filePath, string fileName, string extension);
+FILE *createFile(string filePath, 
+		 string fileName, 
+		 string extension);
 void getUserControls(int argc, char **argv);
 void applyUserControls();
 void print_header(FILE* file);
@@ -33,20 +35,29 @@ ProjectFileManager::ProjectFileManager(string projectName){
 }
 
 void ProjectFileManager::readConfigFile(){
-  configFilePath << getenv("HOME") << "/DAW/projects/" << this->projectName;
-  //this->configFile= getFile(configFilePath.str().c_str(), this->fileName,this->configExten);
-  //getConfigFileOptions(this->readfileIntoArray(this->configFile));
+  configFilePath << getenv("HOME") << "/mmw/tmp/" << this->projectName;
+  this->configFile= getFile(configFilePath.str().c_str(), this->fileName,this->configExten);
+  getConfigFileOptions(this->readfileIntoArray(this->configFile));
 }
 
 void ProjectFileManager::getConfigFileOptions(char* fileChars){
   for(int j= 0; j<strlen(fileChars); j++){
     switch(fileChars[j]){
   	  case 's': {
-         if(fileChars[j+1] == 'r'){
-           strncpy(sampleRate,&fileChars[2],5);
-	       sscanf(sampleRate, "%d", &sr);
-         }
-  	     break;
+            if(fileChars[j+1] == 'r'){
+	      cout << "Reading sample rate .." << endl;
+              strncpy(sampleRate,&fileChars[2],5);
+	      sscanf(sampleRate, "%d", &sr);
+          }
+	  case 'N': {
+            if(fileChars[j+1] == 'a'){
+	    cout << "Reading project name..." << endl;
+            strncpy(name,&fileChars[9],100);
+	    sscanf(name, "%c", &nm);
+	    cout << name << endl;
+	    }
+          }
+  	  break;
       }
     }
   }
@@ -177,24 +188,27 @@ void AudioEngine::runEngine(){
 void AudioEngine::getControls(int argc, char **argv){
 
   for(int n= 0; n < argc; n++){
-    if(argc != 2 || argv[1][0] != '-'){
-       cout << "usage: "<< argv[0] << "[ -p ] | [ -r ] | [ -s ] | [ -n ]" << endl;
-    }
+    //if(argc != 2 || argv[1][0] != '-'){
+    //   cout << "usage: "<< argv[0] << "[ -p ] | [ -r ] | [ -s ] | [ -n ]" << endl;
+    //}
     switch(argv[n][1]){
       case 'r':
- 	    cout << "Recording..." << endl;
+ 	cout << "Recording..." << endl;
         break;
-      case 'p':{
-	    cout << "Playing..." << endl;
-	    this->play();
-	  }
-      case 's':{
-	    cout << this->sampleRate << endl;
-	  }
-      case 'n':{
-	    cout << "Project Name: " << this->projName<< endl;
-      }
-      break;
+      case 'p':
+        cout << "Playing..." << endl;        
+	this->play();
+	break;
+      
+      case 's':
+        cout << this->sampleRate << endl;
+	break;
+      case 'n':
+        cout << "Project Name: " << this->projName<< endl;
+	break;
+      
+      default :
+	cout << "usage: "<< argv[0] << "[ -p ] | [ -r ] | [ -s ] | [ -n ]" << endl;
     }
   }
 }
@@ -207,9 +221,7 @@ void AudioEngine::getControls(int argc, char **argv){
   
   //const char* instrNScoTemplate;
   ////get project name
-
   //
-
   //if(argc < 2 || argv[2][0] != '-'){
   //  cout << "usage: " << argv[0] << 
   //  " is currently uavailiable." << endl; 

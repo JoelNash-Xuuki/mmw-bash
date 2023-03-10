@@ -13,6 +13,34 @@
 using namespace std;
 #ifndef SD_H
 #define SD_H
+class ProjectFileManager{
+  private:
+    string fileName;
+	ostringstream configFilePath;
+	string configExten= ".conf";
+	ostringstream audioEngineTemplateFilePath;
+	string configFile;
+    	char sampleRate[9];
+	char name[50];
+	char nm[50];
+    	char ch[1000];
+	int i= 0;
+
+  public:
+    int sr;
+    string projectName;
+    ProjectFileManager(string projectName);
+    string getFile(string filePath, 
+		   string fileName, 
+		   string extension);
+	void createDir();
+	char* readfileIntoArray(string fileName);
+	void readForConfigFileOptions();
+	int getSampleRate();
+	void getConfigFileOptions(char* fileChars);
+	void readConfigFile();
+};
+
 class AudioEngine{
   private:
   	Csound* csound;
@@ -27,32 +55,6 @@ class AudioEngine{
 	void play();
 	void buildEngine(bool playBackType);
 	string readFileContentsIntoString(const string& path);
-};
-
-class ProjectFileManager{
-  private:
-    string fileName;
-	ostringstream configFilePath;
-	string configExten= ".conf";
-	ostringstream audioEngineTemplateFilePath;
-	string configFile;
-    char sampleRate[9];
-	int sr;
-    char ch[1000];
-	int i= 0;
-
-  public:
-    string projectName;
-    ProjectFileManager(string projectName);
-    string getFile(string filePath, 
-		   string fileName, 
-		   string extension);
-	void createDir();
-	char* readfileIntoArray(string fileName);
-	void readForConfigFileOptions();
-	int getSampleRate();
-	void getConfigFileOptions(char* fileChars);
-	void readConfigFile();
 };
 
 class DAW{
