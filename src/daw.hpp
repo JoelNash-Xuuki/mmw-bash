@@ -53,6 +53,7 @@ class AudioEngine{
 	void getControls(int argc, char **argv);
 	void runEngine();
 	void play();
+	void render();
 	void buildEngine(bool playBackType);
 	string readFileContentsIntoString(const string& path);
 };

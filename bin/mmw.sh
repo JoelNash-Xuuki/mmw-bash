@@ -1,11 +1,4 @@
-PROJ="03102022180354"
-BPM="84"
-BEAT=$(bc <<< "scale=4; (60/$BPM)")
-BAR=$(bc <<< "scale=4;$BEAT*4")
-DUR=$(bc <<< "scale=4;$BAR*2")
-LENGTH=$(bc <<< "scale=2;$BAR*32")
-source $HOME/projects_/options
-IMAGE1="$HOME/images/1677385391650.jpg" 
+source $HOME/mmw/tmp/options
 
 mod1(){
   mmw.sh createLyScoreAndMidiFile $LILY $PROJPATH $PROJ
@@ -60,19 +53,6 @@ rotateMP4(){
 #}
 #
 
-createTextPNG(){
-convert -background transparent -fill lightblue \
-        -extent 1920x1080\
-        -font ~/.fonts/xuukitype1.ttf -pointsize 288 label:$1 \
-         $HOME/images/$2.png
-
-convert -background transparent -fill lightblue \
-        -extent 1920x1080\
-        -font ~/.fonts/xuukitype1.ttf -pointsize 144 label:$1 \
-		-swirl 360 \
-         $HOME/images/$2-e.png
-}
-
 sequenceImages(){
   ffmpeg -f concat -i ~/input.txt -vsync vfr -pix_fmt yuv420p ~/motion-picture/sequence.mp4
 }
@@ -87,12 +67,6 @@ overlayWatermarktt(){
   ffmpeg -i $1 -vf "movie=$2[watermark]; [watermark]scale=240x135 [watermark2];[in][watermark2] overlay=(W/0.7)-(overlay_w/1):(H/0.9)-(overlay_h/1):enable='between(t,($4),($5))'[out]" $3
   mv $3 $1
 }
-
-overlayWatermark(){
-  ffmpeg -i $1 -vf "movie=$2[watermark]; [watermark]scale=240x135 [watermark2];[in][watermark2] overlay=(W/0.85)-(overlay_w/1):(H/0.85)-(overlay_h/1):enable='between(t,($4),($5))'[out]" $3
-  mv $3 $1
-}
-
 
 overlayImage(){
   ffmpeg -i $1 -vf "movie=$2 [layer]; [layer]scale=380:380[layer2];[in][layer2] overlay=240:80 [out]" $3

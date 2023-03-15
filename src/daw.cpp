@@ -154,7 +154,28 @@ void AudioEngine::play(){
     this->readFileContentsIntoString("/home/joel/projects_/202210030854/src/501.orc").c_str()
   );
 
-  csound->ReadScore(
+csound->ReadScore(
+    this->readFileContentsIntoString("/home/joel/projects_/202210030854/src/501.sco").c_str()
+  );
+
+  csound->Start();
+  csound->Perform();	
+  delete csound;
+}
+
+void AudioEngine::render(){
+  csound= new Csound();
+  csound->SetOption("--realtime"); 
+  csound->SetOption("-o/home/joel/audio/501.wav");
+ // csound->SetOption("-iadc");
+  csound->SetOption("-B512");
+  csound->SetOption("-b256");
+  csound->SetOption("-+rtaudio=jack");
+  csound->CompileOrc(
+    this->readFileContentsIntoString("/home/joel/projects_/202210030854/src/501.orc").c_str()
+  );
+
+csound->ReadScore(
     this->readFileContentsIntoString("/home/joel/projects_/202210030854/src/501.sco").c_str()
   );
 
@@ -199,7 +220,10 @@ void AudioEngine::getControls(int argc, char **argv){
         cout << "Playing..." << endl;        
 	this->play();
 	break;
-      
+      case 'd':
+        cout << "Rendering..." << endl;        
+	this->render();
+	break;
       case 's':
         cout << this->sampleRate << endl;
 	break;
