@@ -38,3 +38,7 @@ Requirements
 The user needs to tell subtitles MMW when to print the screen.
 Lyrics could be written to .ly then the midi file could help generate the time to print the subtitles to screen.
 This may also allow the user to make any tweaks to the midi note if required.
+
+Sound Design requirement. Done using modules.
+
+Autotune module

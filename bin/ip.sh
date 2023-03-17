@@ -1,13 +1,19 @@
 source $HOME/mmw/tmp/options
 
+addSub(){
+  cp $MP4 $TEMP
+  ffmpeg -i $1 -vf subtitles=$HOME/mmw/bin/subtitles.srt $2
+  mv $2 $1
+}
+
 			     addLyrics(){
   ffmpeg -i $1\
-	  -vf "drawtext=fontcolor=pink:fontsize=20:x=0:y=0:enable='between(t,2.92,3.52):textfile=$LYRICS1:x=(w-text_w)/2:y=(h-text_h)/2',
-	     drawtext=fontcolor=pink:fontsize=20:x=0:y=0:enable='between(t,3.52,3.80):textfile=$LYRICS2:x=(w-text_w)/2:y=(h-text_h)/2',
-                          drawtext=fontcolor=pink:fontsize=20:x=0:y=0:enable='between(t,3.80,4.09):textfile=$LYRICS3:x=(w-text_w)/2:y=(h-text_h)/2',
-                             drawtext=fontcolor=pink:fontsize=20:x=0:y=0:enable='between(t,4.18,4.40):textfile=$LYRICS4:x=(w-text_w)/2:y=(h-text_h)/2',
-                             drawtext=fontcolor=pink:fontsize=20:x=0:y=0:enable='between(t,4.40,4.86):textfile=$LYRICS5:x=(w-text_w)/2:y=(h-text_h)/2',
-                             drawtext=fontcolor=pink:fontsize=20:x=0:y=0:enable='between(t,4.86,5.33):textfile=$LYRICS6:x=(w-text_w)/2:y=(h-text_h)/2',
+	  -vf "drawtext=fontcolor=pink:fontsize=20:x=0:y=0:enable='between(t,2.619,3.52):textfile=$LYRICS1:x=(w-text_w)/2:y=(h-text_h)/2',
+	     drawtext=fontcolor=pink:fontsize=20:x=0:y=0:enable='between(t,3.09,3.80):textfile=$LYRICS2:x=(w-text_w)/2:y=(h-text_h)/2',
+                          drawtext=fontcolor=pink:fontsize=20:x=0:y=0:enable='between(t,3.334,4.09):textfile=$LYRICS3:x=(w-text_w)/2:y=(h-text_h)/2',
+                             drawtext=fontcolor=pink:fontsize=20:x=0:y=0:enable='between(t,3.57,4.40):textfile=$LYRICS4:x=(w-text_w)/2:y=(h-text_h)/2',
+                             drawtext=fontcolor=pink:fontsize=20:x=0:y=0:enable='between(t,4.00,4.86):textfile=$LYRICS5:x=(w-text_w)/2:y=(h-text_h)/2',
+                             drawtext=fontcolor=pink:fontsize=20:x=0:y=0:enable='between(t,4.06,5.33):textfile=$LYRICS6:x=(w-text_w)/2:y=(h-text_h)/2',
                              drawtext=fontcolor=pink:fontsize=20:x=0:y=0:enable='between(t,5.68,6.00):textfile=$LYRICS7:x=(w-text_w)/2:y=(h-text_h)/2',
                              drawtext=fontcolor=pink:fontsize=20:x=0:y=0:enable='between(t,5.90,6.83):textfile=$LYRICS8:x=(w-text_w)/2:y=(h-text_h)/2',
                              drawtext=fontcolor=pink:fontsize=20:x=0:y=0:enable='between(t,7.17,7.50):textfile=$LYRICS9:x=(w-text_w)/2:y=(h-text_h)/2',
