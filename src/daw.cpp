@@ -165,9 +165,8 @@ csound->ReadScore(
 
 void AudioEngine::render(){
   csound= new Csound();
-  csound->SetOption("--realtime"); 
+  csound->SetOption("--realtime");
   csound->SetOption("-o/home/joel/audio/501.wav");
- // csound->SetOption("-iadc");
   csound->SetOption("-B512");
   csound->SetOption("-b256");
   csound->SetOption("-+rtaudio=jack");
