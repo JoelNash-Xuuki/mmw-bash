@@ -165,11 +165,7 @@ csound->ReadScore(
 
 void AudioEngine::render(){
   csound= new Csound();
-  csound->SetOption("--realtime");
   csound->SetOption("-o/home/joel/audio/501.wav");
-  csound->SetOption("-B512");
-  csound->SetOption("-b256");
-  csound->SetOption("-+rtaudio=jack");
   csound->CompileOrc(
     this->readFileContentsIntoString("/home/joel/projects_/202210030854/src/501.orc").c_str()
   );
