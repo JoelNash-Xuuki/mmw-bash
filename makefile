@@ -1,4 +1,5 @@
-PROG	= src/main.cpp  src/daw.cpp
+PROG	= src/main.cpp  src/daw.cpp src/modsyn.cpp
+
 CSOUND  = -lcsound64 -lcsnd6
 INCLUDE = -I/usr/include/csound/
 
