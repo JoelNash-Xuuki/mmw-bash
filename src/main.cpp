@@ -6,7 +6,7 @@ int main(int argc, char **argv){
 
   PrinterReader pr;
   const char* patch= argv[1];
-  ifstream readPatchFile(patch);
+  //ifstream readPatchFile(patch);
   //pr.readPatch();
 
  // ProjectFileManager* pfm = new ProjectFileManager("202210030835");

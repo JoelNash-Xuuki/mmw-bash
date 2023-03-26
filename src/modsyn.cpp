@@ -9,16 +9,47 @@
 using namespace std;
 
 PrinterReader::PrinterReader(){
+
       mixes=  (MIXOUT *)   malloc(MAXMODS * sizeof(MIXOUT));
-      oscs=   (OSCMOD *)   malloc(MAXMODS * sizeof(OSCMOD));
+      oscs=   (OSC *)   malloc(MAXMODS * sizeof(OSC));
       noises= (NOISEMOD *) malloc(MAXMODS * sizeof(NOISEMOD));
       sahs=   (NOISEMOD *) malloc(MAXMODS * sizeof(NOISEMOD));
       vcfs=   (VCFMOD *)   malloc(MAXMODS * sizeof(VCFMOD));
       envs=   (ENVMOD *)   malloc(MAXMODS * sizeof(ENVMOD));
 }
 
+void PrinterReader:: readPatch(){
+//  string* mod;
+//  while(fscanf("%s", modname ) != EOF){
+      //     if(! strcmp(modname, "OSC")){
+	  //       printf("TEST");
+      //       //read_osc(oscs, osc_count++);
+      //     }
+      //     //else if(! strcmp(modname, "MIXOUT")){
+      //     //  read_mix(mixes, mix_count++);
+      //     //}
+      //     //else if(! strcmp(modname, "NOISE")){
+      //     //  read_noise(noises, noise_count++);
+      //     //}
+      //     //else if(! strcmp(modname, "SAH")){
+      //     //  read_noise(sahs, sah_count++);
+      //     //}
+      //     //else if(! strcmp(modname, "VCF")){
+      //     //  read_vcf(vcfs, vcf_count++);
+      //     //}
+      //     //
+      //     //else if(! strcmp(modname, "ENV")){
+      //     //  read_env(envs, env_count++);
+      //     //} else {
+      //     //  fprintf(stderr,"%s is an unknown module\n", modname);
+      //     //}
+  //}
+}
 
-void PrinterReader::initialize_globals(OSCMOD *oscs, int osc_count, 
+
+
+
+void PrinterReader::initialize_globals(OSC *oscs, int osc_count, 
   			               NOISEMOD *noises, int noise_count, 
   			               NOISEMOD *sahs, int sah_count,
 	                               VCFMOD *vcfs, int vcf_count){

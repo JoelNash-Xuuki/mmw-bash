@@ -1,9 +1,10 @@
-#define SYNMOD_CHARS (128)
-#define MAXMODS (256)
 #include <cstdio>
 #include <cstdlib>
 #include <string>
 #include <cstring>
+#define SYNMOD_CHARS (128)
+#define MAXMODS (256)
+
 using namespace std;
 
 typedef struct { // INSTR;
@@ -18,7 +19,7 @@ typedef struct { // OSCMOD
   char waveform[SYNMOD_CHARS];
   char omin[SYNMOD_CHARS];
   char omax[SYNMOD_CHARS];
-} OSCMOD;
+} OSC;
 
 typedef struct { // MIXOUT;
   char outvar[SYNMOD_CHARS];
@@ -48,58 +49,31 @@ typedef struct { // ENVMOD;
 class PrinterReader{
   private:
     MIXOUT *mixes;
-    OSCMOD *oscs;
+    OSC *oscs;
     NOISEMOD *noises;
     NOISEMOD *sahs;
     VCFMOD *vcfs;
     ENVMOD *envs;
 
+    int osc_count= 0;
     char modname[64];
     int mix_count= 0;
-    int osc_count= 0;
     int noise_count= 0;
     int sah_count= 0;
     int vcf_count= 0;
     int env_count= 0;
     int i;
 
-  void initialize_globals(OSCMOD   *oscs,   int osc_count, 
-  			  NOISEMOD *noises, int noise_count, 
-  			  NOISEMOD *sahs,   int sah_count,
-  			  VCFMOD   *vcfs,   int vcf_count);
+    void readPatch();
+    void initialize_globals(OSC  *oscs,   int osc_count, 
+  			    NOISEMOD *noises, int noise_count, 
+  			    NOISEMOD *sahs,   int sah_count,
+  			    VCFMOD   *vcfs,   int vcf_count);
   public: 
     PrinterReader();
 };
 						
       
-
-//	void readPatch(){
-//	  string* mod;
-      //while(fscanf("%s", modname ) != EOF){
-      //     if(! strcmp(modname, "OSC")){
-	  //       printf("TEST");
-      //       //read_osc(oscs, osc_count++);
-      //     }
-      //     //else if(! strcmp(modname, "MIXOUT")){
-      //     //  read_mix(mixes, mix_count++);
-      //     //}
-      //     //else if(! strcmp(modname, "NOISE")){
-      //     //  read_noise(noises, noise_count++);
-      //     //}
-      //     //else if(! strcmp(modname, "SAH")){
-      //     //  read_noise(sahs, sah_count++);
-      //     //}
-      //     //else if(! strcmp(modname, "VCF")){
-      //     //  read_vcf(vcfs, vcf_count++);
-      //     //}
-      //     //
-      //     //else if(! strcmp(modname, "ENV")){
-      //     //  read_env(envs, env_count++);
-      //     //} else {
-      //     //  fprintf(stderr,"%s is an unknown module\n", modname);
-      //     //}
-      //}
-//	}
 
 //    void print_header(void){
 //      printf("<CsoundSynthesizer>\n");
@@ -129,8 +103,8 @@ class PrinterReader{
 void read_instr(INSTR *instr, int count);
 void print_instr(INSTR instr);
 
-void read_osc(OSCMOD *oscs, int count);
-void print_osc(OSCMOD osc);
+void read_osc(OSC *oscs, int count);
+void print_osc(OSC osc);
 
 void read_mix(MIXOUT *mix, int count);
 void print_mix(MIXOUT mix);
