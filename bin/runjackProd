@@ -1,0 +1,1 @@
+jackd -R -d alsa -d hw:1 -p 256 -r 48000 -S 16 --dither=shaped --nperiods 2
