@@ -7,7 +7,7 @@ int main(int argc, char **argv){
   //ifstream readPatchFile(patch);
   //pr.readPatch();
 
-  ProjectFileManager* pfm = new ProjectFileManager("202210030835");
+  ProjectFileManager* pfm = new ProjectFileManager("202210030834-3");
   AudioEngine * ae= new AudioEngine(pfm->sr,
         	  		    pfm->projectName);
   ae->getControls(argc,argv);

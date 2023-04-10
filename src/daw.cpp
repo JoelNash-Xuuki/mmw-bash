@@ -15,6 +15,7 @@ string readFileContentsIntoString(const string& path);
 FILE *createFile(string filePath, 
 		 string fileName, 
 		 string extension);
+
 void getUserControls(int argc, char **argv);
 void applyUserControls();
 void print_header(FILE* file);
@@ -151,11 +152,11 @@ void AudioEngine::play(){
   csound->SetOption("-b256");
   csound->SetOption("-+rtaudio=jack");
   csound->CompileOrc(
-    this->readFileContentsIntoString("/home/joel/projects_/202210030854/src/501.orc").c_str()
+    this->readFileContentsIntoString("/home/joel/projects_/202210030854-3/src/501.orc").c_str()
   );
 
 csound->ReadScore(
-    this->readFileContentsIntoString("/home/joel/projects_/202210030854/src/501.sco").c_str()
+    this->readFileContentsIntoString("/home/joel/projects_/202210030854-3/src/501.sco").c_str()
   );
 
   csound->Start();
@@ -167,11 +168,11 @@ void AudioEngine::render(){
   csound= new Csound();
   csound->SetOption("-o/home/joel/audio/501.wav");
   csound->CompileOrc(
-    this->readFileContentsIntoString("/home/joel/projects_/202210030854/src/501.orc").c_str()
+    this->readFileContentsIntoString("/home/joel/projects_/202210030854-3/src/501.orc").c_str()
   );
 
 csound->ReadScore(
-    this->readFileContentsIntoString("/home/joel/projects_/202210030854/src/501.sco").c_str()
+    this->readFileContentsIntoString("/home/joel/projects_/202210030854-3/src/501.sco").c_str()
   );
 
   csound->Start();
@@ -189,11 +190,11 @@ void AudioEngine::runEngine(){
   csound->SetOption("-b256");
   csound->SetOption("-+rtaudio=jack");
   csound->CompileOrc(
-    this->readFileContentsIntoString("/home/joel/projects_/202210030854/src/501.orc").c_str()
+    this->readFileContentsIntoString("/home/joel/projects_/202210030854-3/src/501.orc").c_str()
   );
 
   csound->ReadScore(
-    this->readFileContentsIntoString("/home/joel/projects_/202210030854/src/501.sco").c_str()
+    this->readFileContentsIntoString("/home/joel/projects_/202210030854-3/src/501.sco").c_str()
   );
 
   csound->Start();
