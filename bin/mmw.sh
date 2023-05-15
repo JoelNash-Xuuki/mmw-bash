@@ -23,9 +23,11 @@ renderScore(){
 }
 
 createLyScoreAndMidiFile(){
-  lilypond -dmidi-extension=mid $1;
+  #lilypond -dmidi-extension=mid $1.ly;
+  lilypond-book --output=out --format=html $1.lytex
+
   mv $3.mid $2/tmp/
-  mv $3.pdf $2/doc/
+  mv $3.pdf $2/doc/ 
 }
 
 renderMix(){
