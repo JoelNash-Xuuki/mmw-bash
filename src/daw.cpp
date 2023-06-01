@@ -105,6 +105,7 @@ void ProjectFileManager::createDir(){
 //
 //    
 //};
+
 //
 AudioEngine::AudioEngine(int sampleRate, string projName){
   this->sampleRate= sampleRate;
@@ -149,7 +150,7 @@ void AudioEngine::play(){
     this->readFileContentsIntoString("/home/joel/projects_/202210030854-3/src/501.orc").c_str()
   );
 
-csound->ReadScore(
+  csound->ReadScore(
     this->readFileContentsIntoString("/home/joel/projects_/202210030854-3/src/501.sco").c_str()
   );
 
@@ -157,21 +158,23 @@ csound->ReadScore(
   csound->Perform();	
   delete csound;
 }
-void AudioEngine::render(){
-  csound= new Csound();
-  csound->SetOption("-o/home/joel/audio/501.wav");
-  csound->CompileOrc(
-    this->readFileContentsIntoString("/home/joel/projects_/202210030854-5/src/501.orc").c_str()
-  );
 
-  csound->ReadScore(
-    this->readFileContentsIntoString("/home/joel/projects_/202210030854-5/src/501.sco").c_str()
-  );
+void AudioEngine::render() {
+  csound = new Csound();
+  csound->SetOption("-o/home/joel/audio/501.wav");
+  std::string orcfilePath = "/home/joel/projects_/" + this->projName + "/src/501.orc";
+  std::string scofilePath = "/home/joel/projects_/" + this->projName + "/src/501.sco";
+
+  csound->CompileOrc(this->readFileContentsIntoString(orcfilePath.c_str()).c_str());
+
+  csound->ReadScore(this->readFileContentsIntoString(scofilePath.c_str()).c_str());
 
   csound->Start();
-  csound->Perform();	
+  csound->Perform();
   delete csound;
 }
+
+
 void AudioEngine::runEngine(){
 
   csound= new Csound();

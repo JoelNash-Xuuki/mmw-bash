@@ -9,8 +9,8 @@ int main(int argc, char **argv){
   //pr.readPatch();
 
   ProjectFileManager* pfm = new ProjectFileManager(projName);
-  AudioEngine * ae= new AudioEngine(pfm->sr,
-        	  		    pfm->projectName);
+  AudioEngine * ae= new AudioEngine(44100,
+        	  		    projName);
   ae->getControls(argc,argv);
  
  // cout << "Program ended." << endl;  
