@@ -1,0 +1,150 @@
+I'm a Software Engineer and a Musician. You are my assistant. Your name is Susan. 
+
+We are contending with reality by finding solutions to emerging problems. 
+Our objective is to reduce a problem down to a single actionable solution. 
+
+I want to think of our communication as a tool to render a most 
+comprehensive cerebral map in the readers mind.
+
+We want a conceptual model of the reality using words, code and music.
+
+We may need this map to be able to expand to a large scale. Or scale down to something 
+very small.
+
+Analogies
+
+For example imagine if we need to find someone on a particular
+level in a building. We need to describe our problems as if our words
+were rendering the building as a 3d Hollagram that we can use to instantaniously
+strip away walls that enable us to  pin point where 
+the person is exactly because all the best routes to them can be 
+calculated with all obstacles on that route having been determined.
+
+Problems solved are spinning plates. Sometimes you have to return to them to make
+sure they are still spinning meaning have the solution still a solution.
+
+A problem could be any observable phenomena, and it can have a high degree of entropy,
+which I currently understand as a state of chaos. A solution should 
+beable to be reduced to a single actionable step in order
+to reduce this entropy.
+
+I will present problems following these practices:
+
+- Describe setting of the problem for context.
+- Present problem as task..
+- Instruct a format for the solution.
+- Describe the reason for the solution.
+
+Here comes a problem now...
+
+Hello ChatGPT, in the context of
+Digital Audio Workstation (DAW)
+The DAW allows users to arrange and write their music in a .ly file. 
+The DAW compiles the .ly file, producing a .pdf for sheet music and a .midi. 
+Each instrument written to the sheet music is allocated its own channel in the midi file. 
+The midi file is then processed by a .csd file. The .csd file is where users can design the sound 
+for each instrument they've arranged in the .ly score. To hear the music, users utilize a .mix file 
+to instruct the software on how, where, and when the music should be played.
+
+Things details to discuss that I need the app to control away from the users perspective.
+
+'options' file:
+PROJPATH="$HOME/projects_/$PROJ"
+LILY="$PROJPATH/src/$PROJ.ly"
+MIX="$PROJPATH/src/mix.csd"
+CSD="$PROJPATH/src/$PROJ.csd"
+WAV="$HOME/audio/$PROJ.wav"
+MP4="$HOME/motion-picture/$PROJ.mp4"
+MP4R="$HOME/motion-picture/$PROJ-tt.mp4"
+TEMPWOA="$HOME/motion-picture/$PROJ-temp-wo-audio.mp4"
+TEMP="$HOME/motion-picture/$PROJ-temp.mp4"
+WAVMIX="$HOME/audio/501.wav"
+IMAGEFORM="$HOME/images/ig-canvas.png"
+WATERMARK="$HOME/images/X.png"
+TITLE="$HOME/images/title.png"
+BPM="84"
+BEAT=$(bc <<< "scale=4; (60/$BPM)")
+BAR=$(bc <<< "scale=4;$BEAT*4")
+DUR=$(bc <<< "scale=4;$BAR*1")
+LENGTH=$(bc <<< "scale=2;$BAR*24")
+
+'project' script file:
+PROJ="202210030854-3"
+source $HOME/mmw/tmp/options
+
+# create .ly file and .mid file.
+# Move .mid  to /tmp file of the project. This file 
+# should probably say in the app. 
+# The pdf is moved to docs. Because we want the score 
+# to exists beyond the app. 
+mmw.sh createLyScoreAndMidiFile $LILY $PROJPATH $PROJ
+
+createLyScoreAndMidiFile(){
+  lilypond -dmidi-extension=mid $1;
+  #lilypond-book --output=out --format=html $1.lytex
+
+  mv $3.mid $2/tmp/
+  mv $3.pdf $2/doc/ 
+}
+
+# move pdf from proj location to a separate repo from mmw which displays the app.
+# The Xuuki-Node-Site is acting as a UI. Its probably sensible to bring the node 
+# express server into the mmw repo. High percentage of entropy from my perspective
+# just to warn you Susan. Becuase theres c++ csound and node. can it all compule together
+# will it need to. You'd need to critique that idea please.
+cp $HOME/projects_/$PROJ/doc/$PROJ.pdf $HOME/Xuuki-Node-Site/display/public/
+
+
+#this function outputs a wav file using the csd.
+mmw.sh renderScore $WAV $CSD
+
+renderScore(){
+  csound -o$1 $2
+}
+
+# the interface isnt particully sophiticated yet
+
+#This next command renders the audio file of the song
+daw -d $PROJ
+
+The next line moves the audio file into the Xuuk-Node-Site repo to be displayed
+But we sould probably bring the UI into the mmw repo.
+cp $HOME/audio/501.wav $HOME/Xuuki-Node-Site/display/public/$PROJ.wav
+
+There are flaws the user has to make sure they manually select midi channels.
+I would like you to help me refine all the steps and the detail of the steps that are involved in this
+workflow. 
+
+Could you please 
+provide this information in the format of a critical conversation with code examples if necessary? 
+This request is for the purpose of developing the design and the app itself. Thank you!
+
+Vision
+As a Software Engineer and Musician, my vision is to create harmonious synergies 
+between music and technology, crafting unique musical experiences enabled by software solutions. 
+I aspire to touch the bleeding edge of what's possible in both fields.
+
+Mission
+My mission is to apply my skills and knowledge in software engineering to solve complex problems 
+in the music industry, and vice versa. By leveraging the technical rigor of software development 
+and the creativity inherent in music, I aim to produce work that is both technically sound and 
+artistically impactful.
+
+Objectives
+To develop a software solution within the next year that addresses a pressing issue in the 
+music industry, such as digital rights management or music distribution.
+To compose and produce an album within the next two years that incorporates 
+elements of software-generated music or uses technology in a novel way.
+To stay abreast of advancements in both fields and continuously integrate new knowledge 
+and techniques into my work.
+Strategy
+My strategy involves continuous learning and cross-pollination between my two areas of 
+expertise. I will stay updated on trends and advancements in both fields, seek opportunities 
+for innovative applications of technology in music (and vice versa), and network 
+with professionals from both industries to foster collaborative opportunities.
+
+Tactics
+Allocate dedicated time each week to learn about new developments in both fields.
+Regularly exercise ideas for the intersection of music and technology.
+Attend industry events, seminars, and meetups to network and collaborate with other professionals.
+S

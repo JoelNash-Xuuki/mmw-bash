@@ -1,5 +1,3 @@
-
-PROJ="202210030854-3"
 PROJPATH="$HOME/projects_/$PROJ"
 LILY="$PROJPATH/src/$PROJ.ly"
 MIX="$PROJPATH/src/mix.csd"
