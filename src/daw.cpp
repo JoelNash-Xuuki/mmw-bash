@@ -29,18 +29,17 @@ class Config;
 
 // current gets config options
 // and will build the audioEngine
+
 ProjectFileManager::ProjectFileManager(string projectName){
   this->projectName= projectName;
   //this->fileName= this->projectName;
   readConfigFile();
 }
-
 void ProjectFileManager::readConfigFile(){
   configFilePath << getenv("HOME") << "/mmw/tmp/" << this->projectName;
   this->configFile= getFile(configFilePath.str().c_str(), this->fileName,this->configExten);
   getConfigFileOptions(this->readfileIntoArray(this->configFile));
 }
-
 void ProjectFileManager::getConfigFileOptions(char* fileChars){
   for(int j= 0; j<strlen(fileChars); j++){
     switch(fileChars[j]){
@@ -63,11 +62,9 @@ void ProjectFileManager::getConfigFileOptions(char* fileChars){
     }
   }
 }
-
 int ProjectFileManager::getSampleRate(){
   return this->sr;
 }
-
 char* ProjectFileManager::readfileIntoArray(string fileName){
   ifstream file(configFile);
   if(file.is_open()){
@@ -78,7 +75,6 @@ char* ProjectFileManager::readfileIntoArray(string fileName){
   }
   return this->ch;
 }
-
 string ProjectFileManager::getFile(string filePath, 
 			           string fileName, 
 				   string extension){
@@ -86,13 +82,11 @@ string ProjectFileManager::getFile(string filePath,
   declareFile << filePath << fileName << extension;
   return declareFile.str().c_str();
 }
-
 void ProjectFileManager::createDir(){
   ostringstream declareFile;
   declareFile << getenv("HOME") << "/DAW/projects/" << fileName;
   mkdir(declareFile.str().c_str(), 0700);
 }
-
 //void FileManager::readFile(){
 //  //ifstream infile(file);
 //  //string line;
@@ -163,23 +157,21 @@ csound->ReadScore(
   csound->Perform();	
   delete csound;
 }
-
 void AudioEngine::render(){
   csound= new Csound();
   csound->SetOption("-o/home/joel/audio/501.wav");
   csound->CompileOrc(
-    this->readFileContentsIntoString("/home/joel/projects_/202210030854-3/src/501.orc").c_str()
+    this->readFileContentsIntoString("/home/joel/projects_/202210030854-5/src/501.orc").c_str()
   );
 
-csound->ReadScore(
-    this->readFileContentsIntoString("/home/joel/projects_/202210030854-3/src/501.sco").c_str()
+  csound->ReadScore(
+    this->readFileContentsIntoString("/home/joel/projects_/202210030854-5/src/501.sco").c_str()
   );
 
   csound->Start();
   csound->Perform();	
   delete csound;
 }
-
 void AudioEngine::runEngine(){
 
   csound= new Csound();
@@ -201,7 +193,6 @@ void AudioEngine::runEngine(){
   csound->Perform();	
   delete csound;
 }
-
 void AudioEngine::getControls(int argc, char **argv){
 
   for(int n= 0; n < argc; n++){

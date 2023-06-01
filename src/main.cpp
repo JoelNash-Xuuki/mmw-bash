@@ -4,10 +4,11 @@
 int main(int argc, char **argv){
   //PrinterReader pr;
   //const char* patch= argv[1];
+  const char* projName= argv[2];
   //ifstream readPatchFile(patch);
   //pr.readPatch();
 
-  ProjectFileManager* pfm = new ProjectFileManager("202210030834-3");
+  ProjectFileManager* pfm = new ProjectFileManager(projName);
   AudioEngine * ae= new AudioEngine(pfm->sr,
         	  		    pfm->projectName);
   ae->getControls(argc,argv);
