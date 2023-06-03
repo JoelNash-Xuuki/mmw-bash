@@ -65,7 +65,7 @@ class PrinterReader{
     int i;
 
     void readPatch();
-    void initialize_globals(OSC  *oscs,   int osc_count, 
+    void initialize_globals(OSC      *oscs,   int osc_count, 
   			    NOISEMOD *noises, int noise_count, 
   			    NOISEMOD *sahs,   int sah_count,
   			    VCFMOD   *vcfs,   int vcf_count);
