@@ -153,10 +153,10 @@ void AudioEngine::play(){
   csound->Perform();	
   delete csound;
 }
-
 void AudioEngine::render() {
   csound = new Csound();
-  csound->SetOption("-o/home/joel/audio/"+ this->projName + ".wav");
+  std::string outputOp = "-o/home/joel/audio/"+ this->projName + ".wav";
+  csound->SetOption(outputOp.c_str());
   std::string orcfilePath = "/home/joel/projects_/" + this->projName + "/src/501.orc";
   std::string scofilePath = "/home/joel/projects_/" + this->projName + "/src/501.sco";
 
@@ -168,8 +168,6 @@ void AudioEngine::render() {
   csound->Perform();
   delete csound;
 }
-
-
 void AudioEngine::runEngine(){
 
   csound= new Csound();
