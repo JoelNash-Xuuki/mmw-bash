@@ -111,16 +111,13 @@ AudioEngine::AudioEngine(int sampleRate, string projName){
   this->sampleRate= sampleRate;
   this->projName= projName;
 }
-
 AudioEngine::AudioEngine(int sampleRate){
   this->sampleRate= sampleRate;
 }
-
 AudioEngine::AudioEngine(int sampleRate, int argc, char **argv){
   this->sampleRate;
   getControls(argc,argv);
 }
-
 string AudioEngine::readFileContentsIntoString(const string& path) {
   ifstream input_file(path);
   if (!input_file.is_open()) {
@@ -130,14 +127,12 @@ string AudioEngine::readFileContentsIntoString(const string& path) {
   }
   return string((istreambuf_iterator<char>(input_file)), istreambuf_iterator<char>());
 }
-
 void AudioEngine::buildEngine(bool playBackType){
   //string contents= readFileContentsIntoString(audioEngineTemplate.str();
   //fprintf(file, readFileContentsIntoString(instrNScoTemplate).c_str(), sr.c_str());    
   //fprintf(file, contents.c_str(), sr.c_str());
   //fclose(file);
 }
-
 void AudioEngine::play(){
   csound= new Csound();
   csound->SetOption("--realtime"); 
@@ -161,7 +156,7 @@ void AudioEngine::play(){
 
 void AudioEngine::render() {
   csound = new Csound();
-  csound->SetOption("-o/home/joel/audio/501.wav");
+  csound->SetOption("-o/home/joel/audio/"+ this->projName + ".wav");
   std::string orcfilePath = "/home/joel/projects_/" + this->projName + "/src/501.orc";
   std::string scofilePath = "/home/joel/projects_/" + this->projName + "/src/501.sco";
 
