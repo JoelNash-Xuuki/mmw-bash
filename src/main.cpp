@@ -8,6 +8,9 @@ int main(int argc, char **argv){
   //ifstream readPatchFile(patch);
   //pr.readPatch();
 
+
+  //take me to main
+
   ProjectFileManager* pfm = new ProjectFileManager(projName);
   AudioEngine * ae= new AudioEngine(44100,
         	  		    projName);
