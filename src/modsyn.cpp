@@ -9,9 +9,8 @@
 using namespace std;
 
 PrinterReader::PrinterReader(){
-
       mixes=  (MIXOUT *)   malloc(MAXMODS * sizeof(MIXOUT));
-      oscs=   (OSC *)   malloc(MAXMODS * sizeof(OSC));
+      oscs=   (OSC *)      malloc(MAXMODS * sizeof(OSC));
       noises= (NOISEMOD *) malloc(MAXMODS * sizeof(NOISEMOD));
       sahs=   (NOISEMOD *) malloc(MAXMODS * sizeof(NOISEMOD));
       vcfs=   (VCFMOD *)   malloc(MAXMODS * sizeof(VCFMOD));
@@ -19,14 +18,17 @@ PrinterReader::PrinterReader(){
 }
 
 void PrinterReader:: readPatch(){
-//  string* mod;
-//  while(fscanf("%s", modname ) != EOF){
-      //     if(! strcmp(modname, "OSC")){
-	  //       printf("TEST");
-      //       //read_osc(oscs, osc_count++);
-      //     }
-      //     //else if(! strcmp(modname, "MIXOUT")){
-      //     //  read_mix(mixes, mix_count++);
+  //const char* mod;
+  //while(fscanf("%s", mod ) != EOF){
+  //  if(! strcmp(mod, "OSC")){
+
+  //  }
+  //}
+      //printf("TEST");
+      //  read_osc(oscs, osc_count++);
+      //}
+      //  else if(! strcmp(modname, "MIXOUT")){
+      //    read_mix(mixes, mix_count++);
       //     //}
       //     //else if(! strcmp(modname, "NOISE")){
       //     //  read_noise(noises, noise_count++);
