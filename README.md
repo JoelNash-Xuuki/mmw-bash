@@ -43,4 +43,6 @@ Contributions are welcome. Please fork the repository and create a pull request 
 NOTES
 The user needs a stable workflow.
 
+aplay -D plughw:1,0 file.wav
+
 
