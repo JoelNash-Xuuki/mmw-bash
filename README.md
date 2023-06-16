@@ -46,3 +46,7 @@ The user needs a stable workflow.
 aplay -D plughw:1,0 file.wav
 
 
+#How to run tests
+in the home dir of the repo run the following binery to run the tests.s
+./test/bats/bin/bats --tap test/test.bats
+
