@@ -22,6 +22,10 @@ renderScore(){
   csound -o$1 $2
 }
 
+rec(){
+  csound --realtime -odac -iadc -B512 -b256 -+rtaudio=jack $1
+}
+
 createLyScoreAndMidiFile(){
   lilypond -dmidi-extension=mid $1;
   #lilypond-book --output=out --format=html $1.lytex
