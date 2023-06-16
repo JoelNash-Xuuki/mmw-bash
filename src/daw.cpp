@@ -106,7 +106,6 @@ void ProjectFileManager::createDir(){
 //    
 //};
 
-//
 AudioEngine::AudioEngine(int sampleRate, string projName){
   this->sampleRate= sampleRate;
   this->projName= projName;
