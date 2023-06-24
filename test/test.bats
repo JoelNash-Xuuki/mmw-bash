@@ -24,5 +24,21 @@
   [ "$status" -eq 0 ]
 }
 
+@test "csound has a group of options that can work together" {
+    run csound --realtime -odac -iadc -B512 -b256  /home/joel/mmw/test/src/test.csd
+    [ "$status" -eq 0 ]
+}
 
+@test "csound cmd to define mmw rec() available" {
+    if pgrep jackd > /dev/null; then
+      run csound --realtime -odac -iadc -B256 -b256 -+rtaudio=jack /home/joel/mmw/test/src/test.csd
+    else
+      run csound --realtime -odac -iadc -B256 -b256 /home/joel/mmw/test/src/test.csd
+    fi
+    [ "$status" -eq 0 ]
+
+}
+
+
+#./test/bats/bin/bats --tap test/test.bats
 

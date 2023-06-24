@@ -11,7 +11,8 @@ play(){
 }
 
 rec(){
-  csound  --realtime -odac -iadc -B512 -b256 -+rtaudio=jack /home/joel/mmw/src/rec.csd 
+  #csound  --realtime -odac -iadc -B512 -b256 -+rtaudio=jack /home/joel/mmw/src/rec.csd 
+  csound --realtime -odac -iadc -B512 -b256 -+rtaudio=jack /home/joel/mmw/test/src/test.csd
 }
 
 pitchgroup(){
