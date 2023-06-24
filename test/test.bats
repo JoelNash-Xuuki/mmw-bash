@@ -1,3 +1,10 @@
+@test "Check rec source file in place" {
+  run ls /home/joel/mmw/test/src/test.csd
+  [ "$status" -eq 0 ]
+}
+
+
+
 @test "csound is installed" {
   command -v csound >/dev/null 2>&1 || {
     skip "csound is not installed"
@@ -38,11 +45,18 @@
     [ "$status" -eq 0 ]
 }
 
+@test "target audio file to record to " {
+    run sed 's/\[RECTOAUDIOFILE\]/\/home\/joel\/mmw\/tmp\/test-rec-1.wav/g; s/\[ADJECTIVE\]/hair/g; s/\[VERB\]/smile/g' test-rec-template.csd > test-rec.csd
+    [ "$status" -eq 0 ]
+}
 
-sed 's/\[RECTOAUDIOFILE\]/Susan/g; s/\[ADJECTIVE\]/hair/g; s/\[VERB\]/smile/g' template.txt > output.txt
+#filePath="/home/joel/mmw/tmp/test-rec-1.wav"
+#sed "s/\[RECTOAUDIOFILE\]/$filePath/g; s/\[ADJECTIVE\]/hair/g; s/\[VERB\]/smile/g" test-rec-template.csd > test-rec.csd
 
 
-/home/joel/audio/test-rec-1.wav
+
+
+
 
 
 
