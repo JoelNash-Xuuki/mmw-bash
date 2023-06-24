@@ -14,6 +14,10 @@ rec(){
   csound  --realtime -odac -iadc -B512 -b256 -+rtaudio=jack /home/joel/mmw/src/rec.csd 
 }
 
+pitchgroup(){
+   for i in {1..12}; do soundstretch 202210030854-5-a.wav pitchtest-$i.wav -pitch=$i; done
+}
+
 getProjName(){
   echo $1;
 }
