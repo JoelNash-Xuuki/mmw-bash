@@ -11,8 +11,11 @@ play(){
 }
 
 rec(){
-  #csound  --realtime -odac -iadc -B512 -b256 -+rtaudio=jack /home/joel/mmw/src/rec.csd 
-  csound --realtime -odac -iadc -B512 -b256 -+rtaudio=jack /home/joel/mmw/test/src/test.csd
+    if pgrep jackd > /dev/null; then
+      csound --realtime -odac -iadc -B256 -b256 -+rtaudio=jack /home/joel/mmw/test/src/test.csd
+    else
+      csound --realtime -odac -iadc -B256 -b256 /home/joel/mmw/test/src/test.csd
+    fi
 }
 
 pitchgroup(){
@@ -27,9 +30,9 @@ renderScore(){
   csound -o$1 $2
 }
 
-rec(){
-  csound --realtime -odac -iadc -B512 -b256 -+rtaudio=jack $1
-}
+#rec(){
+#  csound --realtime -odac -iadc -B512 -b256 -+rtaudio=jack $1
+#}
 
 createLyScoreAndMidiFile(){
   lilypond -dmidi-extension=mid $1;

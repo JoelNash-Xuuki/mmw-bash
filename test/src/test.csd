@@ -1,6 +1,6 @@
 <CsoundSynthesizer>
 <CsOptions>
-  -W -d -o /home/joel/mmw/tmp/tone.wav
+  -W -d ;-o /home/joel/mmw/tmp/tone.wav
 </CsOptions>
 
 ;-W: Enables warnings. Csound will display warning messages during the rendering process if there are any issues or potential problems in the Csound code.

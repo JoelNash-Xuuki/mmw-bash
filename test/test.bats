@@ -29,16 +29,18 @@
     [ "$status" -eq 0 ]
 }
 
-@test "csound cmd to define mmw rec() available" {
+@test "csound cmd to define mmw rec() with and without jack" {
     if pgrep jackd > /dev/null; then
       run csound --realtime -odac -iadc -B256 -b256 -+rtaudio=jack /home/joel/mmw/test/src/test.csd
     else
       run csound --realtime -odac -iadc -B256 -b256 /home/joel/mmw/test/src/test.csd
     fi
     [ "$status" -eq 0 ]
-
 }
 
 
-#./test/bats/bin/bats --tap test/test.bats
+
+
+
+#run ./test/bats/bin/bats --tap test/test.bats to run tests
 
