@@ -1,0 +1,4 @@
+Hello, [NAME]!
+Your [ADJECTIVE] is looking great today.
+Don't forget to [VERB]!
+
