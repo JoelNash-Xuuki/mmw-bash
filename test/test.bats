@@ -13,3 +13,10 @@
   }
 }
 
+#"-iadc -B512 -b256 -+rtaudio=jack /home/joel/mmw/src/rec.csd"
+
+@test "csound options are valid" {
+  run csound --realtime -odac.wav 
+  [ "$status" -eq 0 ]
+}
+
