@@ -39,6 +39,11 @@
 }
 
 
+sed 's/\[RECTOAUDIOFILE\]/Susan/g; s/\[ADJECTIVE\]/hair/g; s/\[VERB\]/smile/g' template.txt > output.txt
+
+
+/home/joel/audio/test-rec-1.wav
+
 
 
 
