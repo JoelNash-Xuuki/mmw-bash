@@ -14,17 +14,15 @@
   [ "$status" -eq 0 ]
 }
 
+@test "csound buffer size set to 256 samples {
+  run csound -b256  /home/joel/mmw/test/src/test.csd
+  [ "$status" -eq 0 ]
+}
 
+@test "csound can run with Real-Time Audio engine using Jack audio connection kit" {
+  run csound -+rtaudio=jack  /home/joel/mmw/test/src/test.csd
+  [ "$status" -eq 0 ]
+}
 
-#@test "Test rec function with .csd file" {
-#  mmw rec "test/src/test.csd"                                                                                            
-#  [ "$status" -eq 0 ]
-#}
-
-# csound  --realtime -odac -iadc -B512 -b256 -+rtaudio=jack /home/joel/mmw/src/rec.csd
-
-
-
-#"-iadc -B512 -b256 -+rtaudio=jack /home/joel/mmw/src/rec.csd"
 
 
