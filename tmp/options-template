@@ -1,5 +1,5 @@
 PROJ=[PROJECTNAME]
-PROJPATH=/home/joel/projects_/
+PROJPATH=$HOME/projects_/
 LILY=$PROJPATH/src/$PROJ.ly
 MIX=$PROJPATH/src/mix.csd
 CSD=$PROJPATH/src/$PROJ.csd
