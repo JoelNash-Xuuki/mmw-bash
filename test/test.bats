@@ -125,20 +125,24 @@ LENGTH=\$(bc <<< \"scale=2;\$BAR*24\")" > /home/joel/mmw/tmp/options-template
 }
 
 @test "Can use the options template to create options with a set the proj name " {
-  [ -s /home/joel/mmw/tmp/options-template ] 
-  echo "Contents of options-template b4 sed:"
-  cat /home/joel/mmw/tmp/options-template
-  echo "if sed works the contents is printed below:"
-  sed -n -r  "s/\[PROJECTNAME\]/hi/gp;" /home/joel/mmw/tmp/options-template # > /home/joel/mmw/tmp/options
-  echo "Contents of options-template after sed:"
-  cat /home/joel/mmw/tmp/options-template
-  [ "$status" -eq 0 ]                                                                                            
-  [ -s /home/joel/mmw/tmp/options ]
+  sed "s/\[PROJECTNAME\]/hi/g;" /home/joel/mmw/tmp/options-template > /home/joel/mmw/tmp/options
+  [ "$(cat /home/joel/mmw/tmp/options | grep 'PROJ=')" = "PROJ=hi" ]
 }
 
 
 
 
+#assert [ "$(cat /home/joel/mmw/tmp/options | grep 'PROJPATH=')" = "PROJPATH=/home/joel/projects_/" ]
+#assert [ "$(cat /home/joel/mmw/tmp/options | grep 'LILY=')" = "LILY=$PROJPATH/src/$PROJ.ly" ]
+#assert [ "$(cat /home/joel/mmw/tmp/options | grep 'MIX=')" = "MIX=$PROJPATH/src/mix.csd" ]
+#assert [ "$(cat /home/joel/mmw/tmp/options | grep 'CSD=')" = "CSD=$PROJPATH/src/$PROJ.csd" ]
+#assert [ "$(cat /home/joel/mmw/tmp/options | grep 'WAV=')" = "WAV=$HOME/audio/$PROJ.wav" ]
+#assert [ "$(cat /home/joel/mmw/tmp/options | grep 'WAVMIX=')" = "WAVMIX=$HOME/audio/$PROJ-a.wav" ]
+#assert [ "$(cat /home/joel/mmw/tmp/options | grep 'BPM=')" = "BPM=84" ]
+#assert [ "$(cat /home/joel/mmw/tmp/options | grep 'BEAT=')" = "BEAT=$(bc <<< 'scale=4; (60/$BPM)')" ]         
+#assert [ "$(cat /home/joel/mmw/tmp/options | grep 'BAR=')" = "BAR=$(bc <<< 'scale=4;$BEAT*4')" ]
+#assert [ "$(cat /home/joel/mmw/tmp/options | grep 'DUR=')" = "DUR=$(bc <<< 'scale=4;$BAR*1')" ]               
+#assert [ "$(cat /home/joel/mmw/tmp/options | grep 'LENGTH=')" = "LENGTH=$(bc <<< 'scale=2;$BAR*24')" ]
 
 
 #run ./test/bats/bin/bats --tap test/test.bats to run tests
