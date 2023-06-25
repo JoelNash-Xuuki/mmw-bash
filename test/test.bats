@@ -126,7 +126,17 @@ LENGTH=\$(bc <<< \"scale=2;\$BAR*24\")" > /home/joel/mmw/tmp/options-template
 
 @test "Can use the options template to create options with a set the proj name " {
   sed "s/\[PROJECTNAME\]/hi/g;" /home/joel/mmw/tmp/options-template > /home/joel/mmw/tmp/options
-  [ "$(cat /home/joel/mmw/tmp/options | grep 'PROJ=')" = "PROJ=hi" ]
+  [ "$(cat $HOME/mmw/tmp/options | grep 'PROJ=')" = "PROJ=hi" ]
+}
+
+@test "Can use option template to create a location name for mmw projects" {
+  if [ ! -d $HOME/test-mmw-proj-location/ ]; then
+    mkdir $HOME/test-mmw-proj-location
+  fi
+  
+  sed "s/\[PROJECTLOCATION\]/test-mmw-proj-location/g;" /home/joel/mmw/tmp/options-template > /home/joel/mmw/tmp/options
+
+  [ "$(cat /home/joel/mmw/tmp/options | grep 'PROJPATH=')" = "PROJPATH=/home/joel/test-mmw-proj-location" ]
 }
 
 
