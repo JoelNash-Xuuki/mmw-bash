@@ -1,3 +1,4 @@
+#First file for you MMW tests
 @test "Check rec source file in place or create it" {
   if [ ! -f /home/joel/mmw/test/src/test.csd ]; then
     echo "<CsoundSynthesizer>
@@ -92,14 +93,48 @@
     [ "$status" -eq 0 ]
 }
 
-#filePath="/home/joel/mmw/tmp/test-rec-1.wav"
-#sed "s/\[RECTOAUDIOFILE\]/$filePath/g; s/\[ADJECTIVE\]/hair/g; s/\[VERB\]/smile/g" test-rec-template.csd > test-rec.csd
+@test "Is project available " {
+  if [ ! -f /home/mmw/bin/test-mmw-proj ]; then
+    echo "echo "Welcome to your MMW project session"
+           " > /home/joel/mmw/bin/test-mmw-proj
+          chmod +x /home/joel/mmw/bin/test-mmw-proj # make test-mmw-proj executable
+  fi
+  run ls -l /home/joel/mmw/bin/test-mmw-proj
+  [ "$status" -eq 0 ]
+  #[[ $(ls -l /home/joel/mmw/bin/test-mmw-proj | cut -c 2-10) == "-rwxr-xr-x" ]] # check if file is executable
+}
 
+@test "Can create Option template if its not available" {
+  if [ ! -f /home/joel/mmw/tmp/options-template ]; then
+    echo "PROJ="[PROJECTNAME]"
+PROJPATH=$HOME/projects_/$PROJ
+LILY=\$PROJPATH/src/\$PROJ.ly
+MIX=\$PROJPATH/src/mix.csd
+CSD=\$PROJPATH/src/\$PROJ.csd
+WAV=\$HOME/audio/\$PROJ.wav
+WAVMIX=\$HOME/audio/\$PROJ-a.wav
+BPM=84
+BEAT=\$(bc <<< \"scale=4; (60/\$BPM)\")
+BAR=\$(bc <<< \"scale=4;\$BEAT*4\")
+DUR=\$(bc <<< \"scale=4;\$BAR*1\")
+LENGTH=\$(bc <<< \"scale=2;\$BAR*24\")" > /home/joel/mmw/tmp/options-template
+  fi
 
+  run ls /home/joel/mmw/tmp/options-template
+  [ "$status" -eq 0 ]
+}
 
-
-
-
+@test "Can use the options template to create options with a set the proj name " {
+  [ -s /home/joel/mmw/tmp/options-template ] 
+  echo "Contents of options-template b4 sed:"
+  cat /home/joel/mmw/tmp/options-template
+  echo "if sed works the contents is printed below:"
+  sed -n -r  "s/\[PROJECTNAME\]/hi/gp;" /home/joel/mmw/tmp/options-template # > /home/joel/mmw/tmp/options
+  echo "Contents of options-template after sed:"
+  cat /home/joel/mmw/tmp/options-template
+  [ "$status" -eq 0 ]                                                                                            
+  [ -s /home/joel/mmw/tmp/options ]
+}
 
 
 
