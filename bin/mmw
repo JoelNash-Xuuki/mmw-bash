@@ -11,10 +11,16 @@ play(){
 }
 
 rec(){
+    template_file="/home/joel/mmw/test/src/test-rec-template.csd"
+    output_file="/home/joel/mmw/test/src/test-rec.csd"
+    filepath="/home/joel/mmw/tmp/test-rec-1.wav"
+
+    sed "s/\[RECTOAUDIOFILE\]/$filePath/g; s/\[ADJECTIVE\]/hair/g; s/\[VERB\]/smile/g" "$template_file" > "$output_file"
+
     if pgrep jackd > /dev/null; then
-      csound --realtime -odac -iadc -B256 -b256 -+rtaudio=jack /home/joel/mmw/test/src/test.csd
+      csound --realtime -odac -iadc -B256 -b256 -+rtaudio=jack /home/joel/mmw/test/src/test-rec.csd
     else
-      csound --realtime -odac -iadc -B256 -b256 /home/joel/mmw/test/src/test.csd
+      csound --realtime -odac -iadc -B256 -b256 /home/joel/mmw/test/src/test-rec.csd
     fi
 }
 
@@ -29,10 +35,6 @@ getProjName(){
 renderScore(){
   csound -o$1 $2
 }
-
-#rec(){
-#  csound --realtime -odac -iadc -B512 -b256 -+rtaudio=jack $1
-#}
 
 createLyScoreAndMidiFile(){
   lilypond -dmidi-extension=mid $1;

@@ -53,8 +53,8 @@ garvb	=		0
 </CsInstruments>
 <CsScore>
 
-f 4 0 0 1 "/home/joel/audio/501.wav" 0 4 1
-f 5 0 0 1 "/home/joel/audio/501.wav" 0 4 2
+f 4 0 0 1 "/home/joel/audio/test-mix.wav" 0 4 1
+f 5 0 0 1 "/home/joel/audio/test-mix.wav" 0 4 2
 
 t 0 84
 #define dur#128#
