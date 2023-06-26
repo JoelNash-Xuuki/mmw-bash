@@ -5,12 +5,15 @@
 }
 
 @test "Need to find a way to test rec" {
-  #mmw rec
-  sed "s/\[RECTOAUDIOFILE\]/test-rec-1.wav/g;" \
-       /home/joel/mmw/test/src/test-rec-template.csd \  
-       /home/joel/mmw/test/src/test-rec.csd
+  mmw rec
+  [ "$(cat $HOME/mmw/test/src/test-rec.csd | grep 'fout ')" = "fout "test-rec-1.wav", 14, ain1 outs ain1*2.5, ain1*2.5"]
 
-  #[ "$(cat $HOME/mmw/tmp/options | grep 'PROJ=')" = "PROJ=hi" ]
+#i think the " " around test-rec-1.wav r fing with the match 
+
+
+
+
   #[ "$status" -eq 0 ]   
-  [ -f "$HOME/mmw/tmp/test-rec-1.wav" ]
+  #[ -f "$HOME/mmw/tmp/test-rec-1.wav" ]
+  [ -f "$HOME/mmw/test/src/test-rec.csd" ]
 }
