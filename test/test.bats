@@ -5,20 +5,13 @@
 
 }
 
+@test "Testing strings" {                                                
+  mmw rec
+  actual="$(cat $HOME/mmw/test/src/test-rec.csd | grep fout )" 
+  expected="        fout \"test-rec-1.wav\", 14, ain1 outs ain1*2.5, ain1*2.5"
+ [ "$expected" = "$actual" ]
 
-@test "Check if test-rec-1.wav has been correctly printed into csound instr" {                                                
-  mmw rec                                                                                                                
-  [ -f "$HOME/mmw/test/src/test-rec.csd" ]
-  [ "$(cat $HOME/mmw/test/src/test-rec.csd | grep 'fout ')" = "fout "test-rec-1.wav", 14, ain1 outs ain1*2.5, ain1*2.5" ]
 }
-
-
-
-
-
-
-
-
 
 
 #@test "Can name file to record to by printing it into a csound instr" {

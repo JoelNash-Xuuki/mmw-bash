@@ -16,7 +16,7 @@ garvb	init 0
     icmbsnd=  p5
 
 	ain1 inch 1
-	fout "test-rec-1.wav", 14, ain1 outs ain1*2.5, ain1*2.5
+        fout "test-rec-1.wav", 14, ain1 outs ain1*2.5, ain1*2.5
 
 	garvb	=		garvb+(ain1*irvbsnd)
 	gacmb	=		gacmb+(ain1*icmbsnd)
