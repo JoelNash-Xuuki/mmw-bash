@@ -7,21 +7,15 @@ createRecFile(){
   template_file="/home/joel/mmw/test/src/test-rec-template.csd"
   output_file="/home/joel/mmw/test/src/test-rec.csd"
   filepath="/home/joel/mmw/tmp/test-rec-1.wav"
-  sed "s/\[RECTOAUDIOFILE\]/test-rec-1.wav/g;" $template_file > $filepath
+  sed "s/\[RECTOAUDIOFILE\]/$(echo $filepath | sed 's/\//\\\//g')/g;" $template_file > $output_file
 }
 
 rec(){
-    template_file="/home/joel/mmw/test/src/test-rec-template.csd"
-    output_file="/home/joel/mmw/test/src/test-rec.csd"
-    filepath="/home/joel/mmw/tmp/test-rec-1.wav"
-
-    sed "s/\[RECTOAUDIOFILE\]/test-rec-1.wav/g;" /home/joel/mmw/test/src/test-rec-template.csd > /home/joel/mmw/test/src/test-rec.csd
-
-    #if pgrep jackd > /dev/null; then
-    #  csound --realtime -odac -iadc -B256 -b256 -+rtaudio=jack /home/joel/mmw/test/src/test-rec.csd
-    #else
-    #  csound --realtime -odac -iadc -B256 -b256 /home/joel/mmw/test/src/test-rec.csd
-    #fi
+  if pgrep jackd > /dev/null; then
+    csound --realtime -odac -iadc -B256 -b256 -+rtaudio=jack /home/joel/mmw/test/src/test-rec.csd
+  else
+    csound --realtime -odac -iadc -B256 -b256 /home/joel/mmw/test/src/test-rec.csd
+  fi
 }
 pitchgroup(){
    for i in {1..12}; do soundstretch 202210030854-5-a.wav pitchtest-$i.wav -pitch=$i; done
