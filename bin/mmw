@@ -17,6 +17,7 @@ rec(){
     csound --realtime -odac -iadc -B256 -b256 /home/joel/mmw/test/src/test-rec.csd
   fi
 }
+
 pitchgroup(){
    for i in {1..12}; do soundstretch 202210030854-5-a.wav pitchtest-$i.wav -pitch=$i; done
 }

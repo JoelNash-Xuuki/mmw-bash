@@ -16,5 +16,6 @@
 @test "Can rec to an audio file" { 
   mmw rec
   [ -f "$HOME/mmw/tmp/test-rec-1.wav" ]
+  rm $HOME/mmw/tmp/test-rec-1.wav
 }
 
