@@ -2,6 +2,14 @@ source $HOME/mmw/tmp/options
 play(){
   csound --realtime -odac -B512 -b256 -+rtaudio=jack /home/joel/projects_/stepsequencer/501.orc /home/joel/projects_/stepsequencer/501.sco  
 }
+
+createRecFile(){
+  template_file="/home/joel/mmw/test/src/test-rec-template.csd"
+  output_file="/home/joel/mmw/test/src/test-rec.csd"
+  filepath="/home/joel/mmw/tmp/test-rec-1.wav"
+  sed "s/\[RECTOAUDIOFILE\]/test-rec-1.wav/g;" /home/joel/mmw/test/src/test-rec-template.csd > /home/joel/mmw/test/src/test-rec.csd
+}
+
 rec(){
     template_file="/home/joel/mmw/test/src/test-rec-template.csd"
     output_file="/home/joel/mmw/test/src/test-rec.csd"
