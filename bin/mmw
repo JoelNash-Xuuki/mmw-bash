@@ -7,7 +7,7 @@ createRecFile(){
   template_file="/home/joel/mmw/test/src/test-rec-template.csd"
   output_file="/home/joel/mmw/test/src/test-rec.csd"
   filepath="/home/joel/mmw/tmp/test-rec-1.wav"
-  sed "s/\[RECTOAUDIOFILE\]/test-rec-1.wav/g;" /home/joel/mmw/test/src/test-rec-template.csd > /home/joel/mmw/test/src/test-rec.csd
+  sed "s/\[RECTOAUDIOFILE\]/test-rec-1.wav/g;" $template_file > $filepath
 }
 
 rec(){
