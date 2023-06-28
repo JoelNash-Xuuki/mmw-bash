@@ -16,7 +16,8 @@ garvb	init 0
     icmbsnd=  p5
 
 	ain1 inch 1
-        fout "[RECTOAUDIOFILE]", 14, ain1 outs ain1*2.5, ain1*2.5
+        fout "[RECTOAUDIOFILE]", 14, ain1
+        outs ain1*2.5, ain1*2.5
 
 	garvb	=		garvb+(ain1*irvbsnd)
 	gacmb	=		gacmb+(ain1*icmbsnd)
@@ -57,7 +58,7 @@ f 4 0 0 1 "/home/joel/audio/test-mix.wav" 0 4 1
 f 5 0 0 1 "/home/joel/audio/test-mix.wav" 0 4 2
 
 t 0 84
-#define dur#128#
+#define dur#1#
 
 ;ins	strt	dur 	rvbtim	hfroll	
 ;===================================================================
