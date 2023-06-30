@@ -12,9 +12,9 @@ createRecFile(){
 
 rec(){
   if pgrep jackd > /dev/null; then
-    csound --realtime -odac -iadc -B256 -b256 -+rtaudio=jack /home/joel/mmw/test/src/test-rec.csd
+    csound --realtime -odac -iadc -B256 -b256 -+rtaudio=jack $1
   else
-    csound --realtime -odac -iadc -B256 -b256 /home/joel/mmw/test/src/test-rec.csd
+    csound --realtime -odac -iadc -B256 -b256 $1
   fi
 }
 
@@ -46,6 +46,7 @@ audioToMP4(){
 rotateMP4(){
   ffmpeg -i $1 -vf "transpose=1" $2
 }
+
 #imageOverVid(){
 #  local image st nd
 #  image=$1
@@ -53,10 +54,11 @@ rotateMP4(){
 #  nd=$3
 #  image-processor.sh ipaddimage $image $st $nd $MP4 $TEMP
 #}
-#
+
 sequenceImages(){
   ffmpeg -f concat -i ~/input.txt -vsync vfr -pix_fmt yuv420p ~/motion-picture/sequence.mp4
 }
+
 animate(){
 
   ffmpeg -i ~/motion-picture/sequence.mp4 -filter:v "setpts=0.714*PTS,minterpolate='fps=8:mb_size=16:search_param=1000:vsbmc=0:scd=none:mc_mode=obmc:me_mode=bidir:me=ds'" -r 420 ~/motion-picture/sequence-result.mp4
@@ -78,14 +80,8 @@ overlayImagett(){
   mv $3 $1
 }
 
-overlayTitle(){
-  ffmpeg -i $1 -vf "movie=$2 [layer]; [in][layer]overlay=t*64:t*64[out]" $3
-  mv $3 $1
-}
-
 createIGImages(){
    convert $4 -crop 0x0+0+0 "$4-cropped.png"
-
    x=$1
    y=$2
    convert -size 1080x1080 plasma:lightblue -swirl -180 $3 -swirl 50 -composite "$4" -crop 0x0+0+0 -scale 270x270 -gravity east -geometry +0+60 -composite $5
@@ -108,4 +104,3 @@ addTextToVidtt(){
 
 
 "$@"
-

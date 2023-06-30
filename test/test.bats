@@ -14,7 +14,7 @@
 }
 
 @test "Can rec to an audio file" { 
-  mmw rec
+  mmw rec $HOME/mmw/test/src/test-rec.csd
   [ -f "$HOME/mmw/tmp/test-rec-1.wav" ]
   rm $HOME/mmw/tmp/test-rec-1.wav
 }
