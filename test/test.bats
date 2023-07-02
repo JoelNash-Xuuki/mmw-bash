@@ -7,7 +7,7 @@
 
 @test "Use template file to create output/audio output files" { 
   mmw createRecFile
-  filepath="/home/joel/mmw/tmp/test-rec-1.wav"
+  filepath="$HOME/mmw/tmp/test-rec-1.wav"
   actual="$(cat $HOME/mmw/test/src/test-rec.csd | grep fout )" 
   expected="        fout \"$filepath\", 14, ain1"
   [ "$expected" = "$actual" ]
@@ -17,5 +17,20 @@
   mmw rec $HOME/mmw/test/src/test-rec.csd
   [ -f "$HOME/mmw/tmp/test-rec-1.wav" ]
   rm $HOME/mmw/tmp/test-rec-1.wav
+}
+
+#@test "Use options template to set project option..." {
+#  mmw setOptions
+#  filepath="$HOME/mmw/tmp/option "
+#  actual="$(cat $HOME/mmw/tmp/option | grep PROJ= )
+#  expected="/home/joel/$PROJ"
+#  [ "$expected" = "$actual" ]
+#}
+
+@test "Use the options template to create options with user setproj name " {
+  mkdir $HOME/mmw/test/test-proj 
+  mmw setOptions test-proj
+  [ "$(cat $HOME/mmw/tmp/options | grep PROJ= )" = "PROJ=test-proj" ]
+  rm -r $HOME/mmw/test/test-proj
 }
 

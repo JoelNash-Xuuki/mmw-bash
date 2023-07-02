@@ -1,4 +1,10 @@
 source $HOME/mmw/tmp/options
+
+setOptions(){
+ sed "s/\[PROJECTNAME\]/$1/g;" $HOME/mmw/tmp/options-template > $HOME/mmw/tmp/options
+
+}
+
 play(){
   csound --realtime -odac -B512 -b256 -+rtaudio=jack /home/joel/projects_/stepsequencer/501.orc /home/joel/projects_/stepsequencer/501.sco  
 }
