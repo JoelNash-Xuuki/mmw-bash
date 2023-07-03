@@ -1,8 +1,20 @@
 #First file for you MMW tests
+#@test "Use options template to set project option..." {
+#  mmw createProject mmw/test/test-proj
+#  if [ $HOME/mmw/test/mmw/test/test-proj/ ]; then
+#    [ "$status" -eq 0 ]
+#  fi
+#}
+
+#teardown_file() {
+#  if [ -d $HOME/mmw/test/test-proj  ]; then
+#    rm $HOME/mmw/test/test-proj 
+#  fi
+#}
+
 @test "Can run a test that matches a string using bats and mmw" {
   output="$(mmw getProjName test-mmw-proj)"
   [ "$output" = "test-mmw-proj" ] 
-
 }
 
 @test "Use template file to create output/audio output files" { 
@@ -20,17 +32,24 @@
 }
 
 #@test "Use options template to set project option..." {
-#  mmw setOptions
-#  filepath="$HOME/mmw/tmp/option "
-#  actual="$(cat $HOME/mmw/tmp/option | grep PROJ= )
+#  mmw setOptions  
+#  filepath="$HOME/mmw/tmp/option"
+#  actual="$(cat $HOME/mmw/tmp/option | grep PROJ= )"
 #  expected="/home/joel/$PROJ"
 #  [ "$expected" = "$actual" ]
 #}
 
-@test "Use the options template to create options with user setproj name " {
-  mkdir $HOME/mmw/test/test-proj 
-  mmw setOptions test-proj
+@test "Use the options template to create options with user setproj name" {
+  mmw setOptions #test-proj mmw/test/
   [ "$(cat $HOME/mmw/tmp/options | grep PROJ= )" = "PROJ=test-proj" ]
-  rm -r $HOME/mmw/test/test-proj
+#  [ "$(cat $HOME/mmw/tmp/options | grep PROJECTLOCATION= )" = "PROJECTLOCATION=mmw/test/"]
 }
+
+#@test "Can use option template to create a location name for mmw projects" {
+#  if [ ! -d $HOME/test-mmw-proj-location/ ]; then
+#    mkdir $HOME/test-mmw-proj-location
+#  fi
+#
+#  [ "$(cat /home/joel/mmw/tmp/options | grep 'PROJPATH=')" = "PROJPATH=/home/joel/test-mmw-proj-location" ]
+#}
 

@@ -1,8 +1,11 @@
 source $HOME/mmw/tmp/options
+createProject(){
+ mkdir $HOME/$1 
+}
 
 setOptions(){
- sed "s/\[PROJECTNAME\]/$1/g;" $HOME/mmw/tmp/options-template > $HOME/mmw/tmp/options
-
+  sed "s/\[PROJECTNAME\]/test-proj/g;" $HOME/mmw/tmp/options-template > $HOME/mmw/tmp/options
+#  sed "s/\[PROJECTLOCATION\]/test/g;" $HOME/mmw/tmp/options > $HOME/mmw/tmp/options
 }
 
 play(){
@@ -33,6 +36,7 @@ getProjName(){
 renderScore(){
   csound -o$1 $2
 }
+
 createLyScoreAndMidiFile(){
   lilypond -dmidi-extension=mid $1;
   #lilypond-book --output=out --format=html $1.lytex
@@ -107,6 +111,5 @@ addTextToVidtt(){
   ffmpeg -i $1 -vf "drawtext=fontcolor=pink:fontsize=13.3:fontfile=/home/joel/.fonts/xuukitype1.ttf:x=W-(W/1.1):y=H-(H/1.4):enable='between(t,0,30):textfile=/home/joel/projects_/03102022180354/src/text.txt'" $2
   mv $2 $1
 }
-
 
 "$@"
