@@ -41,7 +41,8 @@
 }
 
 @test "Check the options file to confirm Project location exists" {
-  if grep -q "PROJPATH=\$HOME/mmw/test" "$HOME/mmw/tmp/options"; then 
+  if grep -q "PROJPATH=\$HOME/mmw/test"\
+              "$HOME/mmw/tmp/options"; then 
     isProjPath="$(echo "Project location exists.")"
   else
     isProjPath="$(echo "Project location does not exist.")"
