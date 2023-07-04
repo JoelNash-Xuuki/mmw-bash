@@ -3,13 +3,11 @@ createProject(){
  mkdir $HOME/$1 
 }
 
-#setOptions(){
-#  sed "s/\[PROJECTNAME\]/test-proj/g;" $HOME/mmw/tmp/options-template > $HOME/mmw/tmp/options
-#  sed "s/\[PROJECTLOCATION\]/test/g;" $HOME/mmw/tmp/options-template > $HOME/mmw/tmp/options
-#}
-
 setOptions() {
-  sed -e "s/\[PROJECTNAME\]/test-proj/g; s/\[PROJECTLOCATION\]/test/g;" "$HOME/mmw/tmp/options-template" > "$HOME/mmw/tmp/options"
+  sed -e "s/\[PROJECTNAME\]/test-proj/g; 
+          s/\[PROJECTLOCATION\]/test/g;"\
+          "$HOME/mmw/tmp/options-template" >\
+          "$HOME/mmw/tmp/options"
 }
 
 play(){
@@ -19,8 +17,12 @@ play(){
 createRecFile(){
   template_file="/home/joel/mmw/test/src/test-rec-template.csd"
   output_file="/home/joel/mmw/test/src/test-rec.csd"
-  filepath="/home/joel/mmw/tmp/test-rec-1.wav"
-  sed "s/\[RECTOAUDIOFILE\]/$(echo $filepath | sed 's/\//\\\//g')/g;" $template_file > $output_file
+  audioOutputFile="/home/joel/mmw/tmp/test-rec-1.wav"
+  audioInputFile="/home/joel/audio/202210030854-idea-a.wav"
+
+  sed "s/\[RECTOAUDIOFILE\]/$(echo $audioOutputFile | sed 's/\//\\\//g')/g;
+       s/\[PLAYBACKAUDIOFILE\]/$(echo $audioInputFile | sed 's/\//\\\//g')/g;"\
+       $template_file > $output_file
 }
 
 rec(){

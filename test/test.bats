@@ -12,11 +12,6 @@
 #  fi
 #}
 
-@test "Can run a test that matches a string using bats and mmw" {
-  output="$(mmw getProjName test-mmw-proj)"
-  [ "$output" = "test-mmw-proj" ] 
-}
-
 @test "Use template file to create output/audio output files" { 
   mmw createRecFile
   filepath="$HOME/mmw/tmp/test-rec-1.wav"
