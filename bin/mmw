@@ -3,9 +3,13 @@ createProject(){
  mkdir $HOME/$1 
 }
 
-setOptions(){
-  sed "s/\[PROJECTNAME\]/test-proj/g;" $HOME/mmw/tmp/options-template > $HOME/mmw/tmp/options
-#  sed "s/\[PROJECTLOCATION\]/test/g;" $HOME/mmw/tmp/options > $HOME/mmw/tmp/options
+#setOptions(){
+#  sed "s/\[PROJECTNAME\]/test-proj/g;" $HOME/mmw/tmp/options-template > $HOME/mmw/tmp/options
+#  sed "s/\[PROJECTLOCATION\]/test/g;" $HOME/mmw/tmp/options-template > $HOME/mmw/tmp/options
+#}
+
+setOptions() {
+  sed -e "s/\[PROJECTNAME\]/test-proj/g; s/\[PROJECTLOCATION\]/test/g;" "$HOME/mmw/tmp/options-template" > "$HOME/mmw/tmp/options"
 }
 
 play(){

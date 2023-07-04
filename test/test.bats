@@ -42,7 +42,16 @@
 @test "Use the options template to create options with user setproj name" {
   mmw setOptions #test-proj mmw/test/
   [ "$(cat $HOME/mmw/tmp/options | grep PROJ= )" = "PROJ=test-proj" ]
-#  [ "$(cat $HOME/mmw/tmp/options | grep PROJECTLOCATION= )" = "PROJECTLOCATION=mmw/test/"]
+
+}
+
+@test "Check the options file to confirm Project location exists" {
+  if grep -q "PROJPATH=\$HOME/mmw/test" "$HOME/mmw/tmp/options"; then 
+    isProjPath="$(echo "Project location exists.")"
+  else
+    isProjPath="$(echo "Project location does not exist.")"
+  fi 
+  [ "$isProjPath" = "Project location exists." ]
 }
 
 #@test "Can use option template to create a location name for mmw projects" {

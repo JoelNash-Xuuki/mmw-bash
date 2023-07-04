@@ -1,5 +1,5 @@
 PROJ=test-proj
-PROJPATH=$HOME/mmw/[PROJECTLOCATION]
+PROJPATH=$HOME/mmw/test
 LILY=$PROJPATH/src/$PROJ.ly
 MIX=$PROJPATH/src/mix.csd
 CSD=$PROJPATH/src/$PROJ.csd
