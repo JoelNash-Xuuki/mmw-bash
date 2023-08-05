@@ -1,4 +1,21 @@
+
+
+
 source $HOME/mmw/tmp/options
+
+load(){
+  echo loading project...
+}
+
+
+
+
+
+
+
+
+
+
 play(){
   csound --realtime -odac -B512 -b256 -+rtaudio=jack /home/joel/projects_/stepsequencer/501.orc /home/joel/projects_/stepsequencer/501.sco  
 }
