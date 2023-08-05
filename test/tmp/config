@@ -1,4 +1,4 @@
-PROJ=PROJECTNA
+PROJ=test-project-1
 PROJPATH=/home/joel/test-mmw-proj-location
 LILY=$PROJPATH/src/$PROJ.ly
 MIX=$PROJPATH/src/mix.csd
