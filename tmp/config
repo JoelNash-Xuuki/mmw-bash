@@ -9,7 +9,7 @@ STORAGE=audio
 
 #-mmw-proj-location
 
-LILY=$PROJPATH/src/$PROJ.ly
+LILY=$PROJPATH/$PROJ.ly
 MIX=$PROJPATH/src/mix.csd
 CSD=$PROJPATH/src/$PROJ.csd
 WAV=$HOME/audio/$PROJ.wav
