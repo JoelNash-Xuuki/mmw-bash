@@ -1,7 +1,17 @@
-source $HOME/mmw/tmp/config
+source $HOME/mmw/test/tmp/config
 
 load(){
   echo loading project...
+
+  dir_path=$PROJPATH
+
+  # Check if the directory exists
+  if [ ! -d "$dir_path" ]; then
+    echo "Directory does not exist. Creating..."
+    mkdir "$dir_path" 
+  else
+    echo "Directory already exists."
+  fi
   
 }
 
