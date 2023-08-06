@@ -1,9 +1,30 @@
 source ./test/tmp/config
 
+setup() {
+    # get the containing directory of this file
+    # use $BATS_TEST_FILENAME instead of ${BASH_SOURCE[0]} or $0,
+    # as those will point to the bats executable's location or the preprocessed file respectively
+   #  DIR="$( cd "$( dirname "$BATS_TEST_FILENAME" )" >/dev/null 2>&1 && pwd )"
+    # make executables in src/ visible to PATH
+   # PATH="$DIR/../src:$PATH"
+  echo setup
+  #proj-file-path="$HOME/mmw/test/$PROJ"
+  #
+  ## Check if the file exists
+  #if [ -e "$proj-file-path" ]; then
+  #    echo "The file exists: $proj-file_path"
+  #else
+  #    echo "Creating $proj-file_path"
+  #    mkdir $HOME/mmw/test/$PROJ
+  #fi
+
+}
+
 @test "load a project" {
   output="$(mmw load)"
   [ "$output" = "loading project..." ]
   [ "$PROJ" = "test-project-1" ]
+  [ "$PROJPATH" = "$HOME/mmw/test/$PROJ" ]
 }
 
 # Read the contents of insert.txt into a variable.
@@ -31,3 +52,7 @@ source ./test/tmp/config
 #}
 
 #  sed "s/{projname}/$insert_context/g" ~/mmw/test/tmp/-settings ~/TTTG/tmp/chat.txt
+
+
+
+

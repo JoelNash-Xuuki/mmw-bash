@@ -1,32 +1,8 @@
-
-
-
 source $HOME/mmw/tmp/options
 
 load(){
   echo loading project...
 }
-
-
-# Read the contents of insert.txt into a variable.
-
-
-#insert_context=$(cat ~/mmw/tmp/load-settings)
-
-
-# Use the sed command to replace the placeholder in main.txt with the content of insert.txt.
-#sed "s/{context}/$insert_context/g" ~/TTTG/src/prompt.txt > ~/TTTG/tmp/chat.txt
-
-
-
-#sed "s/{task}/$insert_task/g" ~/TTTG/tmp/chat.txt > ~/TTTG/tmp/chat.txt
-
-#insert_task=$(cat ~/TTTG/tmp/task.txt)
-
-
-
-
-
 
 
 play(){
