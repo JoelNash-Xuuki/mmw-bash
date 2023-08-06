@@ -1,7 +1,7 @@
-source $HOME/mmw/tmp/options
 
 load(){
   echo loading project...
+  
 }
 
 
