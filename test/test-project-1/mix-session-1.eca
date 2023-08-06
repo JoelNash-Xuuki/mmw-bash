@@ -1,0 +1,11 @@
+BPM=84 BEAT=$(bc <<< "scale=4; (60/$BPM)")
+BAR=$(bc <<< "scale=4;$BEAT*4")
+DUR=$(bc <<< "scale=4;$BAR*1")
+LENGTH=$(bc <<< "scale=2;$BAR*12")
+START_TIME=$(bc <<< "scale=2;$BAR*0")
+
+TRACK1=test-project-1-track-1.ewf
+
+ecasound -n test-project-mix-session-1 -b:512 -t:$LENGTH -f:16,2,48000 \
+  -a:instra   -i $TRACK1 -y:$START_TIME \
+  -a:instra -o jack,system

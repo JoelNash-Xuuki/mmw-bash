@@ -62,7 +62,7 @@ f9013 0 1 -2	0.95
 f111 0 1024 10 1
 f1001 0   8193    10  1
 ; Load proj wav file and point to each channel
-f1002 0 0 1 "/home/joel/audio/202210030854-idea.wav"         [0.714*4] 4 2 ; Harmony 
+f1002 0 0 1 "test-puoject-1.wav"         [0.714*4] 4 2 ; Harmony 
 t 0 84 ; tempo
 
 { 2 r
@@ -94,12 +94,6 @@ t 0 84 ; tempo
 s
 
 ; empty tables
-;f-1001 0 0 1 "/home/joel/audio/202210030854-idea.wav"         [0.714*4] 4 1 ; Voice
 ;f-1002 0 0 1 "/home/joel/audio/202210030854-idea.wav"         [0.714*4] 4 2 ; Harmony 
-;f-1003 0 0 1 "/home/joel/audio/202210030854-idea.wav"         [0.714*4] 4 3 ; Bass
-;f-1004 0 0 1 "/home/joel/audio/202210030854-idea.wav"         [0.714*4] 4 4 ; Snare   
-;f-1006 0 0 1 "/home/joel/audio/202210030854-idea.wav"         [0.714*4] 4 6 ; HiHat   
-;f-1005 0 0 1 "/home/joel/audio/202210030854-idea.wav"         [0.714*4] 4 5 ; Brush
-;f-1007 0 0 1 "/home/joel/audio/202210030854-idea.wav"         [0.714*4] 4 7 ; Kick
 
 
