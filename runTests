@@ -1,1 +1,1 @@
-./test/bats/bin/bats --tap test/test.bats
+./test/bats/bin/bats --tap test/test-project.bats
