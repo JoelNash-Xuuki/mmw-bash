@@ -4,7 +4,6 @@ SESSION=test-session-1
 TRACK1=test-track-1
 
 
-
 #-mmw-proj-location
 
 LILY=$PROJPATH/src/$PROJ.ly
