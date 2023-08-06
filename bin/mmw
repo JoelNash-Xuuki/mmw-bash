@@ -2,17 +2,21 @@ source $HOME/mmw/test/tmp/config
 
 load(){
   echo loading project...
+  doesProjDirExist
 
+
+  
+  
+}
+
+doesProjDirExist(){
   dir_path=$PROJPATH
-
-  # Check if the directory exists
   if [ ! -d "$dir_path" ]; then
     echo "Directory does not exist. Creating..."
     mkdir "$dir_path" 
   else
     echo "Directory already exists."
   fi
-  
 }
 
 #        $PROJPATH/src/202210030854-idea-session-1.orc\
