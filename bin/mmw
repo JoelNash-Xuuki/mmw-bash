@@ -1,11 +1,18 @@
+source $HOME/mmw/tmp/config
 
 load(){
   echo loading project...
   
 }
 
+#        $PROJPATH/src/202210030854-idea-session-1.orc\
+#	$PROJPATH/src/202210030854-idea-harmony-1-session-1.sco
+
 buildTrack(){
-  echo "$1"
+  echo "Build track $1"
+  csound -o$HOME/$STORAGE/$PROJ-$SESSION-$AUDIO.wav\
+	$PROJPATH/src/$PROJ-$SESSION-$TRACK.orc\
+	$PROJPATH/src/$PROJ-$SESSION-$TRACK.sco
 }
 
 

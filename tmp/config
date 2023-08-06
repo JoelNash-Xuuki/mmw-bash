@@ -2,6 +2,7 @@ PROJ=project-1
 PROJPATH=$HOME/projects_/202210030854-idea
 SESSION=session-1
 AUDIO=audio-1
+TRACK=track-1
 STORAGE=audio
 
 
