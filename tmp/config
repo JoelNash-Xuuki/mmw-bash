@@ -1,7 +1,8 @@
-PROJ=-project-1
+PROJ=project-1
 PROJPATH=$HOME/projects_/202210030854-idea
 SESSION=session-1
-TRACK1=audio-1
+AUDIO=audio-1
+STORAGE=audio
 
 
 
