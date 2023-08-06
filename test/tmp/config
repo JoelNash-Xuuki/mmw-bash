@@ -1,7 +1,7 @@
 PROJ=test-project-1
 PROJPATH=$HOME/mmw/test/$PROJ
 SESSION=test-session-1
-TRACK1=test-audio-1
+TRACK1=test-track-1
 
 
 
