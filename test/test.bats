@@ -27,6 +27,10 @@ setup() {
   [ "$PROJPATH" = "$HOME/mmw/test/$PROJ" ]
 }
 
+@test "can create a file for 1 track" {
+
+}
+
 # Read the contents of insert.txt into a variable.
 
 # Use the sed command to replace the placeholder in main.txt with the content of insert.txt.
