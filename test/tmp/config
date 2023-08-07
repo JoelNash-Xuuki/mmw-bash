@@ -6,7 +6,7 @@ TRACK1=test-track-1
 
 #-mmw-proj-location
 
-LILY=$PROJPATH/$PROJ.ly
+LILY=$PROJPATH/$PROJ-sound-design-1.ly
 MIX=$PROJPATH/src/mix.csd
 CSD=$PROJPATH/src/$PROJ.csd
 WAV=$HOME/audio/$PROJ.wav
