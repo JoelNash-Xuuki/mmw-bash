@@ -1,0 +1,2 @@
+#mmw createLyScoreAndMidiFile
+csound -otest-project-1-sound-design-1.wav test-project-1-sound-design-1.csd

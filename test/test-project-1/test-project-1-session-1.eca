@@ -1,5 +1,11 @@
-source = /home/joel/audio/202210030854-idea-20232007-1.wav  
-offset = 0
-start-position = 0
-length = 11.428
-looping = true
+BPM=84 BEAT=$(bc <<< "scale=4; (60/$BPM)")
+BAR=$(bc <<< "scale=4;$BEAT*4")
+DUR=$(bc <<< "scale=4;$BAR*1")
+LENGTH=$(bc <<< "scale=2;$BAR*12")
+START_TIME=$(bc <<< "scale=2;$BAR*0")
+
+TRACK2=test-project-1-track-2-session-1.ewf
+
+ecasound -n test-project-mix-session-1 -b:512 -t:$LENGTH -f:16,2,48000 \
+  -a:instra   -i $TRACK2 -y:$START_TIME \
+  -a:instra -o jack,system
