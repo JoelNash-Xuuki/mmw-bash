@@ -2,6 +2,7 @@
 ./maketrack bass 3
 ./maketrack snare 4                      
 ./maketrack brush 5
-./maketrack hihat 7
 ./maketrack hihat 6
 ./maketrack kick 7
+
+
