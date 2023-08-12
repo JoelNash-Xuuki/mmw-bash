@@ -1,0 +1,4 @@
+
+source ../tmp/config
+csound -obass.wav -t84 bass.orc bass.sco
+

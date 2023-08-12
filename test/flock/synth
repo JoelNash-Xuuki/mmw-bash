@@ -1,0 +1,4 @@
+
+source ../tmp/config
+csound -osynth.wav -t84 synth.orc synth.sco
+

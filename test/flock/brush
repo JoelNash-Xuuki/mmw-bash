@@ -1,0 +1,4 @@
+
+source ../tmp/config
+csound -obrush.wav -t84 brush.orc brush.sco
+

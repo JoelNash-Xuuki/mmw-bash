@@ -1,2 +1,0 @@
-csound -otest-project-1-bass.wav test-project-1-bass.orc test-project-1-bass.sco
-

@@ -1,18 +1,27 @@
-PROJ=test-project-1
+PROJ=flock
 PROJPATH=$HOME/mmw/test/$PROJ
-SESSION=test-session-1
-TRACK1=test-track-1
-
-
-#-mmw-proj-location
-
-LILY=$PROJPATH/$PROJ-sound-design-1.ly
-MIX=$PROJPATH/src/mix.csd
-CSD=$PROJPATH/src/$PROJ.csd
-WAV=$HOME/audio/$PROJ.wav
-WAVMIX=$HOME/audio/$PROJ-a.wav
-BPM=84
-BEAT=$(bc <<< "scale=4; (60/$BPM)")
+LILY=$PROJPATH/$PROJ.ly
+WAV=$PROJ.wav
+TEMPO=84
+BEAT=$(bc <<< "scale=4; (60/$TEMPO)")
 BAR=$(bc <<< "scale=4;$BEAT*4")
-DUR=$(bc <<< "scale=4;$BAR*1")
-LENGTH=$(bc <<< "scale=2;$BAR*24")
+DUR=$(bc <<< "scale=4;$BAR*16")
+LENGTH=$(bc <<< "scale=2;$BAR*32+$BEAT")
+START_TIME=$(bc <<< "scale=2;$BAR*0")
+
+SYNTH=synth.ewf
+BASS=bass.ewf
+SNARE=snare.ewf
+BRUSH=brush.ewf
+HIHAT=hihat.ewf
+KICK=kick.ewf
+
+#voice #1#
+#harmony #2# 
+#bass #3#
+#snare #4#
+#brush #5#
+#hihat #6#
+#kick #7#
+
+
