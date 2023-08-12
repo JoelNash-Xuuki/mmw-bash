@@ -1,6 +1,6 @@
 source ../tmp/config
 ./makeScore
-./$PROJ
+./buildInstr
 ./maketracks
 ./prod
 ./mix.eca
