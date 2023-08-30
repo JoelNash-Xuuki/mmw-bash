@@ -1,0 +1,2 @@
+csound -otest-project-1-track-2-session-1.wav test-project-1-track-2-session-1.orc test-project-1-track-2-session-1.sco
+

@@ -1,4 +1,5 @@
 source $HOME/mmw/tmp/options
+
 createProject(){
  mkdir $HOME/$1 
 }
@@ -9,6 +10,37 @@ setOptions() {
           "$HOME/mmw/tmp/options-template" >\
           "$HOME/mmw/tmp/options"
 }
+
+
+load(){
+  echo loading project...
+  doesProjDirExist
+
+
+  
+  
+}
+
+doesProjDirExist(){
+  dir_path=$PROJPATH
+  if [ ! -d "$dir_path" ]; then
+    echo "Directory does not exist. Creating..."
+    mkdir "$dir_path" 
+  else
+    echo "Directory already exists."
+  fi
+}
+
+#        $PROJPATH/src/202210030854-idea-session-1.orc\
+#	$PROJPATH/src/202210030854-idea-harmony-1-session-1.sco
+
+buildTrack(){
+  echo "Build track $1"
+  csound -o$HOME/$STORAGE/$PROJ-$SESSION-$AUDIO.wav\
+	$PROJPATH/src/$PROJ-$SESSION-$TRACK.orc\
+	$PROJPATH/src/$PROJ-$SESSION-$TRACK.sco
+}
+
 
 play(){
   csound --realtime -odac -B512 -b256 -+rtaudio=jack /home/joel/projects_/stepsequencer/501.orc /home/joel/projects_/stepsequencer/501.sco  
@@ -44,12 +76,10 @@ renderScore(){
 }
 
 createLyScoreAndMidiFile(){
-  lilypond -dmidi-extension=mid $1;
+  lilypond -dmidi-extension=mid $LILY
   #lilypond-book --output=out --format=html $1.lytex
-
-  mv $3.mid $2/tmp/
-  mv $3.pdf $2/doc/ 
 }
+
 renderMix(){
   csound -o$1 $2
 }

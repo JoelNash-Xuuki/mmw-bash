@@ -1,0 +1,3 @@
+csound -obass.wav sd2-mono.orc bass.sco
+
+
