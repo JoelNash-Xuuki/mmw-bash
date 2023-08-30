@@ -1,8 +1,0 @@
-./maketrack synth 2
-./maketrack bass 3
-./maketrack snare 4                      
-./maketrack brush 5
-./maketrack hihat 6
-./maketrack kick 7
-
-

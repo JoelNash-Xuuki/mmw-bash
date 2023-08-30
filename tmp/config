@@ -5,8 +5,6 @@ AUDIO=audio-1
 TRACK=track-1
 STORAGE=audio
 
-
-
 #-mmw-proj-location
 
 LILY=$PROJPATH/$PROJ.ly

@@ -1,4 +1,0 @@
-
-source ../tmp/config
-csound -osnare.wav -t84 snare.orc snare.sco
-

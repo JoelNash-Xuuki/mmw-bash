@@ -1,4 +1,0 @@
-
-source ../tmp/config
-csound -okick.wav -t84 kick.orc kick.sco
-

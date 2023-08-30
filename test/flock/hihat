@@ -1,4 +1,0 @@
-
-source ../tmp/config
-csound -ohihat.wav -t84 hihat.orc hihat.sco
-

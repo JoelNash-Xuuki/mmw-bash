@@ -1,13 +1,13 @@
 PROJ=flock
-PROJPATH=$HOME/mmw/test/$PROJ
+PROJPATH=$HOME/projects_/$PROJ
 LILY=$PROJPATH/$PROJ.ly
 WAV=$PROJ.wav
 TEMPO=84
 BEAT=$(bc <<< "scale=4; (60/$TEMPO)")
 BAR=$(bc <<< "scale=4;$BEAT*4")
-DUR=$(bc <<< "scale=4;$BAR*16")
-LENGTH=$(bc <<< "scale=2;$BAR*32+$BEAT")
-START_TIME=$(bc <<< "scale=2;$BAR*0")
+LENGTH=$(bc <<< "scale=4;$BAR*4")
+DUR=$(bc <<< "scale=4;$BAR*4")
+START_TIME=$(bc <<< "scale=2;$BAR*1")
 
 SYNTH=synth.ewf
 BASS=bass.ewf
@@ -15,6 +15,17 @@ SNARE=snare.ewf
 BRUSH=brush.ewf
 HIHAT=hihat.ewf
 KICK=kick.ewf
+INSTR1=/home/joel/mount/audio/flock/flock-bounce.wav
+INSTR2=/home/joel/mount/audio/flock/flock-remix-1.wav
+
+GUITAR1=/home/joel/mount/audio/flock/2/guitar-1.wav
+GUITAR2=/home/joel/mount/audio/flock/2/guitar-2.wav
+GUITAR3=/home/joel/mount/audio/flock/1/guitar-1.wav
+GUITAR4=/home/joel/mount/audio/flock/1/guitar-2.wav
+
+#VOCAL1=/home/joel/mount/audio/flock/vocal-1.wav
+VOCAL=/home/joel/mount/audio/flock/2/vocal.wav
+PIANO=/home/joel/mount/audio/flock/2/piano.wav
 
 #voice #1#
 #harmony #2# 
