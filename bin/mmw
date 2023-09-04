@@ -1,4 +1,4 @@
-source $HOME/mmw/tmp/options
+source $HOME/mmw/test/tmp/config
 
 createProject(){
  mkdir $HOME/$1 
