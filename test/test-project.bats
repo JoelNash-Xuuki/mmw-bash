@@ -3,7 +3,12 @@ source ./test/tmp/config
 @test "first test" {
   run echo "Hello, world!"
   [ "$status" -eq 0 ]
-  [ "$output" = "Hello, world!" ]
+}
+
+@test "makeScore should render score" {
+  run mmw makeScore
+  [ "$status" -eq 0 ]
+  [ "$output" = "rendering score..." ]
 }
 
 #@test "load a project" {
