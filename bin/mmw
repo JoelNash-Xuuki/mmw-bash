@@ -77,6 +77,7 @@ renderScore(){
 
 createLyScoreAndMidiFile(){
   lilypond -dmidi-extension=mid $LILY
+  mv $PROJ.mid tmp/$PROJ.mid
   #lilypond-book --output=out --format=html $1.lytex
 }
 
