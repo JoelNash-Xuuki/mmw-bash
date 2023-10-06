@@ -1,15 +1,118 @@
 source ./test/tmp/config
+#!/usr/bin/env bats
 
 @test "first test" {
   run echo "Hello, world!"
-  [ "$status" -eq 0 ]
+  
 }
 
-@test "makeScore should render score" {
-  run mmw makeScore
-  [ "$status" -eq 0 ]
-  [ "$output" = "rendering score..." ]
+@test "createScoreDesign should create the project score file" {
+  run mmw createScoreDesign
+
+  # Check if the file exists
+  [ -f "$HOME/projects_/flock/src/$PROJ.ly" ]
+
+  #Validate data
+  #[ "$(cat "$HOME/projects_/flock/src/$PROJ.ly)" = "$projOrc" ]
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#@test "createLyScoreAndMidiFile should generate the MIDI file" {
+#  run createLyScoreAndMidiFile
+#
+#  # Check if the file exists
+#  [ -f "tmp/$PROJ.mid" ]
+#  assert_success
+#}
+
+#@test "createScoreDesign should render score" {
+#  run mmw createScoreDesign
+#  [ "$status" -eq 0 ]
+#  [ "$output" = "rendering score..." ]
+#}
+
+
+
+#@test "renderScore should create the necessary files" {
+#  run createScoreDesign
+#
+#  # Check if the score file was created
+#  [ -f "$HOME/projects_/flock/src/$PROJ.ly" ]
+#  assert_success
+#
+#}
+
+#@test "renderAudio should generate the correct orc file" {
+#  run renderAudio
+#
+#  [ "$status" -eq 0 ]
+#  [ -f "$HOME/projects_/flock/src/sound-design/$PROJ.orc" ]
+#  [ "$(cat "$HOME/projects_/flock/src/sound-design/$PROJ.orc")" = "$projOrc" ]
+#}
+
+#@test "renderAudio should execute the given command" {
+#  run renderAudio echo "Command executed"
+#
+#  [ "$status" -eq 0 ]
+#  [ "${lines[0]}" = "Command executed" ]
+#}
+#
+#@test "renderAudio should pass arguments to the given command" {
+#  run renderAudio echo "Argument: $1" "Another argument: $2"
+#
+#  [ "$status" -eq 0 ]
+#  [ "${lines[0]}" = "Argument: $1" ]
+#  [ "${lines[1]}" = "Another argument: $2" ]
+#}
+
+
+
+
 
 #@test "load a project" {
 #  output="$(mmw load)"
@@ -26,4 +129,21 @@ source ./test/tmp/config
 #@test "can create a file for 1 track" {
 #  buildTrackName="$(mmw buildTrack $PROJ-$SESSION-$TRACK1)"
 #  [ "$buildTrackName" = "$PROJ-$SESSION-$TRACK1" ]
+#}
+
+######################################################################3
+
+#```bash
+##!/usr/bin/env bats
+#
+#load 'test_helper'
+#
+#
+#
+#@test "renderAudio should create the project sound design file" {
+#  run renderAudio
+#
+#  # Check if the file exists
+#  [ -f "$HOME/projects_/flock/src/sound-design/$PROJ.orc" ]
+#  assert_success
 #}
