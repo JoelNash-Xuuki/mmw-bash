@@ -60,6 +60,9 @@ createLyScoreAndMidiFile(){
 }
 renderAudio(){
 
+  echo "rendering..."
+  rm $HOME/audio/Vyvn/Flock/1/$PROJ.wav
+
   projOrc="
   sr        = 48000
   kr 	  = 4800
@@ -278,7 +281,11 @@ renderAudio(){
   "
   echo "$projSco" >  $HOME/projects_/flock/src/sound-design/$PROJ.sco
 
+  touch $HOME/audio/Vyvn/Flock/1/$PROJ.wav
+#  csound -d -o$HOME/audio/Vyvn/Flock/1/$PROJ.wav -F $HOME/tmp/$PROJ.mid src/sound-design/$PROJ.orc src/sound-design/$PROJ.sco
+
+
+}
 
   
   "$@"
-}

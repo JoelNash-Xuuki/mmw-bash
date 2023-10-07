@@ -16,18 +16,22 @@ source ./test/tmp/config
 
 }
 
-#@test "renderAudio should create a .orc and .sco file {
-#  run mmw renderAudio
-#  $HOME/projects_/flock/src/sound-design/$PROJ.orc
-#  [ -f "$HOME/projects_/flock/src/sound-design/$PROJ.orc" ]
-#
-#}
-
-@test "Check if file exists" {
+@test "renderAudio should create a .orc, .sco and .wav file" {
   run mmw renderAudio
+
   run ls $HOME/projects_/flock/src/sound-design/$PROJ.orc
   [ "$status" -eq 0 ]
+
+  run ls $HOME/projects_/flock/src/sound-design/$PROJ.sco
+  [ "$status" -eq 0 ]
+
+  run ls $HOME/audio/Vyvn/Flock/1/$PROJ.wav
+  [ "$status" -eq 0 ]
+
+
 }
+
+
 
 
 
