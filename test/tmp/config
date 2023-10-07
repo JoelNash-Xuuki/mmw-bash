@@ -10,11 +10,11 @@ DUR=$(bc <<< "scale=4;$BAR*4")
 START_TIME=$(bc <<< "scale=2;$BAR*5")
 
 SYNTH=$PROJPATH/audio/synth.ewf
-BASS=audio/bass.ewf
-SNARE=audio/snare.ewf
-BRUSH=audio/brush.ewf
-HIHAT=audio/hihat.ewf
-KICK=audio/kick.ewf
+BASS=$PROJPATH/audio/bass.ewf
+SNARE=$PROJPATH/audio/snare.ewf
+BRUSH=$PROJPATH/audio/brush.ewf
+HIHAT=$PROJPATH/audio/hihat.ewf
+KICK=$PROJPATH/audio/kick.ewf
 
 INSTR1=/home/joel/audio/flock/flock-bounce.wav
 INSTR2=/home/joel/audio/flock/flock-remix-1.wav
@@ -39,8 +39,6 @@ MIX1WAVTWO=/home/joel/audio/Vyvn/Flock/1/$PROJ-mix-1-1-1.wav
 
 MIX1WAVTHREE=/home/joel/audio/Vyvn/Flock/3/$PROJ-mix-1-1-2.wav
 MIX1WAVTEMP=/home/joel/audio/Vyvn/Flock/3/$PROJ-mix-temp.wav
-
-
 
 MIX1MP3TWOSCREWED=/home/joel/audio/Vyvn/Flock/1/$PROJ-mix-1-1-1-screwed.mp3
 

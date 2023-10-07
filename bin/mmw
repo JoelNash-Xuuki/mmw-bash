@@ -281,8 +281,8 @@ renderAudio(){
   "
   echo "$projSco" >  $HOME/projects_/flock/src/sound-design/$PROJ.sco
 
-  touch $HOME/audio/Vyvn/Flock/1/$PROJ.wav
-#  csound -d -o$HOME/audio/Vyvn/Flock/1/$PROJ.wav -F $HOME/tmp/$PROJ.mid src/sound-design/$PROJ.orc src/sound-design/$PROJ.sco
+  #touch $HOME/audio/Vyvn/Flock/1/$PROJ.wav
+  csound -d -o$HOME/audio/Vyvn/Flock/1/stems/$PROJ.wav -F $HOME/projects_/flock/tmp/$PROJ.mid $HOME/projects_/flock/src/sound-design/$PROJ.orc $HOME/projects_/flock/src/sound-design/$PROJ.sco
 
 
 }

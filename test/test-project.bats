@@ -25,9 +25,8 @@ source ./test/tmp/config
   run ls $HOME/projects_/flock/src/sound-design/$PROJ.sco
   [ "$status" -eq 0 ]
 
-  run ls $HOME/audio/Vyvn/Flock/1/$PROJ.wav
+  run ls $HOME/audio/Vyvn/Flock/1/stems/$PROJ.wav
   [ "$status" -eq 0 ]
-
 
 }
 
