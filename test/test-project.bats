@@ -5,7 +5,6 @@ source ./test/tmp/config
   run echo "Hello, world!"
   
 }
-
 @test "createScoreDesign should create the project score file" {
   run mmw createScoreDesign
 
@@ -16,6 +15,20 @@ source ./test/tmp/config
   #[ "$(cat "$HOME/projects_/flock/src/$PROJ.ly)" = "$projOrc" ]
 
 }
+
+#@test "renderAudio should create a .orc and .sco file {
+#  run mmw renderAudio
+#  $HOME/projects_/flock/src/sound-design/$PROJ.orc
+#  [ -f "$HOME/projects_/flock/src/sound-design/$PROJ.orc" ]
+#
+#}
+
+@test "Check if file exists" {
+  run mmw renderAudio
+  run ls $HOME/projects_/flock/src/sound-design/$PROJ.orc
+  [ "$status" -eq 0 ]
+}
+
 
 
 
