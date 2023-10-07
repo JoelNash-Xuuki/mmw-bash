@@ -287,5 +287,26 @@ renderAudio(){
 
 }
 
+#setLocation() {
+#  sed -e " s/\[PROJECTLOCATION\]/$1/g;"\
+#           "$HOME/mmw/tmp/options-template" >\
+#           "$HOME/mmw/tmp/options"
+#}
+
+setLocation() {
+  local escapedPath=$(echo "$1" | sed 's/\//\\\//g')
+  sed -e "s/\[PROJECTLOCATION\]/$escapedPath/g;" \
+      "$HOME/mmw/tmp/options-template" > \
+      "$HOME/mmw/tmp/options"
+}
+
+
+
+load(){
+
+
+
+  cut -d ',' -f 2 $1.csv | sed -n 2p
+}
   
   "$@"

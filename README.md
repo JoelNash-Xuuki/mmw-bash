@@ -72,3 +72,26 @@ projSco="
 you could desribe the mmw features. 
 make sure test/functions validate data
 
+
+To change a value in a CSV file and then check it using the `cut` command, you can follow these steps:
+
+1. Open the CSV file in a text editor or use a command-line text manipulation tool like `sed` or `awk`.
+2. Locate the line that contains the value you want to change.
+3. Modify the value as desired.
+4. Save the changes to the CSV file.
+
+For example, let's say you want to change the value in the second column of the third line in the `filename.csv` file. You can use the following command:
+
+```bash
+sed -i '3s/old_value/new_value/' filename.csv
+```
+
+This command uses `sed` with the `-i` option to edit the file in-place. It replaces the `old_value` with the `new_value` in the third line of the file.
+
+After making the necessary changes, you can check the modified value using the `cut` command you mentioned:
+
+```bash
+cut -d ',' -f 2 filename.csv | sed -n 2p
+```
+
+This command will display the updated value in the second column of the CSV file.
