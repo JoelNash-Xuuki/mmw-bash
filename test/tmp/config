@@ -1,11 +1,11 @@
 PROJ=Flock
 PROJPATH=$HOME/projects_/flock
 LILY=$PROJPATH/src/$PROJ.ly
-WAV=$HOME/audio/Vyvn/Flock/1/$PROJ.wav
+WAV=$HOME/audio/Vyvn/Flock/1/stems/$PROJ.wav
 TEMPO=84
 BEAT=$(bc <<< "scale=4; (60/$TEMPO)")
 BAR=$(bc <<< "scale=4;$BEAT*4")
-LENGTH=$(bc <<< "scale=4;$BAR*24")
+LENGTH=$(bc <<< "scale=4;$BAR*16")
 DUR=$(bc <<< "scale=4;$BAR*4")
 START_TIME=$(bc <<< "scale=2;$BAR*5")
 
