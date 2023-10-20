@@ -307,9 +307,12 @@ setLocation() {
 
 load(){
 
+  cut -d ',' -f 2 $1 | sed -n 2p
+}
 
-
-  cut -d ',' -f 2 $1.csv | sed -n 2p
+#run tests
+mmw dataTest(){
+  $HOME/mmw/bin/
 }
   
   "$@"

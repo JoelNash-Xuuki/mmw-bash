@@ -15,7 +15,6 @@ source ./test/tmp/config
   #[ "$(cat "$HOME/projects_/flock/src/$PROJ.ly)" = "$projOrc" ]
 
 }
-
 @test "renderAudio should create a .orc, .sco and .wav file" {
   run mmw renderAudio
 

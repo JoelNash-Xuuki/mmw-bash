@@ -1,0 +1,4 @@
+file="data.csv"
+
+#item=$1
+#cell_value=$(awk -v item="$item" -F ',' '$2 == item {print $0}' "$file")
