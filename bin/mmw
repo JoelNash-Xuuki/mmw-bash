@@ -285,9 +285,22 @@ renderAudio(){
 
 
 }
-
 changeSpeed(){
   sox $1 $2 tempo $3
+}
+os(){
+  sessionNo=$1
+  sessionName=$2
+  file_path="$PROJLOC/$PROJ/src/session-$sessionNo/session-$sessionNo-$sessionName.csd"
+  vim "$file_path"
+}
+
+listSession(){
+  sessionNo=$1
+  file_path="$PROJLOC/$PROJ/src/session-$sessionNo/"
+  echo "$file_path"
+  echo /home/joel/projects_/Flock/src/session-3/
+  ls /home/joel/projects_/Flock/src/session-3/
 }
 
 #setLocation() {
@@ -303,16 +316,18 @@ setLocation() {
       "$HOME/mmw/tmp/options"
 }
 
-
-
 load(){
 
   cut -d ',' -f 2 $1 | sed -n 2p
 }
 
 #run tests
-mmw dataTest(){
-  $HOME/mmw/bin/
-}
+#mmw dataTest(){
+#  $HOME/mmw/bin/
+#}
+
+
+
   
   "$@"
+
