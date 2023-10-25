@@ -9,6 +9,7 @@ BAR=$(bc <<< "scale=4;$BEAT*4")
 LENGTH=$(bc <<< "scale=4;$BAR*18")
 DUR=$(bc <<< "scale=4;$BAR*4")
 START_TIME=$(bc <<< "scale=2;$BAR*5")
+MP4=$PROJ.mp4
 
 SYNTH=$PROJPATH/audio/synth.ewf
 BASS=$PROJPATH/audio/bass.ewf
