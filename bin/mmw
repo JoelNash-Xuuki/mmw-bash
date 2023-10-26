@@ -294,26 +294,22 @@ os(){
   file_path="$PROJLOC/$PROJ/src/session-$sessionNo/session-$sessionNo-$sessionName.csd"
   vim "$file_path"
 }
-
 rs(){
   sessionNo=$1
   sessionName=$2
   file_path="$PROJLOC/$PROJ/bin/session/$sessionNo/$sessionName"
   "$file_path"
 }
-
 osm(){
   sessionNo=$1
   file_path="$PROJLOC/$PROJ/src/session-$sessionNo/session-$sessionNo.eca"
   vim "$file_path"
 }
-
 psm(){
   sessionNo=$1
   file_path="$PROJLOC/$PROJ/src/session-$sessionNo/session-$sessionNo.eca"
   "$file_path"
 }
-
 lstS(){
   sessionNo=$1
   file_path="$PROJLOC/$PROJ/src/session-$sessionNo/"
