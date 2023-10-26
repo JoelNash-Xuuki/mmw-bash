@@ -295,12 +295,29 @@ os(){
   vim "$file_path"
 }
 
-listSession(){
+rs(){
+  sessionNo=$1
+  sessionName=$2
+  file_path="$PROJLOC/$PROJ/bin/session/$sessionNo/$sessionName"
+  "$file_path"
+}
+
+osm(){
+  sessionNo=$1
+  file_path="$PROJLOC/$PROJ/src/session-$sessionNo/session-$sessionNo.eca"
+  vim "$file_path"
+}
+
+psm(){
+  sessionNo=$1
+  file_path="$PROJLOC/$PROJ/src/session-$sessionNo/session-$sessionNo.eca"
+  "$file_path"
+}
+
+lstS(){
   sessionNo=$1
   file_path="$PROJLOC/$PROJ/src/session-$sessionNo/"
-  echo "$file_path"
-  echo /home/joel/projects_/Flock/src/session-3/
-  ls /home/joel/projects_/Flock/src/session-3/
+  ls "$file_path"
 }
 
 #setLocation() {
