@@ -316,6 +316,16 @@ lstS(){
   ls "$file_path"
 }
 
+selProj(){
+  sed -i "s/PROJ=.*/PROJ=$1/g" $HOME/mmw/test/tmp/config
+}
+
+proj(){
+  grep -Po '(?<=PROJ=).*' $HOME/mmw/test/tmp/config
+}
+
+
+
 #setLocation() {
 #  sed -e " s/\[PROJECTLOCATION\]/$1/g;"\
 #           "$HOME/mmw/tmp/options-template" >\
