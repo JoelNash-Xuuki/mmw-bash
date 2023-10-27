@@ -4,6 +4,13 @@
 #include "synmod.hpp"
 
 int main(int argc, char **argv){
+
+  if (argc != 2) {
+      printf("Usage: %s <filename>\n", argv[0]);
+      return 1;
+    }
+
+  processFile(argv[1]);
   //PrinterReader pr;
   //const char* patch= argv[1];
   //const char* projName= argv[2];

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 void processFile(const char* filename) {
   FILE *file = fopen(filename, "r");
   if (file == NULL) {
@@ -41,13 +42,3 @@ void processFile(const char* filename) {
   free(oscs);
 }
 
-int main(int argc, char **argv) {
-  if (argc != 2) {
-    printf("Usage: %s <filename>\n", argv[0]);
-    return 1;
-  }
-
-  processFile(argv[1]);
-
-  return 0;
-}
