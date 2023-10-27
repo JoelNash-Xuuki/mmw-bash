@@ -15,7 +15,7 @@ typedef struct { // OSCMOD
   char waveform[SYNMOD_CHARS];
   char omin[SYNMOD_CHARS];
   char omax[SYNMOD_CHARS];
-} OSC;
+} OSCMOD;
 
 //typedef struct { // INSTR;
 //  char no[SYNMOD_CHARS];

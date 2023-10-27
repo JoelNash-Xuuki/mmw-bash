@@ -1,5 +1,7 @@
-#include "daw.hpp"
-#include "modsyn.hpp"
+//#include "daw.hpp"
+//#include "modsyn.hpp"
+
+#include "synmod.hpp"
 
 int main(int argc, char **argv){
   //PrinterReader pr;

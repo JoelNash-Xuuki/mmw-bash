@@ -8,16 +8,16 @@
 
 using namespace std;
 
-PrinterReader::PrinterReader(){
-      mixes=  (MIXOUT *)   malloc(MAXMODS * sizeof(MIXOUT));
-      oscs=   (OSC *)      malloc(MAXMODS * sizeof(OSC));
-      noises= (NOISEMOD *) malloc(MAXMODS * sizeof(NOISEMOD));
-      sahs=   (NOISEMOD *) malloc(MAXMODS * sizeof(NOISEMOD));
-      vcfs=   (VCFMOD *)   malloc(MAXMODS * sizeof(VCFMOD));
-      envs=   (ENVMOD *)   malloc(MAXMODS * sizeof(ENVMOD));
-}
+//PrinterReader::PrinterReader(){
+//      mixes=  (MIXOUT *)   malloc(MAXMODS * sizeof(MIXOUT));
+//      oscs=   (OSC *)      malloc(MAXMODS * sizeof(OSC));
+//      noises= (NOISEMOD *) malloc(MAXMODS * sizeof(NOISEMOD));
+//      sahs=   (NOISEMOD *) malloc(MAXMODS * sizeof(NOISEMOD));
+//      vcfs=   (VCFMOD *)   malloc(MAXMODS * sizeof(VCFMOD));
+//      envs=   (ENVMOD *)   malloc(MAXMODS * sizeof(ENVMOD));
+//}
 
-void PrinterReader:: readPatch(){
+//void PrinterReader:: readPatch(){
   //const char* mod;
   //while(fscanf("%s", mod ) != EOF){
   //  if(! strcmp(mod, "OSC")){
@@ -46,31 +46,31 @@ void PrinterReader:: readPatch(){
       //     //  fprintf(stderr,"%s is an unknown module\n", modname);
       //     //}
   //}
-}
+//}
 
 
 
 
-void PrinterReader::initialize_globals(OSC *oscs, int osc_count, 
-  			               NOISEMOD *noises, int noise_count, 
-  			               NOISEMOD *sahs, int sah_count,
-	                               VCFMOD *vcfs, int vcf_count){
-
-  int i;
-  for(i = 0; i < osc_count; i++){
-    printf("%s init 0.0\n", oscs[i].sig_out);
-      //}
-      //for(i = 0; i < noise_count; i++){
-      //  printf("%s init 0.0\n", noises[i].sig_out);
-      //}
-      //for(i = 0; i < sah_count; i++){
-      //  printf("%s init 0.0\n", sahs[i].sig_out);
-      //}
-      //for( i = 0; i < vcf_count; i++){
-      //  printf("%s init 0.0\n", vcfs[i].sig_out);
-      //}
-   }
-}
+//void PrinterReader::initialize_globals(OSC *oscs, int osc_count, 
+//  			               NOISEMOD *noises, int noise_count, 
+//  			               NOISEMOD *sahs, int sah_count,
+//	                               VCFMOD *vcfs, int vcf_count){
+//
+//  int i;
+//  for(i = 0; i < osc_count; i++){
+//    printf("%s init 0.0\n", oscs[i].sig_out);
+//      //}
+//      //for(i = 0; i < noise_count; i++){
+//      //  printf("%s init 0.0\n", noises[i].sig_out);
+//      //}
+//      //for(i = 0; i < sah_count; i++){
+//      //  printf("%s init 0.0\n", sahs[i].sig_out);
+//      //}
+//      //for( i = 0; i < vcf_count; i++){
+//      //  printf("%s init 0.0\n", vcfs[i].sig_out);
+//      //}
+//   }
+//}
   //print_header();
 
   //pr.initialize_globals(oscs, osc_count, 
