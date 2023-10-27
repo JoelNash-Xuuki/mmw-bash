@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 void processFile(const char* filename) {
   FILE *file = fopen(filename, "r");
   if (file == NULL) {
@@ -41,4 +40,3 @@ void processFile(const char* filename) {
   fclose(file);
   free(oscs);
 }
-

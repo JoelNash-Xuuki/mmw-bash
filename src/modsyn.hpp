@@ -17,6 +17,22 @@ typedef struct { // OSCMOD
   char omax[SYNMOD_CHARS];
 } OSCMOD;
 
+#ifndef ModSyn_H
+#define ModSyn_H
+class ModSyn{
+  public:
+    bool wasRun;
+  public:
+    ModSyn(string name);
+    void run();
+    void testMethod();
+    void processFile(const char* filename);
+};
+# endif
+
+
+//void processFile(const char* filename)
+
 //typedef struct { // INSTR;
 //  char no[SYNMOD_CHARS];
 //} INSTR;

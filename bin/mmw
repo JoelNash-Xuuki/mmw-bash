@@ -50,7 +50,6 @@ echo "$projScore" > $LILY
 
 #  echo "run createLyScoreAndMidiFile?"
 }
-
 createLyScoreAndMidiFile(){
   lilypond -dmidi-extension=mid $LILY
   mv $PROJ.mid tmp/$PROJ.mid
@@ -357,14 +356,11 @@ createProj(){
       fi
   fi
 }
-
 createLyScoreAndMidiFile(){
   lilypond -dmidi-extension=mid $LILY
   mv $PROJ.mid PROJPATH/tmp/$PROJ.mid
   #lilypond-book --output=out --format=html $1.lytex
 }
-
-
 isProjScoreExist(){
   if test -d $SCORE/; then
       echo "Directory exists"
@@ -382,12 +378,8 @@ isProjScoreExist(){
 }
 
 #run tests
-#mmw dataTest(){
-#  $HOME/mmw/bin/
-#}
-
-
-
+tests(){
+  $HOME/mmw/bin/run-mmw-project-tests
+}
   
-  "$@"
-
+"$@"

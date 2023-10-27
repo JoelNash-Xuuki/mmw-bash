@@ -1,16 +1,19 @@
 //#include "daw.hpp"
-//#include "modsyn.hpp"
-
-#include "synmod.hpp"
+#include "modsyn.hpp"
+#include <cstdio>
+#include <iostream>
 
 int main(int argc, char **argv){
 
-  if (argc != 2) {
-      printf("Usage: %s <filename>\n", argv[0]);
-      return 1;
-    }
+  ModSyn ms= ModSyn("testMethod"); 
+  ms.processFile(argv[1]);
 
-  processFile(argv[1]);
+  //if (argc != 2) {
+  //    printf("Usage: %s <filename>\n", argv[0]);
+  //    return 1;
+  //  }
+
+  //processFile(argv[1]);
   //PrinterReader pr;
   //const char* patch= argv[1];
   //const char* projName= argv[2];
@@ -24,6 +27,7 @@ int main(int argc, char **argv){
   //ae->getControls(argc,argv);
  
  // cout << "Program ended." << endl;  
+
   return 0;
 }
 
