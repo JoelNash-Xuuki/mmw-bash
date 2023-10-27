@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #First file for you MMW tests
 #@test "Use options template to set project option..." {
 #  mmw createProject mmw/test/test-proj
@@ -6,7 +5,6 @@
 #    [ "$status" -eq 0 ]
 #  fi
 #}
-=======
 source ./test/tmp/config
 
 setup() {
@@ -26,7 +24,6 @@ setup() {
   #    echo "Creating $proj-file_path"
   #    mkdir $HOME/mmw/test/$PROJ
   #fi
->>>>>>> develop
 
 #teardown_file() {
 #  if [ -d $HOME/mmw/test/test-proj  ]; then
@@ -34,27 +31,24 @@ setup() {
 #  fi
 #}
 
-<<<<<<< HEAD
 @test "Use template file to create output/audio output files" { 
   mmw createRecFile
   filepath="$HOME/mmw/tmp/test-rec-1.wav"
   actual="$(cat $HOME/mmw/test/src/test-rec.csd | grep fout )" 
   expected="        fout \"$filepath\", 14, ain1"
   [ "$expected" = "$actual" ]
-=======
+
 @test "load a project" {
   output="$(mmw load)"
   [ "$output" = "loading project..." ]
   [ "$PROJ" = "test-project-1" ]
   [ "$PROJPATH" = "$HOME/mmw/test/$PROJ" ]
->>>>>>> develop
 }
 
-@test "can create a file for 1 track" {
+#@test "can create a file for 1 track" {
+#
+#}
 
-}
-
-<<<<<<< HEAD
 #@test "Use options template to set project option..." {
 #  mmw setOptions  
 #  filepath="$HOME/mmw/tmp/option"
@@ -86,7 +80,6 @@ setup() {
 #
 #  [ "$(cat /home/joel/mmw/tmp/options | grep 'PROJPATH=')" = "PROJPATH=/home/joel/test-mmw-proj-location" ]
 #}
-=======
 # Read the contents of insert.txt into a variable.
 
 # Use the sed command to replace the placeholder in main.txt with the content of insert.txt.
@@ -115,5 +108,4 @@ setup() {
 
 
 
->>>>>>> develop
 

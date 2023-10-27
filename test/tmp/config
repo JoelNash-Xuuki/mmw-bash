@@ -1,8 +1,10 @@
-PROJ=Flock
-PROJPATH=$HOME/projects_/Flock
-PROJLOC=$HOME/projects_
+PROJ=Hello
+PROJLOC=projects_
+PROJPATH=$HOME/$PROJLOC/$PROJ
+ARTIST=Vyvn
+SCORE=$PROJPATH/score
 LILY=$PROJPATH/src/$PROJ.ly
-WAV=$HOME/audio/Vyvn/$PROJ/1/stems/$PROJ.wav
+WAV=$HOME/audio/$ARTIST/$PROJ/1/stems/$PROJ.wav
 TEMPO=84
 BEAT=$(bc <<< "scale=4; (60/$TEMPO)")
 BAR=$(bc <<< "scale=4;$BEAT*4")

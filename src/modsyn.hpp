@@ -7,10 +7,6 @@
 
 using namespace std;
 
-typedef struct { // INSTR;
-  char no[SYNMOD_CHARS];
-} INSTR;
-
 typedef struct { // OSCMOD
   char frequency[SYNMOD_CHARS];
   char sig_out[SYNMOD_CHARS];
@@ -21,57 +17,61 @@ typedef struct { // OSCMOD
   char omax[SYNMOD_CHARS];
 } OSC;
 
-typedef struct { // MIXOUT;
-  char outvar[SYNMOD_CHARS];
-  char amplitude[SYNMOD_CHARS];
-} MIXOUT;
+//typedef struct { // INSTR;
+//  char no[SYNMOD_CHARS];
+//} INSTR;
 
-typedef struct { // NOISEMOD
-  char speed[SYNMOD_CHARS];
-  char sig_out[SYNMOD_CHARS];
-  char seed[SYNMOD_CHARS];
-  char omin[SYNMOD_CHARS];
-  char omax[SYNMOD_CHARS];
-} NOISEMOD;
-
-typedef struct { //  VCFMOD
-  char sig_in[SYNMOD_CHARS];
-  char sig_out[SYNMOD_CHARS];
-  char cutoff[SYNMOD_CHARS];
-  char resonance[SYNMOD_CHARS];
-} VCFMOD;
-
-typedef struct { // ENVMOD;
-  char amp[SYNMOD_CHARS];
-  char sig_out[SYNMOD_CHARS];
-} ENVMOD;
-
-class PrinterReader{
-  private:
-    MIXOUT *mixes;
-    OSC *oscs;
-    NOISEMOD *noises;
-    NOISEMOD *sahs;
-    VCFMOD *vcfs;
-    ENVMOD *envs;
-
-    int osc_count= 0;
-    char modname[64];
-    int mix_count= 0;
-    int noise_count= 0;
-    int sah_count= 0;
-    int vcf_count= 0;
-    int env_count= 0;
-    int i;
-
-    void initialize_globals(OSC      *oscs,   int osc_count, 
-  			    NOISEMOD *noises, int noise_count, 
-  			    NOISEMOD *sahs,   int sah_count,
-  			    VCFMOD   *vcfs,   int vcf_count);
-  public: 
-    PrinterReader();
-    void readPatch();
-};
+//typedef struct { // MIXOUT;
+//  char outvar[SYNMOD_CHARS];
+//  char amplitude[SYNMOD_CHARS];
+//} MIXOUT;
+//
+//typedef struct { // NOISEMOD
+//  char speed[SYNMOD_CHARS];
+//  char sig_out[SYNMOD_CHARS];
+//  char seed[SYNMOD_CHARS];
+//  char omin[SYNMOD_CHARS];
+//  char omax[SYNMOD_CHARS];
+//} NOISEMOD;
+//
+//typedef struct { //  VCFMOD
+//  char sig_in[SYNMOD_CHARS];
+//  char sig_out[SYNMOD_CHARS];
+//  char cutoff[SYNMOD_CHARS];
+//  char resonance[SYNMOD_CHARS];
+//} VCFMOD;
+//
+//typedef struct { // ENVMOD;
+//  char amp[SYNMOD_CHARS];
+//  char sig_out[SYNMOD_CHARS];
+//} ENVMOD;
+//
+//class PrinterReader{
+//  private:
+//    MIXOUT *mixes;
+//    OSC *oscs;
+//    NOISEMOD *noises;
+//    NOISEMOD *sahs;
+//    VCFMOD *vcfs;
+//    ENVMOD *envs;
+//
+//    int osc_count= 0;
+//    char modname[64];
+//    int mix_count= 0;
+//    int noise_count= 0;
+//    int sah_count= 0;
+//    int vcf_count= 0;
+//    int env_count= 0;
+//    int i;
+//
+//    void initialize_globals(OSC      *oscs,   int osc_count, 
+//  			    NOISEMOD *noises, int noise_count, 
+//  			    NOISEMOD *sahs,   int sah_count,
+//  			    VCFMOD   *vcfs,   int vcf_count);
+//  public: 
+//    PrinterReader();
+//    void readPatch();
+//};
 						
       
 
@@ -100,27 +100,27 @@ class PrinterReader{
 //      printf("</CsoundSynthesizer>\n");
 //    }
 
-void read_instr(INSTR *instr, int count);
-void print_instr(INSTR instr);
-
-void read_osc(OSC *oscs, int count);
-void print_osc(OSC osc);
-
-void read_mix(MIXOUT *mix, int count);
-void print_mix(MIXOUT mix);
-
-void read_noise(NOISEMOD *unit, int count);
-void print_noise(NOISEMOD noise);
-void print_sah(NOISEMOD noise);
-
-void read_vcf(VCFMOD *unit, int count);
-void print_vcf(VCFMOD vcf);
-
-void read_env(ENVMOD *oscs, int count);
-void print_env(ENVMOD osc);
-
-void print_header(void);
-void print_score();
+//void read_instr(INSTR *instr, int count);
+//void print_instr(INSTR instr);
+//
+//void read_osc(OSC *oscs, int count);
+//void print_osc(OSC osc);
+//
+//void read_mix(MIXOUT *mix, int count);
+//void print_mix(MIXOUT mix);
+//
+//void read_noise(NOISEMOD *unit, int count);
+//void print_noise(NOISEMOD noise);
+//void print_sah(NOISEMOD noise);
+//
+//void read_vcf(VCFMOD *unit, int count);
+//void print_vcf(VCFMOD vcf);
+//
+//void read_env(ENVMOD *oscs, int count);
+//void print_env(ENVMOD osc);
+//
+//void print_header(void);
+//void print_score();
 
 
 

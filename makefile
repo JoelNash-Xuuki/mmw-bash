@@ -6,10 +6,8 @@ INCLUDE = -I/usr/include/csound/
 MOD		= src/modsyn.cpp
 CC		= g++
 
+modsyn: $(MOD) 
+	$(CC) $(MOD) -o ~/mmw/bin/modsyn
 
-
-#modsyn: $(MOD) 
-#	$(CC) $(MOD) -o ~/.bin/modsyn
-
-daw: $(PROG)
-	$(CC) $(INCLUDE) $(PROG) $(CSOUND) -o ~/mmw/bin/daw
+#daw: $(PROG)
+#	$(CC) $(INCLUDE) $(PROG) $(CSOUND) -o ~/mmw/bin/daw
