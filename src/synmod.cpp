@@ -91,7 +91,7 @@ void print_osc(OSCMOD osc, FILE* outputFile){
     fprintf(outputFile,"%s, ", osc.sig_am);
   }
   if(!strcmp( osc.sig_fm, "NONE")){
-    fprintf(outputFile,"ifrq, ");
+    fprintf(outputFile,"%s, ",osc.frequency);
   } else {
     fprintf(outputFile,"%s * (1.0 + %s), ",osc.frequency, osc.sig_fm);
   }

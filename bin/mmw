@@ -377,6 +377,14 @@ isProjScoreExist(){
   fi
 }
 
+play(){
+  if pgrep jackd > /dev/null; then
+    csound --realtime -odac -B256 -b256 -+rtaudio=jack $1
+  else
+    csound --realtime -odac -iadc -B256 -b256 $1
+  fi
+}
+
 #run tests
 tests(){
   $HOME/mmw/bin/run-mmw-project-tests
