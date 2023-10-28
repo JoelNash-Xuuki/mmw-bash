@@ -5,8 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
-
 typedef struct { // OSCMOD
   char frequency[SYNMOD_CHARS];
   char sig_out[SYNMOD_CHARS];
@@ -18,3 +16,4 @@ typedef struct { // OSCMOD
 } OSCMOD;
 
 void read_osc(OSCMOD *oscs, int count, FILE* file);
+void print_osc(OSCMOD osc);
