@@ -1,9 +1,9 @@
 #define SYNMOD_CHARS (128)
 #define MAXMODS (256)
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 
 typedef struct { // OSCMOD
   char frequency[SYNMOD_CHARS];
@@ -14,6 +14,16 @@ typedef struct { // OSCMOD
   char omin[SYNMOD_CHARS];
   char omax[SYNMOD_CHARS];
 } OSCMOD;
+typedef struct { //MIXOUT
+  char outvar[SYNMOD_CHARS];
+  char amplitude[SYNMOD_CHARS];
+} MIXOUT;
 
 void read_osc(OSCMOD *oscs, int count, FILE* file);
-void print_osc(OSCMOD osc);
+void read_mix(MIXOUT *mix, int count, FILE* file);
+
+void print_osc(OSCMOD osc, FILE* outputFile);
+void print_mix(MIXOUT mix, FILE* outputFile);
+
+void print_header(FILE* outputFile);
+void print_score(float duration,FILE* outputFile);
