@@ -17,13 +17,8 @@ void processFile(const char* filename) {
   while (fscanf(file, "%s", modname) != EOF) {
     if (!strcmp(modname, "OSC")) {
       // Read in the data
-      fscanf(file, "%s", oscs[osc_count].sig_out);
-      fscanf(file, "%s", oscs[osc_count].frequency);
-      fscanf(file, "%s", oscs[osc_count].waveform);
-      fscanf(file, "%s", oscs[osc_count].sig_am);
-      fscanf(file, "%s", oscs[osc_count].sig_fm);
-      fscanf(file, "%s", oscs[osc_count].omin);
-      fscanf(file, "%s", oscs[osc_count].omax);
+      read_osc(oscs, osc_count,file);
+    
       // Print it to make sure it's ok
       printf("%s %s %s %s %s %s %s\n",
              oscs[osc_count].sig_out,
@@ -39,4 +34,30 @@ void processFile(const char* filename) {
 
   fclose(file);
   free(oscs);
+}
+
+int main(int argc, char **argv){
+  if (argc != 2) {
+      printf("Usage: %s <filename>\n", argv[0]);
+      return 1;
+  }
+
+  processFile(argv[1]);
+
+  return 0;
+}
+
+void read_osc(OSCMOD *oscs, int count, FILE* file){
+ fscanf(file,"%s %s %s %s %s %s %s",
+ oscs[count].sig_out,
+ oscs[count].frequency,
+ oscs[count].waveform, 
+ oscs[count].sig_am, 
+ oscs[count].sig_fm, 
+ oscs[count].omin, 
+ oscs[count].omax);
+ if( count >= MAXMODS ){
+   fprintf(stderr,"Number of oscillators has exceeded maximum: %d\n", MAXMODS);
+   exit(1);
+  }
 }
