@@ -18,18 +18,26 @@ void processFile(const char* filename) {
     if (!strcmp(modname, "OSC")) {
       // Read in the data
       read_osc(oscs, osc_count,file);
-    
       // Print it to make sure it's ok
       printf("%s %s %s %s %s %s %s\n",
-             oscs[osc_count].sig_out,
-             oscs[osc_count].frequency,
-             oscs[osc_count].waveform,
-             oscs[osc_count].sig_am,
-             oscs[osc_count].sig_fm,
-             oscs[osc_count].omin,
-             oscs[osc_count].omax);
-      ++osc_count;
+        oscs[osc_count].sig_out,
+        oscs[osc_count].frequency,
+        oscs[osc_count].waveform,
+        oscs[osc_count].sig_am,
+        oscs[osc_count].sig_fm,
+        oscs[osc_count].omin,
+        oscs[osc_count].omax);
+        ++osc_count;
+    } else {
+      fprintf(stderr, "%s is an unknown module\n", modname);
     }
+
+    
+    // Print it to make sure it's ok
+    for(int i =0; i < osc_count; i++){
+      
+    }
+      
   }
 
   fclose(file);
