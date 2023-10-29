@@ -16,9 +16,13 @@ typedef struct { // STAFFGROUP
 class SheetBuilder{
   private:
     FILE *sheet;
+    STAFFGROUP *staffGroups;
+    int staffGroupCount= 0;
     const char* service;
     const char* title;
     const char* artist;
+    char modname[64];
+
   public:
     SheetBuilder(const char* sheetName,
                  const char* service,
@@ -26,6 +30,10 @@ class SheetBuilder{
                  const char* artist
     );
     void printHeader(void);
+    void printStaffGroups(void);
+    void readStaffGroups(STAFFGROUP *staffGroup, 
+                         int count,  
+                         FILE* sheet);
     void closeSheet(void);
 };
 # endif

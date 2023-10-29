@@ -7,8 +7,6 @@
 
 using namespace std;
 
-
-
 void processPatch(const char* filename) {
 
   OSCMOD *oscs;
@@ -31,6 +29,7 @@ void processPatch(const char* filename) {
   }
 
   print_header(fileOut);
+
   // Read in the data from patch file
   while (fscanf(file, "%s", modname) != EOF) {
     if (!strcmp(modname, "OSC")) {
