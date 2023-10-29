@@ -1,10 +1,10 @@
-PROG	= src/main.cpp src/modsyn.cpp  #src/daw.cpp 
+PROG	= src/main.cpp src/SheetBuilder.cpp  #src/daw.cpp 
 CSOUND  = -lcsound64 -lcsnd6
 INCLUDE = -I/usr/include/csound/
 CC	= g++
 
-modsyn: $(PROG) 
-	$(CC) $(PROG) -o ~/mmw/bin/modsyn
+sheetbuilder: $(PROG) 
+	$(CC) $(PROG) -o ~/mmw/bin/sheetbuilder
 
 
 #daw: $(PROG)

@@ -1,7 +1,13 @@
 #include "synmod.hpp"
 #include <stdio.h>
+#include <string>
 #include <stdlib.h>
-#include <string.h>
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+
 
 void processPatch(const char* filename) {
 
@@ -57,7 +63,11 @@ int main(int argc, char **argv){
       return 1;
   }
 
-  processPatch(argv[1]);
+  const char* sheetName;
+  sheetName= argv[1];
+  SheetBuilder sheetBuilder= SheetBuilder(sheetName);
+
+  //processPatch(argv[1]);
 
   return 0;
 }
@@ -165,3 +175,5 @@ void print_score(float duration, FILE* outputFile){
   fprintf(outputFile,"</CsScore>\n");
   fprintf(outputFile,"</CsoundSynthesizer>\n");
 }
+
+

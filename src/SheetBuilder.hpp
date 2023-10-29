@@ -7,28 +7,25 @@
 
 using namespace std;
 
-#ifndef ModSyn_H
-#define ModSyn_H
-class ModSyn{
+#ifndef SheetBuilder_H
+#define SheetBuilder_H
+class SheetBuilder{
   public:
     bool wasRun;
   public:
-    ModSyn(string name);
-    void run();
-    void testMethod();
-    void processFile(const char* filename);
+    SheetBuilder(const char* sheetName);
 };
 # endif
 
-typedef struct { // OSCMOD
-  char frequency[SYNMOD_CHARS];
-  char sig_out[SYNMOD_CHARS];
-  char sig_am[SYNMOD_CHARS];
-  char sig_fm[SYNMOD_CHARS];
-  char waveform[SYNMOD_CHARS];
-  char omin[SYNMOD_CHARS];
-  char omax[SYNMOD_CHARS];
-} OSCMOD;
+//typedef struct { // OSCMOD
+//  char frequency[SYNMOD_CHARS];
+//  char sig_out[SYNMOD_CHARS];
+//  char sig_am[SYNMOD_CHARS];
+//  char sig_fm[SYNMOD_CHARS];
+//  char waveform[SYNMOD_CHARS];
+//  char omin[SYNMOD_CHARS];
+//  char omax[SYNMOD_CHARS];
+//} OSCMOD;
 
 
 

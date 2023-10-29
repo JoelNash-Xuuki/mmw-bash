@@ -14,6 +14,7 @@ typedef struct { // OSCMOD
   char omin[SYNMOD_CHARS];
   char omax[SYNMOD_CHARS];
 } OSCMOD;
+
 typedef struct { //MIXOUT
   char outvar[SYNMOD_CHARS];
   char amplitude[SYNMOD_CHARS];
