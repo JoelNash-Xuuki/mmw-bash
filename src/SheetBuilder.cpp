@@ -9,16 +9,17 @@
 using namespace std;
 
 SheetBuilder::SheetBuilder(const char* sheetName,
-			   const char* artist){
+			   const char* service){
 
   cout << "Starting Sheet Builder..." << endl;
   this->sheet= fopen(sheetName, "w");
+  this->service= service;
 };
 
 void SheetBuilder::printHeader(void){
   fprintf(this->sheet,"\\version \"2.22.0\"\n\n");
   fprintf(this->sheet,"\\header {\n");
-  fprintf(this->sheet,"\\tagline = \"Xuuki.xyz\"\n");
+  fprintf(this->sheet,"  \\tagline = \"%s\"\n", this->service);
 }
 
 void SheetBuilder::closeSheet(void){

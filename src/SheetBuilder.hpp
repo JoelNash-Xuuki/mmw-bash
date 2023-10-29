@@ -16,9 +16,10 @@ typedef struct { // STAFFGROUP
 class SheetBuilder{
   private:
     FILE *sheet;
+    const char* service ;
   public:
     SheetBuilder(const char* sheetName,
-                 const char* artist
+                 const char* service
     );
     void printHeader(void);
     void closeSheet(void);
