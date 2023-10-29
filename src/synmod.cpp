@@ -95,16 +95,19 @@ void print_osc(OSCMOD osc, FILE* outputFile){
   float mo2;
 
   fprintf(outputFile,"%s oscil ", osc.sig_out);
+
   if(!strcmp(osc.sig_am, "NONE")){
     fprintf(outputFile,"1.0, ");
   } else {
     fprintf(outputFile,"%s, ", osc.sig_am);
   }
+
   if(!strcmp( osc.sig_fm, "NONE")){
     fprintf(outputFile,"%s, ",osc.frequency);
   } else {
     fprintf(outputFile,"%s * (1.0 + %s), ",osc.frequency, osc.sig_fm);
   }
+
   if(!strcmp(osc.waveform, "SINE")){
     fprintf(outputFile,"isine\n");
   }
@@ -125,16 +128,19 @@ void print_osc(OSCMOD osc, FILE* outputFile){
 		   osc.waveform);
     fprintf(outputFile,"isine\n");
   }
+
   sscanf(osc.omin,"%f",&omin); // convert strings to floats
   sscanf(osc.omax,"%f",&omax);
+
   if(omin != -1.0 || omax != 1.0){ // rescale output if necessary
     mo2 = (omax - omin) / 2.0;
-    fprintf(outputFile,"%s = %s + (%f*%s + %f)\n",
-      osc.sig_out, 
-      osc.omin, 
-      mo2, 
-      osc.sig_out, 
-      mo2
+    fprintf(outputFile
+            ,"%s = %s + (%f*%s + %f)\n",
+            osc.sig_out, 
+            osc.omin, 
+            mo2, 
+            osc.sig_out, 
+            mo2
     );
   }
 }

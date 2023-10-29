@@ -2,6 +2,7 @@ PROJ=Hello
 PROJLOC=projects_
 PROJPATH=$HOME/$PROJLOC/$PROJ
 ARTIST=Vyvn
+SERVICE=Xuuki.xyz
 SCORE=$PROJPATH/score
 LILY=$PROJPATH/src/$PROJ.ly
 WAV=$HOME/audio/$ARTIST/$PROJ/1/stems/$PROJ.wav

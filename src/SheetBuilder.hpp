@@ -7,25 +7,25 @@
 
 using namespace std;
 
+typedef struct { // STAFFGROUP
+  char name[SYNMOD_CHARS];
+} STAFFGROUP;
+
 #ifndef SheetBuilder_H
 #define SheetBuilder_H
 class SheetBuilder{
+  private:
+    FILE *sheet;
   public:
-    bool wasRun;
-  public:
-    SheetBuilder(const char* sheetName);
+    SheetBuilder(const char* sheetName,
+                 const char* artist
+    );
+    void printHeader(void);
+    void closeSheet(void);
 };
 # endif
 
-//typedef struct { // OSCMOD
-//  char frequency[SYNMOD_CHARS];
-//  char sig_out[SYNMOD_CHARS];
-//  char sig_am[SYNMOD_CHARS];
-//  char sig_fm[SYNMOD_CHARS];
-//  char waveform[SYNMOD_CHARS];
-//  char omin[SYNMOD_CHARS];
-//  char omax[SYNMOD_CHARS];
-//} OSCMOD;
+
 
 
 

@@ -377,6 +377,10 @@ isProjScoreExist(){
   fi
 }
 
+buildSheetMusic(){
+  sheetbuilder $1 $2
+}
+
 renderMix(){
   csound -o$1 $2
 }
