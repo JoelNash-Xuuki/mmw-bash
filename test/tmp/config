@@ -4,7 +4,7 @@ PROJPATH=$HOME/$PROJLOC/$PROJ
 ARTIST=Vyvn
 SERVICE=Xuuki.xyz
 SCORE=$PROJPATH/score
-LILY=$PROJPATH/src/$PROJ.ly
+LILY=$SCORE/$PROJ.ly
 WAV=$HOME/audio/$ARTIST/$PROJ/1/stems/$PROJ.wav
 TEMPO=84
 BEAT=$(bc <<< "scale=4; (60/$TEMPO)")

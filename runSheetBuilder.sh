@@ -1,2 +1,4 @@
 source $HOME/mmw/test/tmp/config
-mmw buildSheetMusic $PROJ.ly $SERVICE
+mmw setProj Hello
+mmw createProj
+mmw buildSheetMusic $PROJPATH/src/score/$PROJ.ly Xuuki.xyz

@@ -349,6 +349,7 @@ createProj(){
       if [[ $choice == "y" ]]; then
           mkdir $PROJPATH
           mkdir $PROJPATH/src
+          mkdir $PROJPATH/src/score
           mkdir $PROJPATH/tmp
           echo "$PROJ created"
       else
