@@ -18,7 +18,7 @@
         \time 4/4
         \tempo 4 = 84
         r1
-	  r1
+        r1
       }
     >> 
   \new StaffGroup << %Harmony

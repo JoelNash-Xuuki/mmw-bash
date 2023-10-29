@@ -379,7 +379,7 @@ isProjScoreExist(){
 }
 
 buildSheetMusic(){
-  sheetbuilder $1 $2
+  sheetbuilder $1 $2 $3 $4
 }
 
 renderMix(){

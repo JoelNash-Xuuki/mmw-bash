@@ -16,19 +16,19 @@ typedef struct { // STAFFGROUP
 class SheetBuilder{
   private:
     FILE *sheet;
-    const char* service ;
+    const char* service;
+    const char* title;
+    const char* artist;
   public:
     SheetBuilder(const char* sheetName,
-                 const char* service
+                 const char* service,
+                 const char* title,
+                 const char* artist
     );
     void printHeader(void);
     void closeSheet(void);
 };
 # endif
-
-
-
-
 
 //void processFile(const char* filename)
 
