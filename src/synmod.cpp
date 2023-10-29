@@ -150,8 +150,8 @@ void print_header(FILE* outputFile){
   fprintf(outputFile,"isine = 1\n");
   fprintf(outputFile,"itriangle = 2\n");
   fprintf(outputFile,"isawtooth = 3\n");
-  fprintf(outputFile,"isquare = 3\n");
-  fprintf(outputFile,"ipulse = 3\n");
+  fprintf(outputFile,"isquare = 4\n");
+  fprintf(outputFile,"ipulse = 5\n");
 }
 void print_score(float duration, FILE* outputFile){
   fprintf(outputFile,"</CsInstruments>\n");
@@ -161,7 +161,7 @@ void print_score(float duration, FILE* outputFile){
   fprintf(outputFile,"f3 0 8192 10 1 .5 .333 .25 .2 .166 .142 .125 ; sawtooth\n");
   fprintf(outputFile,"f4 0 8192 10 1 0 .333 0 .2 0 .142 0 .111; square\n");
   fprintf(outputFile,"f5 0 8192 10 1 1 1 1 1 1 1 1 1 1 1 1 1; pulse\n\n");
-  fprintf(outputFile,"ii 0 %f\n\n",duration);
+  fprintf(outputFile,"i1 0 %f\n\n",duration);
   fprintf(outputFile,"</CsScore>\n");
   fprintf(outputFile,"</CsoundSynthesizer>\n");
 }
