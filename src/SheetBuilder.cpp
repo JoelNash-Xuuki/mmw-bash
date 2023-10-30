@@ -93,10 +93,21 @@ void SheetBuilder::printStaffGroup(STAFFGROUP staffGroup,
 void SheetBuilder::printStaff(STAFF staff, 
 	                      FILE* sheet){
   cout << "inside print staff" << endl;
-  fprintf(this->sheet,"      \\include \"%s/%s.ly\"\n",this->sheetLocation,staff.instr);
+  char filePath[100];
+  sprintf(filePath, "%s/%s.ly", this->sheetLocation, staff.instr);
+  fprintf(this->sheet, "      \\include \"%s\"\n", filePath);
+
   FILE *instrStaff;
-  instrStaff= fopen("hi", "w");
+  instrStaff= fopen(filePath, "w");
 }
+
+//void SheetBuilder::printStaff(STAFF staff, FILE* sheet){
+//  char filePath[100]; // Assuming a maximum length of 100 characters for the file path
+//  sprintf(filePath, "%s/%s.ly", this->sheetLocation, staff.instr);
+//  fprintf(this->sheet, "      \\include \"%s\"\n", filePath);
+//  // Rest of the code...
+//}
+
 
 void SheetBuilder::closeSheet(void){
    fclose(this->sheet);
