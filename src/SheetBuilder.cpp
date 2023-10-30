@@ -76,10 +76,11 @@ void SheetBuilder::readStaffs(STAFF *staff,
                               int count,  
                               FILE* patch){
   cout << "Reading staff instrument..." << endl;
-  fscanf(patch,"%s %s %s",
+  fscanf(patch,"%s %s %s %s",
          staff[count].instr,
          staff[count].time,
-         staff[count].tempo); 
+         staff[count].tempo,
+         staff[count].clef); 
   if( count >= MAXMODS ){
    fprintf(stderr,"Number of Staffs has exceeded maximum: %d\n", 
 	  MAXMODS);
@@ -107,6 +108,7 @@ void SheetBuilder::printStaff(STAFF staff,
   fprintf(instrStaff,"  {\n");
   fprintf(instrStaff,"  \\time %s\n", staff.time);
   fprintf(instrStaff,"  \\tempo %s\n", staff.tempo);
+  fprintf(instrStaff,"  \\clef= %s\n", staff.clef);
 }
 
 //void SheetBuilder::printStaff(STAFF staff, FILE* sheet){
