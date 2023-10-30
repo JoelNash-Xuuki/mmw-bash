@@ -109,12 +109,14 @@ void SheetBuilder::printStaff(STAFF staff,
   instrStaff= fopen(staffFilePath, "w");
   fprintf(instrStaff,"\\new Staff \\with {\n");
   fprintf(instrStaff,"  instrumentName= \"%s\"\n", staff.instr);
-  fprintf(instrStaff,"  {\n");
+  fprintf(instrStaff,"}\n\n");
+  fprintf(instrStaff,"{\n\n");
   fprintf(instrStaff,"  \\time %s\n", staff.time);
   fprintf(instrStaff,"  \\tempo %s\n", staff.tempo);
   fprintf(instrStaff,"  \\clef= %s\n", staff.clef);
   fprintf(instrStaff,"  \\key %s \\%s\n", staff.key, staff.mode);
   fprintf(instrStaff,"      \\include %s", notesFilePath);
+  fprintf(instrStaff,"}\n");
 }
 
 //void SheetBuilder::printStaff(STAFF staff, FILE* sheet){
