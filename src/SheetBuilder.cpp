@@ -11,22 +11,41 @@ using namespace std;
 SheetBuilder::SheetBuilder(const char* sheetName,
 			   const char* service,
 		   	   const char* title,
-                           const char* artist){
+                           const char* artist,
+                           const char* patchName){
   cout << "Starting Sheet Builder..." << endl;
   this->sheet= fopen(sheetName, "w");
   this->service= service;
   this->title= title;
   this->artist= artist;
   staffGroups= (STAFFGROUP *)malloc(MAXMODS * sizeof(STAFFGROUP));
+  staffs= (STAFF *)malloc(MAXMODS * sizeof(STAFF));
+  this->patch= fopen("patchName", "r");
 
   // Read in the data from patch file
-  while (fscanf(this->sheet, "%s", modname) != EOF) {
+  while (fscanf(this->patch, "%s", modname) != EOF) {
     if (!strcmp(modname, "STAFFGROUP")) {
-      readStaffGroups(staffGroups, staffGroupCount++,this->sheet);
+      cout << "Reading staff group..." << endl;
+      readStaffGroups(staffGroups, staffGroupCount++,this->patch);
+    } else if (!strcmp(modname, "STAFF")) {
+      readStaffs(staffs, staffCount++, this->patch);
     } else {
       fprintf(stderr, "%s is an unknown module\n", modname);
     }
   }
+
+  this->printHeader();
+
+  for(i =0; i < staffGroupCount; i++){
+    cout << "Printing staff group..." << endl;
+    printStaffGroup(staffGroups[i],this->sheet);      
+  }
+
+  for(i =0; i < staffCount; i++){
+    cout << "Printing staff instrument..." << endl;
+    printStaff(staffs[i],this->sheet);      
+  }
+
 };
 
 void SheetBuilder::printHeader(void){
@@ -42,16 +61,42 @@ void SheetBuilder::printHeader(void){
 
 void SheetBuilder::readStaffGroups(STAFFGROUP *staffGroup, 
                                    int count,  
-                                   FILE* sheet){
-  fscanf(sheet,"STAFFGROUP\n");
+                                   FILE* patch){
+  fscanf(patch,"%s",staffGroup[count].name);
+  if( count >= MAXMODS ){
+   fprintf(stderr,"Number of Staff Groups has exceeded maximum: %d\n", 
+	  MAXMODS);
+   exit(1);
+  }
 }
 
-void SheetBuilder::printStaffGroups(){
+void SheetBuilder::readStaffs(STAFF *staff, 
+                              int count,  
+                              FILE* patch){
+  cout << "Reading staff instrument..." << endl;
+  fscanf(patch,"%s",staff[count].instr);
+  if( count >= MAXMODS ){
+   fprintf(stderr,"Number of Staffs has exceeded maximum: %d\n", 
+	  MAXMODS);
+   exit(1);
+  }
+}
 
+void SheetBuilder::printStaffGroup(STAFFGROUP staffGroup, 
+                                   FILE* sheet){
+  fprintf(this->sheet,"    \\new StaffGroup << %% %s\n", 
+                                       staffGroup.name);
+}
+
+void SheetBuilder::printStaff(STAFF staff, 
+	                      FILE* sheet){
+  cout << "inside print staff" << endl;
+  fprintf(this->sheet,"      An instr staff goes here %s \n ",staff.instr);
 }
 
 void SheetBuilder::closeSheet(void){
    fclose(this->sheet);
+   fclose(this->patch);
 }
 
       

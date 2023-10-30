@@ -11,29 +11,42 @@ typedef struct { // STAFFGROUP
   char name[SYNMOD_CHARS];
 } STAFFGROUP;
 
+typedef struct { // STAFF
+  char instr[SYNMOD_CHARS];
+} STAFF;
+
 #ifndef SheetBuilder_H
 #define SheetBuilder_H
 class SheetBuilder{
   private:
     FILE *sheet;
+    FILE *patch ;
     STAFFGROUP *staffGroups;
+    STAFF *staffs;
     int staffGroupCount= 0;
+    int staffCount= 0;
     const char* service;
     const char* title;
     const char* artist;
+    const char* patchName;
     char modname[64];
+    int i;
 
   public:
     SheetBuilder(const char* sheetName,
                  const char* service,
                  const char* title,
-                 const char* artist
-    );
+                 const char* artist,
+                 const char* patchName);
     void printHeader(void);
-    void printStaffGroups(void);
+    void printStaffGroup(STAFFGROUP staffGroup, FILE* sheet);
+    void printStaff(STAFF staff, FILE* sheet);
     void readStaffGroups(STAFFGROUP *staffGroup, 
                          int count,  
                          FILE* sheet);
+    void readStaffs(STAFF *staff, 
+                    int count,  
+                    FILE* sheet);
     void closeSheet(void);
 };
 # endif
