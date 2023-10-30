@@ -16,6 +16,8 @@ typedef struct { // STAFF
   char time[SYNMOD_CHARS];
   char tempo[SYNMOD_CHARS];
   char clef[SYNMOD_CHARS];
+  char key[SYNMOD_CHARS];
+  char mode[SYNMOD_CHARS];
 } STAFF;
 
 #ifndef SheetBuilder_H
