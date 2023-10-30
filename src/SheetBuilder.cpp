@@ -100,12 +100,13 @@ void SheetBuilder::printStaffGroup(STAFFGROUP staffGroup,
 void SheetBuilder::printStaff(STAFF staff, 
 	                      FILE* sheet){
   cout << "inside print staff path" << endl;
-  char filePath[100];
-  sprintf(filePath, "%s/%s.ly", this->sheetLocation, staff.instr);
-  fprintf(this->sheet, "      \\include \"%s\"\n", filePath);
+  char staffFilePath[100];
+  char notesFilePath[100];
+  sprintf(staffFilePath, "%s/%s.ly", this->sheetLocation, staff.instr);
+  sprintf(notesFilePath, "\"%s/notes/ns-xxxx\"\n", this->sheetLocation);
 
   FILE *instrStaff;
-  instrStaff= fopen(filePath, "w");
+  instrStaff= fopen(staffFilePath, "w");
   fprintf(instrStaff,"\\new Staff \\with {\n");
   fprintf(instrStaff,"  instrumentName= \"%s\"\n", staff.instr);
   fprintf(instrStaff,"  {\n");
@@ -113,6 +114,7 @@ void SheetBuilder::printStaff(STAFF staff,
   fprintf(instrStaff,"  \\tempo %s\n", staff.tempo);
   fprintf(instrStaff,"  \\clef= %s\n", staff.clef);
   fprintf(instrStaff,"  \\key %s \\%s\n", staff.key, staff.mode);
+  fprintf(instrStaff,"      \\include %s", notesFilePath);
 }
 
 //void SheetBuilder::printStaff(STAFF staff, FILE* sheet){
