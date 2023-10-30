@@ -112,6 +112,7 @@ void SheetBuilder::printStaff(STAFF staff,
   fprintf(instrStaff,"  \\time %s\n", staff.time);
   fprintf(instrStaff,"  \\tempo %s\n", staff.tempo);
   fprintf(instrStaff,"  \\clef= %s\n", staff.clef);
+  fprintf(instrStaff,"  \\key %s \\%s\n", staff.key, staff.mode);
 }
 
 //void SheetBuilder::printStaff(STAFF staff, FILE* sheet){
