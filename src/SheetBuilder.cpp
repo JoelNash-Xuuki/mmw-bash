@@ -12,7 +12,8 @@ SheetBuilder::SheetBuilder(const char* sheetName,
 			   const char* service,
 		   	   const char* title,
                            const char* artist,
-                           const char* patchName){
+                           const char* patchName,
+		           const char* sheetLocation){
   cout << "Starting Sheet Builder..." << endl;
   this->sheet= fopen(sheetName, "w");
   this->service= service;
@@ -21,6 +22,7 @@ SheetBuilder::SheetBuilder(const char* sheetName,
   staffGroups= (STAFFGROUP *)malloc(MAXMODS * sizeof(STAFFGROUP));
   staffs= (STAFF *)malloc(MAXMODS * sizeof(STAFF));
   this->patch= fopen("patchName", "r");
+  this->sheetLocation= sheetLocation;
 
   // Read in the data from patch file
   while (fscanf(this->patch, "%s", modname) != EOF) {
@@ -91,7 +93,9 @@ void SheetBuilder::printStaffGroup(STAFFGROUP staffGroup,
 void SheetBuilder::printStaff(STAFF staff, 
 	                      FILE* sheet){
   cout << "inside print staff" << endl;
-  fprintf(this->sheet,"      An instr staff goes here %s \n ",staff.instr);
+  fprintf(this->sheet,"      \\include \"%s/%s.ly\"\n",this->sheetLocation,staff.instr);
+  FILE *instrStaff;
+  instrStaff= fopen("hi", "w");
 }
 
 void SheetBuilder::closeSheet(void){

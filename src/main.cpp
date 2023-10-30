@@ -11,7 +11,7 @@ int main(int argc, char **argv){
 //  ModSyn ms= ModSyn("testMethod"); 
  // ms.processFile(argv[1]);
 
-  if (argc != 6) {
+  if (argc != 7) {
       printf("Usage: %s <filename> <service> <title> <artist>\n", argv[0]);
       return 1;
   }
@@ -21,12 +21,14 @@ int main(int argc, char **argv){
   const char* title = argv[3];
   const char* artist = argv[4];
   const char* patchName= argv[5];
+  const char* sheetLocation= argv[6];
 
   SheetBuilder sheetBuilder= SheetBuilder(sheetName,
                                           service,
                                           title,
                                           artist,
-					  patchName);
+					  patchName,
+					  sheetLocation);
   sheetBuilder.closeSheet();
 
   //processFile(argv[1]);

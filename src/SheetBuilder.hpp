@@ -20,7 +20,7 @@ typedef struct { // STAFF
 class SheetBuilder{
   private:
     FILE *sheet;
-    FILE *patch ;
+    FILE *patch;
     STAFFGROUP *staffGroups;
     STAFF *staffs;
     int staffGroupCount= 0;
@@ -31,13 +31,15 @@ class SheetBuilder{
     const char* patchName;
     char modname[64];
     int i;
+    const char* sheetLocation;
 
   public:
     SheetBuilder(const char* sheetName,
                  const char* service,
                  const char* title,
                  const char* artist,
-                 const char* patchName);
+                 const char* patchName,
+		 const char* sheetLocation);
     void printHeader(void);
     void printStaffGroup(STAFFGROUP staffGroup, FILE* sheet);
     void printStaff(STAFF staff, FILE* sheet);
