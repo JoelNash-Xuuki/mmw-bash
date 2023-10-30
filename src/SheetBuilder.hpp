@@ -13,6 +13,9 @@ typedef struct { // STAFFGROUP
 
 typedef struct { // STAFF
   char instr[SYNMOD_CHARS];
+  char time[SYNMOD_CHARS];
+  char tempo[SYNMOD_CHARS];
+  char clef[SYNMOD_CHARS];
 } STAFF;
 
 #ifndef SheetBuilder_H
