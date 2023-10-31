@@ -14,3 +14,18 @@ test: $(TEST)
 
 #daw: $(PROG)
 #	$(CC) $(INCLUDE) $(PROG) $(CSOUND) -o ~/mmw/bin/daw
+
+CXX = g++
+INCLUDES= -I./
+CXXFLAGS = -g $(INCLUDES)
+SRCM= src/CBasicMath.cpp
+OBJM = $(SRCM:.cpp=.o)
+LINKFLAGS= -lcppunit
+
+testbasicmath: test/src/TestBasicMath.cpp $(OBJM)
+	$(CXX) $(CXXFLAGS) -o ~/mmw/bin/testbasicmath test/src/TestBasicMath.cpp $(OBJM) $(LINKFLAGS) $(LINKFLAGSLOG4) $(LIBLOG)
+
+# Default compile
+
+.cpp.o:
+	$(CXX) $(CXXFLAGS) -c $< -o $@
