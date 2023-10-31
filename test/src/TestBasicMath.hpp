@@ -14,31 +14,27 @@
 #include <cppunit/XmlOutputter.h>
 #include <netinet/in.h>
 #include "../../src/CBasicMath.hpp"
-#include "TestBasicMath.hpp"
 
 using namespace CppUnit;
 using namespace std;
-
 //-----------------------------------------------------------------------------
 
-void
-TestBasicMath::testAddition(void)
+class TestBasicMath : public CppUnit::TestFixture
 {
-    CPPUNIT_ASSERT(5 == mTestObj->Addition(2,3));
-}
+    CPPUNIT_TEST_SUITE(TestBasicMath);
+    CPPUNIT_TEST(testAddition);
+    CPPUNIT_TEST(testMultiply);
+    CPPUNIT_TEST_SUITE_END();
 
-void
-TestBasicMath::testMultiply(void)
-{
-    CPPUNIT_ASSERT(6 == mTestObj->Multiply(2,3));
-}
+public:
+    void setUp(void);
+    void tearDown(void);
 
-void TestBasicMath::setUp(void)
-{
-    mTestObj = new CBasicMath();
-}
+protected:
+    void testAddition(void);
+    void testMultiply(void);
 
-void TestBasicMath::tearDown(void)
-{
-    delete mTestObj;
-}
+private:
+
+    CBasicMath *mTestObj;
+};

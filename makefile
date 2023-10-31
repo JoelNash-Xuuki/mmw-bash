@@ -1,5 +1,5 @@
 PROG	= src/main.cpp src/SheetBuilder.cpp  #src/daw.cpp 
-TEST    =  test/src/TestSheetBuilder.cpp test/src/main.cpp
+TEST    = test/src/main.cpp test/src/TestBasicMath.cpp #test/src/TestSheetBuilder.cpp test/src/main.cpp 
 
 CSOUND  = -lcsound64 -lcsnd6
 INCLUDE = -I/usr/include/csound/
@@ -22,8 +22,8 @@ SRCM= src/CBasicMath.cpp
 OBJM = $(SRCM:.cpp=.o)
 LINKFLAGS= -lcppunit
 
-testbasicmath: test/src/TestBasicMath.cpp $(OBJM)
-	$(CXX) $(CXXFLAGS) -o ~/mmw/bin/testbasicmath test/src/TestBasicMath.cpp $(OBJM) $(LINKFLAGS) $(LINKFLAGSLOG4) $(LIBLOG)
+testbasicmath: $(TEST) $(OBJM)
+	$(CXX) $(CXXFLAGS) -o ~/mmw/bin/testbasicmath $(TEST) $(OBJM) $(LINKFLAGS) $(LINKFLAGSLOG4) $(LIBLOG)
 
 # Default compile
 
