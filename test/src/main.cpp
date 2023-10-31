@@ -13,11 +13,12 @@
 #include <cppunit/CompilerOutputter.h>
 #include <cppunit/XmlOutputter.h>
 #include <netinet/in.h>
-#include "TestBasicMath.hpp"
+//#include "TestSheetBuilder.hpp"
+#include "TestSheetBuilder.hpp"
 
 //-----------------------------------------------------------------------------
 
-CPPUNIT_TEST_SUITE_REGISTRATION( TestBasicMath );
+CPPUNIT_TEST_SUITE_REGISTRATION( TestSheetBuilder );
 
 int main(int argc, char* argv[])
 {
@@ -42,9 +43,9 @@ int main(int argc, char* argv[])
     compileroutputter.write ();
 
     // Output XML for Jenkins CPPunit plugin
-    ofstream xmlFileOut("cppTestBasicMathResults.xml");
-    XmlOutputter xmlOut(&collectedresults, xmlFileOut);
-    xmlOut.write();
+//    ofstream xmlFileOut("cppTestSheetBuilderResults.xml");
+ //   XmlOutputter xmlOut(&collectedresults, xmlFileOut);
+  //  xmlOut.write();
 
     // return 0 if tests were successful
     return collectedresults.wasSuccessful() ? 0 : 1;

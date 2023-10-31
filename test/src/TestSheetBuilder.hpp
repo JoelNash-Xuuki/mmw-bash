@@ -1,23 +1,40 @@
-#include <cstdio>
-#include <cstdlib>
+#include <iostream>
 #include <string>
-#include <cstring>
-#define SYNMOD_CHARS (128)
-#define MAXMODS (256)
+#include <list>
+#include <cppunit/TestCase.h>
+#include <cppunit/TestFixture.h>
+#include <cppunit/ui/text/TextTestRunner.h>
+#include <cppunit/extensions/HelperMacros.h>
+#include <cppunit/extensions/TestFactoryRegistry.h>
+#include <cppunit/TestResult.h>
+#include <cppunit/TestResultCollector.h>
+#include <cppunit/TestRunner.h>
+#include <cppunit/BriefTestProgressListener.h>
+#include <cppunit/CompilerOutputter.h>
+#include <cppunit/XmlOutputter.h>
+#include <netinet/in.h>
+#include "../../src/SheetBuilder.hpp"
 
+using namespace CppUnit;
 using namespace std;
+//-----------------------------------------------------------------------------
 
-#ifndef TestSheetBuilder_H
-#define TestSheetBuilder_H
+class TestSheetBuilder : public CppUnit::TestFixture
+{
+    CPPUNIT_TEST_SUITE(TestSheetBuilder);
+    CPPUNIT_TEST(testAddition);
+    CPPUNIT_TEST(testMultiply);
+    CPPUNIT_TEST_SUITE_END();
 
-class TestSheetBuilder {
 public:
-    TestSheetBuilder(const char* sheetName, 
-                     const char* service, 
-                     const char* title,
-                     const char* artist, 
-                     const char* patchName, 
-                     const char* sheetLocation);
-    void closeSheet(void);
+    void setUp(void);
+    void tearDown(void);
+
+protected:
+    void testAddition(void);
+    void testMultiply(void);
+
+private:
+
+    SheetBuilder *mTestObj;
 };
-# endif

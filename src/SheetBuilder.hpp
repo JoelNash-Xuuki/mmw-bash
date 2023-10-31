@@ -164,6 +164,3 @@ class SheetBuilder{
 //
 //void print_header(void);
 //void print_score();
-
-
-
