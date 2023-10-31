@@ -9,29 +9,6 @@ CC	= g++
 sheetbuilder: $(PROG) 
 	$(CC) $(PROG) -o ~/mmw/bin/sheetbuilder
 
-test: $(TEST) 
-	$(CC) $(TEST) -o ~/mmw/bin/sheetbuildertest $(CPPUNIT)
-
-#daw: $(PROG)
-#	$(CC) $(INCLUDE) $(PROG) $(CSOUND) -o ~/mmw/bin/daw
-
-##CXX = g++
-##INCLUDES = -I./
-##CXXFLAGS = -g $(INCLUDES)
-##SRCM = src/CBasicMath.cpp
-##OBJM = $(SRCM:.cpp=.o)
-##LINKFLAGS = -lcppunit
-##
-##testbasicmath: $(TEST) $(OBJM)
-##	$(CXX) $(CXXFLAGS) -o ~/mmw/bin/testbasicmath $(TEST) $(OBJM) $(LINKFLAGS)
-
-CXX = g++
-INCLUDES = -I./
-CXXFLAGS = -g $(INCLUDES)
-SRCM = src/SheetBuilder.cpp
-OBJM = $(SRCM:.cpp=.o)
-LINKFLAGS = -lcppunit
-
-testsheetbuilder: $(TEST) $(OBJM)
-	$(CXX) $(CXXFLAGS) -o ~/mmw/bin/testsheetbuilder $(TEST) $(OBJM) $(LINKFLAGS)
+testsheetbuilder: $(TEST) 
+	$(CC) -o ~/mmw/bin/testsheetbuilder $(TEST) $(CPPUNIT)
 
