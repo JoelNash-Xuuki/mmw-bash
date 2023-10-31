@@ -4,7 +4,20 @@
 #include <cppunit/TextOutputter.h>
 #include <iostream>
 
-class MyTest : public CppUnit::TestCase {
+class MyTestFixture : public CppUnit::TestFixture {
+  // Declare any member variables or helper functions needed for setup and teardown
+public:
+  // Implement the setup and teardown methods
+  void setUp() {
+    // Perform any necessary setup actions before each test case
+  }
+
+  void tearDown() {
+    // Perform any necessary cleanup actions after each test case
+  }
+};
+
+class MyTest : public MyTestFixture {
   CPPUNIT_TEST_SUITE(MyTest);
   CPPUNIT_TEST(testAddition);
   CPPUNIT_TEST_SUITE_END();

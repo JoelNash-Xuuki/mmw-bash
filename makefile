@@ -9,7 +9,7 @@ CC	= g++
 sheetbuilder: $(PROG) 
 	$(CC) $(PROG) -o ~/mmw/bin/sheetbuilder
 
-sheetbuildertest: $(TEST) 
+test: $(TEST) 
 	$(CC) $(TEST) -o ~/mmw/bin/sheetbuildertest $(CPPUNIT)
 
 #daw: $(PROG)
