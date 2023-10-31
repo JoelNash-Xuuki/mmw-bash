@@ -1,5 +1,5 @@
 PROG	= src/main.cpp src/SheetBuilder.cpp  #src/daw.cpp 
-TEST    = test/src/test.cpp
+TEST    =  test/src/TestSheetBuilder.cpp test/src/main.cpp
 
 CSOUND  = -lcsound64 -lcsnd6
 INCLUDE = -I/usr/include/csound/
