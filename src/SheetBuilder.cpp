@@ -8,6 +8,10 @@
 
 using namespace std;
 
+SheetBuilder::SheetBuilder(){
+
+};
+
 SheetBuilder::SheetBuilder(const char* sheetName,
 			   const char* service,
 		   	   const char* title,
@@ -47,6 +51,10 @@ SheetBuilder::SheetBuilder(const char* sheetName,
     cout << "Printing staff instrument..." << endl;
     printStaff(staffs[i],this->sheet);      
   }
+
+};
+
+SheetBuilder::~SheetBuilder(){
 
 };
 
@@ -118,6 +126,7 @@ void SheetBuilder::printStaff(STAFF staff,
   fprintf(instrStaff,"      \\include %s", notesFilePath);
   fprintf(instrStaff,"}\n");
 }
+
 
 //void SheetBuilder::printStaff(STAFF staff, FILE* sheet){
 //  char filePath[100]; // Assuming a maximum length of 100 characters for the file path

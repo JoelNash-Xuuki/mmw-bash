@@ -13,10 +13,8 @@
 #include <cppunit/CompilerOutputter.h>
 #include <cppunit/XmlOutputter.h>
 #include <netinet/in.h>
-//#include "TestSheetBuilder.hpp"
 #include "TestSheetBuilder.hpp"
 
-//-----------------------------------------------------------------------------
 
 CPPUNIT_TEST_SUITE_REGISTRATION( TestSheetBuilder );
 

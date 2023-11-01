@@ -18,8 +18,6 @@
 using namespace CppUnit;
 using namespace std;
 
-//-----------------------------------------------------------------------------
-
 void
 TestSheetBuilder::testAddition(void)
 {
@@ -32,9 +30,13 @@ TestSheetBuilder::testMultiply(void)
     //CPPUNIT_ASSERT(6 == mTestObj->Multiply(2,3));
 }
 
-void TestSheetBuilder::setUp(void)
-{
-    //mTestObj = new SheetBuilder();
+void
+TestSheetBuilder::testPrintStaff(void){
+   
+}
+
+void TestSheetBuilder::setUp(void){
+    mTestObj= SheetBuilder();
 }
 
 void TestSheetBuilder::tearDown(void)

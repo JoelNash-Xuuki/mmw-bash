@@ -39,12 +39,14 @@ class SheetBuilder{
     const char* sheetLocation;
 
   public:
+    SheetBuilder();
     SheetBuilder(const char* sheetName,
                  const char* service,
                  const char* title,
                  const char* artist,
                  const char* patchName,
 		 const char* sheetLocation);
+    ~SheetBuilder();
     void printHeader(void);
     void printStaffGroup(STAFFGROUP staffGroup, FILE* sheet);
     void printStaff(STAFF staff, FILE* sheet);
