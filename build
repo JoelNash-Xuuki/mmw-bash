@@ -1,0 +1,11 @@
+#run the make command
+make
+
+# Check the exit status of the make command
+if [ $? -eq 0 ]; then
+    echo "Make command executed successfully. Running build..."
+    # Run the build command here 
+else
+    echo "Make command encountered an error."
+fi
+

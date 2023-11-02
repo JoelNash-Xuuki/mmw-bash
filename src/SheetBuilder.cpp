@@ -117,7 +117,7 @@ void SheetBuilder::printStaff(STAFF staff,
   instrStaff= fopen(staffFilePath, "w");
   fprintf(instrStaff,"\\new Staff \\with {\n");
   fprintf(instrStaff,"  instrumentName= \"%s\"\n", staff.instr);
-  fprintf(instrStaff,"}\n\n");
+  fprintf(instrStaff, "nn");
   fprintf(instrStaff,"{\n\n");
   fprintf(instrStaff,"  \\time %s\n", staff.time);
   fprintf(instrStaff,"  \\tempo %s\n", staff.tempo);

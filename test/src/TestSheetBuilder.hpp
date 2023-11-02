@@ -38,5 +38,5 @@ protected:
     void testPrintStaff(void);
 
 private:
-    SheetBuilder mTestObj;
+    SheetBuilder sheetBuilder;
 };

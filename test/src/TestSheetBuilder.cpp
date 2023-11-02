@@ -32,11 +32,31 @@ TestSheetBuilder::testMultiply(void)
 
 void
 TestSheetBuilder::testPrintStaff(void){
-   
+
+  // Create a temporary file to capture the output
+  const char* tempFileName = "temp_staff_output.ly";
+  FILE* tempFile = fopen(tempFileName, "w");
+  
+  CPPUNIT_ASSERT(tempFile != nullptr);  // Check if the file was created
+  
+  // Define a sample STAFF structure (replace with your actual data)
+  STAFF staff;
+  strcpy(staff.instr, "Bass");
+  strcpy(staff.time, "4/4");
+  staff.tempo, "Allegro";
+  staff.clef, "treble";
+  staff.key, "C";
+  staff.mode, "major";
+
+  // Call your printStaff function
+  SheetBuilder sheetBuilder;
+  //FILE* sheet = fopen("test_sheet.ly", "w");
+  //sheetBuilder.printStaff(staff, sheet);
+  //fclose(sheet);
 }
 
 void TestSheetBuilder::setUp(void){
-    mTestObj= SheetBuilder();
+  sheetBuilder= SheetBuilder();
 }
 
 void TestSheetBuilder::tearDown(void)
