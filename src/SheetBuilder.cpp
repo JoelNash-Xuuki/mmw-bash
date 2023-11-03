@@ -54,9 +54,7 @@ SheetBuilder::SheetBuilder(const char* sheetName,
 
 };
 
-SheetBuilder::~SheetBuilder(){
-
-};
+SheetBuilder::~SheetBuilder(){};
 
 void SheetBuilder::printHeader(void){
   fprintf(this->sheet,"\\version \"2.22.0\"\n\n");

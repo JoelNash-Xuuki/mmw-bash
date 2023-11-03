@@ -1,11 +1,10 @@
 \new Staff \with {
   instrumentName= "Bass"
-}
+nn{
 
-{
   \time 4/4
   \tempo 84
   \clef= bass
-  \key a \major
-      \include "/home/joel/projects_/Hello/src/score/notes/ns-xxxx"
+  \key c \major
+      \include "/home/joel/mmw/test/src//notes/ns-xxxx"
 }
