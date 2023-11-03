@@ -18,8 +18,8 @@ SheetBuilder::SheetBuilder(const char* sheetName,
                            const char* artist,
                            const char* patchName,
 		           const char* sheetLocation){
-  fprintf(this->log,"Starting Sheet Builder...\n");
   this->log= fopen("app.log", "w");
+  fprintf(this->log,"Starting Sheet Builder...\n");
   this->sheet= fopen(sheetName, "w");
   this->service= service;
   this->title= title;
@@ -32,7 +32,7 @@ SheetBuilder::SheetBuilder(const char* sheetName,
   // Read in the data from patch file
   while (fscanf(this->patch, "%s", modname) != EOF) {
     if (!strcmp(modname, "STAFFGROUP")) {
-      cout << "Reading staff group..." << endl;
+      fprintf(this->log,"Reading staff group...\n");
       readStaffGroups(staffGroups, staffGroupCount++,this->patch);
     } else if (!strcmp(modname, "STAFF")) {
       readStaffs(staffs, staffCount++, this->patch);
@@ -44,12 +44,12 @@ SheetBuilder::SheetBuilder(const char* sheetName,
   this->printHeader();
 
   for(i =0; i < staffGroupCount; i++){
-    cout << "Printing staff group..." << endl;
+    fprintf(this->log,"Printing staff group...\n");
     printStaffGroup(staffGroups[i],this->sheet);      
   }
 
   for(i =0; i < staffCount; i++){
-    cout << "Printing staff instrument..." << endl;
+    fprintf(this->log,"Printing staff instrument...\n");
     printStaff(staffs[i],this->sheet);      
   }
 
@@ -82,7 +82,7 @@ void SheetBuilder::readStaffGroups(STAFFGROUP *staffGroup,
 void SheetBuilder::readStaffs(STAFF *staff, 
                               int count,  
                               FILE* patch){
-  cout << "Reading staff instrument..." << endl;
+  fprintf(this->log,"Reading staff instrument...\n");
   fscanf(patch,"%s %s %s %s %s %s",
          staff[count].instr,
          staff[count].time,
@@ -106,7 +106,7 @@ void SheetBuilder::printStaffGroup(STAFFGROUP staffGroup,
 
 void SheetBuilder::printStaff(STAFF staff, 
 	                      FILE* sheet){
-  cout << "inside print staff path" << endl;
+  fprintf(this->log,"inside print staff path...\n");
   char staffFilePath[100];
   char notesFilePath[100];
   sprintf(staffFilePath, "%s/%s.ly", this->sheetLocation, staff.instr);
