@@ -18,9 +18,6 @@
 using namespace CppUnit;
 using namespace std;
 
-
-
-
 void
 TestSheetBuilder::testPrintStaff(void){
 

@@ -22,8 +22,6 @@ using namespace std;
 class TestSheetBuilder : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE(TestSheetBuilder);
-    CPPUNIT_TEST(testAddition);
-    CPPUNIT_TEST(testMultiply);
     CPPUNIT_TEST(testPrintStaff);
 
     CPPUNIT_TEST_SUITE_END();
@@ -33,8 +31,6 @@ public:
     void tearDown(void);
 
 protected:
-    void testAddition(void);
-    void testMultiply(void);
     void testPrintStaff(void);
 
 private:
