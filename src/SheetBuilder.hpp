@@ -26,6 +26,7 @@ class SheetBuilder{
   private:
     FILE *sheet;
     FILE *patch;
+    FILE *log;
     STAFFGROUP *staffGroups;
     STAFF *staffs;
     int staffGroupCount= 0;

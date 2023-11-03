@@ -18,7 +18,8 @@ SheetBuilder::SheetBuilder(const char* sheetName,
                            const char* artist,
                            const char* patchName,
 		           const char* sheetLocation){
-  cout << "Starting Sheet Builder..." << endl;
+  fprintf(this->log,"Starting Sheet Builder...\n");
+  this->log= fopen("app.log", "w");
   this->sheet= fopen(sheetName, "w");
   this->service= service;
   this->title= title;
