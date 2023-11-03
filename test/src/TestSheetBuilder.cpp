@@ -18,17 +18,8 @@
 using namespace CppUnit;
 using namespace std;
 
-void
-TestSheetBuilder::testAddition(void)
-{
-    //CPPUNIT_ASSERT(5 == mTestObj->Addition(2,3));
-}
 
-void
-TestSheetBuilder::testMultiply(void)
-{
-    //CPPUNIT_ASSERT(6 == mTestObj->Multiply(2,3));
-}
+
 
 void
 TestSheetBuilder::testPrintStaff(void){
@@ -47,6 +38,8 @@ TestSheetBuilder::testPrintStaff(void){
   //FILE* sheet = fopen("/home/joel/mmw/test/src/test_sheet.ly", "w");
   //sheetBuilder.printStaff(staff, sheet);
   ////fclose(sheet);
+
+  //CPPUNIT_ASSERT(6 == mTestObj->Multiply(2,3));
 }
 
 void TestSheetBuilder::setUp(void){
