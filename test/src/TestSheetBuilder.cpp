@@ -19,40 +19,51 @@ using namespace CppUnit;
 using namespace std;
 
 void
+TestSheetBuilder::defineStaffStructure(void){
+  //strcpy(this->staff.instr, "Actual_Staff");
+  //strcpy(this->staff.time, "4/4");
+  //strcpy(this->staff.tempo, "Allegro");
+  //strcpy(this->staff.clef, "treble");
+  //strcpy(this->staff.key, "C");
+  //strcpy(this->staff.mode, "major");
+}
+
+void
 TestSheetBuilder::testPrintStaff(void){
 
-  // Define a sample STAFF structure (replace with your actual data)
-  //STAFF staff;
-  //strcpy(staff.instr, "Bass");
-  //strcpy(staff.time, "4/4");
-  //strcpy(staff.tempo, "Allegro");
-  //strcpy(staff.clef, "treble");
-  //strcpy(staff.key, "C");
-  //strcpy(staff.mode, "major");
+  //sheetBuilder.printStaff(staff);
+  
 
-  //// Call your printStaff function
-  //SheetBuilder sheetBuilder;
-  //FILE* sheet = fopen("/home/joel/mmw/test/src/test_sheet.ly", "w");
-  //sheetBuilder.printStaff(staff, sheet);
-  ////fclose(sheet);
+  //this->testSheet = fopen("/home/joel/mmw/test/src/Test_Sheet.ly", "r");
+  //this->expectedSheet = fopen("/home/joel/mmw/test/src/Expected_Sheet.ly", "r"); 
 
   //CPPUNIT_ASSERT(6 == mTestObj->Multiply(2,3));
 }
 
+void
+TestSheetBuilder::canReadPatchFileStaffGroupsAndStaffCount(void){
+  sheetBuilder.readPatchFile();
+  // Assert the expected results
+  //CPPUNIT_ASSERT_EQUAL(1, sheetBuilder.getStaffGroupCount());
+  //CPPUNIT_ASSERT_EQUAL(1, sheetBuilder.getStaffCount());
+}
+
 void TestSheetBuilder::setUp(void){
-  const char* sheetName= "Test-Sheet.ly";
+  const char* sheetName= "Test_Sheet.ly";
   const char* service= "Xuuki";
   const char* title= "Title";
   const char* artist= "Vyvn";
   const char* patchName= "patchName";
   const char* sheetLocation= "/home/joel/mmw/test/src/";
 
-  sheetBuilder= SheetBuilder(sheetName,
+  this->sheetBuilder= SheetBuilder(sheetName,
                              service,
                              title,
                              artist,
 			     patchName,
 			     sheetLocation);
+
+  //this->testSheet = fopen("/home/joel/mmw/test/src/Test_Sheet.ly", "w");
 }
 
 void TestSheetBuilder::tearDown(void)

@@ -21,18 +21,22 @@ using namespace std;
 
 class TestSheetBuilder : public CppUnit::TestFixture
 {
-    CPPUNIT_TEST_SUITE(TestSheetBuilder);
-    CPPUNIT_TEST(testPrintStaff);
-
-    CPPUNIT_TEST_SUITE_END();
+  CPPUNIT_TEST_SUITE(TestSheetBuilder);
+  CPPUNIT_TEST(canReadPatchFileStaffGroupsAndStaffCount);
+  CPPUNIT_TEST(testPrintStaff);
+  CPPUNIT_TEST_SUITE_END();
 
 public:
-    void setUp(void);
-    void tearDown(void);
+  void setUp(void);
+  void tearDown(void);
 
 protected:
-    void testPrintStaff(void);
+  void canReadPatchFileStaffGroupsAndStaffCount(void);
+  void testPrintStaff(void);
 
 private:
-    SheetBuilder sheetBuilder;
+  SheetBuilder sheetBuilder;
+  void defineStaffStructure(void);
+  FILE* testSheet;
+  FILE* expectedSheet;
 };

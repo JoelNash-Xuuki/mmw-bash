@@ -7,6 +7,8 @@
 
 using namespace std;
 
+
+
 typedef struct { // STAFFGROUP
   char name[SYNMOD_CHARS];
 } STAFFGROUP;
@@ -50,7 +52,7 @@ class SheetBuilder{
     ~SheetBuilder();
     void printHeader(void);
     void printStaffGroup(STAFFGROUP staffGroup, FILE* sheet);
-    void printStaff(STAFF staff, FILE* sheet);
+    void printStaff(STAFF staff);
     void readStaffGroups(STAFFGROUP *staffGroup, 
                          int count,  
                          FILE* sheet);
@@ -58,6 +60,9 @@ class SheetBuilder{
                     int count,  
                     FILE* sheet);
     void closeSheet(void);
+    void readPatchFile();
+    int getStaffGroupCount();
+    int getStaffCount();
 };
 # endif
 

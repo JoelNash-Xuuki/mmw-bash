@@ -8,9 +8,19 @@
 
 using namespace std;
 
-SheetBuilder::SheetBuilder(){
+SheetBuilder::SheetBuilder(){};
 
-};
+int
+SheetBuilder::getStaffCount(){
+  fprintf(this->log,"Number of staff groups: %i\n", this->staffCount);
+  return this->staffCount;
+}
+
+int
+SheetBuilder::getStaffGroupCount(){
+  fprintf(this->log,"Number of staff groups: %i\n", this->staffGroupCount);
+  return this->staffGroupCount;
+}
 
 SheetBuilder::SheetBuilder(const char* sheetName,
 			   const char* service,
@@ -20,16 +30,40 @@ SheetBuilder::SheetBuilder(const char* sheetName,
 		           const char* sheetLocation){
   this->log= fopen("app.log", "w");
   fprintf(this->log,"Starting Sheet Builder...\n");
+
   this->sheet= fopen(sheetName, "w");
+
   this->service= service;
   this->title= title;
   this->artist= artist;
+
   staffGroups= (STAFFGROUP *)malloc(MAXMODS * sizeof(STAFFGROUP));
   staffs= (STAFF *)malloc(MAXMODS * sizeof(STAFF));
+
   this->patch= fopen("patchName", "r");
   this->sheetLocation= sheetLocation;
 
-  // Read in the data from patch file
+  this->readPatchFile();
+  
+
+  //this->printHeader();
+
+  //for(i =0; i < staffGroupCount; i++){
+  //  fprintf(this->log,"Printing staff group...\n");
+  //  printStaffGroup(staffGroups[i],this->sheet);      
+  //}
+
+  //for(i =0; i < staffCount; i++){
+  //  fprintf(this->log,"Printing staff instrument...\n");
+  //  printStaff(staffs[i]);      
+  //}
+
+};
+
+SheetBuilder::~SheetBuilder(){};
+
+void SheetBuilder::readPatchFile(){
+// Read in the data from patch file
   while (fscanf(this->patch, "%s", modname) != EOF) {
     if (!strcmp(modname, "STAFFGROUP")) {
       fprintf(this->log,"Reading staff group...\n");
@@ -40,22 +74,7 @@ SheetBuilder::SheetBuilder(const char* sheetName,
       fprintf(stderr, "%s is an unknown module\n", modname);
     }
   }
-
-  this->printHeader();
-
-  for(i =0; i < staffGroupCount; i++){
-    fprintf(this->log,"Printing staff group...\n");
-    printStaffGroup(staffGroups[i],this->sheet);      
-  }
-
-  for(i =0; i < staffCount; i++){
-    fprintf(this->log,"Printing staff instrument...\n");
-    printStaff(staffs[i],this->sheet);      
-  }
-
-};
-
-SheetBuilder::~SheetBuilder(){};
+}
 
 void SheetBuilder::printHeader(void){
   fprintf(this->sheet,"\\version \"2.22.0\"\n\n");
@@ -104,28 +123,25 @@ void SheetBuilder::printStaffGroup(STAFFGROUP staffGroup,
                                        staffGroup.name);
 }
 
-void SheetBuilder::printStaff(STAFF staff, 
-	                      FILE* sheet){
+void SheetBuilder::printStaff(STAFF staff){
   fprintf(this->log,"inside print staff path...\n");
   char staffFilePath[100];
   char notesFilePath[100];
   sprintf(staffFilePath, "%s/%s.ly", this->sheetLocation, staff.instr);
-  sprintf(notesFilePath, "\"%s/notes/ns-xxxx\"\n", this->sheetLocation);
+  //sprintf(notesFilePath, "\"%s/notes/ns-xxxx\"\n", this->sheetLocation);
 
-  FILE *instrStaff;
-  instrStaff= fopen(staffFilePath, "w");
-  fprintf(instrStaff,"\\new Staff \\with {\n");
-  fprintf(instrStaff,"  instrumentName= \"%s\"\n", staff.instr);
-  fprintf(instrStaff, "nn");
-  fprintf(instrStaff,"{\n\n");
-  fprintf(instrStaff,"  \\time %s\n", staff.time);
-  fprintf(instrStaff,"  \\tempo %s\n", staff.tempo);
-  fprintf(instrStaff,"  \\clef= %s\n", staff.clef);
-  fprintf(instrStaff,"  \\key %s \\%s\n", staff.key, staff.mode);
-  fprintf(instrStaff,"      \\include %s", notesFilePath);
-  fprintf(instrStaff,"}\n");
+  sheet= fopen(staffFilePath, "w");
+  fprintf(sheet,"\\new Staff \\with {\n");
+  //fprintf(sheet,"  instrumentName= \"%s\"\n", staff.instr);
+  //fprintf(sheet, "nn");
+  //fprintf(sheet,"{\n\n");
+  //fprintf(sheet,"  \\time %s\n", staff.time);
+  //fprintf(sheet,"  \\tempo %s\n", staff.tempo);
+  //fprintf(sheet,"  \\clef= %s\n", staff.clef);
+  //fprintf(sheet,"  \\key %s \\%s\n", staff.key, staff.mode);
+  //fprintf(sheet,"      \\include %s", notesFilePath);
+  //fprintf(sheet,"}\n");
 }
-
 
 //void SheetBuilder::printStaff(STAFF staff, FILE* sheet){
 //  char filePath[100]; // Assuming a maximum length of 100 characters for the file path
@@ -133,7 +149,6 @@ void SheetBuilder::printStaff(STAFF staff,
 //  fprintf(this->sheet, "      \\include \"%s\"\n", filePath);
 //  // Rest of the code...
 //}
-
 
 void SheetBuilder::closeSheet(void){
    fclose(this->sheet);

@@ -1,0 +1,136 @@
+test/src/TestSheetBuilder.cpp: In member function ‘void TestSheetBuilder::testPrintStaff()’:
+test/src/TestSheetBuilder.cpp:39:79: error: no match for ‘operator=’ (operand types are ‘FILE’ and ‘FILE*’)
+   39 |   this->expectedSheet = fopen("/home/joel/mmw/test/src/Expected_Sheet.ly", "r");
+      |                                                                               ^
+In file included from /usr/include/stdio.h:43,
+                 from /usr/include/c++/10/cstdio:42,
+                 from /usr/include/c++/10/ext/string_conversions.h:43,
+                 from /usr/include/c++/10/bits/basic_string.h:6545,
+                 from /usr/include/c++/10/string:55,
+                 from /usr/include/c++/10/bits/locale_classes.h:40,
+                 from /usr/include/c++/10/bits/ios_base.h:41,
+                 from /usr/include/c++/10/ios:42,
+                 from /usr/include/c++/10/ostream:38,
+                 from /usr/include/c++/10/iostream:39,
+                 from test/src/TestSheetBuilder.cpp:1:
+/usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h:49:8: note: candidate: ‘constexpr _IO_FILE& _IO_FILE::operator=(const _IO_FILE&)’
+   49 | struct _IO_FILE
+      |        ^~~~~~~~
+/usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h:49:8: note:   no known conversion for argument 1 from ‘FILE*’ to ‘const _IO_FILE&’
+/usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h:49:8: note: candidate: ‘constexpr _IO_FILE& _IO_FILE::operator=(_IO_FILE&&)’
+/usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h:49:8: note:   no known conversion for argument 1 from ‘FILE*’ to ‘_IO_FILE&&’
+make: *** [makefile:13: testsheetbuilder] Error 1
+
+#include <iostream>
+#include <string>
+#include <list>
+#include <cppunit/TestCase.h>
+#include <cppunit/TestFixture.h>
+#include <cppunit/ui/text/TextTestRunner.h>
+#include <cppunit/extensions/HelperMacros.h>
+#include <cppunit/extensions/TestFactoryRegistry.h>
+#include <cppunit/TestResult.h>
+#include <cppunit/TestResultCollector.h>
+#include <cppunit/TestRunner.h>
+#include <cppunit/BriefTestProgressListener.h>
+#include <cppunit/CompilerOutputter.h>
+#include <cppunit/XmlOutputter.h>
+#include <netinet/in.h>
+#include "TestSheetBuilder.hpp"
+
+using namespace CppUnit;
+using namespace std;
+
+void
+TestSheetBuilder::defineStaffStructure(void){
+  strcpy(this->staff.instr, "Bass");
+  strcpy(this->staff.time, "4/4");
+  strcpy(this->staff.tempo, "Allegro");
+  strcpy(this->staff.clef, "treble");
+  strcpy(this->staff.key, "C");
+  strcpy(this->staff.mode, "major");
+}
+
+void
+TestSheetBuilder::testPrintStaff(void){
+
+
+  sheetBuilder.printStaff(this->staff, this->actualSheet);
+  fclose(this->actualSheet);
+
+  this->actualSheet = fopen("/home/joel/mmw/test/src/Test_Sheet.ly", "r");
+  this->expectedSheet = fopen("/home/joel/mmw/test/src/Expected_Sheet.ly", "r");
+
+  //CPPUNIT_ASSERT(6 == mTestObj->Multiply(2,3));
+}
+
+void TestSheetBuilder::setUp(void){
+  const char* sheetName= "Test_Sheet.ly";
+  const char* service= "Xuuki";
+  const char* title= "Title";
+  const char* artist= "Vyvn";
+  const char* patchName= "patchName";
+  const char* sheetLocation= "/home/joel/mmw/test/src/";
+
+  sheetBuilder= SheetBuilder(sheetName,
+                             service,
+                             title,
+                             artist,
+                             patchName,
+                             sheetLocation);
+
+//  this->actualSheet = fopen("/home/joel/mmw/test/src/test_sheet.ly", "w");
+}
+
+void TestSheetBuilder::tearDown(void)
+{
+    //delete mTestObj;
+}
+
+nclude <iostream>
+#include <string>
+#include <list>
+#include <cppunit/TestCase.h>
+#include <cppunit/TestFixture.h>
+#include <cppunit/ui/text/TextTestRunner.h>
+#include <cppunit/extensions/HelperMacros.h>
+#include <cppunit/extensions/TestFactoryRegistry.h>
+#include <cppunit/TestResult.h>
+#include <cppunit/TestResultCollector.h>
+#include <cppunit/TestRunner.h>
+#include <cppunit/BriefTestProgressListener.h>
+#include <cppunit/CompilerOutputter.h>
+#include <cppunit/XmlOutputter.h>
+#include <netinet/in.h>
+#include "../../src/SheetBuilder.hpp"
+
+using namespace CppUnit;
+using namespace std;
+//-----------------------------------------------------------------------------
+
+class TestSheetBuilder : public CppUnit::TestFixture
+{
+  CPPUNIT_TEST_SUITE(TestSheetBuilder);
+  CPPUNIT_TEST(testPrintStaff);
+  CPPUNIT_TEST_SUITE_END();
+
+public:
+  void setUp(void);
+  void tearDown(void);
+
+protected:
+  void testPrintStaff(void);
+
+private:
+  SheetBuilder sheetBuilder;
+  void defineStaffStructure(void);
+  FILE* actualSheet, expectedSheet;
+  STAFF staff;
+};
+
+
+I've defined expectedSheet as type FILE* but as far as I can tell from the error it says i'm trying to convert a FILE to FILE*? 
+what do I need to change?
+Dont say write FILE* expectedSheet i've jsut given you  evidence above so regard teh code above please!
+
+
