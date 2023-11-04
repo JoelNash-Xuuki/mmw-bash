@@ -44,9 +44,7 @@ SheetBuilder::SheetBuilder(const char* sheetName,
   this->sheetLocation= sheetLocation;
 
   this->readPatchFile();
-  
-
-  //this->printHeader();
+  this->printHeader();
 
   //for(i =0; i < staffGroupCount; i++){
   //  fprintf(this->log,"Printing staff group...\n");
