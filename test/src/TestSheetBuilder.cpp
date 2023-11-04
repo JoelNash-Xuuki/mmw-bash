@@ -44,8 +44,8 @@ void
 TestSheetBuilder::canReadPatchFileStaffGroupsAndStaffCount(void){
   sheetBuilder.readPatchFile();
   // Assert the expected results
-  //CPPUNIT_ASSERT_EQUAL(1, sheetBuilder.getStaffGroupCount());
-  //CPPUNIT_ASSERT_EQUAL(1, sheetBuilder.getStaffCount());
+  CPPUNIT_ASSERT_EQUAL(1, sheetBuilder.getStaffGroupCount());
+  CPPUNIT_ASSERT_EQUAL(1, sheetBuilder.getStaffCount());
 }
 
 void TestSheetBuilder::setUp(void){
