@@ -7,30 +7,64 @@
 
 using namespace std;
 
-#ifndef ModSyn_H
-#define ModSyn_H
-class ModSyn{
+
+
+typedef struct { // STAFFGROUP
+  char name[SYNMOD_CHARS];
+} STAFFGROUP;
+
+typedef struct { // STAFF
+  char instr[SYNMOD_CHARS];
+  char time[SYNMOD_CHARS];
+  char tempo[SYNMOD_CHARS];
+  char clef[SYNMOD_CHARS];
+  char key[SYNMOD_CHARS];
+  char mode[SYNMOD_CHARS];
+} STAFF;
+
+#ifndef SheetBuilder_H
+#define SheetBuilder_H
+class SheetBuilder{
+  private:
+    FILE *sheet;
+    FILE *patch;
+    FILE *log;
+    STAFFGROUP *staffGroups;
+    STAFF *staffs;
+    int staffGroupCount= 0;
+    int staffCount= 0;
+    const char* service;
+    const char* title;
+    const char* artist;
+    const char* patchName;
+    char modname[64];
+    int i;
+    const char* sheetLocation;
+
   public:
-    bool wasRun;
-  public:
-    ModSyn(string name);
-    void run();
-    void testMethod();
-    void processFile(const char* filename);
+    SheetBuilder();
+    SheetBuilder(const char* sheetName,
+                 const char* service,
+                 const char* title,
+                 const char* artist,
+                 const char* patchName,
+		 const char* sheetLocation);
+    ~SheetBuilder();
+    void printHeader(void);
+    void printStaffGroup(STAFFGROUP staffGroup, FILE* sheet);
+    void printStaff(STAFF staff);
+    void readStaffGroups(STAFFGROUP *staffGroup, 
+                         int count,  
+                         FILE* sheet);
+    void readStaffs(STAFF *staff, 
+                    int count,  
+                    FILE* sheet);
+    void closeSheet(void);
+    void readPatchFile();
+    int getStaffGroupCount();
+    int getStaffCount();
 };
 # endif
-
-typedef struct { // OSCMOD
-  char frequency[SYNMOD_CHARS];
-  char sig_out[SYNMOD_CHARS];
-  char sig_am[SYNMOD_CHARS];
-  char sig_fm[SYNMOD_CHARS];
-  char waveform[SYNMOD_CHARS];
-  char omin[SYNMOD_CHARS];
-  char omax[SYNMOD_CHARS];
-} OSCMOD;
-
-
 
 //void processFile(const char* filename)
 
@@ -138,6 +172,3 @@ typedef struct { // OSCMOD
 //
 //void print_header(void);
 //void print_score();
-
-
-

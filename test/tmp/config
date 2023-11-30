@@ -1,13 +1,18 @@
-PROJ=Flock
-PROJPATH=$HOME/projects_/flock
-LILY=$PROJPATH/src/$PROJ.ly
-WAV=$HOME/audio/Vyvn/Flock/1/stems/$PROJ.wav
+PROJ=Hello
+PROJLOC=projects_
+PROJPATH=$HOME/$PROJLOC/$PROJ
+ARTIST=Vyvn
+SERVICE=Xuuki.xyz
+SCORE=$PROJPATH/src/score
+LILY=$SCORE/$PROJ.ly
+WAV=$HOME/audio/$ARTIST/$PROJ/1/stems/$PROJ.wav
 TEMPO=84
 BEAT=$(bc <<< "scale=4; (60/$TEMPO)")
 BAR=$(bc <<< "scale=4;$BEAT*4")
-LENGTH=$(bc <<< "scale=4;$BAR*16")
+LENGTH=$(bc <<< "scale=4;$BAR*18")
 DUR=$(bc <<< "scale=4;$BAR*4")
-START_TIME=$(bc <<< "scale=2;$BAR*5")
+START_TIME=$(bc <<< "scale=2;$BAR*1")
+MP4=$PROJ.mp4
 
 SYNTH=$PROJPATH/audio/synth.ewf
 BASS=$PROJPATH/audio/bass.ewf

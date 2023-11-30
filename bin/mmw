@@ -1,57 +1,54 @@
 source $HOME/mmw/test/tmp/config
+
 createScoreDesign(){
 
-  projScore="
-  
-  \version \"2.22.0\"
-  
-  \header {
-    tagline = \"Xuuki.xyz\"
-    title = \"$PROJ\"
-    composer = \"Vyvyan\"
-  }
-  
-  \score {
-    <<
-      \new StaffGroup << %Melody
-        \new Staff = \"voice\" \with  { %Voice
-          instrumentName=  \"Voice\"
-  	shortInstrumentName= \"Voi\"
-        } 
-          \relative {
-          \clef percussion
-          \time 4/4
-          \tempo 4 = $TEMPO
-          r1
-  	  r1
-        }
-      >> 
-    \new StaffGroup << %Harmony
-      \include \"src/score/harmony.ly\"
-    >> 
-    \new StaffGroup << %Bass
-      \include \"src/score/bass.ly\"
-    >>
-    \new StaffGroup << %Percussion
-      \include \"/home/joel/projects_/flock/src/score/snare.ly\"
-      \include \"/home/joel/projects_/flock/src/score/brush.ly\"
-      \include \"/home/joel/projects_/flock/src/score/hihat.ly\"
-      \include \"src/score/kick.ly\"
-    >>
-  >>
-    \layout {}
-    \midi {
+projScore="\version \"2.22.0\"
+
+\header {
+  tagline = \"Xuuki.xyz\"
+  title = \"$PROJ\"
+  composer = \"$ARTIST\"
+}
+
+\score {
+  <<
+    \new StaffGroup << %Melody
+      \new Staff = \"voice\" \with  { %Voice
+        instrumentName=  \"Voice\"
+	shortInstrumentName= \"Voi\"
+      } 
+        \relative {
+        \clef percussion
+        \time 4/4
         \tempo 4 = $TEMPO
-    }
+
+      }
+    >> 
+  \new StaffGroup << %Harmony
+    \include \"src/score/harmony.ly\"
+  >> 
+  \new StaffGroup << %Bass
+    %\include \"src/score/bass.ly\"
+  >>
+  \new StaffGroup << %Percussion
+    %\include \"/home/joel/projects_/flock/src/score/snare.ly\"
+    %\include \"/home/joel/projects_/flock/src/score/brush.ly\"
+    %\include \"/home/joel/projects_/flock/src/score/hihat.ly\"
+    %\include \"src/score/kick.ly\"
+  >>
+>>
+  \layout {}
+  \midi {
+      \tempo 4 = $TEMPO
   }
-  
-  "
+}
+"
 
-  rm $HOME/projects_/flock/src/$PROJ.ly
+rm $LILY
 
-  echo "$projScore" > $HOME/projects_/flock/src/$PROJ.ly
+echo "$projScore" > $LILY
 
-  echo "run createLyScoreAndMidiFile?"
+#  echo "run createLyScoreAndMidiFile?"
 }
 createLyScoreAndMidiFile(){
   lilypond -dmidi-extension=mid $LILY
@@ -285,34 +282,118 @@ renderAudio(){
 
 
 }
-
 changeSpeed(){
   sox $1 $2 tempo $3
 }
+os(){
+  sessionNo=$1
+  sessionName=$2
+  file_path="$PROJLOC/$PROJ/src/session-$sessionNo/session-$sessionNo-$sessionName.csd"
+  vim "$file_path"
+}
+rs(){
+  sessionNo=$1
+  sessionName=$2
+  file_path="$PROJLOC/$PROJ/bin/session/$sessionNo/$sessionName"
+  "$file_path"
+}
+osm(){
+  sessionNo=$1
+  file_path="$PROJLOC/$PROJ/src/session-$sessionNo/session-$sessionNo.eca"
+  vim "$file_path"
+}
+psm(){
+  sessionNo=$1
+  file_path="$PROJLOC/$PROJ/src/session-$sessionNo/session-$sessionNo.eca"
+  "$file_path"
+}
+lstS(){
+  sessionNo=$1
+  file_path="$PROJLOC/$PROJ/src/session-$sessionNo/"
+  ls "$file_path"
+}
+setProj(){
+  sed -i "s/PROJ=.*/PROJ=$1/g" $HOME/mmw/test/tmp/config
+}
+proj(){
+  grep -Po '(?<=PROJ=).*' $HOME/mmw/test/tmp/config
+}
+projLoc(){
+  grep -Po '(?<=PROJLOC=).*' $HOME/mmw/test/tmp/config
+}
+setProjLoc(){
+  sed -i "s/PROJLOC=.*/PROJLOC=$1/g" $HOME/mmw/test/tmp/config
+}
+deleteProj(){
+  #test -d $PROJPATH && echo "$PROJ exists" || (test -f $PROJPATH && echo "$PROJ  exists" || echo "$PROJ does not exist")
 
-#setLocation() {
-#  sed -e " s/\[PROJECTLOCATION\]/$1/g;"\
-#           "$HOME/mmw/tmp/options-template" >\
-#           "$HOME/mmw/tmp/options"
-#}
+  if test -d $PROJPATH || test -f  $PROJPATH; then
+      read -p "$PROJ exists. Do you want to delete it? (y/n): " choice
+      if [[ $choice == "y" ]]; then
+          rm -r $PROJPATH
+          echo "$PROJ deleted"
+      else
+          echo "$PROJ not deleted"
+      fi
+  fi
+}
+createProj(){
+  #test -d $PROJPATH && echo "$PROJ exists" || (test -f $PROJPATH && echo "$PROJ  exists" || echo "$PROJ does not exist")
 
-setLocation() {
-  local escapedPath=$(echo "$1" | sed 's/\//\\\//g')
-  sed -e "s/\[PROJECTLOCATION\]/$escapedPath/g;" \
-      "$HOME/mmw/tmp/options-template" > \
-      "$HOME/mmw/tmp/options"
+  if test -d $PROJPATH; then
+      echo "Directory exists"
+  elif test -f  $PROJPATH; then
+      echo "$PROJ exists"
+  else
+      read -p "$PROJ does not exist. Do you want to create it? (y/n): " choice
+      if [[ $choice == "y" ]]; then
+          mkdir $PROJPATH
+          mkdir $PROJPATH/src
+          mkdir $PROJPATH/src/score
+          mkdir $PROJPATH/tmp
+          echo "$PROJ created"
+      else
+          echo "$PROJ not created"
+      fi
+  fi
+}
+createLyScoreAndMidiFile(){
+  lilypond -dmidi-extension=mid $LILY
+  mv $PROJ.mid PROJPATH/tmp/$PROJ.mid
+  #lilypond-book --output=out --format=html $1.lytex
+}
+isProjScoreExist(){
+  if test -d $SCORE/; then
+      echo "Directory exists"
+  elif test -f  $SCORE; then
+      echo "$PROJ $SCORE exists"
+  else
+      read -p "$PROJ $SCORE does not exist. Do you want to create it? (y/n): " choice
+      if [[ $choice == "y" ]]; then
+          mkdir $SCORE
+          echo "$PROJ $SCORE created"
+      else
+          echo "$PROJ not created"
+      fi
+  fi
 }
 
-
-
-load(){
-
-  cut -d ',' -f 2 $1 | sed -n 2p
+buildSheetMusic(){
+  sheetbuilder $1 $2 $3 $4 $5 $6 $7
 }
+
+renderMix(){
+  csound -o$1 $2
+}
+
+convertTo48(){
+  ffmpeg -i test.wav -ar 48000 out.wav
+}
+
 
 #run tests
-mmw dataTest(){
-  $HOME/mmw/bin/
+tests(){
+  $HOME/mmw/bin/run-mmw-project-tests
 }
   
-  "$@"
+"$@"
