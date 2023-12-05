@@ -26,9 +26,8 @@ typedef struct { // STAFF
 #define SheetBuilder_H
 class SheetBuilder{
   private:
-    FILE *sheet;
+    
     FILE *patch;
-    FILE *log;
     STAFFGROUP *staffGroups;
     STAFF *staffs;
     int staffGroupCount= 0;
@@ -43,8 +42,10 @@ class SheetBuilder{
 
   protected:
     const char* sheetName;
+    FILE *log;
 
   public:
+    FILE *sheet;
     SheetBuilder();
     SheetBuilder(const char* sheetName,
                  const char* service,
@@ -58,6 +59,5 @@ class SheetBuilder{
     int getStaffGroupCount();
     int getStaffCount();
     bool compareFiles(const char* filePath1, const char* filePath2);
-
 };
 # endif

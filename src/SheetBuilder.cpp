@@ -31,17 +31,16 @@ SheetBuilder::SheetBuilder(const char* sheetName,
   this->log= fopen("app.log", "w");
   fprintf(this->log,"Starting Sheet Builder...\n");
 
-  this->sheet= fopen(sheetName, "w");
-
+  this->sheetName= sheetName;
   this->service= service;
   this->title= title;
   this->artist= artist;
+  this->sheetLocation= sheetLocation;
 
   staffGroups= (STAFFGROUP *)malloc(MAXMODS * sizeof(STAFFGROUP));
   staffs= (STAFF *)malloc(MAXMODS * sizeof(STAFF));
 
   this->patch= fopen(patchName, "r");
-  this->sheetLocation= sheetLocation;
 
 };
 
@@ -52,7 +51,20 @@ void SheetBuilder::readPatchFile(){
 }
 
 void SheetBuilder::printHeader(void){
-
+  fprintf(this->log,"Printing Header...\n");
+  char sheetHeader[100];
+  strcpy(sheetHeader, this->sheetName);
+  strcat(sheetHeader, "_Header.partial.ly");
+  FILE* sheet= fopen(sheetHeader, "w");
+  fprintf(sheet,"\\version \"2.22.0\"\n\n");
+  fprintf(sheet,"\\header {\n");
+  fprintf(sheet,"  \\tagline = \"%s\"\n", this->service);
+  fprintf(sheet,"  \\title = \"%s\"\n", this->title);
+  fprintf(sheet,"  \\composer = \"%s\"\n", this->artist);
+  fprintf(sheet,"}\n");
+  fprintf(sheet,"\\score {\n");
+  fprintf(sheet,"  <<\n");
+  fclose(sheet);
 }
 
 bool SheetBuilder::compareFiles(const char* filePath1, const char* filePath2) {

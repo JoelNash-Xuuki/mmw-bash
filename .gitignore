@@ -1,2 +1,3 @@
 src/*.o
 app.log
+src/*.swp
