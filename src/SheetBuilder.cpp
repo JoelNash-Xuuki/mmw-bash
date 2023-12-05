@@ -39,16 +39,13 @@ SheetBuilder::SheetBuilder(const char* sheetName,
 
   staffGroups= (STAFFGROUP *)malloc(MAXMODS * sizeof(STAFFGROUP));
   staffs= (STAFF *)malloc(MAXMODS * sizeof(STAFF));
-
   this->patch= fopen(patchName, "r");
 
 };
 
 SheetBuilder::~SheetBuilder(){};
 
-void SheetBuilder::readPatchFile(){
 
-}
 
 void SheetBuilder::printHeader(void){
   fprintf(this->log,"Printing Header...\n");
@@ -65,6 +62,28 @@ void SheetBuilder::printHeader(void){
   fprintf(sheet,"\\score {\n");
   fprintf(sheet,"  <<\n");
   fclose(sheet);
+}
+
+void SheetBuilder::readStaffGroups(STAFFGROUP *staffGroup, 
+                                   int count){
+  fprintf(this->log,"Reading staff group: %i...\n", count);
+  fscanf(this->patch,"%s",staffGroup[count].name);
+  if( count >= MAXMODS ){
+   fprintf(stderr,"Number of Staff Groups has exceeded maximum: %d\n", 
+      MAXMODS);
+   exit(1);
+  }
+}
+
+void SheetBuilder::readPatchFile(){
+  fprintf(this->log,"Reading in patch file...\n");
+  while (fscanf(this->patch, "%s", modname) != EOF) {
+    if (!strcmp(modname, "STAFFGROUP")) {
+      readStaffGroups(staffGroups, ++staffGroupCount);
+    } else {
+      fprintf(stderr, "%s is an unknown module\n", modname);
+    }
+  }
 }
 
 bool SheetBuilder::compareFiles(const char* filePath1, const char* filePath2) {

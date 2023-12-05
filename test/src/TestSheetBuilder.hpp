@@ -22,6 +22,7 @@ class TestSheetBuilder : public CppUnit::TestFixture
 {
   CPPUNIT_TEST_SUITE(TestSheetBuilder);
   CPPUNIT_TEST(canPrintScoreHeader);
+  CPPUNIT_TEST(canReadPatchFileStaffGroupsAndStaffCount);
   CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -30,6 +31,7 @@ public:
 
 protected:
   void canPrintScoreHeader(void);
+  void canReadPatchFileStaffGroupsAndStaffCount(void);
 
 private:
   SheetBuilder sheetBuilder;

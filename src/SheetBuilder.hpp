@@ -56,6 +56,7 @@ class SheetBuilder{
     ~SheetBuilder();
     void printHeader(void);
     void readPatchFile();
+    void readStaffGroups(STAFFGROUP *staffGroup, int count);
     int getStaffGroupCount();
     int getStaffCount();
     bool compareFiles(const char* filePath1, const char* filePath2);

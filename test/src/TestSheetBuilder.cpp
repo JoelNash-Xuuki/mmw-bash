@@ -41,11 +41,11 @@ void TestSheetBuilder::canPrintScoreHeader(void){
     "/home/joel/mmw/test/src/Expected_Test_Sheet_Header.ly"));
 }
 
-//void TestSheetBuilder::canReadPatchFileStaffGroupsAndStaffCount(void){
-//  sheetBuilder.readPatchFile();
-//  CPPUNIT_ASSERT_EQUAL(1, sheetBuilder.getStaffGroupCount());
-//  CPPUNIT_ASSERT_EQUAL(1, sheetBuilder.getStaffCount());
-//}
+void TestSheetBuilder::canReadPatchFileStaffGroupsAndStaffCount(void){
+  sheetBuilder.readPatchFile();
+  CPPUNIT_ASSERT_EQUAL(1, sheetBuilder.getStaffGroupCount());
+  //CPPUNIT_ASSERT_EQUAL(1, sheetBuilder.getStaffCount());
+}
 
 void TestSheetBuilder::tearDown(void){
     //delete this->sheetBuilder;

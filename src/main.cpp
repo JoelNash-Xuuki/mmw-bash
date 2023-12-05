@@ -4,7 +4,6 @@
 
 int main(int argc, char **argv){
 
-
   if (argc != 7) {
       printf("Usage: %s <filename> <service> <title> <artist>\n", argv[0]);
       return 1;
@@ -23,5 +22,6 @@ int main(int argc, char **argv){
                                           artist,
 					  patchName,
 					  sheetLocation);
+  sheetBuilder.printHeader();
   return 0;
 }
