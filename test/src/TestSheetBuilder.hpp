@@ -17,13 +17,11 @@
 
 using namespace CppUnit;
 using namespace std;
-//-----------------------------------------------------------------------------
 
 class TestSheetBuilder : public CppUnit::TestFixture
 {
   CPPUNIT_TEST_SUITE(TestSheetBuilder);
-  CPPUNIT_TEST(canReadPatchFileStaffGroupsAndStaffCount);
-  CPPUNIT_TEST(testPrintStaff);
+  CPPUNIT_TEST(canPrintScoreHeader);
   CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -31,12 +29,12 @@ public:
   void tearDown(void);
 
 protected:
-  void canReadPatchFileStaffGroupsAndStaffCount(void);
-  void testPrintStaff(void);
+  void canPrintScoreHeader(void);
 
 private:
   SheetBuilder sheetBuilder;
   void defineStaffStructure(void);
   FILE* testSheet;
   FILE* expectedSheet;
+
 };
