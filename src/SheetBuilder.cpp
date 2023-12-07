@@ -97,7 +97,7 @@ void SheetBuilder::readPatchFile(){
     if (!strcmp(modname, "STAFFGROUP")) {
       readStaffGroups(staffGroups, ++staffGroupCount);
     } else if (!strcmp(modname, "STAFF")) {
-      readStaffs(staffs, ++staffCount);
+      readStaffs(this->staffs, ++staffCount);
     } else if (!strcmp(modname, "NOTE")) {
       readNotes(this->notes, ++this->noteCount);
     } else {
@@ -133,29 +133,36 @@ void SheetBuilder::printAllNotesOnStaff(FILE *sheet) {
   //}
 }
 
-void SheetBuilder::printStaffInGroup(STAFF *staff,
-		                     int count) {
-  fprintf(this->log,"Printing all staff in group...\n");
-  fprintf(this->log, "Printing staff: %i\n",count);
-  if (count > 0) {
-    fprintf(staff[count].sheet,"      \\new Staff \\with {\n");
-    fprintf(staff[count].sheet,"        instrumentName= \"%s\"\n", 
-            staff[count].instr);
-    fprintf(staff[count].sheet,"      }\n\n");
-    fprintf(staff[count].sheet,"      {\n");
-    fprintf(staff[count].sheet,"        \\time %s\n", 
-           staff[count].time);
-    fprintf(staff[count].sheet,"        \\tempo %s\n", 
-            staff[count].tempo);
-    fprintf(staff[count].sheet,"        \\clef %s\n", 
-            staff[count].clef);
-    fprintf(staff[count].sheet,"        \\key %s \\%s\n", 
-	    staff[count].key,
-            staff[count].mode);
-    //printAllNotesOnStaff(staff[count].sheet);
-    fprintf(staff[count].sheet,"      }\n");
-    fprintf(this->log,"Closing staff sheet\n");
-    fclose(staff[count].sheet);
+void SheetBuilder::printStaffInGroup(){
+  int count= 1;
+
+  for (count; count > 0; count--){
+    fprintf(this->log,"Printing all staff in group...\n");
+    fprintf(this->log, "Printing staff: %i\n",count);
+    if (count > 0) {
+      this->staffs[count].sheet = fopen(("/home/joel/mmw/test/src/Test_Sheet_Staff_" + 
+	                              to_string(count) + ".partial.ly").c_str(), "w");
+      this->patch= fopen(patchName, "r");
+      fprintf(this->staffs[count].sheet,"      \\new Staff \\with {\n");
+      fprintf(this->staffs[count].sheet,"      \\new Staff \\with {\n");
+      //fprintf(this->staffs[count].sheet,"        instrumentName= \"%s\"\n", 
+      //        this->staffs[count].instr);
+      //fprintf(this->staffs[count].sheet,"      }\n\n");
+      //fprintf(this->staffs[count].sheet,"      {\n");
+      //fprintf(this->staffs[count].sheet,"        \\time %s\n", 
+      //        this->staffs[count].time);
+      //fprintf(this->staffs[count].sheet,"        \\tempo %s\n", 
+      //        this->staffs[count].tempo);
+      //fprintf(this->staffs[count].sheet,"        \\clef %s\n", 
+      //        this->staffs[count].clef);
+      //fprintf(this->staffs[count].sheet,"        \\key %s \\%s\n", 
+      //        this->staffs[count].key,
+      //        this->staffs[count].mode);
+      //fprintf(this->staffs[count].sheet,"      }\n");
+      //fclose( this->staffs[count].sheet);
+      //fprintf(this->log,"Closed staff sheet\n");
+      //printAllNotesOnStaff(staff[count].sheet);
+    }
   }
 }
 

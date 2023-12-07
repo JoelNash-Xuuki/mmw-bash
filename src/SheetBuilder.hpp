@@ -71,12 +71,13 @@ class SheetBuilder{
     void readPatchFile();
     void printStaffGroupHeader(void);
     void printAllNotesOnStaff(FILE *sheet);
-    void printStaffInGroup(STAFF *staff,
-		           int count);
+    void printStaffInGroup();
     int getStaffGroupCount();
     void setStaffGroupCount(int count);
+
     int getStaffCount();
     void setStaffCount(int count);
+
     int getNoteCount();
     bool compareFiles(const char* filePath1, const char* filePath2);
 };

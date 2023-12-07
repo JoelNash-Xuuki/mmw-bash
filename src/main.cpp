@@ -23,6 +23,7 @@ int main(int argc, char **argv){
 					  patchName,
 					  sheetLocation);
   sheetBuilder.printHeader();
+  sheetBuilder.readPatchFile();
   sheetBuilder.printStaffGroupHeader();
   return 0;
 }
