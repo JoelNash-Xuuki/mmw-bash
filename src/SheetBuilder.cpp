@@ -134,14 +134,19 @@ void SheetBuilder::printAllNotesOnStaff(FILE *sheet) {
 }
 
 void SheetBuilder::printStaffInGroup(){
-  int count= 1;
+  int count= this->getStaffCount();
+  char sheetStaff[100];
 
+  strcpy(sheetStaff, this->sheetName);
+ 
   for (count; count > 0; count--){
     fprintf(this->log,"Printing all staff in group...\n");
     fprintf(this->log, "Printing staff: %i\n",count);
     if (count > 0) {
-      this->staffs[count].sheet = fopen(("/home/joel/mmw/test/src/Test_Sheet_Staff_" + 
-	                              to_string(count) + ".partial.ly").c_str(), "w");
+      string newString = "_Staff_" + std::to_string(count) + ".partial.ly";
+      strcat(sheetStaff, newString.c_str());
+
+      this->staffs[count].sheet = fopen(sheetStaff,"w");
       this->patch= fopen(patchName, "r");
       fprintf(this->staffs[count].sheet,"      \\new Staff \\with {\n");
       fprintf(this->staffs[count].sheet,"        instrumentName= \"%s\"\n", 
