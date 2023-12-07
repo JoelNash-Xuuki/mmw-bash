@@ -5,6 +5,6 @@
       {
         \time 4/4
         \tempo 84
-        \clef Bass
-        \key a \major
+        \clef bass
+        \key c \major
       }

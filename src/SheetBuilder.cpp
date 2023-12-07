@@ -144,24 +144,23 @@ void SheetBuilder::printStaffInGroup(){
 	                              to_string(count) + ".partial.ly").c_str(), "w");
       this->patch= fopen(patchName, "r");
       fprintf(this->staffs[count].sheet,"      \\new Staff \\with {\n");
-      fprintf(this->staffs[count].sheet,"      \\new Staff \\with {\n");
-      //fprintf(this->staffs[count].sheet,"        instrumentName= \"%s\"\n", 
-      //        this->staffs[count].instr);
-      //fprintf(this->staffs[count].sheet,"      }\n\n");
-      //fprintf(this->staffs[count].sheet,"      {\n");
-      //fprintf(this->staffs[count].sheet,"        \\time %s\n", 
-      //        this->staffs[count].time);
-      //fprintf(this->staffs[count].sheet,"        \\tempo %s\n", 
-      //        this->staffs[count].tempo);
-      //fprintf(this->staffs[count].sheet,"        \\clef %s\n", 
-      //        this->staffs[count].clef);
-      //fprintf(this->staffs[count].sheet,"        \\key %s \\%s\n", 
-      //        this->staffs[count].key,
-      //        this->staffs[count].mode);
-      //fprintf(this->staffs[count].sheet,"      }\n");
-      //fclose( this->staffs[count].sheet);
-      //fprintf(this->log,"Closed staff sheet\n");
-      //printAllNotesOnStaff(staff[count].sheet);
+      fprintf(this->staffs[count].sheet,"        instrumentName= \"%s\"\n", 
+              this->staffs[count].instr);
+      fprintf(this->staffs[count].sheet,"      }\n\n");
+      fprintf(this->staffs[count].sheet,"      {\n");
+      fprintf(this->staffs[count].sheet,"        \\time %s\n", 
+              this->staffs[count].time);
+      fprintf(this->staffs[count].sheet,"        \\tempo %s\n", 
+              this->staffs[count].tempo);
+      fprintf(this->staffs[count].sheet,"        \\clef %s\n", 
+              this->staffs[count].clef);
+      fprintf(this->staffs[count].sheet,"        \\key %s \\%s\n", 
+              this->staffs[count].key,
+              this->staffs[count].mode);
+      fprintf(this->staffs[count].sheet,"      }\n");
+      fclose( this->staffs[count].sheet);
+      fprintf(this->log,"Closed staff sheet\n");
+      printAllNotesOnStaff(staffs[count].sheet);
     }
   }
 }
