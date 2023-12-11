@@ -9,7 +9,6 @@
 using namespace std;
 
 SheetBuilder::SheetBuilder(){};
-
 SheetBuilder::SheetBuilder(const char* sheetName,
 			   const char* service,
 		   	   const char* title,
@@ -183,7 +182,7 @@ void SheetBuilder::printStaffInGroupCloseBracket(){
   fprintf(this->log, "Opening %s ...\n", sheetStaffs);
   FILE* sheet= fopen(sheetStaffs, "w");
   fprintf(this->log, "Opened %s\n", sheetStaffs);
-  fprintf(sheet,"    }\n");
+  fprintf(sheet,"      }\n");
   fprintf(this->log, "Closing %s ...\n", sheetStaffs);
   fclose(sheet);
   fprintf(this->log, "Closed %s\n", sheetStaffs);
@@ -280,8 +279,8 @@ void SheetBuilder::collectFileSections(){
   appendFile("/home/joel/mmw/test/src/Test_Sheet_Header.partial.ly", outputFile);
   appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_Group_Header.ly", outputFile);
   appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_1.partial.ly", outputFile);
+  appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_Notes.ly", outputFile);
   appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_Group_Close_Bracket.ly", outputFile);
-  //appendFile("/home/joel/mmw/test/src/Test_Sheet_Close.ly", outputFile);
   outputFile.close();
 }
 

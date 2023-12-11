@@ -59,29 +59,30 @@ void TestSheetBuilder::canPrintStaffInGroupHeader(void){
   this->sheetBuilder.readPatchFile();
   this->sheetBuilder.printStaffInGroupHeader();
   CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
-                 "/home/joel/mmw/test/src/Test_Sheet_Staff_1.partial.ly",
-                 "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_1.partial.ly"));
+    "/home/joel/mmw/test/src/Test_Sheet_Staff_1.partial.ly",
+    "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_1.partial.ly"));
 }
 
 void TestSheetBuilder::canPrintNotesOnStaff(void){
   this->sheetBuilder.readPatchFile();
   this->sheetBuilder.printAllNotesOnStaff();
   CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
-                "/home/joel/mmw/test/src/Test_Sheet_Staff_Notes.ly", 
-                "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_Notes.ly"));
+    "/home/joel/mmw/test/src/Test_Sheet_Staff_Notes.ly", 
+    "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_Notes.ly"));
 }
 
 void TestSheetBuilder::canPrintStaffInGroupCloseBracket(void){
   this->sheetBuilder.printStaffInGroupCloseBracket();
   CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
-                "/home/joel/mmw/test/src/Test_Sheet_Staff_Group_Close_Bracket.ly", 
-                "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_Group_Close_Bracket.ly"));
+    "/home/joel/mmw/test/src/Test_Sheet_Staff_Group_Close_Bracket.ly", 
+    "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_Group_Close_Bracket.ly"));
 }
 
 void TestSheetBuilder::canAppendScoreFileSections(void){
   this->sheetBuilder.collectFileSections(); 
- // CPPUNIT_ASSERT(this->sheetBuilder.compareFiles("/home/joel/mmw/test/src/Test_Sheet.ly",
-  //                                               "/home/joel/mmw/test/src/Expected_Test_Sheet.ly"));
+  CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
+    "/home/joel/mmw/test/src/Test_Sheet.ly",
+    "/home/joel/mmw/test/src/Expected_Test_Sheet.ly"));
 }
 
 void TestSheetBuilder::tearDown(void){
