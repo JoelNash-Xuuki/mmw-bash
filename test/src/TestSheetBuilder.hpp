@@ -26,6 +26,8 @@ class TestSheetBuilder : public CppUnit::TestFixture
   CPPUNIT_TEST(canPrintStaffGroupHeader);
   CPPUNIT_TEST(canPrintStaffInGroupHeader);
   CPPUNIT_TEST(canPrintNotesOnStaff);
+  CPPUNIT_TEST(canPrintStaffInGroupCloseBracket);
+  CPPUNIT_TEST(canAppendScoreFileSections);
   CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -38,6 +40,8 @@ protected:
   void canPrintStaffGroupHeader(void);
   void canPrintStaffInGroupHeader(void);
   void canPrintNotesOnStaff(void);
+  void canPrintStaffInGroupCloseBracket(void);
+  void canAppendScoreFileSections(void);
 
 private:
   SheetBuilder sheetBuilder;

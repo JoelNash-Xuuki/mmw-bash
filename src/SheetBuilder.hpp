@@ -69,8 +69,11 @@ class SheetBuilder{
                          int count);
     void readPatchFile();
     void printStaffGroupHeader(void);
-    void printAllNotesOnStaff();
     void printStaffInGroupHeader();
+    void printAllNotesOnStaff();
+    void printStaffInGroupCloseBracket();
+    void appendFile(const string& inputFile, ofstream& outputFile);
+    void collectFileSections();
 
     int getStaffGroupCount();
     void setStaffGroupCount(int count);

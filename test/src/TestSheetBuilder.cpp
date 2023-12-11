@@ -71,6 +71,19 @@ void TestSheetBuilder::canPrintNotesOnStaff(void){
                 "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_Notes.ly"));
 }
 
+void TestSheetBuilder::canPrintStaffInGroupCloseBracket(void){
+  this->sheetBuilder.printStaffInGroupCloseBracket();
+  CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
+                "/home/joel/mmw/test/src/Test_Sheet_Staff_Group_Close_Bracket.ly", 
+                "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_Group_Close_Bracket.ly"));
+}
+
+void TestSheetBuilder::canAppendScoreFileSections(void){
+  this->sheetBuilder.collectFileSections(); 
+ // CPPUNIT_ASSERT(this->sheetBuilder.compareFiles("/home/joel/mmw/test/src/Test_Sheet.ly",
+  //                                               "/home/joel/mmw/test/src/Expected_Test_Sheet.ly"));
+}
+
 void TestSheetBuilder::tearDown(void){
     //delete this->sheetBuilder;
 }

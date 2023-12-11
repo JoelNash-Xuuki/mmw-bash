@@ -27,14 +27,12 @@ SheetBuilder::SheetBuilder(const char* sheetName,
 
   staffGroups= (STAFFGROUP *)malloc(MAXMODS * sizeof(STAFFGROUP));
   staffs= (STAFF *)malloc(MAXMODS * sizeof(STAFF));
-  notes= (NOTE *)malloc(MAXMODS * sizeof(NOTE ));
+  notes= (NOTE *)malloc(MAXMODS * sizeof(NOTE));
 
   this->patch= fopen(patchName, "r");
-
 };
 
 SheetBuilder::~SheetBuilder(){};
-
 void SheetBuilder::printHeader(void){
   fprintf(this->log,"Printing Header...\n");
   char sheetHeader[100];
@@ -178,6 +176,19 @@ void SheetBuilder::printStaffInGroupHeader(){
   }
 }
 
+void SheetBuilder::printStaffInGroupCloseBracket(){
+  char sheetStaffs[100];
+  strcpy(sheetStaffs, this->sheetName);
+  strcat(sheetStaffs, "_Staff_Group_Close_Bracket.ly");
+  fprintf(this->log, "Opening %s ...\n", sheetStaffs);
+  FILE* sheet= fopen(sheetStaffs, "w");
+  fprintf(this->log, "Opened %s\n", sheetStaffs);
+  fprintf(sheet,"    }\n");
+  fprintf(this->log, "Closing %s ...\n", sheetStaffs);
+  fclose(sheet);
+  fprintf(this->log, "Closed %s\n", sheetStaffs);
+}
+
 int SheetBuilder::getStaffGroupCount(){
   fprintf(this->log,"Number of staff groups: %i\n", this->staffGroupCount);
   return this->staffGroupCount;
@@ -236,4 +247,41 @@ bool SheetBuilder::compareFiles(const char* filePath1, const char* filePath2) {
     file2.close();
     return true; // Files are identical
 }     
+
+void SheetBuilder::appendFile(const string& inputFile, ofstream& outputFile) {
+  std::ifstream inFile(inputFile);
+  if (!inFile) {
+      cerr << "Error opening input file: " << inputFile << endl;
+      return;
+  }
+  
+  outputFile << inFile.rdbuf();
+  inFile.close();
+}
+
+void SheetBuilder::collectFileSections(){
+  string outputPath = this->sheetName; // Change to your output file path
+  outputPath += ".ly";
+
+  // Delete the existing file
+  if (remove(outputPath.c_str()) != 0) {
+      int err = errno;
+      //std::cerr << "Error deleting existing file: " << strerror(err) << std::endl;
+  } else {
+      //std::cout << "Existing file deleted successfully." << std::endl;
+  }
+
+  ofstream outputFile(outputPath, std::ios::app);
+
+  if (!outputFile) {
+    cerr << "Error opening output file." << std::endl;
+  }
+
+  appendFile("/home/joel/mmw/test/src/Test_Sheet_Header.partial.ly", outputFile);
+  appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_Group_Header.ly", outputFile);
+  appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_1.partial.ly", outputFile);
+  appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_Group_Close_Bracket.ly", outputFile);
+  //appendFile("/home/joel/mmw/test/src/Test_Sheet_Close.ly", outputFile);
+  outputFile.close();
+}
 
