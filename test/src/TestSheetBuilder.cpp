@@ -55,12 +55,20 @@ void TestSheetBuilder::canPrintStaffGroupHeader(void){
     "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_Group_Header.ly"));
 }
 
-void TestSheetBuilder::canPrintStaffInGroup(void){
+void TestSheetBuilder::canPrintStaffInGroupHeader(void){
   this->sheetBuilder.readPatchFile();
-  this->sheetBuilder.printStaffInGroup();
+  this->sheetBuilder.printStaffInGroupHeader();
   CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
                  "/home/joel/mmw/test/src/Test_Sheet_Staff_1.partial.ly",
                  "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_1.partial.ly"));
+}
+
+void TestSheetBuilder::canPrintNotesOnStaff(void){
+  this->sheetBuilder.readPatchFile();
+  this->sheetBuilder.printAllNotesOnStaff();
+  CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
+                "/home/joel/mmw/test/src/Test_Sheet_Staff_Notes.ly", 
+                "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_Notes.ly"));
 }
 
 void TestSheetBuilder::tearDown(void){

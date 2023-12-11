@@ -23,7 +23,7 @@ typedef struct { // STAFF
   FILE* sheet;
 } STAFF;
 
-typedef struct { // STAFFGROUP
+typedef struct { // NOTES
   char pat[SYNMOD_CHARS];
 } NOTE;
 
@@ -64,14 +64,14 @@ class SheetBuilder{
     void printHeader(void);
     void readStaffs(STAFF *staff, 
                     int count);
-    void readNotes(NOTE *note, 
-                    int count);
+    void readNotes(NOTE *note);
     void readStaffGroups(STAFFGROUP *staffGroup, 
                          int count);
     void readPatchFile();
     void printStaffGroupHeader(void);
-    void printAllNotesOnStaff(FILE *sheet);
-    void printStaffInGroup();
+    void printAllNotesOnStaff();
+    void printStaffInGroupHeader();
+
     int getStaffGroupCount();
     void setStaffGroupCount(int count);
 

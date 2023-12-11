@@ -24,7 +24,8 @@ class TestSheetBuilder : public CppUnit::TestFixture
   CPPUNIT_TEST(canPrintScoreHeader);
   CPPUNIT_TEST(canReadPatchFileStaffGroupsStaffCountAndNoteCount);
   CPPUNIT_TEST(canPrintStaffGroupHeader);
-  CPPUNIT_TEST(canPrintStaffInGroup);
+  CPPUNIT_TEST(canPrintStaffInGroupHeader);
+  CPPUNIT_TEST(canPrintNotesOnStaff);
   CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -35,7 +36,8 @@ protected:
   void canPrintScoreHeader(void);
   void canReadPatchFileStaffGroupsStaffCountAndNoteCount(void);
   void canPrintStaffGroupHeader(void);
-  void canPrintStaffInGroup(void);
+  void canPrintStaffInGroupHeader(void);
+  void canPrintNotesOnStaff(void);
 
 private:
   SheetBuilder sheetBuilder;

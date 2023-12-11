@@ -27,6 +27,8 @@ SheetBuilder::SheetBuilder(const char* sheetName,
 
   staffGroups= (STAFFGROUP *)malloc(MAXMODS * sizeof(STAFFGROUP));
   staffs= (STAFF *)malloc(MAXMODS * sizeof(STAFF));
+  notes= (NOTE *)malloc(MAXMODS * sizeof(NOTE ));
+
   this->patch= fopen(patchName, "r");
 
 };
@@ -79,14 +81,14 @@ void SheetBuilder::readStaffs(STAFF *staff,
   }
 }
 
-void SheetBuilder::readNotes(NOTE *note,
-                             int count){
-  fprintf(this->log,"Reading notes to go on staff %d ...\n", count);
+void SheetBuilder::readNotes(NOTE *note){
+  this->noteCount += 1;
+  fprintf(this->log,"Reading notes to go on staff %d ...\n", noteCount);
   fscanf(this->patch,"%s",
-         notes[count].pat); 
-  if( count >= MAXMODS ){
+         notes[noteCount].pat); 
+  if(noteCount>= MAXMODS ){
    fprintf(stderr,"Number of Staffs has exceeded maximum: %d\n", 
-	  MAXMODS);
+          MAXMODS);
    exit(1);
   }
 }
@@ -99,7 +101,7 @@ void SheetBuilder::readPatchFile(){
     } else if (!strcmp(modname, "STAFF")) {
       readStaffs(this->staffs, ++staffCount);
     } else if (!strcmp(modname, "NOTE")) {
-      readNotes(this->notes, ++this->noteCount);
+      readNotes(this->notes);
     } else {
       fprintf(stderr, "%s is an unknown module\n", modname);
     }
@@ -124,16 +126,25 @@ void SheetBuilder::printStaffGroupHeader() {
   fprintf(this->log, "Closed %s\n", sheetStaffs);
 }
 
-void SheetBuilder::printAllNotesOnStaff(FILE *sheet) {
-  //fprintf(this->log,"Printing all Notes on staff %i\n", this->noteCount);
-  //int noteNo;
-  //int i= getNoteCount();
-  //for (int i= getNoteCount(); i > 0; i--) {
-  //  fprintf(sheet,"        \\include \"/home/joel/projects_/Hello/src/score/notes/ns-%s\"\n",notes[i].pat);
-  //}
+void SheetBuilder::printAllNotesOnStaff() {
+
+  char sheetStaffNotes[100];
+  strcpy(sheetStaffNotes, this->sheetName);
+  strcat(sheetStaffNotes, "_Staff_Notes.ly");
+  fprintf(this->log, "Opening %s ...\n", sheetStaffNotes);
+  FILE* sheet= fopen(sheetStaffNotes, "w");
+
+  fprintf(this->log,"Printing all Notes on staff %i\n", this->noteCount);
+  int noteNo;
+  int i= getNoteCount();
+  for (int i= getNoteCount(); i > 0; i--) {
+    fprintf(sheet,"        \\include \"/home/joel/projects_/Hello/src/score/notes/ns-%s\"\n",notes[i].pat);
+  }
+
+  fclose(sheet);
 }
 
-void SheetBuilder::printStaffInGroup(){
+void SheetBuilder::printStaffInGroupHeader(){
   int count= this->getStaffCount();
   char sheetStaff[100];
 
@@ -162,15 +173,10 @@ void SheetBuilder::printStaffInGroup(){
       fprintf(this->staffs[count].sheet,"        \\key %s \\%s\n", 
               this->staffs[count].key,
               this->staffs[count].mode);
-      fprintf(this->staffs[count].sheet,"      }\n");
       fclose( this->staffs[count].sheet);
-      fprintf(this->log,"Closed staff sheet\n");
-      printAllNotesOnStaff(staffs[count].sheet);
     }
   }
 }
-
-
 
 int SheetBuilder::getStaffGroupCount(){
   fprintf(this->log,"Number of staff groups: %i\n", this->staffGroupCount);
@@ -191,7 +197,7 @@ void SheetBuilder::setStaffCount(int count){
 }
 
 int SheetBuilder::getNoteCount(){
-  fprintf(this->log,"Number of notes for staff: %i\n", this->staffGroupCount);
+  fprintf(this->log,"Number of notes for staff: %i\n", this->noteCount);
   return this->noteCount;
 }
 
@@ -230,3 +236,4 @@ bool SheetBuilder::compareFiles(const char* filePath1, const char* filePath2) {
     file2.close();
     return true; // Files are identical
 }     
+

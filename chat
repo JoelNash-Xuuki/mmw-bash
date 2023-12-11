@@ -1,40 +1,12 @@
-sgpt "regard the follwing code and focus on function printerHeader(). Then write me a cppunit test for it $(cat src/SheetBuilder.cpp)"
-Here is an example of a CppUnit test for the `printHeader()` function in the `SheetBuilder` class:
+sgpt "
+You can you see my code in the file
+SheetBuilder.cpp
 
-```cpp
-#include <cppunit/extensions/HelperMacros.h>
-#include "SheetBuilder.hpp"
+$(cat src/SheetBuilder.cpp)
 
-class SheetBuilderTest : public CppUnit::TestFixture {
-  CPPUNIT_TEST_SUITE(SheetBuilderTest);
-  CPPUNIT_TEST(testPrintHeader);
-  CPPUNIT_TEST_SUITE_END();
+I want to test printAllNotesOnStaff(FILE *sheet).
+But the function exists in printStaffInGroup()
 
-public:
-  void testPrintHeader() {
-    SheetBuilder sheetBuilder;
-    sheetBuilder.printHeader();
+It looks like I can only test printStaffInGroup()
 
-    // Assert that the header has been printed correctly
-    // You can add more assertions here to check the specific content of the header
-    // For example:
-    // CPPUNIT_ASSERT_EQUAL(std::string("\\version \"2.22.0\"\n\n"), getSheetContent());
-
-    sheetBuilder.closeSheet();
-  }
-
-private:
-  std::string getSheetContent() {
-    std::ifstream sheetFile("sheet.ly");
-    std::string content((std::istreambuf_iterator<char>(sheetFile)),
-                        std::istreambuf_iterator<char>());
-    sheetFile.close();
-    return content;
-  }
-};
-
-CPPUNIT_TEST_SUITE_REGISTRATION(SheetBuilderTest);
-```
-
-Note that this test assumes that the `SheetBuilder` class has a member function `closeSheet()` that closes the sheet file. It also assumes that the sheet file is named "sheet.ly". You may need to modify the test code according to your specific implementation.
-
+"

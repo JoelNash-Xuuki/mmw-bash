@@ -25,6 +25,7 @@ int main(int argc, char **argv){
   sheetBuilder.printHeader();
   sheetBuilder.readPatchFile();
   sheetBuilder.printStaffGroupHeader();
-  sheetBuilder.printStaffInGroup();
+  sheetBuilder.printStaffInGroupHeader();
+  sheetBuilder.printAllNotesOnStaff();
   return 0;
 }

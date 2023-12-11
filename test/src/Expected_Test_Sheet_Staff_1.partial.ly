@@ -7,4 +7,3 @@
         \tempo 84
         \clef bass
         \key c \major
-      }
