@@ -72,6 +72,7 @@ class SheetBuilder{
     void printStaffInGroupHeader();
     void printAllNotesOnStaff();
     void printStaffInGroupCloseBracket();
+    void printScoreClose();
     void appendFile(const string& inputFile, ofstream& outputFile);
     void collectFileSections();
 

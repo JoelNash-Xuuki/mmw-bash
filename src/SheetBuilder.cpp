@@ -40,9 +40,9 @@ void SheetBuilder::printHeader(void){
   FILE* sheet= fopen(sheetHeader, "w");
   fprintf(sheet,"\\version \"2.22.0\"\n\n");
   fprintf(sheet,"\\header {\n");
-  fprintf(sheet,"  \\tagline = \"%s\"\n", this->service);
-  fprintf(sheet,"  \\title = \"%s\"\n", this->title);
-  fprintf(sheet,"  \\composer = \"%s\"\n", this->artist);
+  fprintf(sheet,"  tagline = \"%s\"\n", this->service);
+  fprintf(sheet,"  title = \"%s\"\n", this->title);
+  fprintf(sheet,"  composer = \"%s\"\n", this->artist);
   fprintf(sheet,"}\n");
   fprintf(sheet,"\\score {\n");
   fprintf(sheet,"  <<\n");
@@ -135,7 +135,8 @@ void SheetBuilder::printAllNotesOnStaff() {
   int noteNo;
   int i= getNoteCount();
   for (int i= getNoteCount(); i > 0; i--) {
-    fprintf(sheet,"        \\include \"/home/joel/projects_/Hello/src/score/notes/ns-%s\"\n",notes[i].pat);
+    fprintf(sheet,"        \\include \"/home/joel/projects_/notes/ns-%s\"\n",
+            notes[i].pat);
   }
 
   fclose(sheet);
@@ -163,7 +164,7 @@ void SheetBuilder::printStaffInGroupHeader(){
       fprintf(this->staffs[count].sheet,"      {\n");
       fprintf(this->staffs[count].sheet,"        \\time %s\n", 
               this->staffs[count].time);
-      fprintf(this->staffs[count].sheet,"        \\tempo %s\n", 
+      fprintf(this->staffs[count].sheet,"        \\tempo 4 = %s\n", 
               this->staffs[count].tempo);
       fprintf(this->staffs[count].sheet,"        \\clef %s\n", 
               this->staffs[count].clef);
@@ -183,9 +184,25 @@ void SheetBuilder::printStaffInGroupCloseBracket(){
   FILE* sheet= fopen(sheetStaffs, "w");
   fprintf(this->log, "Opened %s\n", sheetStaffs);
   fprintf(sheet,"      }\n");
+  fprintf(sheet,"     >>\n");
   fprintf(this->log, "Closing %s ...\n", sheetStaffs);
   fclose(sheet);
   fprintf(this->log, "Closed %s\n", sheetStaffs);
+}
+
+void SheetBuilder::printScoreClose(){
+  fprintf(this->log,"Printing Header...\n");
+  char sheetHeader[100];
+  strcpy(sheetHeader, this->sheetName);
+  strcat(sheetHeader, "_Close.partial.ly");
+  FILE* sheet= fopen(sheetHeader, "w");
+  fprintf(sheet,"  >>\n");
+  fprintf(sheet,"  \\layout {}\n");
+  fprintf(sheet,"  \\midi {\n");
+  fprintf(sheet,"    \\tempo 4 = 84\n");
+  fprintf(sheet,"  }\n");
+  fprintf(sheet,"}\n");
+  fclose(sheet);
 }
 
 int SheetBuilder::getStaffGroupCount(){
@@ -281,6 +298,7 @@ void SheetBuilder::collectFileSections(){
   appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_1.partial.ly", outputFile);
   appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_Notes.ly", outputFile);
   appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_Group_Close_Bracket.ly", outputFile);
+  appendFile("/home/joel/mmw/test/src/Test_Sheet_Close.partial.ly", outputFile);
   outputFile.close();
 }
 

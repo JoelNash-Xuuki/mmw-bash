@@ -78,6 +78,10 @@ void TestSheetBuilder::canPrintStaffInGroupCloseBracket(void){
     "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_Group_Close_Bracket.ly"));
 }
 
+void TestSheetBuilder::canPrintScoreClose(void){
+  this->sheetBuilder.printScoreClose();
+}
+
 void TestSheetBuilder::canAppendScoreFileSections(void){
   this->sheetBuilder.collectFileSections(); 
   CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
