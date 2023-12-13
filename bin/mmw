@@ -4,6 +4,10 @@ setProj(){
   sed -i "s/PROJ=.*/PROJ=$1/g" $HOME/mmw/test/tmp/config
 }
 
+setProjLoc(){
+  sed -i "s|PROJLOC=.*|PROJLOC=$1|g" $HOME/mmw/test/tmp/config
+}
+
 createProj(){
   #test -d $PROJPATH && echo "$PROJ exists" || (test -f $PROJPATH && echo "$PROJ  exists" || echo "$PROJ does not exist")
 
@@ -12,11 +16,10 @@ createProj(){
   elif test -f  $PROJPATH; then
       echo "$PROJ exists"
   else
-      read -p "$PROJ does not exist. Do you want to create it? (y/n): " choice
+      read -p "$PROJPATH does not exist. Do you want to create it? (y/n): " choice
       if [[ $choice == "y" ]]; then
           mkdir $PROJPATH
           mkdir $PROJPATH/src
-          mkdir $PROJPATH/src/score
           mkdir $PROJPATH/tmp
           echo "$PROJ created"
       else
@@ -31,7 +34,8 @@ buildSheetMusic(){
 
 createLyScoreAndMidiFile(){
   lilypond -dmidi-extension=mid $LILY
-  mv $PROJ.mid PROJPATH/tmp/$PROJ.mid
+  mv $PROJ.mid $MIDI 
+  mv $PROJ.pdf $PDF
   #lilypond-book --output=out --format=html $1.lytex
 }
 

@@ -23,7 +23,7 @@ void TestSheetBuilder::setUp(void){
   const char* service= "Xuuki";
   const char* title= "Title";
   const char* artist= "Vyvn";
-  const char* patchName= "patchName";
+  const char* patchName= "/home/joel/projects_/patches/testPatch";
   const char* sheetLocation= "/home/joel/mmw/test/src/";
   this->sheetBuilder= SheetBuilder(sheetName,
                              service,

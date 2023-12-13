@@ -1,10 +1,12 @@
 PROJ=Hello
-PROJLOC=projects_
-PROJPATH=$HOME/$PROJLOC/$PROJ
+PROJLOC=projects_/Hello
+PROJPATH=$HOME/$PROJLOC/
 ARTIST=Vyvn
 SERVICE=Xuuki.xyz
-SCORE=$PROJPATH/src/score
-LILY=$SCORE/$PROJ.ly
+SCORE=src/$PROJ.ly
+LILY=$SCORE
+MIDI=$HOME/$PROJLOC/tmp/$PROJ.mid
+PDF=$HOME/Xuuki_Site_Node/site-app/public/doc/$PROJ.pdf
 WAV=$HOME/audio/$ARTIST/$PROJ/1/stems/$PROJ.wav
 TEMPO=84
 BEAT=$(bc <<< "scale=4; (60/$TEMPO)")

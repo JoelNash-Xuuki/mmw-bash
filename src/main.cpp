@@ -27,5 +27,8 @@ int main(int argc, char **argv){
   sheetBuilder.printStaffGroupHeader();
   sheetBuilder.printStaffInGroupHeader();
   sheetBuilder.printAllNotesOnStaff();
+  sheetBuilder.printStaffInGroupCloseBracket();
+  sheetBuilder.printScoreClose();
+  sheetBuilder.collectFileSections();
   return 0;
 }

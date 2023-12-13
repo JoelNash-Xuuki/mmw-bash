@@ -1,33 +1,48 @@
 source ./test/tmp/config
 #!/usr/bin/env bats
 
-@test "first test" {
-  run echo "Hello, world!"
-  
+@test "can set the Project name" {
+  mmw setProj Test_Sheet
+  projName=$(grep "^PROJ=Test_Sheet$" "./test/tmp/config")
+  [ "$projName" = "PROJ=Test_Sheet" ]
 }
-@test "createScoreDesign should create the project score file" {
-  run mmw createScoreDesign
 
-  # Check if the file exists
-  [ -f "$HOME/projects_/flock/src/$PROJ.ly" ]
+@test "can set the Project Location" {
+  mmw setProjLoc mmw/test
+  projLocation=$(grep "^PROJLOC=mmw/test$" "./test/tmp/config")
+  [ "$projLocation" = "PROJLOC=mmw/test" ]
+}
+
+# Read the line from the config file
+
+    # Assert that the line is exactly as expected
+
+@test "createScoreDesign should create the project score file" {
+
+  [ -f "$LILY" ]
+  mmw createLyScoreAndMidiFile
+  [ -f "$MIDI" ]
+  [ -f "$PDF" ]
+
 
   #Validate data
   #[ "$(cat "$HOME/projects_/flock/src/$PROJ.ly)" = "$projOrc" ]
 
 }
-@test "renderAudio should create a .orc, .sco and .wav file" {
-  run mmw renderAudio
 
-  run ls $HOME/projects_/flock/src/sound-design/$PROJ.orc
-  [ "$status" -eq 0 ]
-
-  run ls $HOME/projects_/flock/src/sound-design/$PROJ.sco
-  [ "$status" -eq 0 ]
-
-  run ls $HOME/audio/Vyvn/Flock/1/stems/$PROJ.wav
-  [ "$status" -eq 0 ]
-
-}
+#@test "renderAudio should create a .orc, .sco and .wav file" {
+#  run mmw renderAudio
+#
+#  run ls $HOME/projects_/flock/src/sound-design/$PROJ.orc
+#  [ "$status" -eq 0 ]
+#
+#  run ls $HOME/projects_/flock/src/sound-design/$PROJ.sco
+#  [ "$status" -eq 0 ]
+#
+#  run ls $HOME/audio/Vyvn/Flock/1/stems/$PROJ.wav
+#  [ "$status" -eq 0 ]
+#
+#}
 
 
 

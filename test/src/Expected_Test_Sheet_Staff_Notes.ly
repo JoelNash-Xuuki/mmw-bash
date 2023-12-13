@@ -1,1 +1,1 @@
-        \include "/home/joel/projects_/Hello/src/score/notes/ns-3001"
+        \include "/home/joel/projects_/notes/ns-3001"
