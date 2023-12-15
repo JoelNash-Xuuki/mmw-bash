@@ -30,8 +30,6 @@ typedef struct { // OSCMOD
   char omax[SYNMOD_CHARS];
 } OSCMOD;
 
-
-
 //void processFile(const char* filename)
 
 //typedef struct { // INSTR;
