@@ -13,9 +13,9 @@
 #include <cppunit/CompilerOutputter.h>
 #include <cppunit/XmlOutputter.h>
 #include <netinet/in.h>
-#include "TestSheetBuilder.hpp"
+#include "TestModSyn.hpp"
 
-CPPUNIT_TEST_SUITE_REGISTRATION( TestSheetBuilder );
+CPPUNIT_TEST_SUITE_REGISTRATION( TestModSyn );
 
 int main(int argc, char* argv[])
 {

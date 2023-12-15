@@ -1,6 +1,7 @@
 SHEETBUILDER = src/main.cpp src/SheetBuilder.cpp  #src/daw.cpp 
-MODSYN       = src/modsyn/main.cpp src/modsyn/synmod.cpp 
+MODSYN       = src/modsyn/main.cpp src/modsyn/modsyn.cpp 
 TESTSHEETBUILDER         = test/src/main.cpp test/src/TestSheetBuilder.cpp src/SheetBuilder.cpp 
+TESTMODSYN   = test/src/testmodsyn/main.cpp  test/src/testmodsyn/TestModSyn.cpp src/modsyn/modsyn.cpp
 
 CSOUND  = -lcsound64 -lcsnd6
 INCLUDE = -I/usr/include/csound/
@@ -16,5 +17,5 @@ testsheetbuilder: $(TESTSHEETBUILDER )
 modsyn: $(MODSYN) 
 	$(CC) $(MODSYN) -o ~/mmw/bin/modsyn
 
-
-
+testmodsyn: $(TESTMODSYN) 
+	$(CC) $(TESTMODSYN) -o ~/mmw/bin/testmodsyn $(CPPUNIT)

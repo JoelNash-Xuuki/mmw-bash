@@ -1,4 +1,4 @@
-#include "synmod.hpp"
+#include "modsyn.hpp"
 #include <stdio.h>
 #include <string>
 #include <stdlib.h>
@@ -7,8 +7,15 @@
 
 using namespace std;
 
-void processPatch(const char* filename) {
+ModSyn::ModSyn(){};
 
+ModSyn::ModSyn(const char* patch){
+  
+};
+
+ModSyn::~ModSyn(){};
+
+void ModSyn::processPatch() {
   OSCMOD *oscs;
   MIXOUT *mixes;
 
@@ -20,11 +27,11 @@ void processPatch(const char* filename) {
   oscs  = (OSCMOD *)malloc(MAXMODS * sizeof(OSCMOD));
   mixes = (MIXOUT *)malloc(MAXMODS * sizeof(MIXOUT));
 
-  FILE *file = fopen(filename, "r");
+  FILE *file = fopen(this->patch, "r");
   FILE *fileOut = fopen("test.csd", "w");
 
   if (file == NULL) {
-    printf("Failed to open file: %s\n", filename);
+    printf("Failed to open file: %s\n", this->patch);
     return;
   }
 
@@ -56,7 +63,7 @@ void processPatch(const char* filename) {
   free(oscs);
 }
 
-void read_osc(OSCMOD *oscs, int count, FILE* file){
+void ModSyn::read_osc(OSCMOD *oscs, int count, FILE* file){
  fscanf(file,"%s %s %s %s %s %s %s",
  oscs[count].sig_out,
  oscs[count].frequency,
@@ -70,11 +77,12 @@ void read_osc(OSCMOD *oscs, int count, FILE* file){
    exit(1);
   }
 }
-void read_mix(MIXOUT *mix, int count, FILE* file){
+
+void ModSyn::read_mix(MIXOUT *mix, int count, FILE* file){
   fscanf(file,"%s %s", mix[count].outvar, mix[count].amplitude);
 }
 
-void print_osc(OSCMOD osc, FILE* outputFile){
+void ModSyn::print_osc(OSCMOD osc, FILE* outputFile){
   float omin, omax;
   float mo2;
 
@@ -128,7 +136,8 @@ void print_osc(OSCMOD osc, FILE* outputFile){
     );
   }
 }
-void print_mix(MIXOUT mix, FILE* outputFile){
+
+void ModSyn::print_mix(MIXOUT mix, FILE* outputFile){
   float amplitude;
   sscanf(mix.amplitude, "%f", &amplitude);
   fprintf(outputFile,"kenv linseg 0,.05,%f,p3-0.1,%f,.05,0\n", amplitude, amplitude);
@@ -136,7 +145,7 @@ void print_mix(MIXOUT mix, FILE* outputFile){
   fprintf(outputFile,"\tendin\n\n");
 }
 
-void print_header(FILE* outputFile){
+void ModSyn::print_header(FILE* outputFile){
   fprintf(outputFile,"<CsoundSynthesizer>\n");
   fprintf(outputFile,"<CsOptions>\n");
   fprintf(outputFile,"-F test.mid\n");
@@ -153,7 +162,7 @@ void print_header(FILE* outputFile){
   fprintf(outputFile,"isquare = 4\n");
   fprintf(outputFile,"ipulse = 5\n");
 }
-void print_score(float duration, FILE* outputFile){
+void ModSyn::print_score(float duration, FILE* outputFile){
   fprintf(outputFile,"</CsInstruments>\n");
   fprintf(outputFile,"<CsScore>\n\n");
   fprintf(outputFile,"f1 0 8192 10 1 ; sine\n");
@@ -166,4 +175,37 @@ void print_score(float duration, FILE* outputFile){
   fprintf(outputFile,"</CsoundSynthesizer>\n");
 }
 
+bool ModSyn::compareFiles(const char* filePath1, const char* filePath2) { std::ifstream file1(filePath1);
+    std::ifstream file2(filePath2);
 
+    if (!file1.is_open() || !file2.is_open()) {
+        return false; // Unable to open one or both files
+    }
+
+    char ch1, ch2;
+
+    while (true) {
+        ch1 = file1.get();
+        ch2 = file2.get();
+
+        if (ch1 != ch2) {
+            file1.close();
+            file2.close();
+            return false; // Files differ
+        }
+
+        if (file1.eof() && file2.eof()) {
+            break; // Reached the end of both files, and they are identical
+        }
+
+        if (file1.eof() || file2.eof()) {
+            file1.close();
+            file2.close();
+            return false; // Files have different sizes
+        }
+    }
+
+    file1.close();
+    file2.close();
+    return true; // Files are identical
+}
