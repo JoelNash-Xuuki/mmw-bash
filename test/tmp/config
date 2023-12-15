@@ -1,9 +1,9 @@
 PROJ=Hello
 PROJLOC=projects_/Hello
-PROJPATH=$HOME/$PROJLOC/
+PROJPATH=$HOME/$PROJLOC
 ARTIST=Vyvn
 SERVICE=Xuuki.xyz
-SCORE=src/$PROJ.ly
+SCORE=$PROJPATH/src/$PROJ.ly
 LILY=$SCORE
 MIDI=$HOME/$PROJLOC/tmp/$PROJ.mid
 PDF=$HOME/Xuuki_Site_Node/site-app/public/doc/$PROJ.pdf

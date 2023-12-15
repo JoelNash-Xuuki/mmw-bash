@@ -20,6 +20,7 @@ createProj(){
       if [[ $choice == "y" ]]; then
           mkdir $PROJPATH
           mkdir $PROJPATH/src
+          mkdir $PROJPATH/sound_design
           mkdir $PROJPATH/tmp
           echo "$PROJ created"
       else
@@ -37,6 +38,18 @@ createLyScoreAndMidiFile(){
   mv $PROJ.mid $MIDI 
   mv $PROJ.pdf $PDF
   #lilypond-book --output=out --format=html $1.lytex
+}
+
+createSoundDesign(){
+  projOrc="
+  sr        = 48000
+  kr        = 4800
+  ksmps     = 10
+  nchnls    = 9
+  0dbfs     = 1
+  
+  "
+  echo "$projOrc" > $PROJPATH/sound_design/$PROJ.orc
 }
 
 "$@"

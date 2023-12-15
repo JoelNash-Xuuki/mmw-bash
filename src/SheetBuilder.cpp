@@ -228,8 +228,7 @@ int SheetBuilder::getNoteCount(){
   return this->noteCount;
 }
 
-bool SheetBuilder::compareFiles(const char* filePath1, const char* filePath2) {
-    std::ifstream file1(filePath1);
+bool SheetBuilder::compareFiles(const char* filePath1, const char* filePath2) { std::ifstream file1(filePath1);
     std::ifstream file2(filePath2);
 
     if (!file1.is_open() || !file2.is_open()) {
