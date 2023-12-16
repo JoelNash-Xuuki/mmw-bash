@@ -19,15 +19,17 @@ using namespace CppUnit;
 using namespace std;
 
 void TestModSyn::setUp(void){
-  const char* patch= "/home/joel/projects_/patches/mpatch1";
-  this->modsyn= ModSyn(patch);
+  const char* patch= "/home/joel/projects_/patches/mpatch4";
+  const char* name= "/home/joel//mmw/test/src/sound-design/test.csd";
+
+  this->modsyn= ModSyn(patch,name);
 }
 
 void TestModSyn::canReadPatch(void){
-//  this->sheetBuilder.collectFileSections(); 
+  this->modsyn.processPatch(); 
   CPPUNIT_ASSERT(this->modsyn.compareFiles(
-    "/home/joel/mmw/test.csd",
-    "/home/joel/mmw/expected_test.csd"));
+    "/home/joel/mmw/test/src/sound-design/test.csd",
+    "/home/joel/mmw/test/src/sound-design/expected_test.csd"));
 }
 
 void TestModSyn::tearDown(void){

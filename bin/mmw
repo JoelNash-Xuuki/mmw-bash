@@ -41,15 +41,10 @@ createLyScoreAndMidiFile(){
 }
 
 createSoundDesign(){
-  projOrc="
-  sr        = 48000
-  kr        = 4800
-  ksmps     = 10
-  nchnls    = 9
-  0dbfs     = 1
-  
-  "
-  echo "$projOrc" > $PROJPATH/sound_design/$PROJ.orc
+
+  modsyn $1 $2
+
+  csound -d -o$PROJPATH/$PROJ.wav -F $PROJPATH/tmp/$PROJ.mid $PROJPATH/sound_design/$PROJ.csd
 }
 
 "$@"

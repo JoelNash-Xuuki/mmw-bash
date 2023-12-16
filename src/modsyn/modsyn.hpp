@@ -25,21 +25,28 @@ class ModSyn{
 
   private:
    const char* patch;
+   const char* name;
 
   public:
     ModSyn();
-    ModSyn(const char* patch);
+    ModSyn(const char* patch,
+           const char* name); 
     ~ModSyn();
     void processPatch();
-
-    void read_osc(OSCMOD *oscs, int count, FILE* file);
-    void read_mix(MIXOUT *mix, int count, FILE* file);
-    
-    void print_osc(OSCMOD osc, FILE* outputFile);
-    void print_mix(MIXOUT mix, FILE* outputFile);
-    
+    void read_osc(OSCMOD *oscs, 
+                  int count, 
+                  FILE* file);
+    void read_mix(MIXOUT *mix, 
+                  int count, 
+                  FILE* file);
+    void print_osc(OSCMOD osc, 
+                   FILE* outputFile);
+    void print_mix(MIXOUT mix, 
+                   FILE* outputFile);
     void print_header(FILE* outputFile);
-    void print_score(float duration,FILE* outputFile);
-    bool compareFiles(const char* filePath1, const char* filePath2);
+    void print_score(float duration,
+                     FILE* outputFile);
+    bool compareFiles(const char* filePath1, 
+                      const char* filePath2);
 };
 #endif

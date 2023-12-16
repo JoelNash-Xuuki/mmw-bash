@@ -9,8 +9,10 @@ using namespace std;
 
 ModSyn::ModSyn(){};
 
-ModSyn::ModSyn(const char* patch){
-  
+ModSyn::ModSyn(const char* patch,
+               const char* name){
+ this->patch= patch;
+ this->name= name;
 };
 
 ModSyn::~ModSyn(){};
@@ -28,7 +30,7 @@ void ModSyn::processPatch() {
   mixes = (MIXOUT *)malloc(MAXMODS * sizeof(MIXOUT));
 
   FILE *file = fopen(this->patch, "r");
-  FILE *fileOut = fopen("test.csd", "w");
+  FILE *fileOut = fopen(this->name, "w");
 
   if (file == NULL) {
     printf("Failed to open file: %s\n", this->patch);
