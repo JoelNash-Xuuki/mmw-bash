@@ -62,7 +62,7 @@ void TestSheetBuilder::canPrintStaffGroupHeader(void){
     "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_Group_Header.ly"));
 }
 
-void TestSheetBuilder::canPrintStaffGroupHeader(void){
+void TestSheetBuilder::canPrintMultipleStaffGroupHeaders(void){
   sheetBuilder.setPatchFile("/home/joel/projects_/patches/testPatch-2");
   this->sheetBuilder.printStaffGroupHeader();
   CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(

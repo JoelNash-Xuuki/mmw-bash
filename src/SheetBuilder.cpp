@@ -145,21 +145,23 @@ void SheetBuilder::readPatchFile(const char* patchName){
 }
 
 void SheetBuilder::printStaffGroupHeader() {
+  int count= this->getStaffGroupCount();
   char sheetStaffs[100];
   strcpy(sheetStaffs, this->sheetName);
   strcat(sheetStaffs, "_Staff_Group_Header.ly");
 
-  fprintf(this->log, "Opening %s ...\n", sheetStaffs);
-  FILE* sheet= fopen(sheetStaffs, "w");
-  fprintf(this->log, "Opened %s\n", sheetStaffs);
-  if (this->staffGroupCount > 0) {
-    fprintf(this->log,"Printing staff group...\n");
-    fprintf(sheet,"    \\new StaffGroup <<\n");
+  for (count; count > 0; count--){
+    fprintf(this->log, "Opening %s ...\n", sheetStaffs);
+    FILE* sheet= fopen(sheetStaffs, "w");
+    fprintf(this->log, "Opened %s\n", sheetStaffs);
+    if (this->staffGroupCount > 0) {
+      fprintf(this->log,"Printing staff group...\n");
+      fprintf(sheet,"    \\new StaffGroup <<\n");
+      fprintf(this->log, "Closing %s ...\n", sheetStaffs);
+      fclose(sheet);
+      fprintf(this->log, "Closed %s\n", sheetStaffs);
+    }
   }
-
-  fprintf(this->log, "Closing %s ...\n", sheetStaffs);
-  fclose(sheet);
-  fprintf(this->log, "Closed %s\n", sheetStaffs);
 }
 
 void SheetBuilder::printAllNotesOnStaff() {
