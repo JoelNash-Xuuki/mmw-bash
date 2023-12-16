@@ -39,7 +39,6 @@ void ModSyn::processPatch() {
 
   print_header(fileOut);
 
-  // Read in the data from patch file
   while (fscanf(file, "%s", modname) != EOF) {
     if (!strcmp(modname, "OSC")) {
       read_osc(oscs, osc_count++,file);
@@ -50,7 +49,6 @@ void ModSyn::processPatch() {
     }
   }
 
-  // Print mods
   for(i =0; i < osc_count; i++){
     print_osc(oscs[i],fileOut);      
   }
@@ -97,7 +95,7 @@ void ModSyn::print_osc(OSCMOD osc, FILE* outputFile){
   }
 
   if(!strcmp( osc.sig_fm, "NONE")){
-    fprintf(outputFile,"%s, ",osc.frequency);
+    fprintf(outputFile,"kfrq, ");
   } else {
     fprintf(outputFile,"%s * (1.0 + %s), ",osc.frequency, osc.sig_fm);
   }
@@ -149,8 +147,7 @@ void ModSyn::print_mix(MIXOUT mix, FILE* outputFile){
 
 void ModSyn::print_header(FILE* outputFile){
   fprintf(outputFile,"<CsoundSynthesizer>\n");
-  fprintf(outputFile,"<CsOptions>\n");
-  fprintf(outputFile,"-F test.mid\n");
+  fprintf(outputFile,"<CsOptions>\n\n");
   fprintf(outputFile,"</CsOptions>\n");
   fprintf(outputFile,"sr = 48000\n");
   fprintf(outputFile,"kr = 4800\n");
@@ -158,6 +155,7 @@ void ModSyn::print_header(FILE* outputFile){
   fprintf(outputFile,"nchnls = 1\n");
   fprintf(outputFile,"<CsInstruments>\n\n");
   fprintf(outputFile,"\tinstr 1\n");
+  fprintf(outputFile,"\tkfrq cpsmidib 1\n");
   fprintf(outputFile,"isine = 1\n");
   fprintf(outputFile,"itriangle = 2\n");
   fprintf(outputFile,"isawtooth = 3\n");
@@ -167,12 +165,12 @@ void ModSyn::print_header(FILE* outputFile){
 void ModSyn::print_score(float duration, FILE* outputFile){
   fprintf(outputFile,"</CsInstruments>\n");
   fprintf(outputFile,"<CsScore>\n\n");
+  fprintf(outputFile,"f0 %f\n\n",duration);
   fprintf(outputFile,"f1 0 8192 10 1 ; sine\n");
   fprintf(outputFile,"f2 0 8192 10 1 0 .111 0 .04 0 .02 0 ; triangle\n");
   fprintf(outputFile,"f3 0 8192 10 1 .5 .333 .25 .2 .166 .142 .125 ; sawtooth\n");
   fprintf(outputFile,"f4 0 8192 10 1 0 .333 0 .2 0 .142 0 .111; square\n");
   fprintf(outputFile,"f5 0 8192 10 1 1 1 1 1 1 1 1 1 1 1 1 1; pulse\n\n");
-  fprintf(outputFile,"i1 0 %f\n\n",duration);
   fprintf(outputFile,"</CsScore>\n");
   fprintf(outputFile,"</CsoundSynthesizer>\n");
 }

@@ -13,6 +13,26 @@ SheetBuilder::SheetBuilder(const char* sheetName,
 			   const char* service,
 		   	   const char* title,
                            const char* artist,
+		           const char* sheetLocation){
+  this->log= fopen("app.log", "w");
+  fprintf(this->log,"Starting Sheet Builder...\n");
+
+  this->sheetName= sheetName;
+  this->service= service;
+  this->title= title;
+  this->artist= artist;
+  this->sheetLocation= sheetLocation;
+
+  staffGroups= (STAFFGROUP *)malloc(MAXMODS * sizeof(STAFFGROUP));
+  staffs= (STAFF *)malloc(MAXMODS * sizeof(STAFF));
+  notes= (NOTE *)malloc(MAXMODS * sizeof(NOTE));
+
+};
+
+SheetBuilder::SheetBuilder(const char* sheetName,
+			   const char* service,
+		   	   const char* title,
+                           const char* artist,
                            const char* patchName,
 		           const char* sheetLocation){
   this->log= fopen("app.log", "w");
@@ -28,7 +48,6 @@ SheetBuilder::SheetBuilder(const char* sheetName,
   staffs= (STAFF *)malloc(MAXMODS * sizeof(STAFF));
   notes= (NOTE *)malloc(MAXMODS * sizeof(NOTE));
 
-  this->patch= fopen(patchName, "r");
 };
 
 SheetBuilder::~SheetBuilder(){};
@@ -90,7 +109,27 @@ void SheetBuilder::readNotes(NOTE *note){
   }
 }
 
+void SheetBuilder::setPatchFile(const char* patchName){
+  this->patchName= patchName;
+}
+
 void SheetBuilder::readPatchFile(){
+  this->patch= fopen(patchName, "r");
+  fprintf(this->log,"Reading in patch file...\n");
+  while (fscanf(this->patch, "%s", modname) != EOF) {
+    if (!strcmp(modname, "STAFFGROUP")) {
+      readStaffGroups(staffGroups, ++staffGroupCount);
+    } else if (!strcmp(modname, "STAFF")) {
+      readStaffs(this->staffs, ++staffCount);
+    } else if (!strcmp(modname, "NOTE")) {
+      readNotes(this->notes);
+    } else {
+      fprintf(stderr, "%s is an unknown module\n", modname);
+    }
+  }
+}
+
+void SheetBuilder::readPatchFile(const char* patchName){
   fprintf(this->log,"Reading in patch file...\n");
   while (fscanf(this->patch, "%s", modname) != EOF) {
     if (!strcmp(modname, "STAFFGROUP")) {

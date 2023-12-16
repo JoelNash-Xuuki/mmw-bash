@@ -23,13 +23,11 @@ void TestSheetBuilder::setUp(void){
   const char* service= "Xuuki";
   const char* title= "Title";
   const char* artist= "Vyvn";
-  const char* patchName= "/home/joel/projects_/patches/testPatch";
   const char* sheetLocation= "/home/joel/mmw/test/src/";
   this->sheetBuilder= SheetBuilder(sheetName,
                              service,
                              title,
                              artist,
-			     patchName,
 			     sheetLocation);
 }
 
@@ -41,10 +39,19 @@ void TestSheetBuilder::canPrintScoreHeader(void){
 }
 
 void TestSheetBuilder::canReadPatchFileStaffGroupsStaffCountAndNoteCount(void){
+  sheetBuilder.setPatchFile("/home/joel/projects_/patches/testPatch");
   sheetBuilder.readPatchFile();
   CPPUNIT_ASSERT_EQUAL(1, sheetBuilder.getStaffGroupCount());
   CPPUNIT_ASSERT_EQUAL(1, sheetBuilder.getStaffCount());
   CPPUNIT_ASSERT_EQUAL(1, sheetBuilder.getNoteCount());
+}
+
+void TestSheetBuilder::canReadPatchFileOfMultipleStaffGroupsStaffCountAndNoteCount(void){
+  sheetBuilder.setPatchFile("/home/joel/projects_/patches/testPatch-2");
+  sheetBuilder.readPatchFile();
+  CPPUNIT_ASSERT_EQUAL(2, sheetBuilder.getStaffGroupCount());
+  CPPUNIT_ASSERT_EQUAL(2, sheetBuilder.getStaffCount());
+  CPPUNIT_ASSERT_EQUAL(2, sheetBuilder.getNoteCount());
 }
 
 void TestSheetBuilder::canPrintStaffGroupHeader(void){
@@ -55,7 +62,16 @@ void TestSheetBuilder::canPrintStaffGroupHeader(void){
     "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_Group_Header.ly"));
 }
 
+void TestSheetBuilder::canPrintStaffGroupHeader(void){
+  sheetBuilder.setPatchFile("/home/joel/projects_/patches/testPatch-2");
+  this->sheetBuilder.printStaffGroupHeader();
+  CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
+    "/home/joel/mmw/test/src/Test_Sheet_Staff_Group_Header.ly",
+    "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_Group_Header.ly"));
+}
+
 void TestSheetBuilder::canPrintStaffInGroupHeader(void){
+  sheetBuilder.setPatchFile("/home/joel/projects_/patches/testPatch");
   this->sheetBuilder.readPatchFile();
   this->sheetBuilder.printStaffInGroupHeader();
   CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
@@ -64,6 +80,7 @@ void TestSheetBuilder::canPrintStaffInGroupHeader(void){
 }
 
 void TestSheetBuilder::canPrintNotesOnStaff(void){
+  sheetBuilder.setPatchFile("/home/joel/projects_/patches/testPatch");
   this->sheetBuilder.readPatchFile();
   this->sheetBuilder.printAllNotesOnStaff();
   CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(

@@ -60,6 +60,12 @@ class SheetBuilder{
                  const char* artist,
                  const char* patchName,
 		 const char* sheetLocation);
+
+    SheetBuilder(const char* sheetName,
+                 const char* service,
+                 const char* title,
+                 const char* artist,
+		 const char* sheetLocation);
     ~SheetBuilder();
     void printHeader(void);
     void readStaffs(STAFF *staff, 
@@ -67,7 +73,9 @@ class SheetBuilder{
     void readNotes(NOTE *note);
     void readStaffGroups(STAFFGROUP *staffGroup, 
                          int count);
+    void setPatchFile(const char* patchName);
     void readPatchFile();
+    void readPatchFile(const char* patchName);
     void printStaffGroupHeader(void);
     void printStaffInGroupHeader();
     void printAllNotesOnStaff();
