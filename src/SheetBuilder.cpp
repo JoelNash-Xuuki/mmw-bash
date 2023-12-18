@@ -146,20 +146,21 @@ void SheetBuilder::readPatchFile(const char* patchName){
 
 void SheetBuilder::printStaffGroupHeader() {
   int count= this->getStaffGroupCount();
-  char sheetStaffs[100];
-  strcpy(sheetStaffs, this->sheetName);
-  strcat(sheetStaffs, "_Staff_Group_Header.ly");
+  char sheetStaff[100];
+  strcpy(sheetStaff, this->sheetName);
 
   for (count; count > 0; count--){
-    fprintf(this->log, "Opening %s ...\n", sheetStaffs);
-    FILE* sheet= fopen(sheetStaffs, "w");
-    fprintf(this->log, "Opened %s\n", sheetStaffs);
+    fprintf(this->log, "Opening %s ...\n", sheetStaff);
+    string newString = "_Staff_Group_Header_" + std::to_string(count) + ".partial.ly";
+    strcat(sheetStaff, newString.c_str());
+    FILE* sheet= fopen(sheetStaff, "w");
+
     if (this->staffGroupCount > 0) {
       fprintf(this->log,"Printing staff group...\n");
       fprintf(sheet,"    \\new StaffGroup <<\n");
-      fprintf(this->log, "Closing %s ...\n", sheetStaffs);
+      fprintf(this->log, "Closing %s ...\n", sheetStaff);
       fclose(sheet);
-      fprintf(this->log, "Closed %s\n", sheetStaffs);
+      fprintf(this->log, "Closed %s\n", sheetStaff);
     }
   }
 }
@@ -195,9 +196,9 @@ void SheetBuilder::printStaffInGroupHeader(){
     if (count > 0) {
       string newString = "_Staff_" + std::to_string(count) + ".partial.ly";
       strcat(sheetStaff, newString.c_str());
-
       this->staffs[count].sheet = fopen(sheetStaff,"w");
       this->patch= fopen(patchName, "r");
+
       fprintf(this->staffs[count].sheet,"      \\new Staff \\with {\n");
       fprintf(this->staffs[count].sheet,"        instrumentName= \"%s\"\n", 
               this->staffs[count].instr);
