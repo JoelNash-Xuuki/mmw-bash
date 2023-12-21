@@ -67,7 +67,10 @@ void TestSheetBuilder::canPrintMultipleStaffGroupHeaders(void){
   sheetBuilder.readPatchFile();
   this->sheetBuilder.printStaffGroupHeader();
   CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
-    "/home/joel/mmw/test/src/Test_Sheet_Staff_Group_Header.ly",
+    "/home/joel/mmw/test/src/Test_Sheet_Staff_Group_Header_1.ly",
+    "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_Group_Header.ly"));
+  CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
+    "/home/joel/mmw/test/src/Test_Sheet_Staff_Group_Header_2.ly",
     "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_Group_Header.ly"));
 }
 
@@ -101,7 +104,10 @@ void TestSheetBuilder::canPrintScoreClose(void){
 }
 
 void TestSheetBuilder::canAppendScoreFileSections(void){
+  sheetBuilder.setPatchFile("/home/joel/projects_/patches/testPatch-2");
+  sheetBuilder.readPatchFile();
   this->sheetBuilder.collectFileSections(); 
+
   CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
     "/home/joel/mmw/test/src/Test_Sheet.ly",
     "/home/joel/mmw/test/src/Expected_Test_Sheet.ly"));

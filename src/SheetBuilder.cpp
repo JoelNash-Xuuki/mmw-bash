@@ -151,7 +151,7 @@ void SheetBuilder::printStaffGroupHeader() {
 
   for (count; count > 0; count--){
     fprintf(this->log, "Opening %s ...\n", sheetStaff);
-    string newString = "_Staff_Group_Header_" + std::to_string(count) + ".partial.ly";
+    string newString = "_Staff_Group_Header_" + std::to_string(count) + ".ly";
     strcat(sheetStaff, newString.c_str());
     FILE* sheet= fopen(sheetStaff, "w");
 
@@ -194,7 +194,7 @@ void SheetBuilder::printStaffInGroupHeader(){
     fprintf(this->log,"Printing all staff in group...\n");
     fprintf(this->log, "Printing staff: %i\n",count);
     if (count > 0) {
-      string newString = "_Staff_" + std::to_string(count) + ".partial.ly";
+      string newString = "_Staff_Group_Header" + std::to_string(count) + ".ly";
       strcat(sheetStaff, newString.c_str());
       this->staffs[count].sheet = fopen(sheetStaff,"w");
       this->patch= fopen(patchName, "r");
@@ -317,7 +317,9 @@ void SheetBuilder::appendFile(const string& inputFile, ofstream& outputFile) {
 }
 
 void SheetBuilder::collectFileSections(){
+  char sheetStaff[100];
   string outputPath = this->sheetName; // Change to your output file path
+  strcpy(sheetStaff, this->sheetName);
   outputPath += ".ly";
 
   // Delete the existing file
@@ -334,12 +336,21 @@ void SheetBuilder::collectFileSections(){
     cerr << "Error opening output file." << std::endl;
   }
 
-  appendFile("/home/joel/mmw/test/src/Test_Sheet_Header.partial.ly", outputFile);
-  appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_Group_Header.ly", outputFile);
-  appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_1.partial.ly", outputFile);
-  appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_Notes.ly", outputFile);
-  appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_Group_Close_Bracket.ly", outputFile);
-  appendFile("/home/joel/mmw/test/src/Test_Sheet_Close.partial.ly", outputFile);
+//  appendFile("/home/joel/mmw/test/src/Test_Sheet_Header.partial.ly", outputFile);
+  string newString = "_Staff_Group_Header_" + std::to_string(i) + ".ly";
+  strcat(sheetStaff, newString.c_str());
+  cout << "TESTING APPENDING: " << this->getStaffGroupCount() << sheetStaff << endl << endl;
+
+  for (int i= 0; i < this->getStaffGroupCount(); i++){
+    string newString = "_Staff_Group_Header_" + std::to_string(this->getStaffGroupCount()) + ".ly";
+    strcat(sheetStaff, newString.c_str());
+    appendFile(sheetStaff, outputFile);
+  }
+  
+  //appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_1.partial.ly", outputFile);
+  //appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_Notes.ly", outputFile);
+  //appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_Group_Close_Bracket.ly", outputFile);
+  //appendFile("/home/joel/mmw/test/src/Test_Sheet_Close.partial.ly", outputFile);
   outputFile.close();
 }
 
