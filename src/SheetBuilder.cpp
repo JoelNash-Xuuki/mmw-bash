@@ -319,7 +319,6 @@ void SheetBuilder::appendFile(const string& inputFile, ofstream& outputFile) {
 void SheetBuilder::collectFileSections(){
   char sheetStaff[100];
   string outputPath = this->sheetName; // Change to your output file path
-  strcpy(sheetStaff, this->sheetName);
   outputPath += ".ly";
 
   // Delete the existing file
@@ -337,14 +336,17 @@ void SheetBuilder::collectFileSections(){
   }
 
 //  appendFile("/home/joel/mmw/test/src/Test_Sheet_Header.partial.ly", outputFile);
-  string newString = "_Staff_Group_Header_" + std::to_string(i) + ".ly";
-  strcat(sheetStaff, newString.c_str());
-  cout << "TESTING APPENDING: " << this->getStaffGroupCount() << sheetStaff << endl << endl;
+//  string newString = "_Staff_Group_Header_" + std::to_string(i) + ".ly";
+ // strcat(sheetStaff, newString.c_str());
 
-  for (int i= 0; i < this->getStaffGroupCount(); i++){
-    string newString = "_Staff_Group_Header_" + std::to_string(this->getStaffGroupCount()) + ".ly";
+
+  for (int i= 1; i <= this->getStaffGroupCount(); i++){
+    strcpy(sheetStaff, this->sheetName);
+    string newString = "_Staff_Group_Header_" + std::to_string(i) + ".ly";
     strcat(sheetStaff, newString.c_str());
     appendFile(sheetStaff, outputFile);
+
+    cout << "TESTING APPENDING: " << this->getStaffGroupCount() << sheetStaff << endl << endl;
   }
   
   //appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_1.partial.ly", outputFile);
