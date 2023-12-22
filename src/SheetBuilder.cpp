@@ -165,7 +165,7 @@ void SheetBuilder::printStaffGroupHeader() {
   }
 }
 
-void SheetBuilder::printAllNotesOnStaff() {
+void SheetBuilder::printAllNotesOnStaff(){
 
   char sheetStaffNotes[100];
   strcpy(sheetStaffNotes, this->sheetName);
@@ -194,7 +194,7 @@ void SheetBuilder::printStaffInGroupHeader(){
     fprintf(this->log,"Printing all staff in group...\n");
     fprintf(this->log, "Printing staff: %i\n",count);
     if (count > 0) {
-      string newString = "_Staff_Group_Header" + std::to_string(count) + ".ly";
+      string newString = "_Staff_In_Group_Header_" + std::to_string(count) + ".ly";
       strcat(sheetStaff, newString.c_str());
       this->staffs[count].sheet = fopen(sheetStaff,"w");
       this->patch= fopen(patchName, "r");
@@ -335,10 +335,7 @@ void SheetBuilder::collectFileSections(){
     cerr << "Error opening output file." << std::endl;
   }
 
-//  appendFile("/home/joel/mmw/test/src/Test_Sheet_Header.partial.ly", outputFile);
-//  string newString = "_Staff_Group_Header_" + std::to_string(i) + ".ly";
- // strcat(sheetStaff, newString.c_str());
-
+  appendFile("/home/joel/mmw/test/src/Test_Sheet_Header.partial.ly", outputFile);
 
   for (int i= 1; i <= this->getStaffGroupCount(); i++){
     strcpy(sheetStaff, this->sheetName);
