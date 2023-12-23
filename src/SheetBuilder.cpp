@@ -188,13 +188,14 @@ void SheetBuilder::printStaffInGroupHeader(){
   int count= this->getStaffCount();
   char sheetStaff[100];
 
-  strcpy(sheetStaff, this->sheetName);
  
+  fprintf(this->log,"Printing all staff in group...\n");
   for (count; count > 0; count--){
-    fprintf(this->log,"Printing all staff in group...\n");
     fprintf(this->log, "Printing staff: %i\n",count);
     if (count > 0) {
-      string newString = "_Staff_In_Group_Header_" + std::to_string(count) + ".ly";
+
+      strcpy(sheetStaff, this->sheetName);
+      string newString = "_Staff_" + std::to_string(count) + ".ly";
       strcat(sheetStaff, newString.c_str());
       this->staffs[count].sheet = fopen(sheetStaff,"w");
       this->patch= fopen(patchName, "r");
@@ -342,8 +343,6 @@ void SheetBuilder::collectFileSections(){
     string newString = "_Staff_Group_Header_" + std::to_string(i) + ".ly";
     strcat(sheetStaff, newString.c_str());
     appendFile(sheetStaff, outputFile);
-
-    cout << "TESTING APPENDING: " << this->getStaffGroupCount() << sheetStaff << endl << endl;
   }
   
   //appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_1.partial.ly", outputFile);

@@ -50,8 +50,8 @@ void TestSheetBuilder::canReadPatchFileOfMultipleStaffGroupsStaffCountAndNoteCou
   sheetBuilder.setPatchFile("/home/joel/projects_/patches/testPatch-2");
   sheetBuilder.readPatchFile();
   CPPUNIT_ASSERT_EQUAL(2, sheetBuilder.getStaffGroupCount());
-  CPPUNIT_ASSERT_EQUAL(2, sheetBuilder.getStaffCount());
-  CPPUNIT_ASSERT_EQUAL(2, sheetBuilder.getNoteCount());
+  CPPUNIT_ASSERT_EQUAL(3, sheetBuilder.getStaffCount());
+  CPPUNIT_ASSERT_EQUAL(3, sheetBuilder.getNoteCount());
 }
 
 void TestSheetBuilder::canPrintStaffGroupHeader(void){
@@ -83,6 +83,21 @@ void TestSheetBuilder::canPrintStaffInGroupHeader(void){
     "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_1.partial.ly"));
 }
 
+void TestSheetBuilder::canPrintMultipleStaffInGroupHeader(void){
+  sheetBuilder.setPatchFile("/home/joel/projects_/patches/testPatch-3");
+  this->sheetBuilder.readPatchFile();
+  this->sheetBuilder.printStaffInGroupHeader();
+  CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
+    "/home/joel/mmw/test/src/Test_Sheet_Staff_1.ly",
+    "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_1.ly"));
+  CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
+    "/home/joel/mmw/test/src/Test_Sheet_Staff_2.ly",
+    "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_2.ly"));
+  CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
+    "/home/joel/mmw/test/src/Test_Sheet_Staff_3.ly",
+    "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_3.ly"));
+}
+
 void TestSheetBuilder::canPrintNotesOnStaff(void){
   sheetBuilder.setPatchFile("/home/joel/projects_/patches/testPatch");
   this->sheetBuilder.readPatchFile();
@@ -104,7 +119,7 @@ void TestSheetBuilder::canPrintScoreClose(void){
 }
 
 void TestSheetBuilder::canAppendScoreFileSections(void){
-  sheetBuilder.setPatchFile("/home/joel/projects_/patches/testPatch-2");
+  sheetBuilder.setPatchFile("/home/joel/projects_/patches/testPatch-3");
   sheetBuilder.readPatchFile();
   this->sheetBuilder.collectFileSections(); 
 
@@ -116,3 +131,4 @@ void TestSheetBuilder::canAppendScoreFileSections(void){
 void TestSheetBuilder::tearDown(void){
     //delete this->sheetBuilder;
 }
+
