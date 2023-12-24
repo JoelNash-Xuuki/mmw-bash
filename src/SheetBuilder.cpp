@@ -351,4 +351,3 @@ void SheetBuilder::collectFileSections(){
   //appendFile("/home/joel/mmw/test/src/Test_Sheet_Close.partial.ly", outputFile);
   outputFile.close();
 }
-
