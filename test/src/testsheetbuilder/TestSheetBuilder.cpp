@@ -58,8 +58,8 @@ void TestSheetBuilder::canPrintStaffGroupHeader(void){
   this->sheetBuilder.setStaffGroupCount(1);
   this->sheetBuilder.printStaffGroupHeader();
   CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
-    "/home/joel/mmw/test/src/Test_Sheet_Staff_Group_Header.ly",
-    "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_Group_Header.ly"));
+    "/home/joel/mmw/test/src/score/Test_Sheet_Staff_Group_Header_1.ly",
+    "/home/joel/mmw/test/src/score/Expected_Test_Sheet_Staff_Group_Header_1.ly"));
 }
 
 void TestSheetBuilder::canPrintMultipleStaffGroupHeaders(void){
@@ -67,11 +67,11 @@ void TestSheetBuilder::canPrintMultipleStaffGroupHeaders(void){
   sheetBuilder.readPatchFile();
   this->sheetBuilder.printStaffGroupHeader();
   CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
-    "/home/joel/mmw/test/src/Test_Sheet_Staff_Group_Header_1.ly",
-    "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_Group_Header.ly"));
+    "/home/joel/mmw/test/src/score/Test_Sheet_Staff_Group_Header_1.ly",
+    "/home/joel/mmw/test/src/score/Expected_Test_Sheet_Staff_Group_Header_1.ly"));
   CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
-    "/home/joel/mmw/test/src/Test_Sheet_Staff_Group_Header_2.ly",
-    "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_Group_Header.ly"));
+    "/home/joel/mmw/test/src/score/Test_Sheet_Staff_Group_Header_2.ly",
+    "/home/joel/mmw/test/src/score/Expected_Test_Sheet_Staff_Group_Header_1.ly"));
 }
 
 void TestSheetBuilder::canPrintStaffInGroupHeader(void){
@@ -79,8 +79,8 @@ void TestSheetBuilder::canPrintStaffInGroupHeader(void){
   this->sheetBuilder.readPatchFile();
   this->sheetBuilder.printStaffInGroupHeader();
   CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
-    "/home/joel/mmw/test/src/Test_Sheet_Staff_1.partial.ly",
-    "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_1.partial.ly"));
+    "/home/joel/mmw/test/src/score/Test_Sheet_Staff_1.partial.ly",
+    "/home/joel/mmw/test/src/score/Expected_Test_Sheet_Staff_1.partial.ly"));
 }
 
 void TestSheetBuilder::canPrintMultipleStaffInGroupHeader(void){
