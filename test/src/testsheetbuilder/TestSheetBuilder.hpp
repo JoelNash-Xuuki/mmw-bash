@@ -24,7 +24,7 @@ class TestSheetBuilder : public CppUnit::TestFixture
   CPPUNIT_TEST(canPrintScoreHeader);
   CPPUNIT_TEST(canReadPatchFileStaffGroupsStaffCountAndNoteCount);
   CPPUNIT_TEST(canReadPatchFileOfMultipleStaffGroupsStaffCountAndNoteCount);
-  //CPPUNIT_TEST(canPrintStaffGroupHeader);
+  CPPUNIT_TEST(canPrintStaffGroupHeader);
   //CPPUNIT_TEST(canPrintMultipleStaffGroupHeaders);
   //CPPUNIT_TEST(canPrintStaffInGroupHeader);
   //CPPUNIT_TEST(canPrintMultipleStaffInGroupHeader);
