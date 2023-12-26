@@ -13,7 +13,7 @@
 #include <cppunit/CompilerOutputter.h>
 #include <cppunit/XmlOutputter.h>
 #include <netinet/in.h>
-#include "../../src/SheetBuilder.hpp"
+#include "../../../src/SheetBuilder.hpp"
 
 using namespace CppUnit;
 using namespace std;

@@ -1,6 +1,6 @@
-SHEETBUILDER = src/main.cpp src/SheetBuilder.cpp  #src/daw.cpp 
+SHEETBUILDER = src/main.cpp src/SheetBuilder.cpp   
 MODSYN       = src/modsyn/main.cpp src/modsyn/modsyn.cpp 
-TESTSHEETBUILDER         = test/src/main.cpp test/src/TestSheetBuilder.cpp src/SheetBuilder.cpp 
+TESTSHEETBUILDER         = test/src/testsheetbuilder/main.cpp test/src/testsheetbuilder/TestSheetBuilder.cpp src/SheetBuilder.cpp 
 TESTMODSYN   = test/src/testmodsyn/main.cpp  test/src/testmodsyn/TestModSyn.cpp src/modsyn/modsyn.cpp
 
 CSOUND  = -lcsound64 -lcsnd6

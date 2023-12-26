@@ -19,11 +19,11 @@ using namespace CppUnit;
 using namespace std;
 
 void TestSheetBuilder::setUp(void){
-  const char* sheetName= "/home/joel/mmw/test/src/Test_Sheet";
+  const char* sheetName= "/home/joel/mmw/test/src/score/Test_Sheet";
   const char* service= "Xuuki";
   const char* title= "Title";
   const char* artist= "Vyvn";
-  const char* sheetLocation= "/home/joel/mmw/test/src/";
+  const char* sheetLocation= "/home/joel/mmw/test/src/testsheetbuilder";
   this->sheetBuilder= SheetBuilder(sheetName,
                              service,
                              title,
@@ -34,8 +34,8 @@ void TestSheetBuilder::setUp(void){
 void TestSheetBuilder::canPrintScoreHeader(void){
   this->sheetBuilder.printHeader();
   CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
-    "/home/joel/mmw/test/src/Test_Sheet_Header.partial.ly", 
-    "/home/joel/mmw/test/src/Expected_Test_Sheet_Header.ly"));
+    "/home/joel/mmw/test/src/score/Test_Sheet_Header.partial.ly", 
+    "/home/joel/mmw/test/src/score/Expected_Test_Sheet_Header.partial.ly"));
 }
 
 void TestSheetBuilder::canReadPatchFileStaffGroupsStaffCountAndNoteCount(void){
