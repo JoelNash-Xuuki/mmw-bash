@@ -79,8 +79,8 @@ void TestSheetBuilder::canPrintStaffInGroupHeader(void){
   this->sheetBuilder.readPatchFile();
   this->sheetBuilder.printStaffInGroupHeader();
   CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
-    "/home/joel/mmw/test/src/score/Test_Sheet_Staff_1.partial.ly",
-    "/home/joel/mmw/test/src/score/Expected_Test_Sheet_Staff_1.partial.ly"));
+    "/home/joel/mmw/test/src/score/Test_Sheet_Staff_1.ly",
+    "/home/joel/mmw/test/src/score/Expected_Test_Sheet_Staff_1.ly"));
 }
 
 void TestSheetBuilder::canPrintMultipleStaffInGroupHeader(void){
