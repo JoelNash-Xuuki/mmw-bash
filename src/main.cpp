@@ -22,13 +22,13 @@ int main(int argc, char **argv){
                                           artist,
 					  patchName,
 					  sheetLocation);
-  sheetBuilder.printHeader();
-  sheetBuilder.readPatchFile();
-  sheetBuilder.printStaffGroupHeader();
-  sheetBuilder.printStaffInGroupHeader();
-  sheetBuilder.printAllNotesOnStaff();
-  sheetBuilder.printStaffInGroupCloseBracket();
-  sheetBuilder.printScoreClose();
-  sheetBuilder.collectFileSections();
+  //sheetBuilder.printHeader();
+  //sheetBuilder.readPatchFile();
+  //sheetBuilder.printStaffGroupHeader();
+  //sheetBuilder.printStaffInGroupHeader();
+  //sheetBuilder.printAllNotesOnStaff();
+  //sheetBuilder.printStaffInGroupCloseBracket();
+  //sheetBuilder.printScoreClose();
+  //sheetBuilder.collectFileSections();
   return 0;
 }

@@ -146,10 +146,12 @@ void SheetBuilder::readPatchFile(const char* patchName){
 
 void SheetBuilder::printStaffGroupHeader() {
   int count= this->getStaffGroupCount();
-  char sheetStaff[100];
-  strcpy(sheetStaff, this->sheetName);
+  
 
   for (count; count > 0; count--){
+    char sheetStaff[100];
+    strcpy(sheetStaff, this->sheetName);
+
     fprintf(this->log, "Opening %s ...\n", sheetStaff);
     string newString = "_Staff_Group_Header_" + std::to_string(count) + ".ly";
     strcat(sheetStaff, newString.c_str());
@@ -166,7 +168,6 @@ void SheetBuilder::printStaffGroupHeader() {
 }
 
 void SheetBuilder::printAllNotesOnStaff(){
-
   char sheetStaffNotes[100];
   strcpy(sheetStaffNotes, this->sheetName);
   strcat(sheetStaffNotes, "_Staff_Notes.ly");
@@ -180,14 +181,12 @@ void SheetBuilder::printAllNotesOnStaff(){
     fprintf(sheet,"        \\include \"/home/joel/projects_/notes/ns-%s\"\n",
             notes[i].pat);
   }
-
   fclose(sheet);
 }
 
 void SheetBuilder::printStaffInGroupHeader(){
   int count= this->getStaffCount();
   char sheetStaff[100];
-
  
   fprintf(this->log,"Printing all staff in group...\n");
   for (count; count > 0; count--){
