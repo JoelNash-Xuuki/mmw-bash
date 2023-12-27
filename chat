@@ -1,12 +1,14 @@
 sgpt "
 Regard the 
-line fprintf(sheet,\"        \\include \\"/home/joel/projects_/notes/ns-%s\\"\n\",this->notes[count].pat)
 in the function printAllNotesOnStaff()  
 that is the following code of SheetBuilder.cpp:
 $(cat src/SheetBuilder.cpp)
 
-When i execute the printAllNotesOnStaff() i get a segmentation fault. im sure it has something to 
-do with using this->notes[count].pat. 
-Can you see how I can avoid this segmentation fault?
+The last change I made was that I moved the line FILE* sheet= fopen(sheetStaffNotes, "w");
+inside the for loop. This has caused a segmentation fault 
+can you explain why I get this error 
+
+I'm aiming to eventually created multiple files like in the function printStaffGroupHeader().
+Can you ensure that your suggestion aims to ensure I can make multiple note files...
 
 "

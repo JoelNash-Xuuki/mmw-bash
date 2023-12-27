@@ -168,22 +168,16 @@ void SheetBuilder::printStaffGroupHeader() {
 }
 
 void SheetBuilder::printAllNotesOnStaff(){
-  char sheetStaffNotes[100];
-  strcpy(sheetStaffNotes, this->sheetName);
-  strcat(sheetStaffNotes, "_Staff_Notes.ly");
-  fprintf(this->log, "Opening %s ...\n", sheetStaffNotes);
-  FILE* sheet= fopen(sheetStaffNotes, "w");
-
-  fprintf(this->log,"Printing all Notes on staff %i\n", this->noteCount);
-  int noteNo;
-  int i= getNoteCount();
   for (int i= getNoteCount(); i > 0; i--) {
-
-
+    char sheetStaffNotes[100];
+    strcpy(sheetStaffNotes, this->sheetName);
+    string newString = "_Staff_Notes_" + std::to_string(i) + ".ly";
+    strcat(sheetStaffNotes, newString.c_str());
+    FILE* sheet= fopen(sheetStaffNotes, "w");
     fprintf(sheet,"        \\include \"/home/joel/projects_/notes/ns-%s\"\n",
             notes[i].pat);
+    fclose(sheet);
   }
-  fclose(sheet);
 }
 
 void SheetBuilder::printStaffInGroupHeader(){
