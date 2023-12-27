@@ -178,6 +178,8 @@ void SheetBuilder::printAllNotesOnStaff(){
   int noteNo;
   int i= getNoteCount();
   for (int i= getNoteCount(); i > 0; i--) {
+
+
     fprintf(sheet,"        \\include \"/home/joel/projects_/notes/ns-%s\"\n",
             notes[i].pat);
   }

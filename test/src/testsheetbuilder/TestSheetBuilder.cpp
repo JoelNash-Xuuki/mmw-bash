@@ -66,12 +66,12 @@ void TestSheetBuilder::canPrintMultipleStaffGroupHeaders(void){
   sheetBuilder.setPatchFile("/home/joel/projects_/patches/testPatch-3");
   sheetBuilder.readPatchFile();
   this->sheetBuilder.printStaffGroupHeader();
-  //CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
-  //  "/home/joel/mmw/test/src/score/Test_Sheet_Staff_Group_Header_1.ly",
-  //  "/home/joel/mmw/test/src/score/Expected_Test_Sheet_Staff_Group_Header_1.ly"));
-  //CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
-  //  "/home/joel/mmw/test/src/score/Test_Sheet_Staff_Group_Header_2.ly",
-  //  "/home/joel/mmw/test/src/score/Expected_Test_Sheet_Staff_Group_Header_1.ly"));
+  CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
+    "/home/joel/mmw/test/src/score/Test_Sheet_Staff_Group_Header_1.ly",
+    "/home/joel/mmw/test/src/score/Expected_Test_Sheet_Staff_Group_Header_1.ly"));
+  CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
+    "/home/joel/mmw/test/src/score/Test_Sheet_Staff_Group_Header_2.ly",
+    "/home/joel/mmw/test/src/score/Expected_Test_Sheet_Staff_Group_Header_1.ly"));
 }
 
 void TestSheetBuilder::canPrintStaffInGroupHeader(void){
@@ -103,8 +103,8 @@ void TestSheetBuilder::canPrintNotesOnStaff(void){
   this->sheetBuilder.readPatchFile();
   this->sheetBuilder.printAllNotesOnStaff();
   CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
-    "/home/joel/mmw/test/src/Test_Sheet_Staff_Notes.ly", 
-    "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_Notes.ly"));
+    "/home/joel/mmw/test/src/score/Test_Sheet_Staff_Notes.ly", 
+    "/home/joel/mmw/test/src/score/Expected_Test_Sheet_Staff_Notes.ly"));
 }
 
 void TestSheetBuilder::canPrintStaffInGroupCloseBracket(void){

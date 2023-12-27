@@ -1,10 +1,12 @@
 sgpt "
-Regard the function printStaffGroupHeader() in the file SheetBuilder.cpp 
-that is the following code
+Regard the 
+line fprintf(sheet,\"        \\include \\"/home/joel/projects_/notes/ns-%s\\"\n\",this->notes[count].pat)
+in the function printAllNotesOnStaff()  
+that is the following code of SheetBuilder.cpp:
 $(cat src/SheetBuilder.cpp)
 
-Reckon the line if (this->staffGroupCount > 0) is necessary?
-
-
+When i execute the printAllNotesOnStaff() i get a segmentation fault. im sure it has something to 
+do with using this->notes[count].pat. 
+Can you see how I can avoid this segmentation fault?
 
 "
