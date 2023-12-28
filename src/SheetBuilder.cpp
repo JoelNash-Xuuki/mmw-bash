@@ -51,6 +51,7 @@ SheetBuilder::SheetBuilder(const char* sheetName,
 };
 
 SheetBuilder::~SheetBuilder(){};
+
 void SheetBuilder::printHeader(void){
   fprintf(this->log,"Printing Header...\n");
   char sheetHeader[100];
