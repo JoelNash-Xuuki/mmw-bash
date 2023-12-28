@@ -6,11 +6,12 @@ I need to add:
    }
   >>
 to the file. these symbols appear in printStaffInGroupCloseBracket()
-once all the notes are printed in each staff group.
-Currently I'm only managing to print the close bracket after all notes are printed/appended
-and so the close bracket don't get added to a staff group if there is still a number
-of notes to count through. can you help me think of a way to add the close bracket after
-all notes are printed/appended within a given staff group?
-This means before an additional staffgroup is added 
-I need the close bracket symbols to be added.
+Currently i'm print after every staff which isn't what i want. Can you see 
+a way for the logic to 'know' if theres yet another staff to print before 
+appending the group close bracket?
+it also needs to know if theres yet another staff group to print.
+which means the count variables ie noteCount, staffGroupCount, staffCount
+being 0 won't target the end of print a staff group and staff when theres
+more staff groups and staffs to print
+
 "

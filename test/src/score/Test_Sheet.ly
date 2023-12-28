@@ -30,18 +30,23 @@
         \tempo 4 = 84
         \clef bass
         \key c \major
-        \include "/home/joel/projects_/notes/ns-3001"
-      }
-     >>
+        \include "/home/joel/projects_/notes/ns-5001"
+      } 
       \new Staff \with {
-        instrumentName= "HiHat"
+        instrumentName= "Bass"
       }
 
       {
         \time 4/4
         \tempo 4 = 84
-        \clef bss
+        \clef bass
         \key c \major
-        \include "/home/joel/projects_/notes/ns-3001"
+        \include "/home/joel/projects_/notes/ns-6001"
       }
      >>
+  >>
+  \layout {}
+  \midi {
+    \tempo 4 = 84
+  }
+}

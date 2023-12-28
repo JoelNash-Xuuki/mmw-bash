@@ -196,7 +196,6 @@ void SheetBuilder::printStaffInGroupHeader(){
       strcat(sheetStaff, newString.c_str());
       this->staffs[count].sheet = fopen(sheetStaff,"w");
       this->patch= fopen(patchName, "r");
-
       fprintf(this->staffs[count].sheet,"      \\new Staff \\with {\n");
       fprintf(this->staffs[count].sheet,"        instrumentName= \"%s\"\n", 
               this->staffs[count].instr);
@@ -353,6 +352,11 @@ void SheetBuilder::collectFileSections(){
       fprintf(this->log, "Opening %s ...\n", sheetStaff);
       string newString = "_Staff_Group_Header_" + to_string(++this->staffGroupCount) + ".ly";
       strcat(sheetStaff, newString.c_str());
+      if (this->staffGroupCount == 2) {
+        appendFile("/home/joel/mmw/test/src/score/Test_Sheet_Staff_Group_Close_Bracket.ly", 
+               outputFile);
+        this->staffGroupCount= 0;
+      }
       appendFile(sheetStaff, outputFile);
     } else if (!strcmp(modname, "STAFF")) {
       char sheetStaff[100];
@@ -368,17 +372,13 @@ void SheetBuilder::collectFileSections(){
       string newString = "_Staff_Notes_" + to_string(++this->noteCount) + ".ly";
       strcat(sheetStaffNotes, newString.c_str());
       appendFile(sheetStaffNotes, outputFile);
+      if (this->staffCount == 2)  {
+          appendFile("/home/joel/mmw/test/src/score/Test_Sheet_Staff_Close_Bracket.ly",                     outputFile);
+          this->staffCount=0;
+      }
     } else {
       fprintf(stderr, "%s is an unknown module\n", modname);
     }
-
-    if (this->noteCount > 0 && this->staffGroupCount > )  {
-      appendFile("/home/joel/mmw/test/src/score/Test_Sheet_Staff_Group_Close_Bracket.ly", 
-               outputFile);
-      this->noteCount= 0;
-      this->staffGroupCount= 0;
-    }
-  
   }
 
   if (this->noteCount > 0)  {
@@ -386,7 +386,9 @@ void SheetBuilder::collectFileSections(){
                outputFile);
   }
 
+  appendFile("/home/joel/mmw/test/src/score/Test_Sheet_Close.partial.ly", 
+              outputFile);
+
   fclose(this->patch);
-  //appendFile("/home/joel/mmw/test/src/Test_Sheet_Close.partial.ly", outputFile);
   outputFile.close();
 }
