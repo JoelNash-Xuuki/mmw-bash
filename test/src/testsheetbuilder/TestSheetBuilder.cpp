@@ -125,8 +125,8 @@ void TestSheetBuilder::canPrintMultipleNotesOnStaff(void){
 void TestSheetBuilder::canPrintStaffInGroupCloseBracket(void){
   this->sheetBuilder.printStaffInGroupCloseBracket();
   CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
-    "/home/joel/mmw/test/src/Test_Sheet_Staff_Group_Close_Bracket.ly", 
-    "/home/joel/mmw/test/src/Expected_Test_Sheet_Staff_Group_Close_Bracket.ly"));
+    "/home/joel/mmw/test/src/score/Test_Sheet_Staff_Group_Close_Bracket.ly", 
+    "/home/joel/mmw/test/src/score/Expected_Test_Sheet_Staff_Group_Close_Bracket.ly"));
 }
 
 void TestSheetBuilder::canPrintScoreClose(void){
@@ -134,13 +134,13 @@ void TestSheetBuilder::canPrintScoreClose(void){
 }
 
 void TestSheetBuilder::canAppendScoreFileSections(void){
-  sheetBuilder.setPatchFile("/home/joel/projects_/patches/testPatch-3");
+  sheetBuilder.setPatchFile("/home/joel/projects_/patches/scorePatch");
   sheetBuilder.readPatchFile();
   this->sheetBuilder.collectFileSections(); 
 
   CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
-    "/home/joel/mmw/test/src/Test_Sheet.ly",
-    "/home/joel/mmw/test/src/Expected_Test_Sheet.ly"));
+    "/home/joel/mmw/test/src/score/Test_Sheet.ly",
+    "/home/joel/mmw/test/src/score/Expected_Test_Sheet.ly"));
 }
 
 void TestSheetBuilder::tearDown(void){

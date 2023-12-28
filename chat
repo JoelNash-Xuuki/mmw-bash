@@ -1,14 +1,16 @@
 sgpt "
-Regard the 
-in the function printAllNotesOnStaff()  
-that is the following code of SheetBuilder.cpp:
+Regard the function collectFileSections in the following code:
 $(cat src/SheetBuilder.cpp)
 
-The last change I made was that I moved the line FILE* sheet= fopen(sheetStaffNotes, "w");
-inside the for loop. This has caused a segmentation fault 
-can you explain why I get this error 
-
-I'm aiming to eventually created multiple files like in the function printStaffGroupHeader().
-Can you ensure that your suggestion aims to ensure I can make multiple note files...
-
+I need to add:
+   }
+  >>
+to the file. these symbols appear in printStaffInGroupCloseBracket()
+once all the notes are printed in each staff group.
+Currently I'm only managing to print the close bracket after all notes are printed/appended
+and so the close bracket don't get added to a staff group if there is still a number
+of notes to count through. can you help me think of a way to add the close bracket after
+all notes are printed/appended within a given staff group?
+This means before an additional staffgroup is added 
+I need the close bracket symbols to be added.
 "

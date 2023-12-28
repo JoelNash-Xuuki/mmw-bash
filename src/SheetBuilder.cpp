@@ -127,6 +127,7 @@ void SheetBuilder::readPatchFile(){
       fprintf(stderr, "%s is an unknown module\n", modname);
     }
   }
+  fclose(this->patch);
 }
 
 void SheetBuilder::readPatchFile(const char* patchName){
@@ -168,12 +169,13 @@ void SheetBuilder::printStaffGroupHeader() {
 }
 
 void SheetBuilder::printAllNotesOnStaff(){
+  FILE* sheet;
   for (int i= getNoteCount(); i > 0; i--) {
     char sheetStaffNotes[100];
     strcpy(sheetStaffNotes, this->sheetName);
     string newString = "_Staff_Notes_" + std::to_string(i) + ".ly";
     strcat(sheetStaffNotes, newString.c_str());
-    FILE* sheet= fopen(sheetStaffNotes, "w");
+    sheet= fopen(sheetStaffNotes, "w");
     fprintf(sheet,"        \\include \"/home/joel/projects_/notes/ns-%s\"\n",
             notes[i].pat);
     fclose(sheet);
@@ -316,8 +318,11 @@ void SheetBuilder::collectFileSections(){
   char sheetStaff[100];
   string outputPath = this->sheetName; // Change to your output file path
   outputPath += ".ly";
+  bool appendCloseBracket= false;
+  this->staffGroupCount= 0;
+  this->staffCount= 0;
+  this->noteCount= 0;
 
-  // Delete the existing file
   if (remove(outputPath.c_str()) != 0) {
       int err = errno;
       //std::cerr << "Error deleting existing file: " << strerror(err) << std::endl;
@@ -331,18 +336,57 @@ void SheetBuilder::collectFileSections(){
     cerr << "Error opening output file." << std::endl;
   }
 
-  appendFile("/home/joel/mmw/test/src/Test_Sheet_Header.partial.ly", outputFile);
-
-  for (int i= 1; i <= this->getStaffGroupCount(); i++){
-    strcpy(sheetStaff, this->sheetName);
-    string newString = "_Staff_Group_Header_" + std::to_string(i) + ".ly";
-    strcat(sheetStaff, newString.c_str());
-    appendFile(sheetStaff, outputFile);
-  }
+  appendFile("/home/joel/mmw/test/src/score/Test_Sheet_Header.partial.ly", outputFile);
   
-  //appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_1.partial.ly", outputFile);
-  //appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_Notes.ly", outputFile);
-  //appendFile("/home/joel/mmw/test/src/Test_Sheet_Staff_Group_Close_Bracket.ly", outputFile);
+  this->patch= fopen(patchName, "r");
+  fprintf(this->log,"Reading in patch file...\n");
+  strcpy(sheetStaff, this->sheetName);
+
+  while (true) {
+    if (fscanf(this->patch, "%s", modname) == EOF) {
+      break;
+    }
+  
+    if (!strcmp(modname, "STAFFGROUP")) {
+      char sheetStaff[100];
+      strcpy(sheetStaff, this->sheetName);
+      fprintf(this->log, "Opening %s ...\n", sheetStaff);
+      string newString = "_Staff_Group_Header_" + to_string(++this->staffGroupCount) + ".ly";
+      strcat(sheetStaff, newString.c_str());
+      appendFile(sheetStaff, outputFile);
+    } else if (!strcmp(modname, "STAFF")) {
+      char sheetStaff[100];
+      strcpy(sheetStaff, this->sheetName);
+      fprintf(this->log, "Opening %s ...\n", sheetStaff);
+      string newString = "_Staff_" + to_string(++this->staffCount) + ".ly";
+      strcat(sheetStaff, newString.c_str());
+      appendFile(sheetStaff, outputFile);
+    } else if (!strcmp(modname, "NOTE")) {
+      char sheetStaffNotes[100];
+      strcpy(sheetStaffNotes, this->sheetName);
+      fprintf(this->log, "Opening %s ...\n", sheetStaffNotes);
+      string newString = "_Staff_Notes_" + to_string(++this->noteCount) + ".ly";
+      strcat(sheetStaffNotes, newString.c_str());
+      appendFile(sheetStaffNotes, outputFile);
+    } else {
+      fprintf(stderr, "%s is an unknown module\n", modname);
+    }
+
+    if (this->noteCount > 0 && this->staffGroupCount > )  {
+      appendFile("/home/joel/mmw/test/src/score/Test_Sheet_Staff_Group_Close_Bracket.ly", 
+               outputFile);
+      this->noteCount= 0;
+      this->staffGroupCount= 0;
+    }
+  
+  }
+
+  if (this->noteCount > 0)  {
+    appendFile("/home/joel/mmw/test/src/score/Test_Sheet_Staff_Group_Close_Bracket.ly", 
+               outputFile);
+  }
+
+  fclose(this->patch);
   //appendFile("/home/joel/mmw/test/src/Test_Sheet_Close.partial.ly", outputFile);
   outputFile.close();
 }
