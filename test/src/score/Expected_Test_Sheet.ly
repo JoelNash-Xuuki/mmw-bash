@@ -31,7 +31,7 @@
         \clef bass
         \key c \major
         \include "/home/joel/projects_/notes/ns-5001"
-      } 
+      }
       \new Staff \with {
         instrumentName= "Bass"
       }
