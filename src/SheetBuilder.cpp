@@ -393,13 +393,16 @@ void SheetBuilder::collectFileSections(){
   }
 
   if (this->noteCount > 0)  {
-    appendFile("/home/joel/mmw/test/src/score/Test_Sheet_Staff_Group_Close_Bracket.ly", 
-               outputFile);
+    char sheetStaffGroupClose[100];
+    strcpy(sheetStaffGroupClose, this->sheetName);
+    strcat(sheetStaffGroupClose, "_Staff_Group_Close_Bracket.ly");
+    appendFile(sheetStaffGroupClose, outputFile);
   }
 
-  appendFile("/home/joel/mmw/test/src/score/Test_Sheet_Close.partial.ly", 
-              outputFile);
-
+  char sheetClose[100];
+  strcpy(sheetClose, this->sheetName);
+  strcat(sheetClose, "_Close.partial.ly");
+  appendFile(sheetClose, outputFile);
   fclose(this->patch);
   outputFile.close();
 }
