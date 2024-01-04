@@ -52,23 +52,6 @@ SheetBuilder::SheetBuilder(const char* sheetName,
 
 SheetBuilder::~SheetBuilder(){};
 
-void SheetBuilder::printHeader(void){
-  fprintf(this->log,"Printing Header...\n");
-  char sheetHeader[100];
-  strcpy(sheetHeader, this->sheetName);
-  strcat(sheetHeader, "_Header.partial.ly");
-  FILE* sheet= fopen(sheetHeader, "w");
-  fprintf(sheet,"\\version \"2.22.0\"\n\n");
-  fprintf(sheet,"\\header {\n");
-  fprintf(sheet,"  tagline = \"%s\"\n", this->service);
-  fprintf(sheet,"  title = \"%s\"\n", this->title);
-  fprintf(sheet,"  composer = \"%s\"\n", this->artist);
-  fprintf(sheet,"}\n");
-  fprintf(sheet,"\\score {\n");
-  fprintf(sheet,"  <<\n");
-  fclose(sheet);
-}
-
 void SheetBuilder::readStaffGroups(STAFFGROUP *staffGroup, 
                                    int count){
   fprintf(this->log,"Reading staff group: %i...\n", count);
@@ -144,6 +127,23 @@ void SheetBuilder::readPatchFile(const char* patchName){
       fprintf(stderr, "%s is an unknown module\n", modname);
     }
   }
+}
+
+void SheetBuilder::printHeader(void){
+  fprintf(this->log,"Printing Header...\n");
+  char sheetHeader[100];
+  strcpy(sheetHeader, this->sheetName);
+  strcat(sheetHeader, "_Header.partial.ly");
+  FILE* sheet= fopen(sheetHeader, "w");
+  fprintf(sheet,"\\version \"2.22.0\"\n\n");
+  fprintf(sheet,"\\header {\n");
+  fprintf(sheet,"  tagline = \"%s\"\n", this->service);
+  fprintf(sheet,"  title = \"%s\"\n", this->title);
+  fprintf(sheet,"  composer = \"%s\"\n", this->artist);
+  fprintf(sheet,"}\n");
+  fprintf(sheet,"\\score {\n");
+  fprintf(sheet,"  <<\n");
+  fclose(sheet);
 }
 
 void SheetBuilder::printStaffGroupHeader() {
@@ -315,7 +315,6 @@ void SheetBuilder::appendFile(const string& inputFile, ofstream& outputFile) {
 }
 
 void SheetBuilder::collectFileSections(){
-  char sheetStaff[100];
   string outputPath = this->sheetName; // Change to your output file path
   outputPath += ".ly";
   bool appendCloseBracket= false;
@@ -336,10 +335,14 @@ void SheetBuilder::collectFileSections(){
     cerr << "Error opening output file." << std::endl;
   }
 
-  appendFile("/home/joel/mmw/test/src/score/Test_Sheet_Header.partial.ly", outputFile);
-  
+
+  char sheetHeader[100];
+  strcpy(sheetHeader, this->sheetName);
+  strcat(sheetHeader, "_Header.partial.ly");
+  appendFile(sheetHeader, outputFile);
   this->patch= fopen(patchName, "r");
   fprintf(this->log,"Reading in patch file...\n");
+  char sheetStaff[100];
   strcpy(sheetStaff, this->sheetName);
 
   while (true) {
@@ -354,7 +357,10 @@ void SheetBuilder::collectFileSections(){
       string newString = "_Staff_Group_Header_" + to_string(++this->staffGroupCount) + ".ly";
       strcat(sheetStaff, newString.c_str());
       if (this->staffGroupCount == 2) {
-        appendFile("/home/joel/mmw/test/src/score/Test_Sheet_Staff_Group_Close_Bracket.ly", 
+        char sheetStaffGroupClose[100];
+        strcpy(sheetStaffGroupClose, this->sheetName);
+        strcat(sheetStaffGroupClose, "_Staff_Group_Close_Bracket.ly");
+        appendFile(sheetStaffGroupClose, 
                outputFile);
         this->staffGroupCount= 0;
       }
@@ -374,7 +380,11 @@ void SheetBuilder::collectFileSections(){
       strcat(sheetStaffNotes, newString.c_str());
       appendFile(sheetStaffNotes, outputFile);
       if (this->staffCount == 2)  {
-          appendFile("/home/joel/mmw/test/src/score/Test_Sheet_Staff_Close_Bracket.ly",                     outputFile);
+          char sheetStaffClose[100];
+          strcpy(sheetStaffClose, this->sheetName);
+          strcat(sheetStaffClose, "_Staff_Close_Bracket.ly");
+          appendFile(sheetStaffClose,                     
+                      outputFile);
           this->staffCount=0;
       }
     } else {
