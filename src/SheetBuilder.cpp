@@ -43,11 +43,11 @@ SheetBuilder::SheetBuilder(const char* sheetName,
   this->title= title;
   this->artist= artist;
   this->sheetLocation= sheetLocation;
+  this->setPatchFile(patchName);
 
   staffGroups= (STAFFGROUP *)malloc(MAXMODS * sizeof(STAFFGROUP));
   staffs= (STAFF *)malloc(MAXMODS * sizeof(STAFF));
   notes= (NOTE *)malloc(MAXMODS * sizeof(NOTE));
-
 };
 
 SheetBuilder::~SheetBuilder(){};
