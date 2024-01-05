@@ -129,8 +129,18 @@ void TestSheetBuilder::canPrintStaffInGroupCloseBracket(void){
     "/home/joel/mmw/test/src/score/Expected_Test_Sheet_Staff_Group_Close_Bracket.ly"));
 }
 
+void TestSheetBuilder::canPrintStaffCloseBracket(void){
+  this->sheetBuilder.printStaffCloseBracket();
+  CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
+    "/home/joel/mmw/test/src/score/Test_Sheet_Staff_Close_Bracket.ly",
+    "/home/joel/mmw/test/src/score/Expected_Test_Sheet_Staff_Close_Bracket.ly"));
+}
+
 void TestSheetBuilder::canPrintScoreClose(void){
   this->sheetBuilder.printScoreClose();
+  CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
+    "/home/joel/mmw/test/src/score/Test_Sheet_Close.partial.ly",
+    "/home/joel/mmw/test/src/score/Expected_Test_Sheet_Close.partial.ly"));
 }
 
 void TestSheetBuilder::canAppendScoreFileSections(void){

@@ -230,6 +230,16 @@ void SheetBuilder::printStaffInGroupCloseBracket(){
   fprintf(this->log, "Closed %s\n", sheetStaffs);
 }
 
+void SheetBuilder::printStaffCloseBracket(){
+  fprintf(this->log,"Print Staff close Bracket...\n");
+  char sheetPartial[100];
+  strcpy(sheetPartial, this->sheetName);
+  strcat(sheetPartial, "_Staff_Close_Bracket.ly");
+  FILE* sheet= fopen(sheetPartial, "w");
+  fprintf(sheet,"      }\n");
+  fclose(sheet);
+}
+
 void SheetBuilder::printScoreClose(){
   fprintf(this->log,"Printing Header...\n");
   char sheetHeader[100];
