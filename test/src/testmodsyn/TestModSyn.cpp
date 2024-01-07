@@ -21,7 +21,6 @@ using namespace std;
 void TestModSyn::setUp(void){
   const char* patch= "/home/joel/projects_/patches/mpatch4";
   const char* name= "/home/joel//mmw/test/src/sound-design/test.csd";
-
   this->modsyn= ModSyn(patch,name);
 }
 
