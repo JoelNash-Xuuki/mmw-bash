@@ -44,6 +44,9 @@ createSoundDesign(){
 
   modsyn $1 $2
 
+}
+
+renderAudio(){
   csound -d -o$PROJPATH/$PROJ.wav -F $PROJPATH/tmp/$PROJ.mid $PROJPATH/sound_design/$PROJ.csd
 }
 
