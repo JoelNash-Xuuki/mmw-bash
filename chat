@@ -1,14 +1,10 @@
 sgpt "
 Regard the following functions:
 $(cat function)
+Here is an excerpt
+$(cat fontnames)
 
-The function processes file scorePatch:
-$(cat /home/joel/projects_/patches/scorePatch)
 
 
-You can see 4 STAFFGROUP strings in the file above correct?
-
-I think my readPatchFile() function should be able to count all four
-STAFFGROUP strings but I think it only counts two. Can you see why?
 
 "

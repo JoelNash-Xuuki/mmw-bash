@@ -73,5 +73,5 @@ AUDIOFILE=/home/joel/audio/202210030854-idea-output.wav
 
 MP4=$PROJ.mp4
 MP4R=$PROJ-r.mp4
-MP4TEMP=$PROJ-temp.mp4
+MP4RTEMP=$PROJ-temp.mp4
 WATERMARK=/home/joel/images/X.png
