@@ -9,13 +9,12 @@ MIDI=$HOME/$PROJLOC/tmp/$PROJ.mid
 PDF=$HOME/Xuuki_Site_Node/site-app/public/doc/$PROJ.pdf
 WAV=$HOME/audio/$ARTIST/$PROJ/1/stems/$PROJ.wav
 TEMPO=84
+
 BEAT=$(bc <<< "scale=4; (60/$TEMPO)")
 BAR=$(bc <<< "scale=4;$BEAT*4")
 LENGTH=$(bc <<< "scale=4;$BAR*18")
 DUR=$(bc <<< "scale=4;$BAR*4")
 START_TIME=$(bc <<< "scale=2;$BAR*1")
-MP4=$PROJ.mp4
-
 
 SYNTH=$PROJPATH/audio/synth.ewf
 BASS=$PROJPATH/audio/bass.ewf
@@ -70,4 +69,9 @@ SESSION="session-1"
 LILY="${PROJPATH}/src/${PROJ}-${SESSION}.ly"
 TITLE="${PROJPATH}/${PROJ}-${SESSION}"
 
+AUDIOFILE=/home/joel/audio/202210030854-idea-output.wav
 
+MP4=$PROJ.mp4
+MP4R=$PROJ-r.mp4
+MP4TEMP=$PROJ-temp.mp4
+WATERMARK=/home/joel/images/X.png

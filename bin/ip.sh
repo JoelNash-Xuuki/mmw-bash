@@ -13,8 +13,16 @@ createTextPNG(){
 }
 
 createMP4(){
-  ffmpeg -ss 00:00:00 -i $WAVMIX -t $LENGTH -filter_complex "[0:a]showspectrum=s=854x480:mode=combined:slide=scroll:saturation=0.2:scale=log,format=yuv420p[v]" -map "[v]" -map 0:a -b:v 700k -b:a 360k $MP4
-#ffmpeg -ss 00:00:00 -i /home/joel/motion-picture/03102022180354.mp4 -t 22.784 -filter_complex "[0:a]showspectrum=s=854x480:mode=combined:slide=scroll:saturation=0.2:scale=log,format=yuv420p[v]" -map "[v]" -map 0:a -b:v 700k -b:a 360k 03102022180354-testvid.mp4
+  ffmpeg -ss 00:00:00 -i $AUDIOFILE -t $LENGTH -filter_complex "[0:a]showspectrum=s=854x480:mode=combined:slide=scroll:saturation=0.2:scale=log,format=yuv420p[v]" -map "[v]" -map 0:a -b:v 700k -b:a 360k $MP4
+}
+
+rotateMP4(){
+  ffmpeg -i $MP4 -vf "transpose=1" $MP4R
+}
+
+overlayWatermarktt(){
+  ffmpeg -i $MP4R -vf "movie=$WATERMARK[watermark]; [watermark]scale=240x135 [watermark2];[in][watermark2] overlay=(W/1.1)-(overlay_w/2):(H/1.005)-(overlay_h/1):enable='between(t,(0),($LENGTH))'[out]" $MP4TEMP
+  mv $MP4TEMP $MP4R
 }
 
 "$@"
