@@ -2,3 +2,4 @@ src/*.o
 app.log
 src/*.swp
 *.swp
+tmp/config
