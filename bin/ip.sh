@@ -1,3 +1,16 @@
+source $HOME/mmw/tmp/config
+
+runMethod(){
+  echo $PROJ
+}
+
+createTextPNG(){
+  convert -background transparent -fill lightblue \
+	  -gravity center\
+          -extent 1920x1080\
+          -font ~/.fonts/xuukitype1.ttf -pointsize 288 label:$1 \
+           $HOME/images/$2.png
+}
 
 createMP4(){
   ffmpeg -ss 00:00:00 -i $WAVMIX -t $LENGTH -filter_complex "[0:a]showspectrum=s=854x480:mode=combined:slide=scroll:saturation=0.2:scale=log,format=yuv420p[v]" -map "[v]" -map 0:a -b:v 700k -b:a 360k $MP4
