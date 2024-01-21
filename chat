@@ -1,8 +1,5 @@
 sgpt "
-Regard the following functions:
 $(cat function)
-Here is an excerpt
-$(cat fontnames)
 
 
 

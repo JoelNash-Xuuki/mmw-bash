@@ -21,7 +21,7 @@ rotateMP4(){
 }
 
 overlayWatermarktt(){
-  ffmpeg -i $MP4R -vf "movie=$WATERMARK[watermark]; [watermark]scale=240x135 [watermark2];[in][watermark2] overlay=(W/1.1)-(overlay_w/2):(H/1.005)-(overlay_h/1):enable='between(t,(0),($LENGTH))'[out]" $MP4RTEMP
+  ffmpeg -i $MP4R -vf "movie=$WATERMARK[watermark]; [watermark]scale=240x135 [watermark2];[in][watermark2] overlay=W-w-0.1:H-h-0.1:enable='between(t,(0),($LENGTH))'[out]" $MP4RTEMP
   mv $MP4RTEMP $MP4R
 }
 
@@ -35,7 +35,7 @@ addSub() {
 
   # Define subtitle styling
   # Font style similar to CLI (monospaced), white font color, black background
-  style="FontName=Courier New,FontSize=24,PrimaryColour=&H00FFFFFF,BackColour=&H00000000,BorderStyle=4,Outline=0,Shadow=0,Alignment=2,MarginL=10,MarginR=10,MarginV=20"
+  style="FontName=Courier New,FontSize=16,PrimaryColour=&H00FFFFFF,BackColour=&H00000000,BorderStyle=4,Outline=0,Shadow=0,Alignment=2,MarginL=10,MarginR=10,MarginV=60"
 
   ffmpeg -i $MP4R -vf "subtitles=$HOME/mmw/tmp/subtitles.srt:force_style='$style'" $MP4RTEMP
 

@@ -1,37 +1,6 @@
-addSub(){
-  cp $MP4R $MP4RTEMP
-  ffmpeg -i $MP4R -vf subtitles=$HOME/mmw/tmp/subtitles.srt $MP4RTEMP
+overlayWatermarktt(){
+  ffmpeg -i $MP4R -vf "movie=$WATERMARK[watermark]; [watermark]scale=240x135 [watermark2];[in][watermark2] overlay=(W/1.1)-(overlay_w/2):(H/1.005)-(overlay_h/1):enable='between(t,(0),($LENGTH))'[out]" $MP4RTEMP
   mv $MP4RTEMP $MP4R
 }
 
-I want to change the font of the subtitles 
-to a similar font to my bash terminal.
-
-Can you show me how to do this?
-
-
-To change the font of the subtitles to a similar font as your bash terminal, you can modify the `addSub` function as follows:
-
-```bash
-addSub(){
-  cp $MP4R $MP4RTEMP
-  ffmpeg -i $MP4R -vf "subtitles=$HOME/mmw/tmp/subtitles.srt:force_style='FontName=YOUR_TERMINAL_FONT_NAME'" $MP4RTEMP
-  mv $MP4RTEMP $MP4R
-}
-```
-
-Replace `YOUR_TERMINAL_FONT_NAME` with the name of the font you want to use. You can find the name of your terminal font by running the
-following command in your terminal:
-
-```bash
-The command: 
-echo $TERM_FONT
-$(echo $TERM_FONT)
-Does not appear to print a font name, why is that?
-Help me get a font that ffmpeg can use. i want the font 
-to look like my bash terminal font
-
-your solution can online involce the cli. I'm running arch linux atm
-
-
-
+show me how to put the watermark more tightly in the bottom right
