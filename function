@@ -1,6 +1,0 @@
-overlayWatermarktt(){
-  ffmpeg -i $MP4R -vf "movie=$WATERMARK[watermark]; [watermark]scale=240x135 [watermark2];[in][watermark2] overlay=(W/1.1)-(overlay_w/2):(H/1.005)-(overlay_h/1):enable='between(t,(0),($LENGTH))'[out]" $MP4RTEMP
-  mv $MP4RTEMP $MP4R
-}
-
-show me how to put the watermark more tightly in the bottom right
