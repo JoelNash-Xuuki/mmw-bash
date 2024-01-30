@@ -25,10 +25,10 @@ void TestSheetBuilder::setUp(void){
   const char* artist= "Vyvn";
   const char* sheetLocation= "/home/joel/mmw/test/src/testsheetbuilder";
   this->sheetBuilder= SheetBuilder(sheetName,
-                             service,
-                             title,
-                             artist,
-			     sheetLocation);
+                                   service,
+                                   title,
+                                   artist,
+			           sheetLocation);
 }
 
 void TestSheetBuilder::canPrintScoreHeader(void){

@@ -30,10 +30,10 @@ class TestSheetBuilder : public CppUnit::TestFixture
   CPPUNIT_TEST(canPrintMultipleStaffInGroupHeader);
   CPPUNIT_TEST(canPrintNotesOnStaff);
   CPPUNIT_TEST(canPrintMultipleNotesOnStaff);
-  //CPPUNIT_TEST(canPrintStaffInGroupCloseBracket);
-  //CPPUNIT_TEST(canPrintStaffCloseBracket);
-  //CPPUNIT_TEST(canPrintScoreClose);
-  //CPPUNIT_TEST(canAppendScoreFileSections);
+  CPPUNIT_TEST(canPrintStaffInGroupCloseBracket);
+  CPPUNIT_TEST(canPrintStaffCloseBracket);
+  CPPUNIT_TEST(canPrintScoreClose);
+  CPPUNIT_TEST(canAppendScoreFileSections);
   CPPUNIT_TEST_SUITE_END();
 
 public:
