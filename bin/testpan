@@ -1,0 +1,1 @@
+ffmpeg -loop 1 -framerate 24 -i 0000.png -vf "zoompan=z='min(zoom+0.0100,4.0)':d=2080:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1920x1920" -t 8 -c:v libx264 -pix_fmt yuv420p output.mp4
