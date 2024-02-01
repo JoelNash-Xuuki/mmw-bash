@@ -345,11 +345,9 @@ void SheetBuilder::collectFileSections(){
   //}
 
   ofstream outputFile(outputPath, std::ios::app);
-
   if (!outputFile) {
     cerr << "Error opening output file." << std::endl;
   }
-
 
   char sheetHeader[100];
   strcpy(sheetHeader, this->sheetName);
@@ -390,12 +388,12 @@ void SheetBuilder::collectFileSections(){
       strcat(sheetStaff, newString.c_str());
       appendFile(sheetStaff, outputFile);
     } else if (!strcmp(modname, "NOTE")) {
-      //char sheetStaffNotes[100];
-      //strcpy(sheetStaffNotes, this->sheetName);
-      //fprintf(this->log, "Opening %s ...\n", sheetStaffNotes);
-      //string newString = "_Staff_Notes_" + to_string(++noteCounter) + ".ly";
-      //strcat(sheetStaffNotes, newString.c_str());
-      //appendFile(sheetStaffNotes, outputFile);
+      char sheetStaffNotes[100];
+      strcpy(sheetStaffNotes, this->sheetName);
+      fprintf(this->log, "Opening %s ...\n", sheetStaffNotes);
+      string newString = "_Staff_Notes_" + to_string(++noteCounter) + ".ly";
+      strcat(sheetStaffNotes, newString.c_str());
+      appendFile(sheetStaffNotes, outputFile);
       //if (this->staffCount == 3)  {
       //    char sheetStaffClose[100];
       //    strcpy(sheetStaffClose, this->sheetName);
@@ -404,6 +402,12 @@ void SheetBuilder::collectFileSections(){
       //                outputFile);
       //    this->staffCount=0;
       //}
+    } else if (!strcmp(modname, "X")) {
+      char sheetStaffClose[100];
+        strcpy(sheetStaffClose, this->sheetName);
+        strcat(sheetStaffClose, "_Staff_Close_Bracket.ly");
+        appendFile(sheetStaffClose,                     
+                   outputFile);
     } else {
       fprintf(stderr, "%s is an unknown module\n", modname);
     }
@@ -412,7 +416,7 @@ void SheetBuilder::collectFileSections(){
   if (this->noteCount > 0)  {
     char sheetStaffGroupClose[100];
     strcpy(sheetStaffGroupClose, this->sheetName);
-    strcat(sheetStaffGroupClose, "_Staff_Group_Close_Bracket.ly");
+   // strcat(sheetStaffGroupClose, "_Staff_Group_Close_Bracket.ly");
     appendFile(sheetStaffGroupClose, outputFile);
   }
 
