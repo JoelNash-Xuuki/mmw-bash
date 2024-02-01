@@ -1,0 +1,41 @@
+To associate a staff with a staff group, you can modify the `SheetBuilder` class to include a `staffGroupIndex` member variable in the `STAFF` struct. Here's how you can do it:
+
+1. Add a new member variable `staffGroupIndex` to the `STAFF` struct in the `SheetBuilder.hpp` file:
+
+```cpp
+struct STAFF {
+  char instr[100];
+  char time[100];
+  char tempo[100];
+  char clef[100];
+  char key[100];
+  char mode[100];
+  FILE* sheet;
+  int staffGroupIndex; // New member variable
+};
+```
+
+2. Modify the `readStaffs` function in the `SheetBuilder` class to assign the `staffGroupIndex` to each staff:
+
+```cpp
+void SheetBuilder::readStaffs(STAFF *staff, int count){
+  fprintf(this->log,"Reading staff instrument %d ...\n", count);
+  fscanf(this->patch,"%s %s %s %s %s %s",
+         staff[count].instr,
+         staff[count].time,
+         staff[count].tempo,
+         staff[count].clef,
+         staff[count].key,
+         staff[count].mode); 
+
+  staff[count].staffGroupIndex = this->staffGroupCount; // Assign staff group index
+
+  if( count >= MAXMODS ){
+   fprintf(stderr,"Number of Staffs has exceeded maximum: %d\n", 
+	  MAXMODS);
+   exit(1);
+  }
+}
+```
+
+3. Modify the `printStaffInGroupHeader` function to only print

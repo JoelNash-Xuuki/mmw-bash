@@ -21,6 +21,7 @@ typedef struct { // STAFF
   char key[SYNMOD_CHARS];
   char mode[SYNMOD_CHARS];
   FILE* sheet;
+  int staffGroupIndex;
 } STAFF;
 
 typedef struct { // NOTES

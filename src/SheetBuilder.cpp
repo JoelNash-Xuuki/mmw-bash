@@ -100,11 +100,10 @@ void SheetBuilder::setPatchFile(const char* patchName){
 void SheetBuilder::readPatchFile(){
   this->staffGroupCount= 0;
   this->patch= fopen(patchName, "r");
-  fprintf(this->log,"Reading in patch file...\n");
+  fprintf(this->log,"Reading in patch file\n");
   while (fscanf(this->patch, "%s", modname) != EOF) {
     if (!strcmp(modname, "STAFFGROUP")) {
-      readStaffGroups(staffGroups, this->staffGroupCount);
-      this->staffGroupCount++;
+      readStaffGroups(staffGroups, ++this->staffGroupCount);
     } else if (!strcmp(modname, "STAFF")) {
       readStaffs(this->staffs, ++this->staffCount);
     } else if (!strcmp(modname, "NOTE")) {
