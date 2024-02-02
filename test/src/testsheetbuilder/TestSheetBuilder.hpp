@@ -23,7 +23,7 @@ class TestSheetBuilder : public CppUnit::TestFixture
   CPPUNIT_TEST_SUITE(TestSheetBuilder);
   //CPPUNIT_TEST(canPrintScoreHeader);
   //CPPUNIT_TEST(canReadPatchFileStaffGroupsStaffCountAndNoteCount);
-  CPPUNIT_TEST(canReadPatchFileOfMultipleStaffGroupsStaffCountAndNoteCount);
+  //CPPUNIT_TEST(canReadPatchFileOfMultipleStaffGroupsStaffCountAndNoteCount);
   //CPPUNIT_TEST(canPrintStaffGroupHeader);
   //CPPUNIT_TEST(canPrintMultipleStaffGroupHeaders);
   //CPPUNIT_TEST(canPrintStaffInGroupHeader);
@@ -33,7 +33,7 @@ class TestSheetBuilder : public CppUnit::TestFixture
   //CPPUNIT_TEST(canPrintStaffInGroupCloseBracket);
   //CPPUNIT_TEST(canPrintStaffCloseBracket);
   //CPPUNIT_TEST(canPrintScoreClose);
-  //CPPUNIT_TEST(canAppendScoreFileSections);
+  CPPUNIT_TEST(canAppendScoreFileSections);
   CPPUNIT_TEST_SUITE_END();
 
 public:

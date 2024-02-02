@@ -67,12 +67,13 @@ void SheetBuilder::readStaffs(STAFF *staff,
                               int count){
   fprintf(this->log,"Reading staff instrument %d ...\n", count);
   fscanf(this->patch,"%s %s %s %s %s %s",
-         staff[count].instr,
-         staff[count].time,
-         staff[count].tempo,
-         staff[count].clef,
-         staff[count].key,
-         staff[count].mode); 
+    staff[count].instr,
+    staff[count].time,
+    staff[count].tempo,
+    staff[count].clef,
+    staff[count].key,
+    staff[count].mode); 
+    staff[count].staffGroupIndex = this->staffGroupCount;
 
   if( count >= MAXMODS ){
    fprintf(stderr,"Number of Staffs has exceeded maximum: %d\n", 
@@ -328,101 +329,90 @@ void SheetBuilder::appendFile(const string& inputFile, ofstream& outputFile) {
 void SheetBuilder::collectFileSections(){
   string outputPath = this->sheetName; // Change to your output file path
   outputPath += ".ly";
-  bool appendCloseBracket= false;
-  int staffGroupCounter= 0;
-  int staffCounter= 0;
-  int noteCounter= 0;
-  ////this->staffGroupCount= 0;
-  ////this->staffCount= 0;
-  ////this->noteCount= 0;
 
-  //if (remove(outputPath.c_str()) != 0) {
-  //    int err = errno;
-  //    //std::cerr << "Error deleting existing file: " << strerror(err) << std::endl;
-  //} else {
-  //    //std::cout << "Existing file deleted successfully." << std::endl;
-  //}
+  /////if (remove(outputPath.c_str()) != 0) {
+  /////    int err = errno;
+  /////    //std::cerr << "Error deleting existing file: " << strerror(err) << std::endl;
+  /////} else {
+  /////    //std::cout << "Existing file deleted successfully." << std::endl;
+  /////}
 
   ofstream outputFile(outputPath, std::ios::app);
   if (!outputFile) {
     cerr << "Error opening output file." << std::endl;
   }
 
-  char sheetHeader[100];
-  strcpy(sheetHeader, this->sheetName);
-  strcat(sheetHeader, "_Header.partial.ly");
-  appendFile(sheetHeader, outputFile);
-  this->patch= fopen(patchName, "r");
-  fprintf(this->log,"Reading in patch file...\n");
-  char sheetStaff[100];
-  strcpy(sheetStaff, this->sheetName);
-
-  while (true) {
-    if (fscanf(this->patch, "%s", modname) == EOF) {
-      break;
-    }
-  
-    if (!strcmp(modname, "STAFFGROUP")) {
-      char sheetStaff[100];
-      strcpy(sheetStaff, this->sheetName);
-      fprintf(this->log, "Opening %s ...\n", sheetStaff);
-      string newString = "_Staff_Group_Header_" + to_string(++staffGroupCounter) + ".ly";
-      strcat(sheetStaff, newString.c_str());
-      fprintf(this->log,"Appending staff group %i.\n",staffGroupCounter);
-      if (staffGroupCounter == this->staffGroupCount) {
-       fprintf(this->log,"Appending _Staff_Group_Close_Bracket.\n",staffGroupCounter);
-        char sheetStaffGroupClose[100];
-        strcpy(sheetStaffGroupClose, this->sheetName);
-        strcat(sheetStaffGroupClose, "_Staff_Group_Close_Bracket.ly");
-        appendFile(sheetStaffGroupClose, 
-               outputFile);
-        staffGroupCounter= 0;
-      }
-      appendFile(sheetStaff, outputFile);
-    } else if (!strcmp(modname, "STAFF")) {
-      char sheetStaff[100];
-      strcpy(sheetStaff, this->sheetName);
-      fprintf(this->log, "Opening %s ...\n", sheetStaff);
-      string newString = "_Staff_" + to_string(++staffCounter) + ".ly";
-      strcat(sheetStaff, newString.c_str());
-      appendFile(sheetStaff, outputFile);
-    } else if (!strcmp(modname, "NOTE")) {
-      char sheetStaffNotes[100];
-      strcpy(sheetStaffNotes, this->sheetName);
-      fprintf(this->log, "Opening %s ...\n", sheetStaffNotes);
-      string newString = "_Staff_Notes_" + to_string(++noteCounter) + ".ly";
-      strcat(sheetStaffNotes, newString.c_str());
-      appendFile(sheetStaffNotes, outputFile);
-      //if (this->staffCount == 3)  {
-      //    char sheetStaffClose[100];
-      //    strcpy(sheetStaffClose, this->sheetName);
-      //    strcat(sheetStaffClose, "_Staff_Close_Bracket.ly");
-      //    appendFile(sheetStaffClose,                     
-      //                outputFile);
-      //    this->staffCount=0;
-      //}
-    } else if (!strcmp(modname, "X")) {
-      char sheetStaffClose[100];
-        strcpy(sheetStaffClose, this->sheetName);
-        strcat(sheetStaffClose, "_Staff_Close_Bracket.ly");
-        appendFile(sheetStaffClose,                     
-                   outputFile);
-    } else {
-      fprintf(stderr, "%s is an unknown module\n", modname);
-    }
+  for (int i= 1; i <= this->staffGroupCount; i++) { 
+    char sheetStaffGroupHeader[100];
+    fprintf(this->log, "Append staff group %d\n", i);
+    strcpy(sheetStaffGroupHeader, this->sheetName);
+    string newString = "_Staff_Group_Header_" + to_string(i + 1) + ".ly";
+    strcat(sheetStaffGroupHeader, newString.c_str());
+    appendFile(sheetStaffGroupHeader, outputFile);
   }
 
-  if (this->noteCount > 0)  {
-    char sheetStaffGroupClose[100];
-    strcpy(sheetStaffGroupClose, this->sheetName);
-   // strcat(sheetStaffGroupClose, "_Staff_Group_Close_Bracket.ly");
-    appendFile(sheetStaffGroupClose, outputFile);
-  }
+  ///char sheetHeader[100];
+  ///fprintf(this->log, "Append Score header  %s ...\n", sheetHeader);
+  ///strcpy(sheetHeader, this->sheetName);
+  ///strcat(sheetHeader, "_Header.partial.ly");
+  ///appendFile(sheetHeader, outputFile);
+  //while (true) {
+    //if (fscanf(this->patch, "%s", modname) == EOF) {
+    //  break;
+    //}
+  // for (int i= 0; i < this->staffGroupCount; i++) { 
+  //    char sheetStaffGroupHeader[100];
 
-  char sheetClose[100];
-  strcpy(sheetClose, this->sheetName);
-  strcat(sheetClose, "_Close.partial.ly");
-  appendFile(sheetClose, outputFile);
-  fclose(this->patch);
-  outputFile.close();
+  //    fprintf(this->log, "Append staff group %s ...\n", sheetStaffGroupHeader);
+  //    strcpy(sheetStaffGroupHeader, this->sheetName);
+  //    string newString = "_Staff_Group_Header_" + to_string(i + 1) + ".ly";
+  //    strcat(sheetStaffGroupHeader, newString.c_str());
+  //    appendFile(sheetStaffGroupHeader, outputFile);
+  // }
+    //} else if (!strcmp(modname, "STAFF")) {
+    //  char sheetStaff[100];
+    //  strcpy(sheetStaff, this->sheetName);
+    //  fprintf(this->log, "Opening %s ...\n", sheetStaff);
+    //  string newString = "_Staff_" + to_string(++staffCounter) + ".ly";
+    //  strcat(sheetStaff, newString.c_str());
+    //  appendFile(sheetStaff, outputFile);
+    //} else if (!strcmp(modname, "NOTE")) {
+    //  char sheetStaffNotes[100];
+    //  strcpy(sheetStaffNotes, this->sheetName);
+    //  fprintf(this->log, "Opening %s ...\n", sheetStaffNotes);
+    //  string newString = "_Staff_Notes_" + to_string(++noteCounter) + ".ly";
+    //  strcat(sheetStaffNotes, newString.c_str());
+    //  appendFile(sheetStaffNotes, outputFile);
+    //  //if (this->staffCount == 3)  {
+    //  //    char sheetStaffClose[100];
+    //  //    strcpy(sheetStaffClose, this->sheetName);
+    //  //    strcat(sheetStaffClose, "_Staff_Close_Bracket.ly");
+    //  //    appendFile(sheetStaffClose,                     
+    //  //                outputFile);
+    //  //    this->staffCount=0;
+    //  //}
+    //} else if (!strcmp(modname, "X")) {
+    //  char sheetStaffClose[100];
+    //    strcpy(sheetStaffClose, this->sheetName);
+    //    strcat(sheetStaffClose, "_Staff_Close_Bracket.ly");
+    //    appendFile(sheetStaffClose,                     
+    //               outputFile);
+    //} else {
+    //  fprintf(stderr, "%s is an unknown module\n", modname);
+    //}
+  //}
+
+  //if (this->noteCount > 0)  {
+  //  char sheetStaffGroupClose[100];
+  //  strcpy(sheetStaffGroupClose, this->sheetName);
+  // // strcat(sheetStaffGroupClose, "_Staff_Group_Close_Bracket.ly");
+  //  appendFile(sheetStaffGroupClose, outputFile);
+  //}
+
+  //char sheetClose[100];
+  //strcpy(sheetClose, this->sheetName);
+  //strcat(sheetClose, "_Close.partial.ly");
+  //appendFile(sheetClose, outputFile);
+  //fclose(this->patch);
+ outputFile.close();
 }
