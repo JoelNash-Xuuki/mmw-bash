@@ -1,0 +1,7 @@
+sgpt "
+Regard the function ColletFileSctions()
+$(cat function)
+I want to add a staff close bracket once
+a given number of staff notes have finished 
+printing to the file.
+"

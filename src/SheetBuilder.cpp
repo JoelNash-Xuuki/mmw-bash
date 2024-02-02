@@ -333,7 +333,7 @@ void SheetBuilder::collectFileSections(){
 
   if (remove(outputPath.c_str()) != 0) {
       int err = errno;
-      //std::cerr << "Error deleting existing file: " << strerror(err) << std::endl;
+  //std::cerr << "Error deleting existing file: " << strerror(err) << std::endl;
   } else {
       //std::cout << "Existing file deleted successfully." << std::endl;
   }
@@ -343,7 +343,19 @@ void SheetBuilder::collectFileSections(){
     cerr << "Error opening output file." << std::endl;
   }
 
+  // Add the sheet header
+  char sheetHeader[100];
+  strcpy(sheetHeader, this->sheetName);
+  strcat(sheetHeader, "_Header.partial.ly");
+  appendFile(sheetHeader, outputFile);
+  this->patch= fopen(patchName, "r");
+  fprintf(this->log,"Reading in patch file...\n");
+  char sheetStaff[100];
+  strcpy(sheetStaff, this->sheetName);
+
+
   for (int i= 0; i <= this->staffGroupCount; i++) { 
+    // Print the group header
     char sheetStaffGroupHeader[100];
     fprintf(this->log, "Append staff group %d\n", i);
     strcpy(sheetStaffGroupHeader, this->sheetName);
@@ -354,53 +366,39 @@ void SheetBuilder::collectFileSections(){
     for (int j = 0; j < this->staffCount; j++) {
       // Check if staff belongs to current staff group
       if (this->staffs[j].staffGroupIndex == i) {
-        // Print staff
-        char sheetStaff[100];
-        fprintf(this->log, "Append staff %d\n", j);
-        strcpy(sheetStaff, this->sheetName);
-        string newString = "_Staff_" + to_string(j + 1) + ".ly";
+        char sheetStaff[100]; fprintf(this->log, "Append staff %d\n", j); strcpy(sheetStaff, this->sheetName); string newString = "_Staff_" + to_string(j + 1) + ".ly";
         strcat(sheetStaff, newString.c_str());
         appendFile(sheetStaff, outputFile);
     
         for (int n = 0; n <= this->noteCount; n++) {
+          // Check if notes belongs to current staff
           if (this->notes[n].staffIndex == j) {
+            fprintf(this->log, "Append notes %d\n", i);
             char sheetStaffNotes[100];
             strcpy(sheetStaffNotes, this->sheetName);
             fprintf(this->log, "Opening %s ...\n", sheetStaffNotes);
             string newString = "_Staff_Notes_" + to_string(n + 1) + ".ly";
             strcat(sheetStaffNotes, newString.c_str());
             appendFile(sheetStaffNotes, outputFile);
+
+            // Print Close Bracket          
+            char sheetStaffClose[100];
+            strcpy(sheetStaffClose, this->sheetName);
+            strcat(sheetStaffClose, "_Staff_Close_Bracket.ly");
+
+            fprintf(this->log, "Append staff close bracket %d\n", i);
+            appendFile(sheetStaffClose, 
+                       outputFile);
           }
         }
       }
     }
   }
       
-    //  //if (this->staffCount == 3)  {
-    //  //    char sheetStaffClose[100];
-    //  //    strcpy(sheetStaffClose, this->sheetName);
-    //  //    strcat(sheetStaffClose, "_Staff_Close_Bracket.ly");
-    //  //    appendFile(sheetStaffClose,                     
-    //  //                outputFile);
-    //  //    this->staffCount=0;
-    //  //}
-    //} else if (!strcmp(modname, "X")) {
-    //  char sheetStaffClose[100];
-    //    strcpy(sheetStaffClose, this->sheetName);
-    //    strcat(sheetStaffClose, "_Staff_Close_Bracket.ly");
-    //    appendFile(sheetStaffClose,                     
-    //               outputFile);
-    //} else {
-    //  fprintf(stderr, "%s is an unknown module\n", modname);
-    //}
-  //}
-
-  //if (this->noteCount > 0)  {
-   char sheetStaffGroupClose[100];
-   strcpy(sheetStaffGroupClose, this->sheetName);
-   strcat(sheetStaffGroupClose, "_Staff_Group_Close_Bracket.ly");
-   appendFile(sheetStaffGroupClose, outputFile);
-  //}
+  //char sheetStaffGroupClose[100];
+  //strcpy(sheetStaffGroupClose, this->sheetName);
+  //strcat(sheetStaffGroupClose, "_Staff_Group_Close_Bracket.ly");
+  //appendFile(sheetStaffGroupClose, outputFile);
 
   //char sheetClose[100];
   //strcpy(sheetClose, this->sheetName);
