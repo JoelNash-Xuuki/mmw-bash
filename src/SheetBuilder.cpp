@@ -65,7 +65,6 @@ void SheetBuilder::readStaffGroups(STAFFGROUP *staffGroup,
 
 void SheetBuilder::readStaffs(STAFF *staff, 
                               int count){
-  fprintf(this->log,"Reading staff instrument %d ...\n", count);
   fscanf(this->patch,"%s %s %s %s %s %s",
     staff[count].instr,
     staff[count].time,
@@ -74,6 +73,9 @@ void SheetBuilder::readStaffs(STAFF *staff,
     staff[count].key,
     staff[count].mode); 
     staff[count].staffGroupIndex = this->staffGroupCount;
+  fprintf(this->log,"Reading staff %d with group id: %d\n", 
+          count, 
+          staff[count].staffGroupIndex);
 
   if( count >= MAXMODS ){
    fprintf(stderr,"Number of Staffs has exceeded maximum: %d\n", 
@@ -86,8 +88,8 @@ void SheetBuilder::readNotes(NOTE *note,
                              int count){
   fprintf(this->log,"Reading notes to go on staff %d ...\n", count);
   fscanf(this->patch,"%s",
-         notes[noteCount].pat); 
-         notes[noteCount].staffIndex= this->staffCount;
+         notes[count].pat); 
+         notes[count].staffIndex= this->staffCount;
   if(noteCount>= MAXMODS ){
    fprintf(stderr,"Number of Staffs has exceeded maximum: %d\n", 
           MAXMODS);
@@ -349,15 +351,13 @@ void SheetBuilder::collectFileSections(){
   strcat(sheetHeader, "_Header.partial.ly");
   appendFile(sheetHeader, outputFile);
   this->patch= fopen(patchName, "r");
-  fprintf(this->log,"Reading in patch file...\n");
   char sheetStaff[100];
   strcpy(sheetStaff, this->sheetName);
 
-
-  for (int i= 0; i <= this->staffGroupCount; i++) { 
+  for (int i= 0; i < this->staffGroupCount; i++) { 
     // Print the group header
     char sheetStaffGroupHeader[100];
-    fprintf(this->log, "Append staff group %d\n", i);
+    fprintf(this->log, "Append staff group %d\n", i + 1);
     strcpy(sheetStaffGroupHeader, this->sheetName);
     string newString = "_Staff_Group_Header_" + to_string(i + 1) + ".ly";
     strcat(sheetStaffGroupHeader, newString.c_str());
@@ -366,14 +366,17 @@ void SheetBuilder::collectFileSections(){
     for (int j = 0; j < this->staffCount; j++) {
       // Check if staff belongs to current staff group
       if (this->staffs[j].staffGroupIndex == i) {
-        char sheetStaff[100]; fprintf(this->log, "Append staff %d\n", j); strcpy(sheetStaff, this->sheetName); string newString = "_Staff_" + to_string(j + 1) + ".ly";
+        char sheetStaff[100]; 
+        fprintf(this->log, "Append staff %d\n", j + 1); 
+        strcpy(sheetStaff, this->sheetName); 
+        string newString = "_Staff_" + to_string(j + 1) + ".ly";
         strcat(sheetStaff, newString.c_str());
         appendFile(sheetStaff, outputFile);
     
-        for (int n = 0; n <= this->noteCount; n++) {
+        for (int n = 0; n < this->noteCount; n++) {
           // Check if notes belongs to current staff
           if (this->notes[n].staffIndex == j) {
-            fprintf(this->log, "Append notes %d\n", i);
+            fprintf(this->log, "Append notes %d\n", n + 1);
             char sheetStaffNotes[100];
             strcpy(sheetStaffNotes, this->sheetName);
             fprintf(this->log, "Opening %s ...\n", sheetStaffNotes);
@@ -386,21 +389,20 @@ void SheetBuilder::collectFileSections(){
             strcpy(sheetStaffClose, this->sheetName);
             strcat(sheetStaffClose, "_Staff_Close_Bracket.ly");
 
-            fprintf(this->log, "Append staff close bracket %d\n", i);
+            fprintf(this->log, "Append staff close bracket %d\n", j + 1);
             appendFile(sheetStaffClose, 
                        outputFile);
           }
         }
       }
     }
+      char sheetStaffGroupClose[100];
+      strcpy(sheetStaffGroupClose, this->sheetName);
+      strcat(sheetStaffGroupClose, "_Staff_Group_Close_Bracket.ly");
+      appendFile(sheetStaffGroupClose, outputFile);
   }
       
-  //char sheetStaffGroupClose[100];
-  //strcpy(sheetStaffGroupClose, this->sheetName);
-  //strcat(sheetStaffGroupClose, "_Staff_Group_Close_Bracket.ly");
-  //appendFile(sheetStaffGroupClose, outputFile);
-
-  //char sheetClose[100];
+    //char sheetClose[100];
   //strcpy(sheetClose, this->sheetName);
   //strcat(sheetClose, "_Close.partial.ly");
   //appendFile(sheetClose, outputFile);
