@@ -1,8 +1,0 @@
-sgpt "Implementation: $(cat src/SheetBuilder.cpp) 
-  Can you see how I count STAFFGROUPS, STAFF and 
-  NOTE in readPatchFile()? 
-  I'm trying to also make sure that the staff's
-  are associated with staffgroup using staffGroupIndex.
-  I want to print these out in collectFileSections()
-  show me a nice way to do that
-"

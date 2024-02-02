@@ -330,59 +330,43 @@ void SheetBuilder::collectFileSections(){
   string outputPath = this->sheetName; // Change to your output file path
   outputPath += ".ly";
 
-  /////if (remove(outputPath.c_str()) != 0) {
-  /////    int err = errno;
-  /////    //std::cerr << "Error deleting existing file: " << strerror(err) << std::endl;
-  /////} else {
-  /////    //std::cout << "Existing file deleted successfully." << std::endl;
-  /////}
+  if (remove(outputPath.c_str()) != 0) {
+      int err = errno;
+      std::cerr << "Error deleting existing file: " << strerror(err) << std::endl;
+  } else {
+      std::cout << "Existing file deleted successfully." << std::endl;
+  }
 
   ofstream outputFile(outputPath, std::ios::app);
   if (!outputFile) {
     cerr << "Error opening output file." << std::endl;
   }
 
-  for (int i= 1; i <= this->staffGroupCount; i++) { 
+  for (int i= 0; i <= this->staffGroupCount; i++) { 
     char sheetStaffGroupHeader[100];
     fprintf(this->log, "Append staff group %d\n", i);
     strcpy(sheetStaffGroupHeader, this->sheetName);
     string newString = "_Staff_Group_Header_" + to_string(i + 1) + ".ly";
     strcat(sheetStaffGroupHeader, newString.c_str());
     appendFile(sheetStaffGroupHeader, outputFile);
+
+    for (int j = 0; j < this->staffCount; j++) {
+      // Check if staff belongs to current staff group
+      if (this->staffs[j].staffGroupIndex == i) {
+        // Print staff
+        char sheetStaff[100];
+        strcpy(sheetStaff, this->sheetName);
+        string newString = "_Staff_" + to_string(j + 1) + ".ly";
+        strcat(sheetStaff, newString.c_str());
+        appendFile(sheetStaff, outputFile);
+      }
+    }
   }
 
-  ///char sheetHeader[100];
-  ///fprintf(this->log, "Append Score header  %s ...\n", sheetHeader);
-  ///strcpy(sheetHeader, this->sheetName);
-  ///strcat(sheetHeader, "_Header.partial.ly");
-  ///appendFile(sheetHeader, outputFile);
-  //while (true) {
-    //if (fscanf(this->patch, "%s", modname) == EOF) {
-    //  break;
-    //}
-  // for (int i= 0; i < this->staffGroupCount; i++) { 
-  //    char sheetStaffGroupHeader[100];
 
-  //    fprintf(this->log, "Append staff group %s ...\n", sheetStaffGroupHeader);
-  //    strcpy(sheetStaffGroupHeader, this->sheetName);
-  //    string newString = "_Staff_Group_Header_" + to_string(i + 1) + ".ly";
-  //    strcat(sheetStaffGroupHeader, newString.c_str());
-  //    appendFile(sheetStaffGroupHeader, outputFile);
-  // }
-    //} else if (!strcmp(modname, "STAFF")) {
-    //  char sheetStaff[100];
-    //  strcpy(sheetStaff, this->sheetName);
-    //  fprintf(this->log, "Opening %s ...\n", sheetStaff);
-    //  string newString = "_Staff_" + to_string(++staffCounter) + ".ly";
-    //  strcat(sheetStaff, newString.c_str());
-    //  appendFile(sheetStaff, outputFile);
-    //} else if (!strcmp(modname, "NOTE")) {
-    //  char sheetStaffNotes[100];
-    //  strcpy(sheetStaffNotes, this->sheetName);
-    //  fprintf(this->log, "Opening %s ...\n", sheetStaffNotes);
-    //  string newString = "_Staff_Notes_" + to_string(++noteCounter) + ".ly";
-    //  strcat(sheetStaffNotes, newString.c_str());
-    //  appendFile(sheetStaffNotes, outputFile);
+
+
+      
     //  //if (this->staffCount == 3)  {
     //  //    char sheetStaffClose[100];
     //  //    strcpy(sheetStaffClose, this->sheetName);
@@ -403,10 +387,10 @@ void SheetBuilder::collectFileSections(){
   //}
 
   //if (this->noteCount > 0)  {
-  //  char sheetStaffGroupClose[100];
-  //  strcpy(sheetStaffGroupClose, this->sheetName);
-  // // strcat(sheetStaffGroupClose, "_Staff_Group_Close_Bracket.ly");
-  //  appendFile(sheetStaffGroupClose, outputFile);
+   char sheetStaffGroupClose[100];
+   strcpy(sheetStaffGroupClose, this->sheetName);
+   strcat(sheetStaffGroupClose, "_Staff_Group_Close_Bracket.ly");
+   appendFile(sheetStaffGroupClose, outputFile);
   //}
 
   //char sheetClose[100];
