@@ -82,11 +82,12 @@ void SheetBuilder::readStaffs(STAFF *staff,
   }
 }
 
-void SheetBuilder::readNotes(NOTE *note){
-  this->noteCount += 1;
-  fprintf(this->log,"Reading notes to go on staff %d ...\n", noteCount);
+void SheetBuilder::readNotes(NOTE *note,
+                             int count){
+  fprintf(this->log,"Reading notes to go on staff %d ...\n", count);
   fscanf(this->patch,"%s",
          notes[noteCount].pat); 
+         notes[noteCount].staffIndex= this->staffCount;
   if(noteCount>= MAXMODS ){
    fprintf(stderr,"Number of Staffs has exceeded maximum: %d\n", 
           MAXMODS);
@@ -108,7 +109,7 @@ void SheetBuilder::readPatchFile(){
     } else if (!strcmp(modname, "STAFF")) {
       readStaffs(this->staffs, ++this->staffCount);
     } else if (!strcmp(modname, "NOTE")) {
-      readNotes(this->notes);
+      readNotes(this->notes, ++this->noteCount);
     } else {
       fprintf(stderr, "%s is an unknown module\n", modname);
     }
@@ -124,7 +125,7 @@ void SheetBuilder::readPatchFile(const char* patchName){
     } else if (!strcmp(modname, "STAFF")) {
       readStaffs(this->staffs, ++staffCount);
     } else if (!strcmp(modname, "NOTE")) {
-      readNotes(this->notes);
+      readNotes(this->notes, ++noteCount);
     } else {
       fprintf(stderr, "%s is an unknown module\n", modname);
     }
@@ -219,17 +220,17 @@ void SheetBuilder::printStaffInGroupHeader(){
 }
 
 void SheetBuilder::printStaffInGroupCloseBracket(){
-  char sheetStaffs[100];
-  strcpy(sheetStaffs, this->sheetName);
-  strcat(sheetStaffs, "_Staff_Group_Close_Bracket.ly");
-  fprintf(this->log, "Opening %s ...\n", sheetStaffs);
-  FILE* sheet= fopen(sheetStaffs, "w");
-  fprintf(this->log, "Opened %s\n", sheetStaffs);
-  fprintf(sheet,"      }\n");
-  fprintf(sheet,"     >>\n");
-  fprintf(this->log, "Closing %s ...\n", sheetStaffs);
-  fclose(sheet);
-  fprintf(this->log, "Closed %s\n", sheetStaffs);
+char sheetStaffs[100];
+strcpy(sheetStaffs, this->sheetName);
+strcat(sheetStaffs, "_Staff_Group_Close_Bracket.ly");
+fprintf(this->log, "Opening %s ...\n", sheetStaffs);
+FILE* sheet= fopen(sheetStaffs, "w");
+fprintf(this->log, "Opened %s\n", sheetStaffs);
+fprintf(sheet,"      }\n");
+fprintf(sheet,"     >>\n");
+fprintf(this->log, "Closing %s ...\n", sheetStaffs);
+fclose(sheet);
+fprintf(this->log, "Closed %s\n", sheetStaffs);
 }
 
 void SheetBuilder::printStaffCloseBracket(){
@@ -332,9 +333,9 @@ void SheetBuilder::collectFileSections(){
 
   if (remove(outputPath.c_str()) != 0) {
       int err = errno;
-      std::cerr << "Error deleting existing file: " << strerror(err) << std::endl;
+      //std::cerr << "Error deleting existing file: " << strerror(err) << std::endl;
   } else {
-      std::cout << "Existing file deleted successfully." << std::endl;
+      //std::cout << "Existing file deleted successfully." << std::endl;
   }
 
   ofstream outputFile(outputPath, std::ios::app);
@@ -355,17 +356,25 @@ void SheetBuilder::collectFileSections(){
       if (this->staffs[j].staffGroupIndex == i) {
         // Print staff
         char sheetStaff[100];
+        fprintf(this->log, "Append staff %d\n", j);
         strcpy(sheetStaff, this->sheetName);
         string newString = "_Staff_" + to_string(j + 1) + ".ly";
         strcat(sheetStaff, newString.c_str());
         appendFile(sheetStaff, outputFile);
+    
+        for (int n = 0; n <= this->noteCount; n++) {
+          if (this->notes[n].staffIndex == j) {
+            char sheetStaffNotes[100];
+            strcpy(sheetStaffNotes, this->sheetName);
+            fprintf(this->log, "Opening %s ...\n", sheetStaffNotes);
+            string newString = "_Staff_Notes_" + to_string(n + 1) + ".ly";
+            strcat(sheetStaffNotes, newString.c_str());
+            appendFile(sheetStaffNotes, outputFile);
+          }
+        }
       }
     }
   }
-
-
-
-
       
     //  //if (this->staffCount == 3)  {
     //  //    char sheetStaffClose[100];
