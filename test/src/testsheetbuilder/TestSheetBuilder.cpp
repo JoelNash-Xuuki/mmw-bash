@@ -146,9 +146,8 @@ void TestSheetBuilder::canPrintScoreClose(void){
 void TestSheetBuilder::canAppendScoreFileSections(void){
   sheetBuilder.setPatchFile("/home/joel/projects_/patches/testPatch-3");
   sheetBuilder.readPatchFile();
-  sheetBuilder.setPatchFile("/home/joel/projects_/patches/scorePatch");
+  this->sheetBuilder.printHeader();
   this->sheetBuilder.collectFileSections(); 
-
   CPPUNIT_ASSERT(this->sheetBuilder.compareFiles(
     "/home/joel/mmw/test/src/score/Test_Sheet.ly",
     "/home/joel/mmw/test/src/score/Expected_Test_Sheet.ly"));

@@ -21,10 +21,12 @@ typedef struct { // STAFF
   char key[SYNMOD_CHARS];
   char mode[SYNMOD_CHARS];
   FILE* sheet;
+  int staffGroupIndex;
 } STAFF;
 
 typedef struct { // NOTES
   char pat[SYNMOD_CHARS];
+  int staffIndex;
 } NOTE;
 
 #ifndef SheetBuilder_H
@@ -70,7 +72,8 @@ class SheetBuilder{
     void printHeader(void);
     void readStaffs(STAFF *staff, 
                     int count);
-    void readNotes(NOTE *note);
+    void readNotes(NOTE *note,
+                   int count);
     void readStaffGroups(STAFFGROUP *staffGroup, 
                          int count);
     void setPatchFile(const char* patchName);
