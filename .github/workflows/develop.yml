@@ -31,5 +31,4 @@ jobs:
 
       - name: Run testmodsyn
         run: |
-          g++ test/src/testmodsyn/main.cpp test/src/testmodsyn/TestModSyn.cpp src/modsyn/modsyn.cpp -o testmodsyn $(pkg-config
---cflags --libs cppunit)
+          g++ test/src/testmodsyn/main.cpp test/src/testmodsyn/TestModSyn.cpp src/modsyn/modsyn.cpp -o testmodsyn $(pkg-config --cflags --libs cppunit)
