@@ -408,10 +408,9 @@ void SheetBuilder::collectFileSections(){
     appendFile(sheetStaffGroupClose, outputFile);
   }
       
-    //char sheetClose[100];
-  //strcpy(sheetClose, this->sheetName);
-  //strcat(sheetClose, "_Close.partial.ly");
-  //appendFile(sheetClose, outputFile);
-  //fclose(this->patch);
- outputFile.close();
+  char sheetClose[100];
+  strcpy(sheetClose, this->sheetName);
+  strcat(sheetClose, "_Close.partial.ly");
+  appendFile(sheetClose, outputFile);
+  outputFile.close();
 }
