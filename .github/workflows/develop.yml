@@ -22,8 +22,7 @@ jobs:
 
       - name: Run testsheetbuilder
         run: |
-          g++ test/src/testsheetbuilder/main.cpp test/src/testsheetbuilder/TestSheetBuilder.cpp src/SheetBuilder.cpp -o testshe
-etbuilder $(pkg-config --cflags --libs cppunit)
+          g++ test/src/testsheetbuilder/main.cpp test/src/testsheetbuilder/TestSheetBuilder.cpp src/SheetBuilder.cpp -o testsheetbuilder $(pkg-config --cflags --libs cppunit)
           ./testsheetbuilder
 
       - name: Build modsyn
