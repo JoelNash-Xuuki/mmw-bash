@@ -1,4 +1,4 @@
-- name: Pull code to user device
+  name: Pull code to user device
   uses: webfactory/ssh-agent@v0.5.0
   with:
     ssh-private-key: ${{ secrets.USER_DEVICE_SSH_PRIVATE_KEY }}
