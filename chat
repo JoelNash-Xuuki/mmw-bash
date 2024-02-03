@@ -1,7 +1,12 @@
 sgpt "
-Regard the function ColletFileSctions()
+Regard the following code
 $(cat function)
-I want to add a staff close bracket once
-a given number of staff notes have finished 
-printing to the file.
+
+readPatchFile reads in 3 staffs
+
+I think the second for loop needs to loop one more
+time to append the 3rd staff and notes before
+the second time the sheet staff group close
+bracket is printed?
+
 "

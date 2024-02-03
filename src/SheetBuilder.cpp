@@ -86,10 +86,12 @@ void SheetBuilder::readStaffs(STAFF *staff,
 
 void SheetBuilder::readNotes(NOTE *note,
                              int count){
-  fprintf(this->log,"Reading notes to go on staff %d ...\n", count);
   fscanf(this->patch,"%s",
          notes[count].pat); 
          notes[count].staffIndex= this->staffCount;
+
+  fprintf(this->log,"Reading notes %d with staff id: %d\n", count, staffCount);
+
   if(noteCount>= MAXMODS ){
    fprintf(stderr,"Number of Staffs has exceeded maximum: %d\n", 
           MAXMODS);
@@ -156,12 +158,11 @@ void SheetBuilder::printStaffGroupHeader() {
   
 
   for (count; count > 0; count--){
-    char sheetStaff[100];
+    char sheetStaff[150];
     strcpy(sheetStaff, this->sheetName);
-
-    fprintf(this->log, "Opening %s ...\n", sheetStaff);
     string newString = "_Staff_Group_Header_" + std::to_string(count) + ".ly";
     strcat(sheetStaff, newString.c_str());
+    fprintf(this->log, "Opening %s\n", sheetStaff);
     FILE* sheet= fopen(sheetStaff, "w");
 
     if (this->staffGroupCount > 0) {
@@ -225,7 +226,7 @@ void SheetBuilder::printStaffInGroupCloseBracket(){
 char sheetStaffs[100];
 strcpy(sheetStaffs, this->sheetName);
 strcat(sheetStaffs, "_Staff_Group_Close_Bracket.ly");
-fprintf(this->log, "Opening %s ...\n", sheetStaffs);
+fprintf(this->log, "Opening %s\n", sheetStaffs);
 FILE* sheet= fopen(sheetStaffs, "w");
 fprintf(this->log, "Opened %s\n", sheetStaffs);
 fprintf(sheet,"      }\n");
@@ -345,6 +346,10 @@ void SheetBuilder::collectFileSections(){
     cerr << "Error opening output file." << std::endl;
   }
 
+  fprintf(this->log, "There are %d Staff Group(s)\n", this->staffGroupCount);
+  fprintf(this->log, "There are %d Staff(s)\n", this->staffCount);
+  fprintf(this->log, "There are %d Notes(s)\n", this->noteCount);
+
   // Add the sheet header
   char sheetHeader[100];
   strcpy(sheetHeader, this->sheetName);
@@ -363,43 +368,44 @@ void SheetBuilder::collectFileSections(){
     strcat(sheetStaffGroupHeader, newString.c_str());
     appendFile(sheetStaffGroupHeader, outputFile);
 
-    for (int j = 0; j < this->staffCount; j++) {
+    for (int j = 0; j <=this->staffCount; j++) {
       // Check if staff belongs to current staff group
-      if (this->staffs[j].staffGroupIndex == i) {
+      if (this->staffs[j].staffGroupIndex == i + 1) {
         char sheetStaff[100]; 
-        fprintf(this->log, "Append staff %d\n", j + 1); 
+        fprintf(this->log, "Append staff %d to group %d \n", j, i + 1); 
         strcpy(sheetStaff, this->sheetName); 
-        string newString = "_Staff_" + to_string(j + 1) + ".ly";
+        string newString = "_Staff_" + to_string(j) + ".ly";
         strcat(sheetStaff, newString.c_str());
         appendFile(sheetStaff, outputFile);
     
         for (int n = 0; n < this->noteCount; n++) {
-          // Check if notes belongs to current staff
+          // Check if notes belongs to current staffj
           if (this->notes[n].staffIndex == j) {
-            fprintf(this->log, "Append notes %d\n", n + 1);
+            fprintf(this->log, "Append notes %d to staff %d \n",n, j);
             char sheetStaffNotes[100];
             strcpy(sheetStaffNotes, this->sheetName);
-            fprintf(this->log, "Opening %s ...\n", sheetStaffNotes);
-            string newString = "_Staff_Notes_" + to_string(n + 1) + ".ly";
+            string newString = "_Staff_Notes_" + to_string(n) + ".ly";
             strcat(sheetStaffNotes, newString.c_str());
             appendFile(sheetStaffNotes, outputFile);
-
-            // Print Close Bracket          
-            char sheetStaffClose[100];
-            strcpy(sheetStaffClose, this->sheetName);
-            strcat(sheetStaffClose, "_Staff_Close_Bracket.ly");
-
-            fprintf(this->log, "Append staff close bracket %d\n", j + 1);
-            appendFile(sheetStaffClose, 
-                       outputFile);
+            
           }
         }
+       // Print Close Bracket          
+        char sheetStaffClose[100];
+        strcpy(sheetStaffClose, this->sheetName);
+        strcat(sheetStaffClose, "_Staff_Close_Bracket.ly");
+
+        fprintf(this->log, "Append staff close bracket %d\n", j);
+        appendFile(sheetStaffClose, 
+                   outputFile);
       }
     }
-      char sheetStaffGroupClose[100];
-      strcpy(sheetStaffGroupClose, this->sheetName);
-      strcat(sheetStaffGroupClose, "_Staff_Group_Close_Bracket.ly");
-      appendFile(sheetStaffGroupClose, outputFile);
+
+    char sheetStaffGroupClose[100];
+    strcpy(sheetStaffGroupClose, this->sheetName);
+    strcat(sheetStaffGroupClose, "_Staff_Group_Close_Bracket.ly");
+    fprintf(this->log, "Append Group staff close %d\n", i + 1);
+    appendFile(sheetStaffGroupClose, outputFile);
   }
       
     //char sheetClose[100];
