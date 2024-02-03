@@ -1,12 +1,9 @@
 sgpt "
-Regard the following code
-$(cat function)
+$(cat .github/workflows/develop.yml)
+$(cat makefile) 
 
-readPatchFile reads in 3 staffs
-
-I think the second for loop needs to loop one more
-time to append the 3rd staff and notes before
-the second time the sheet staff group close
-bracket is printed?
+Anything to crituque about my yml file
+when I push changes to the develop branch i want my user device 
+to pull it down.
 
 "
