@@ -142,7 +142,7 @@ void SheetBuilder::printHeader(void){
   strcpy(sheetHeader, this->sheetName);
   strcat(sheetHeader, "_Header.partial.ly");
   FILE* sheet= fopen(sheetHeader, "w");
-  fprintf(sheet,"\\version \"2.22.0\"\n\n");
+//  fprintf(sheet,"\\version \"2.22.0\"\n\n");
   fprintf(sheet,"\\header {\n");
   fprintf(sheet,"  tagline = \"%s\"\n", this->service);
   fprintf(sheet,"  title = \"%s\"\n", this->title);
@@ -340,12 +340,11 @@ void SheetBuilder::collectFileSections(){
   } else {
       //std::cout << "Existing file deleted successfully." << std::endl;
   }
-
   ofstream outputFile(outputPath, std::ios::app);
   if (!outputFile) {
     cerr << "Error opening output file." << std::endl;
   }
-
+  //Confirm score conponents
   fprintf(this->log, "There are %d Staff Group(s)\n", this->staffGroupCount);
   fprintf(this->log, "There are %d Staff(s)\n", this->staffCount);
   fprintf(this->log, "There are %d Notes(s)\n", this->noteCount);
@@ -378,7 +377,7 @@ void SheetBuilder::collectFileSections(){
         strcat(sheetStaff, newString.c_str());
         appendFile(sheetStaff, outputFile);
     
-        for (int n = 0; n < this->noteCount; n++) {
+        for (int n = 0; n <=this->noteCount; n++) {
           // Check if notes belongs to current staffj
           if (this->notes[n].staffIndex == j) {
             fprintf(this->log, "Append notes %d to staff %d \n",n, j);
@@ -387,7 +386,6 @@ void SheetBuilder::collectFileSections(){
             string newString = "_Staff_Notes_" + to_string(n) + ".ly";
             strcat(sheetStaffNotes, newString.c_str());
             appendFile(sheetStaffNotes, outputFile);
-            
           }
         }
        // Print Close Bracket          
@@ -407,7 +405,6 @@ void SheetBuilder::collectFileSections(){
     fprintf(this->log, "Append Group staff close %d\n", i + 1);
     appendFile(sheetStaffGroupClose, outputFile);
   }
-      
   char sheetClose[100];
   strcpy(sheetClose, this->sheetName);
   strcat(sheetClose, "_Close.partial.ly");
