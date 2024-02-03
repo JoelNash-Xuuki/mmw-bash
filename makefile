@@ -8,6 +8,8 @@ INCLUDE = -I/usr/include/csound/
 CPPUNIT = -lcppunit
 CC	= g++
 
+all: sheetbuilder testsheetbuilder modsyn testmodsyn
+
 sheetbuilder: $(SHEETBUILDER) 
 	$(CC) $(SHEETBUILDER) -o ~/mmw/bin/sheetbuilder
 
@@ -19,3 +21,9 @@ modsyn: $(MODSYN)
 
 testmodsyn: $(TESTMODSYN) 
 	$(CC) $(TESTMODSYN) -o ~/mmw/bin/testmodsyn $(CPPUNIT)
+
+clean:
+	rm -f ~/mmw/bin/sheetbuilder
+	rm -f ~/mmw/bin/testsheetbuilder
+	rm -f ~/mmw/bin/modsyn
+	rm -f ~/mmw/bin/testmodsy

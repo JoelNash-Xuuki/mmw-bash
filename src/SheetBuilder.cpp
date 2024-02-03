@@ -142,7 +142,7 @@ void SheetBuilder::printHeader(void){
   strcpy(sheetHeader, this->sheetName);
   strcat(sheetHeader, "_Header.partial.ly");
   FILE* sheet= fopen(sheetHeader, "w");
-//  fprintf(sheet,"\\version \"2.22.0\"\n\n");
+  fprintf(sheet,"\\version \"2.22.0\"\n\n");
   fprintf(sheet,"\\header {\n");
   fprintf(sheet,"  tagline = \"%s\"\n", this->service);
   fprintf(sheet,"  title = \"%s\"\n", this->title);
@@ -229,7 +229,6 @@ strcat(sheetStaffs, "_Staff_Group_Close_Bracket.ly");
 fprintf(this->log, "Opening %s\n", sheetStaffs);
 FILE* sheet= fopen(sheetStaffs, "w");
 fprintf(this->log, "Opened %s\n", sheetStaffs);
-fprintf(sheet,"      }\n");
 fprintf(sheet,"     >>\n");
 fprintf(this->log, "Closing %s ...\n", sheetStaffs);
 fclose(sheet);
@@ -353,8 +352,8 @@ void SheetBuilder::collectFileSections(){
   char sheetHeader[100];
   strcpy(sheetHeader, this->sheetName);
   strcat(sheetHeader, "_Header.partial.ly");
+  fprintf(this->log, "Append Score Header\n");
   appendFile(sheetHeader, outputFile);
-  this->patch= fopen(patchName, "r");
   char sheetStaff[100];
   strcpy(sheetStaff, this->sheetName);
 
