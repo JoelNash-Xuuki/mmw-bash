@@ -1,0 +1,36 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up C++ environment
+        uses: actions/setup-cpp@v2
+
+      - name: Build sheetbuilder
+        run: |
+          g++ src/main.cpp src/SheetBuilder.cpp -o sheetbuilder
+
+      - name: Run testsheetbuilder
+        run: |
+          g++ test/src/testsheetbuilder/main.cpp test/src/testsheetbuilder/TestSheetBuilder.cpp src/SheetBuilder.cpp -o testshe
+etbuilder $(pkg-config --cflags --libs cppunit)
+          ./testsheetbuilder
+
+      - name: Build modsyn
+        run: |
+          g++ src/modsyn/main.cpp src/modsyn/modsyn.cpp -o modsyn
+
+      - name: Run testmodsyn
+        run: |
+          g++ test/src/testmodsyn/main.cpp test/src/testmodsyn/TestModSyn.cpp src/modsyn/modsyn.cpp -o testmodsyn $(pkg-config
+--cflags --libs cppunit)
