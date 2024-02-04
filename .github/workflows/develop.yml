@@ -1,4 +1,4 @@
-Request: name: Pull code to user device
+name: Pull code to user device
 
 on:
   push:
