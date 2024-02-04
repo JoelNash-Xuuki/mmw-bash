@@ -5,7 +5,11 @@ $(cat makefile)
 Anything to crituque about my yml file
 when I push changes to the develop branch i want my user device 
 to pull it down. if thats appropiate for github actions.
-help prove this works
+do i need the user device to host its own runner to do this?
 
+how can i confirm 
+USER_DEVICE_SSH_PRIVATE_KEY 
+USER_DEVICE_SSH_KNOWN_HOSTS 
+is correct?
 
 "
