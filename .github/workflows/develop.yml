@@ -1,4 +1,4 @@
-name: Pull code to user device
+Request: name: Pull code to user device
 
 on:
   push:
@@ -17,8 +17,6 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.0
         with:
           ssh-private-key: ${{ secrets.USER_DEVICE_SSH_PRIVATE_KEY }}
-          ssh-known-hosts: ${{ secrets.USER_DEVICE_SSH_KNOWN_HOSTS }}
-          ssh-strict: true
 
       - name: Pull code
         run: |

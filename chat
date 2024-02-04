@@ -1,4 +1,31 @@
 sgpt "
 $(cat .github/workflows/develop.yml)
-check the syntax of my github actions yml file
+These are the results after I run this yml file
+in my github actions tab on the browser. 
+Help me investigate and understand the behaviour
+and how I can correct it
+
+Warning: Unexpected input(s) \'ssh-known-hosts\', \'ssh-strict\', valid inputs are [\'ssh-private-key\', \'ssh-auth-sock\']
+2
+Run webfactory/ssh-agent@v0.5.0
+6
+Adding GitHub.com keys to /home/runner/.ssh/known_hosts
+7
+Starting ssh-agent
+8
+Adding private key to agent
+9
+Error loading key \"(stdin)\": error in libcrypto
+10
+Error: Command failed: ssh-add -
+11
+Error loading key \"(stdin)\": error in libcrypto
+12
+
+Warning: Unexpected input(s) \'ssh-known-hosts\', \'ssh-strict\', valid inputs are [\'ssh-private-key\', \'ssh-auth-sock\']
+2
+Post job cleanup.
+3
+Stopping SSH agent
+
 "
