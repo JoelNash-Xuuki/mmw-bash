@@ -2,11 +2,9 @@ sgpt "
 This is my attempt to build a yaml file.
 $(cat .github/workflows/develop.yml)
 
-I need to understand this error
-So it can be fixed
-
-i've confirmed the following.
-shall i try trigger my pipeline again and see what happens?
+what does this command do?
 $(cat content)
+
+
 
 "
