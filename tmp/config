@@ -1,5 +1,5 @@
-PROJ=Hello
-PROJLOC=projects_/Hello
+PROJ=202210030854-idea
+PROJLOC=projects_/$PROJ
 PROJPATH=$HOME/$PROJLOC
 ARTIST=Vyvn
 SERVICE=Xuuki.xyz
@@ -69,7 +69,8 @@ SESSION="session-1"
 LILY="${PROJPATH}/src/${PROJ}-${SESSION}.ly"
 TITLE="${PROJPATH}/${PROJ}-${SESSION}"
 
-AUDIOFILE=/home/joel/audio/202210030854-idea-output.wav
+AUDIOFILE=/home/joel/Downloads/instr-1.wav
+
 
 MP4=$PROJ.mp4
 MP4R=$PROJ-r.mp4

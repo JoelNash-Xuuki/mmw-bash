@@ -6,7 +6,7 @@ runMethod(){
 
 createTextPNG(){
   convert -background transparent -fill lightblue \
-	  -gravity center\
+	      -gravity center\
           -extent 1920x1080\
           -font ~/.fonts/xuukitype1.ttf -pointsize 288 label:$1 \
            $HOME/images/$2.png
