@@ -1,9 +1,6 @@
-stage-the-dev-feature
-Command failed: ssh-add - Error loading key "(stdin)": error in libcrypto
-stage-the-dev-feature
-Node.js 16 actions are deprecated. Please update the following actions to use Node.js 20: actions/checkout@v2, webfactory/ssh-agent@v0.5.0. For more information see: https://github.blog/changelog/2023-09-22-github-actions-transitioning-from-node-16-to-node-20/.
-￼Show less
-stage-the-dev-feature
-The following actions uses node12 which is deprecated and will be forced to run on node16: actions/checkout@v2, webfactory/ssh-agent@v0.5.0. For more info: https://github.blog/changelog/2023-06-13-github-actions-all-actions-will-run-on-node16-instead-of-node12-by-default/
-
-
+Ops-1: ssh-add ~/.ssh/id_rsa
+Could not open a connection to your authentication agent.
+Ops-1: eval $(ssh-agent)
+Agent pid 7572
+Ops-1: ssh-add ~/.ssh/id_rsa
+Identity added: /home/joel/.ssh/id_rsa (joel@raspberrypi)

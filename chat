@@ -1,14 +1,12 @@
 sgpt "
 This is my attempt to build a yaml file.
-This file will be used by github actions
-I connect to my dev device (joel@192.168.1.229) 
-via ssh. When I'm done with a feature
-I want to push those changes to the develop branch
-Then I want my test device joel@192.168.1.135
-to pull it down. 
-If thats possible in github actions. (im still 
-learning the concept).
-
 $(cat .github/workflows/develop.yml)
+
+I need to understand this error
+So it can be fixed
+
+i've confirmed the following.
+shall i try trigger my pipeline again and see what happens?
+$(cat content)
 
 "
