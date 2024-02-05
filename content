@@ -1,1 +1,18 @@
-ssh -o StrictHostKeyChecking=yes -A -t joel@192.168.1.135 "cd $HOME/mmw/ && git pull origin develop"
+
+Run ssh -o StrictHostKeyChecking=yes -A -t joel@192.168.1.135 "cd $HOME/mmw/ && git pull origin develop"
+
+  ssh -o StrictHostKeyChecking=yes -A -t joel@192.168.1.135 "cd $HOME/mmw/ && git pull origin develop"
+
+  shell: /usr/bin/bash -e {0}
+
+  env:
+
+    SSH_AUTH_SOCK: /tmp/ssh-XXXXXXlv27x1/agent.1652
+
+    SSH_AGENT_PID: 1653
+
+Pseudo-terminal will not be allocated because stdin is not a terminal.
+
+ssh: connect to host 192.168.1.135 port 22: Connection timed out
+
+Error: Process completed with exit code 255.

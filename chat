@@ -2,8 +2,11 @@ sgpt "
 This is my attempt to build a yaml file.
 $(cat .github/workflows/develop.yml)
 
-what does this command do?
+This is the error
 $(cat content)
+
+Perhaps its silly use github actions
+to ssh into the test device and then pull down the code?
 
 
 
