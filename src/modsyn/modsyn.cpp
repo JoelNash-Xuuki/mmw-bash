@@ -13,9 +13,8 @@ ModSyn::ModSyn(const char* patch,
   this->patch= patch;
   this->name= name;
 
-  fprintf(this->log,"Reading in patch file\n");
   this->log= fopen("logs/modsyn.log", "w");
-  fprintf(this->log,"Starting Modular Synthesiser...\n");
+  fprintf(this->log,"Starting Modular Synthesiser.\n");
 
   this->oscs  = (OSCMOD *)malloc(MAXMODS * 
                                  sizeof(OSCMOD));
