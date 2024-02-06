@@ -18,6 +18,6 @@ int main(int argc, char **argv){
 
   ModSyn modsyn= ModSyn(patch,
                         name);
-
+  
   return 0;
 }

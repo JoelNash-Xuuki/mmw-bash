@@ -27,7 +27,8 @@ void ModSyn::processFile(const char* filename) {
     return;
   }
 
-  OSCMOD *oscs = (OSCMOD *)malloc(MAXMODS * sizeof(OSCMOD));
+  OSCMOD *oscs = (OSCMOD *)malloc(MAXMODS * 
+                                  sizeof(OSCMOD));
   int osc_count = 0;
   char modname[64];
 

@@ -15,12 +15,10 @@ ModSyn::ModSyn(const char* patch,
 
   this->log= fopen("logs/modsyn.log", "w");
   fprintf(this->log,"Starting Modular Synthesiser.\n");
-
-  this->oscs  = (OSCMOD *)malloc(MAXMODS * 
+  this->oscs= (OSCMOD *)malloc(MAXMODS *
                                  sizeof(OSCMOD));
   this->mixes = (MIXOUT *)malloc(MAXMODS * 
                                  sizeof(MIXOUT));
-
 };
 
 ModSyn::~ModSyn(){};
@@ -37,6 +35,7 @@ void ModSyn::processPatch() {
   print_header(this->fileOut);
   readPatchFile();
 
+  this->printInstr(this->fileOut);
   int i;
   for(i =0; i < osc_count; i++){
     print_osc(oscs[i],this->fileOut);      
@@ -46,8 +45,7 @@ void ModSyn::processPatch() {
     print_mix(mixes[i],this->fileOut);      
   }
   print_score(10.0,this->fileOut);
-
-  
+  fclose(this->fileOut);
 }
 
 void ModSyn::readPatchFile(){
