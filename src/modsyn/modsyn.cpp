@@ -27,9 +27,6 @@ ModSyn::ModSyn(const char* patch,
 ModSyn::~ModSyn(){};
 void ModSyn::processPatch() {
 
-  
-  
-
   this->file= fopen(this->patch, "r");
   this->fileOut= fopen(this->name, "w");
 
