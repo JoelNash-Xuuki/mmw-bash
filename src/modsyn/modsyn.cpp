@@ -8,36 +8,55 @@
 using namespace std;
 
 ModSyn::ModSyn(){};
-
 ModSyn::ModSyn(const char* patch,
                const char* name){
- this->patch= patch;
- this->name= name;
+  this->patch= patch;
+  this->name= name;
+
+  fprintf(this->log,"Reading in patch file\n");
+  this->log= fopen("logs/modsyn.log", "w");
+  fprintf(this->log,"Starting Modular Synthesiser...\n");
+
+  this->oscs  = (OSCMOD *)malloc(MAXMODS * 
+                                 sizeof(OSCMOD));
+  this->mixes = (MIXOUT *)malloc(MAXMODS * 
+                                 sizeof(MIXOUT));
+
 };
 
 ModSyn::~ModSyn(){};
-
 void ModSyn::processPatch() {
-  OSCMOD *oscs;
-  MIXOUT *mixes;
 
-  int osc_count = 0;
-  int mix_count = 0;
-  char modname[64];
-  int i;
+  
+  
 
-  oscs  = (OSCMOD *)malloc(MAXMODS * sizeof(OSCMOD));
-  mixes = (MIXOUT *)malloc(MAXMODS * sizeof(MIXOUT));
-
-  FILE *file = fopen(this->patch, "r");
-  FILE *fileOut = fopen(this->name, "w");
+  this->file= fopen(this->patch, "r");
+  this->fileOut= fopen(this->name, "w");
 
   if (file == NULL) {
     printf("Failed to open file: %s\n", this->patch);
     return;
   }
 
-  print_header(fileOut);
+  print_header(this->fileOut);
+  readPatchFile();
+
+  int i;
+  for(i =0; i < osc_count; i++){
+    print_osc(oscs[i],this->fileOut);      
+  }
+
+  for(i =0; i < mix_count; i++){
+    print_mix(mixes[i],this->fileOut);      
+  }
+  print_score(10.0,this->fileOut);
+
+  
+}
+
+void ModSyn::readPatchFile(){
+  this->osc_count= 0;
+  this->mix_count= 0;
 
   while (fscanf(file, "%s", modname) != EOF) {
     if (!strcmp(modname, "OSC")) {
@@ -45,22 +64,10 @@ void ModSyn::processPatch() {
     } else if(! strcmp(modname, "MIXOUT")){ 
       read_mix(mixes, mix_count++,file);
     } else {
-      fprintf(stderr, "%s is an unknown module\n", modname);
+      fprintf(stderr, "%s is an unknown module\n", 
+              modname);
     }
   }
-
-  for(i =0; i < osc_count; i++){
-    print_osc(oscs[i],fileOut);      
-  }
-
-  for(i =0; i < mix_count; i++){
-    print_mix(mixes[i],fileOut);      
-  }
-  print_score(10.0,fileOut);
-
-  fclose(file);
-  fclose(fileOut);
-  free(oscs);
 }
 
 void ModSyn::read_osc(OSCMOD *oscs, int count, FILE* file){
@@ -154,6 +161,9 @@ void ModSyn::print_header(FILE* outputFile){
   fprintf(outputFile,"ksmps = 10\n");
   fprintf(outputFile,"nchnls = 1\n");
   fprintf(outputFile,"<CsInstruments>\n\n");
+}
+
+void ModSyn::printInstr(FILE* outputFile){
   fprintf(outputFile,"\tinstr 1\n");
   fprintf(outputFile,"\tkfrq cpsmidib 1\n");
   fprintf(outputFile,"isine = 1\n");
@@ -162,6 +172,7 @@ void ModSyn::print_header(FILE* outputFile){
   fprintf(outputFile,"isquare = 4\n");
   fprintf(outputFile,"ipulse = 5\n");
 }
+
 void ModSyn::print_score(float duration, FILE* outputFile){
   fprintf(outputFile,"</CsInstruments>\n");
   fprintf(outputFile,"<CsScore>\n\n");
@@ -209,3 +220,4 @@ bool ModSyn::compareFiles(const char* filePath1, const char* filePath2) { std::i
     file2.close();
     return true; // Files are identical
 }
+

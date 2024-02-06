@@ -23,7 +23,8 @@ SheetBuilder::SheetBuilder(const char* sheetName,
   this->artist= artist;
   this->sheetLocation= sheetLocation;
 
-  staffGroups= (STAFFGROUP *)malloc(MAXMODS * sizeof(STAFFGROUP));
+  staffGroups= (STAFFGROUP *)malloc(MAXMODS 
+                                  * sizeof(STAFFGROUP));
   staffs= (STAFF *)malloc(MAXMODS * sizeof(STAFF));
   notes= (NOTE *)malloc(MAXMODS * sizeof(NOTE));
 
@@ -38,14 +39,14 @@ SheetBuilder::SheetBuilder(const char* sheetName,
   this->log= fopen("app.log", "w");
   fprintf(this->log,"Starting Sheet Builder...\n");
 
-  this->sheetName= sheetName;
-  this->service= service;
+  this->sheetName;
+  
   this->title= title;
   this->artist= artist;
   this->sheetLocation= sheetLocation;
-  this->setPatchFile(patchName);
 
-  staffGroups= (STAFFGROUP *)malloc(MAXMODS * sizeof(STAFFGROUP));
+  staffGroups= (STAFFGROUP *)malloc(MAXMODS * 
+                                    sizeof(STAFFGROUP));
   staffs= (STAFF *)malloc(MAXMODS * sizeof(STAFF));
   notes= (NOTE *)malloc(MAXMODS * sizeof(NOTE));
 };
@@ -155,12 +156,12 @@ void SheetBuilder::printHeader(void){
 
 void SheetBuilder::printStaffGroupHeader() {
   int count= this->getStaffGroupCount();
-  
 
   for (count; count > 0; count--){
     char sheetStaff[150];
     strcpy(sheetStaff, this->sheetName);
-    string newString = "_Staff_Group_Header_" + std::to_string(count) + ".ly";
+    string newString = "_Staff_Group_Header_" + 
+                        to_string(count) + ".ly";
     strcat(sheetStaff, newString.c_str());
     fprintf(this->log, "Opening %s\n", sheetStaff);
     FILE* sheet= fopen(sheetStaff, "w");

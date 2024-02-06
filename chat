@@ -1,13 +1,11 @@
 sgpt "
-This is my attempt to build a yaml file.
-$(cat .github/workflows/develop.yml)
 
-This is the error
+I'm going put the following code
+into a function. from reading the code 
+what would you say the functions is 
+called? 
+
 $(cat content)
-
-Perhaps its silly use github actions
-to ssh into the test device and then pull down the code?
-
 
 
 "

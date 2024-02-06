@@ -33,7 +33,6 @@ typedef struct { // NOTES
 #define SheetBuilder_H
 class SheetBuilder{
   private:
-    
     FILE *patch;
     STAFFGROUP *staffGroups;
     STAFF *staffs;

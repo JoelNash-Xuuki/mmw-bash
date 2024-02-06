@@ -1,6 +1,10 @@
 #include "modsyn.hpp"
 #include <cstdio>
 #include <iostream>
+#include <string>
+#include <stdlib.h>
+#include <iostream>
+#include <fstream>
 
 int main(int argc, char **argv){
 
@@ -10,6 +14,9 @@ int main(int argc, char **argv){
   ModSyn modsyn= ModSyn(patch,
                         name);
   modsyn.processPatch();
+  //fclose(modsyn.file);
+  //fclose(modsyn.fileOut);
+  //free(modsyn.oscs);
 
   return 0;
 }
