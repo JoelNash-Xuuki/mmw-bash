@@ -8,6 +8,11 @@
 
 int main(int argc, char **argv){
 
+  if (argc != 3) {
+      printf("Usage: %s <patch> <name>\n", argv[0]);
+      return 1;
+  }
+
   const char* patch = argv[1];
   const char* name = argv[2];
 
