@@ -33,14 +33,17 @@ setSub(){
 
 
 addSub() {
-  cp $MP4R $MP4RTEMP
-
   # Define subtitle styling
   # Font style similar to CLI (monospaced), white font color, black background
-  style="FontName=Courier New,FontSize=16,PrimaryColour=&H00FFFFFF,BackColour=&H00000000,BorderStyle=4,Outline=0,Shadow=0,Alignment=2,MarginL=10,MarginR=10,MarginV=60"
+  style="FontName=Courier New,FontSize=16,PrimaryColour=&H00FFFFFF,BackColour=&H00000000,BorderStyle=4,Outline=0,Shadow=0,Alignment=2,MarginL=40,MarginR=40,MarginV=$1"
 
   ffmpeg -i $MP4R -vf "subtitles=$HOME/mmw/tmp/subtitles.srt:force_style='$style'" $MP4RTEMP
 
+  mv $MP4RTEMP $MP4R
+}
+
+overlayImage(){
+  ffmpeg -i $MP4R -vf "movie=$1[layer];[layer]scale=350:-1[layer2];[in][layer2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:enable='between(t,($2),($3))'[out]" $MP4RTEMP
   mv $MP4RTEMP $MP4R
 }
 

@@ -1,11 +1,8 @@
 sgpt "
-
-I'm going put the following code
-into a function. from reading the code 
-what would you say the functions is 
-called? 
+GOt any thoughts to this ffmpeg command
+I want to over lay an image on an mp4 file
+for a certain amount of time
 
 $(cat content)
-
 
 "
