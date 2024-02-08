@@ -1,0 +1,1 @@
+ffmpeg -i random-blur.png -vf "zoompan=z='if(lte(zoom,1.5),zoom+0.0015,1.5)':d=8:x='iw/2-(iw/zoom/2)+(t-4)*100':y='ih/2-(ih/zoom/2)':s=1920x1920" output.mp4

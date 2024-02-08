@@ -1,8 +1,6 @@
 sgpt "
-GOt any thoughts to this ffmpeg command
-I want to over lay an image on an mp4 file
-for a certain amount of time
-
-$(cat content)
+show me a ffmpeg or ffplay command that starts of zoomed in on a photo
+and
+`kj
 
 "

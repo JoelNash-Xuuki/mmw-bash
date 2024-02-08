@@ -1,5 +1,3 @@
 
-overlayTitle(){
-  ffmpeg -i $1 -vf "movie=$2[layer];[layer]scale=400:-1[layer2];[in][layer2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:enable='between(t,($4),($5))'[out]" $3
-  mv $3 $1
-}
+
+

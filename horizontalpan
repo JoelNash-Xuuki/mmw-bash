@@ -1,0 +1,5 @@
+ffmpeg -loop 1 -i $1 -loop 1 -i $1 -filter_complex "[0:v]scale=1080:1080[bg];[bg][1:v]overlay=-640+t*64:-280[out]" -map [out] -map 0:a? -c:a copy output01.mp4
+
+#Stream map '0:a' matches no streams.
+#To ignore this, add a trailing '?' to the map.
+
