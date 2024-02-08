@@ -75,4 +75,4 @@ AUDIOFILE=/home/joel/audio/instr-1.wav
 MP4=$PROJ.mp4
 MP4R=$PROJ-r.mp4
 MP4RTEMP=$PROJ-temp.mp4
-WATERMARK=/home/joel/images/X.png
+WATERMARK=$HOME/images/X.png
