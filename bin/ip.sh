@@ -25,6 +25,7 @@ rotateMP4(){
 overlayWatermarktt(){
   ffmpeg -i $MP4R -vf "movie=$WATERMARK[watermark]; [watermark]scale=240x135 [watermark2];[in][watermark2] overlay=W-w-0.1:H-h-0.1:enable='between(t,(0),($LENGTH))'[out]" $MP4RTEMP
   mv $MP4RTEMP $MP4R
+  rm $MP4RTEMP
 }
 
 setSub(){
@@ -42,6 +43,13 @@ addSub() {
   ffmpeg -i $MP4R -vf "subtitles=$HOME/mmw/tmp/subtitles.srt:force_style='$style'" $MP4RTEMP
 
   mv $MP4RTEMP $MP4R
+  rm $MP4RTEMP
+}
+
+overlayImage(){
+  ffmpeg -i $MP4R -vf "movie=$1[layer];[layer]scale=400:-1[layer2];[in][layer2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:enable='between(t,($2),($3))'[out]" $MP4RTEMP
+  mv $MP4RTEMP $MP4R
+  rm $MP4RTEMP
 }
 
 "$@"
