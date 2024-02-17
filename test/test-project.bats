@@ -19,11 +19,10 @@ source ./test/tmp/config
 
 @test "createScoreDesign should create the project score file" {
 
-  [ -f "$LILY" ]
   mmw createLyScoreAndMidiFile
+  [ -f "$LILY" ]
   [ -f "$MIDI" ]
   [ -f "$PDF" ]
-
 
   #Validate data
   #[ "$(cat "$HOME/projects_/flock/src/$PROJ.ly)" = "$projOrc" ]

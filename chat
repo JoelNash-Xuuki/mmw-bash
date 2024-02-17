@@ -1,11 +1,11 @@
 sgpt "
+Regard the following bash script that creates 
+an ecasound sound command.
+$(cat bin/rec.eca)
+I need a new line to start AFTER every \'\\'.
+How do i express for bash to create a string with new lines?
 
-I'm going put the following code
-into a function. from reading the code 
-what would you say the functions is 
-called? 
-
-$(cat content)
-
+Don't show me '\' '\' '\'n becuase it prints '\'n
+Also '\'n seems to create a new line but it maintains \n 
 
 "

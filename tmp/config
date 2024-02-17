@@ -1,5 +1,6 @@
 PROJ=Hello
 PROJLOC=projects_/Hello
+LOC=audio
 PROJPATH=$HOME/$PROJLOC
 ARTIST=Vyvn
 SERVICE=Xuuki.xyz
@@ -8,7 +9,9 @@ LILY=$SCORE
 MIDI=$HOME/$PROJLOC/tmp/$PROJ.mid
 PDF=$HOME/Xuuki_Site_Node/site-app/public/doc/$PROJ.pdf
 WAV=$HOME/audio/$ARTIST/$PROJ/1/stems/$PROJ.wav
+AUDIO=$HOME/$LOC/$ARTIST/$PROJ/stems/
 TEMPO=84
+FILE=.wav
 
 BEAT=$(bc <<< "scale=4; (60/$TEMPO)")
 BAR=$(bc <<< "scale=4;$BEAT*4")
