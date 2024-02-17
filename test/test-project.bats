@@ -18,14 +18,14 @@ source ./test/tmp/config
 }
 
 
-#@test "can create a new project" {
-#  mmw createProj
-#  [ -f "$PROJPATH" ]
-#  [ -f "$PROJPATH/src" ] 
-#  [ -f "$PROJPATH/sound_design" ]
-#  [ -f "$PROJPATH/tmp" ]
-#}
-#
+@test "can create a new project" {
+  mmw createProj
+  [ -f "$PROJPATH" ]
+  [ -f "$PROJPATH/src" ] 
+  [ -f "$PROJPATH/sound_design" ]
+  [ -f "$PROJPATH/tmp" ]
+}
+
 #
 #@test "createScoreDesign should create the project score file" {
 #
