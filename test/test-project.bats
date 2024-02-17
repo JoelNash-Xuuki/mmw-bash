@@ -27,7 +27,9 @@ source ./test/tmp/config
   [ -d "$PROJPATH/session/1" ]
 }
 
-
+@test "set initial rec session" {
+  [ "rec" = "recy" ]
+}
 #@test "createScoreDesign should create the project score file" {
 #
 #  mmw createLyScoreAndMidiFile
