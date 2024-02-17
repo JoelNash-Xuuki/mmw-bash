@@ -28,7 +28,7 @@ source ./test/tmp/config
 }
 
 @test "set initial rec session" {
-  [ "rec" = "$HOME/mmw/test/expected-rec.eca" ]
+  [ "rec" = "$HOME/mmw/test/expected_rec.eca" ]
 }
 #@test "createScoreDesign should create the project score file" {
 #
