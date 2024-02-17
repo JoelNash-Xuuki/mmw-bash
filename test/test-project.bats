@@ -1,33 +1,47 @@
 source ./test/tmp/config
 #!/usr/bin/env bats
 
-@test "can set the Project name" {
+@test "Set the Project name" {
   mmw setProj Test_Sheet
   projName=$(grep "^PROJ=Test_Sheet$" "./test/tmp/config")
   [ "$projName" = "PROJ=Test_Sheet" ]
 }
 
-@test "can set the Project Location" {
+@test "set the Project Location" {
   mmw setProjLoc mmw/test
   projLocation=$(grep "^PROJLOC=mmw/test$" "./test/tmp/config")
   [ "$projLocation" = "PROJLOC=mmw/test" ]
 }
 
-# Read the line from the config file
-
-    # Assert that the line is exactly as expected
-
-@test "createScoreDesign should create the project score file" {
-
-  mmw createLyScoreAndMidiFile
-  [ -f "$LILY" ]
-  [ -f "$MIDI" ]
-  [ -f "$PDF" ]
-
-  #Validate data
-  #[ "$(cat "$HOME/projects_/flock/src/$PROJ.ly)" = "$projOrc" ]
-
+@test "Declare a project path" {
+  [ -d "$PROJPATH" ]
 }
+
+
+#@test "can create a new project" {
+#  mmw createProj
+#  [ -f "$PROJPATH" ]
+#  [ -f "$PROJPATH/src" ] 
+#  [ -f "$PROJPATH/sound_design" ]
+#  [ -f "$PROJPATH/tmp" ]
+#}
+#
+#
+#@test "createScoreDesign should create the project score file" {
+#
+#  mmw createLyScoreAndMidiFile
+#  [ -f "$LILY" ]
+#  [ -f "$MIDI" ]
+#  [ -f "$PDF" ]
+#
+#  #Validate data
+#  #[ "$(cat "$HOME/projects_/flock/src/$PROJ.ly)" = "$projOrc" ]
+#
+#}
+#
+#@test "create recording session" {
+#
+#}
 
 #@test "renderAudio should create a .orc, .sco and .wav file" {
 #  run mmw renderAudio
