@@ -1,11 +1,18 @@
 sgpt "
-Regard the following bash script that creates 
-an ecasound sound command.
-$(cat bin/rec.eca)
-I need a new line to start AFTER every \'\\'.
-How do i express for bash to create a string with new lines?
+regard createProj()
+$(cat bin/mmw)
 
-Don't show me '\' '\' '\'n becuase it prints '\'n
-Also '\'n seems to create a new line but it maintains \n 
+When I run this using a bats test it freezes becuase the user is asked if they want to create the file
+$PROJPATH. is there a way to test can say yes for me?
+
+pehaps the method of echo "Y"
+
+piping into
+in the test $(cat test/test-project.bats)
+that creates aproj?
+
+The piping echo technieu doesn't seem to work
+
+ 
 
 "

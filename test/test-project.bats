@@ -2,9 +2,9 @@ source ./test/tmp/config
 #!/usr/bin/env bats
 
 @test "Set the Project name" {
-  mmw setProj Test_Sheet
-  projName=$(grep "^PROJ=Test_Sheet$" "./test/tmp/config")
-  [ "$projName" = "PROJ=Test_Sheet" ]
+  mmw setProj test-proj
+  projName=$(grep "^PROJ=test-proj$" "./test/tmp/config")
+  [ "$projName" = "PROJ=test-proj" ]
 }
 
 @test "set the Project Location" {
@@ -13,18 +13,20 @@ source ./test/tmp/config
   [ "$projLocation" = "PROJLOC=mmw/test" ]
 }
 
-@test "Declare a project path" {
-  [ -d "$PROJPATH" ]
-}
-
-
 @test "can create a new project" {
-  mmw createProj
-  [ -f "$PROJPATH" ]
-  [ -f "$PROJPATH/src" ] 
-  [ -f "$PROJPATH/sound_design" ]
-  [ -f "$PROJPATH/tmp" ]
+  if test -d $PROJPATH; then
+    rm -r "$PROJPATH"  
+  fi
+
+  echo "y" | mmw createProj
+  [ -d "$PROJPATH" ]
+  [ -d "$PROJPATH/src" ] 
+  [ -d "$PROJPATH/sound_design" ]
+  [ -d "$PROJPATH/tmp" ]
+  [ -d "$PROJPATH/session" ]
+  [ -d "$PROJPATH/session/1" ]
 }
+
 
 #
 #@test "createScoreDesign should create the project score file" {

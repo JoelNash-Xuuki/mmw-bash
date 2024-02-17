@@ -1,6 +1,6 @@
-PROJ=Test_Sheet
+PROJ=test-proj
 PROJLOC=mmw/test
-PROJPATH=$HOME/$PROJLOC
+PROJPATH=$HOME/$PROJLOC/$PROJ
 ARTIST=Vyvn
 SERVICE=Xuuki.xyz
 SCORE=$PROJPATH/src/score/$PROJ.ly

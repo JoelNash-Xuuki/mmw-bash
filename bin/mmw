@@ -19,6 +19,8 @@ createProj(){
       if [[ $choice == "y" ]]; then
           mkdir $PROJPATH
           mkdir $PROJPATH/src
+          mkdir $PROJPATH/session
+          mkdir $PROJPATH/session/1
           mkdir $PROJPATH/sound_design
           mkdir $PROJPATH/tmp
           echo "$PROJ created"
