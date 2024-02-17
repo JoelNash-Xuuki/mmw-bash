@@ -13,7 +13,7 @@ source ./test/tmp/config
   [ "$projLocation" = "PROJLOC=mmw/test" ]
 }
 
-@test "can create a new project" {
+@test "can create a new project with 1 session dir" {
   if test -d $PROJPATH; then
     rm -r "$PROJPATH"  
   fi
@@ -28,7 +28,6 @@ source ./test/tmp/config
 }
 
 
-#
 #@test "createScoreDesign should create the project score file" {
 #
 #  mmw createLyScoreAndMidiFile
