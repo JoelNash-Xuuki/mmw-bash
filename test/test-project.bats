@@ -45,8 +45,11 @@ source ./test/tmp/config
   [ "$status" -eq 0 ]
 }
 
-
-
+@test "create session 1" {
+  mmw play
+  run diff $PROJPATH/session/1/session.eca $HOME/mmw/test/expected_session.eca
+  [ "$status" -eq 0 ]
+}
 
 
 
