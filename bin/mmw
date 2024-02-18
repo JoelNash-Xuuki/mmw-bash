@@ -64,6 +64,11 @@ configRec(){
     
   # Make the file executable
   chmod +x "$PROJPATH/$SESSION/rec.eca"
+  cat $PROJPATH/$SESSION/rec.eca
+}
+
+rec(){
+  $PROJPATH/$SESSION/rec.eca
 }
 
 buildSheetMusic(){
