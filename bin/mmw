@@ -34,6 +34,7 @@ createProj(){
           mkdir $PROJPATH
           mkdir $HOME/audio/$ARTIST/$PROJ
           mkdir $HOME/audio/$ARTIST/$PROJ/stems
+          dd if=/dev/zero of=$HOME/audio/$ARTIST/$PROJ/stems/blank.wav bs=48000 count=1
           mkdir $PROJPATH/src
           mkdir $PROJPATH/session
           mkdir $PROJPATH/session/1

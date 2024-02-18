@@ -27,9 +27,10 @@ source ./test/tmp/config
   if test -d $PROJPATH; then
     rm -r "$PROJPATH"  
   fi
-
   echo "y" | mmw createProj
   [ -d "$PROJPATH" ]
+  [ -d "$HOME/audio/$ARTIST/$PROJ" ]
+  [ -d "$HOME/audio/$ARTIST/$PROJ/stems" ]
   [ -d "$PROJPATH/src" ] 
   [ -d "$PROJPATH/sound_design" ]
   [ -d "$PROJPATH/tmp" ]
@@ -39,7 +40,7 @@ source ./test/tmp/config
 
 @test "set rec session 1" {
   run mmw setSession 1
-  run mmw configRec 84 instr-1 drum-2 250 250
+  run mmw configRec 84 input-1 input-2 250 250
   run diff $PROJPATH/session/1/rec.eca $HOME/mmw/test/expected_rec.eca
   [ "$status" -eq 0 ]
 }
