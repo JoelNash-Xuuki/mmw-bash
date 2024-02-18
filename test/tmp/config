@@ -1,5 +1,5 @@
-PROJ=test-proj
-PROJLOC=mmw/test
+PROJ=Hello
+PROJLOC=projects_
 PROJPATH=$HOME/$PROJLOC/$PROJ
 ARTIST=Vyvn
 SERVICE=Xuuki.xyz
@@ -17,7 +17,7 @@ DUR=$(bc <<< "scale=4;$BAR*4")
 START_TIME=$(bc <<< "scale=2;$BAR*1")
 MP4=$PROJ.mp4
 FILE=.wav
-AUDIO=$HOME/audio/$ARTIST/$PROJ/
+AUDIO=$HOME/audio/$ARTIST/$PROJ/stems/
 
 SYNTH=$PROJPATH/audio/synth.ewf
 BASS=$PROJPATH/audio/bass.ewf
