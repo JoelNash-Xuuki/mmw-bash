@@ -7,6 +7,10 @@ setProjLoc(){
   sed -i "s|PROJLOC=.*|PROJLOC=$1|g" $HOME/mmw/test/tmp/config
 }
 
+setSession(){
+  sed -i "s|SESSION=session/.*|SESSION=session/$1|g" $HOME/mmw/test/tmp/config
+}
+
 createProj(){
   #test -d $PROJPATH && echo "$PROJ exists" || (test -f $PROJPATH && echo "$PROJ  exists" || echo "$PROJ does not exist")
 

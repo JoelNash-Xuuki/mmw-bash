@@ -13,6 +13,16 @@ source ./test/tmp/config
   [ "$projLocation" = "PROJLOC=mmw/test" ]
 }
 
+@test "set session" {
+  mmw setSession 1
+  session=$(grep "^SESSION=session/1$" "./test/tmp/config")
+  [ "$session" = "SESSION=session/1" ]
+
+  mmw setSession 2
+  session=$(grep "^SESSION=session/2$" "./test/tmp/config")
+  [ "$session" = "SESSION=session/2" ]
+}
+
 @test "can create a new project with 1 session dir" {
   if test -d $PROJPATH; then
     rm -r "$PROJPATH"  
@@ -28,6 +38,7 @@ source ./test/tmp/config
 }
 
 @test "set initial rec session" {
+  mmw setSession 1
   mmw configRec 84 instr-1 drum-2 250 250
   run diff "$PROJPATH/session/1/rec.eca" "$HOME/mmw/test/expected_rec.eca"
   [ "$status" -eq 0 ]
