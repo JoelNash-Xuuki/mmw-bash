@@ -1,15 +1,11 @@
 sgpt "
-$(cat .github/workflows/develop.yml)
-$(cat makefile) 
-
-Anything to crituque about my yml file
-when I push changes to the develop branch i want my user device 
-to pull it down. if thats appropiate for github actions.
-do i need the user device to host its own runner to do this?
-
-how can i confirm 
-USER_DEVICE_SSH_PRIVATE_KEY 
-USER_DEVICE_SSH_KNOWN_HOSTS 
-is correct?
+Correct me if I'm wrong but I think the following error 
+implies that the audio file is not the correct format 
+for ecasound to read.
+I'm guess the solution might require ensuring a 
+aompatiable wav file is in place
+can you show me how to create one?
+it would have to be 48000
+$(cat content)
 
 "

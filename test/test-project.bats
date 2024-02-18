@@ -40,7 +40,7 @@ source ./test/tmp/config
 
 @test "set rec session 1" {
   run mmw setSession 1
-  run mmw configRec 84 input-1 input-2 250 250
+  run mmw configRec 98 input_1 input_2 250 250
   run diff $PROJPATH/session/1/rec.eca $HOME/mmw/test/expected_rec.eca
   [ "$status" -eq 0 ]
 }

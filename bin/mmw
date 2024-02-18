@@ -34,7 +34,7 @@ createProj(){
           mkdir $PROJPATH
           mkdir $HOME/audio/$ARTIST/$PROJ
           mkdir $HOME/audio/$ARTIST/$PROJ/stems
-          dd if=/dev/zero of=$HOME/audio/$ARTIST/$PROJ/stems/blank.wav bs=48000 count=1
+          ffmpeg -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=48000 -t 5 $HOME/audio/$ARTIST/$PROJ/stems/input_1.wav
           mkdir $PROJPATH/src
           mkdir $PROJPATH/session
           mkdir $PROJPATH/session/1
