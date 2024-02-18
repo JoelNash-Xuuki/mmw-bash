@@ -17,15 +17,23 @@ displaySession(){
   echo $SESSION | grep -o '[0-9]'
 }
 
+displayProj(){
+  echo $PROJ
+}
+
+deleteProj(){
+  rm -r $PROJPATH
+}
+
 createProj(){
   if test -d $PROJPATH; then
       echo "Directory exists"
-  elif test -f  $PROJPATH; then
-      echo "$PROJ exists"
   else
       read -p "$PROJPATH does not exist. Do you want to create it? (y/n): " choice
       if [[ $choice == "y" ]]; then
           mkdir $PROJPATH
+          mkdir $HOME/audio/$ARTIST/$PROJ
+          mkdir $HOME/audio/$ARTIST/$PROJ/stems
           mkdir $PROJPATH/src
           mkdir $PROJPATH/session
           mkdir $PROJPATH/session/1
