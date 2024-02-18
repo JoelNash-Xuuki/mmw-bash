@@ -14,11 +14,11 @@ source ./test/tmp/config
 }
 
 @test "set session" {
-  mmw setSession 1
+  run mmw setSession 1
   session=$(grep "^SESSION=session/1$" "./test/tmp/config")
   [ "$session" = "SESSION=session/1" ]
 
-  mmw setSession 2
+  run mmw setSession 2
   session=$(grep "^SESSION=session/2$" "./test/tmp/config")
   [ "$session" = "SESSION=session/2" ]
 }
@@ -37,15 +37,12 @@ source ./test/tmp/config
   [ -d "$PROJPATH/session/1" ]
 }
 
-@test "set initial rec session" {
-  mmw setSession 1
-  mmw configRec 84 instr-1 drum-2 250 250
-  run diff "$PROJPATH/session/1/rec.eca" "$HOME/mmw/test/expected_rec.eca"
+@test "set rec session 1" {
+  run mmw setSession 1
+  run mmw configRec 84 instr-1 drum-2 250 250
+  run diff $PROJPATH/session/1/rec.eca $HOME/mmw/test/expected_rec.eca
   [ "$status" -eq 0 ]
 }
-
-  
-
 
 
 

@@ -1,8 +1,10 @@
 sgpt "
-regard  the test for rec configuration
-$(cat test/test-project.bats)
+regard SESSION:
+$(cat test/tmp/config)
+I want to display just the number of SESSION=session/2
+ie the 2
+useing a bash command
 
-How do I compare the contents of 2 files 
-in my bats bash test?
+Show me how exactly
 
 "

@@ -1,2 +1,3 @@
 source ./test/tmp/config
-echo $PROJPATH
+
+diff $PROJPATH/$SESSION/rec.eca $HOME/mmw/test/expected_rec.eca
