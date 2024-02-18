@@ -47,11 +47,11 @@ configRec(){
   drum_volume=$5
   
   # Generate the ecasound command
-  ecasound_command="ecasound -n $PROJ -f:16,2,48000 \ "$'\n'
-  ecasound_command+="  -a:instr -i $AUDIO$2$FILE -ea:$instr_volume \ "$'\n'
-  ecasound_command+="  -a:2,3 -i jack,system,1,0 \ "$'\n'
-  ecasound_command+="  -a:2 -o $AUDIO$3$FILE -ea:$drum_volume \ "$'\n'
-  ecasound_command+="  -a:met -i:null -pn:metronome,$tempo -ea:1 \ "$'\n'
+  ecasound_command="ecasound -n $PROJ -f:16,2,48000 \\"$'\n'
+  ecasound_command+="  -a:instr -i $AUDIO$2$FILE -ea:$instr_volume \\"$'\n'
+  ecasound_command+="  -a:2,3 -i jack,system,1,0 \\"$'\n'
+  ecasound_command+="  -a:2 -o $AUDIO$3$FILE -ea:$drum_volume \\"$'\n'
+  ecasound_command+="  -a:met -i:null -pn:metronome,$tempo -ea:1 \\"$'\n'
   ecasound_command+="  -a:instr,3,met -o jack,system"
 
   if [ -d "$PROJPATH/$SESSION" ]; then
