@@ -28,8 +28,30 @@ source ./test/tmp/config
 }
 
 @test "set initial rec session" {
-  [ "rec" = "$HOME/mmw/test/expected_rec.eca" ]
+  mmw configRec 84 instr-1 drum-2 250 250
+  run diff "$PROJPATH/session/1/rec.eca" "$HOME/mmw/test/expected_rec.eca"
+  [ "$status" -eq 0 ]
 }
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #@test "createScoreDesign should create the project score file" {
 #
 #  mmw createLyScoreAndMidiFile

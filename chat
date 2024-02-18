@@ -1,18 +1,8 @@
 sgpt "
-regard createProj()
-$(cat bin/mmw)
+regard  the test for rec configuration
+$(cat test/test-project.bats)
 
-When I run this using a bats test it freezes becuase the user is asked if they want to create the file
-$PROJPATH. is there a way to test can say yes for me?
-
-pehaps the method of echo "Y"
-
-piping into
-in the test $(cat test/test-project.bats)
-that creates aproj?
-
-The piping echo technieu doesn't seem to work
-
- 
+How do I compare the contents of 2 files 
+in my bats bash test?
 
 "
