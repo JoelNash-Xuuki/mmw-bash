@@ -1,0 +1,6 @@
+ecasound -n Hello -f:16,2,48000 \ 
+         -a:instr -i /home/joel/audio/Vyvn/Hello/.wav -ea: \ 
+         -a:2,3 -i jack,system,1,0 \ 
+         -a:2 -o /home/joel/audio/Vyvn/Hello/.wav -ea: \ 
+         -a:met -i:null -pn:metronome, -ea:1 \ 
+         -a:instr,3,met -o jack,system
