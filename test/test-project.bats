@@ -7,11 +7,11 @@ source ./test/tmp/config
   [ "$projName" = "PROJ=test-proj" ]
 }
 
-#@test "set the Project Location" {
-#  mmw setProjLoc mmw/test
-#  projLocation=$(grep "^PROJLOC=mmw/test$" "./test/tmp/config")
-#  [ "$projLocation" = "PROJLOC=mmw/test" ]
-#}
+@test "set the Project Location" {
+  mmw setProjLoc mmw/test
+  projLocation=$(grep "^PROJLOC=mmw/test$" "./test/tmp/config")
+  [ "$projLocation" = "PROJLOC=mmw/test" ]
+}
 #
 #@test "set session" {
 #  run mmw setSession 1
