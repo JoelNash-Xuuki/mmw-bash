@@ -12,17 +12,17 @@ source ./test/tmp/config
   projLocation=$(grep "^PROJLOC=mmw/test$" "./test/tmp/config")
   [ "$projLocation" = "PROJLOC=mmw/test" ]
 }
-#
-#@test "set session" {
-#  run mmw setSession 1
-#  session=$(grep "^SESSION=session/1$" "./test/tmp/config")
-#  [ "$session" = "SESSION=session/1" ]
-#
-#  run mmw setSession 2
-#  session=$(grep "^SESSION=session/2$" "./test/tmp/config")
-#  [ "$session" = "SESSION=session/2" ]
-#}
-#
+
+@test "set session" {
+  run mmw setSession 1
+  session=$(grep "^SESSION=session/1$" "./test/tmp/config")
+  [ "$session" = "SESSION=session/1" ]
+
+  run mmw setSession 2
+  session=$(grep "^SESSION=session/2$" "./test/tmp/config")
+  [ "$session" = "SESSION=session/2" ]
+}
+
 #@test "can create a new project with 1 session dir" {
 #  if test -d $PROJPATH; then
 #    rm -r "$PROJPATH"  
