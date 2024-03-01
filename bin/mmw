@@ -26,25 +26,39 @@ deleteProj(){
 }
 
 createProj(){
-  if test -d $PROJPATH; then
-      echo "Directory exists"
+  if test -d $HOME/audio/; then
+      echo "audio directory exists"
   else
-      read -p "$PROJPATH does not exist. Do you want to create it? (y/n): " choice
-      if [[ $choice == "y" ]]; then
-          mkdir $PROJPATH
-          mkdir $HOME/audio/$ARTIST/$PROJ
-          mkdir $HOME/audio/$ARTIST/$PROJ/stems
-          ffmpeg -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=48000 -t 5 $HOME/audio/$ARTIST/$PROJ/stems/input_1.wav
-          mkdir $PROJPATH/src
-          mkdir $PROJPATH/session
-          mkdir $PROJPATH/session/1
-          mkdir $PROJPATH/sound_design
-          mkdir $PROJPATH/tmp
-          echo "$PROJ created"
-      else
-          echo "$PROJ not created"
-      fi
+    mkdir -p $HOME/audio/
+    echo " audio directory created"
   fi
+
+  if test -d $HOME/audio/$ARTIST; then
+      echo "Artist directory exists"
+  else
+    mkdir -p $HOME/audio/$ARTIST;
+    echo "Artist directory created"
+  fi
+  
+  if test -d $PROJPATH; then
+    echo "Directory exists"
+  else
+    read -p "$PROJPATH does not exist. Do you want to create it? (y/n): " choice
+      if [[ $choice == "y" ]]; then
+        mkdir $PROJPATH
+        mkdir $HOME/audio/$ARTIST/$PROJ
+        mkdir $HOME/audio/$ARTIST/$PROJ/stems
+        ffmpeg -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=48000 -t 5 $HOME/audio/$ARTIST/$PROJ/stems/input_1.wav
+        mkdir $PROJPATH/src
+        mkdir $PROJPATH/session
+        mkdir $PROJPATH/session/1
+        mkdir $PROJPATH/sound_design
+        mkdir $PROJPATH/tmp
+        echo "$PROJ created"
+      else
+        echo "$PROJ not created"
+      fi
+   fi
 }
 
 configRec(){
