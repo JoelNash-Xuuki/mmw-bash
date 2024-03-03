@@ -69,7 +69,7 @@ SESSION="session-1"
 LILY="${PROJPATH}/src/${PROJ}-${SESSION}.ly"
 TITLE="${PROJPATH}/${PROJ}-${SESSION}"
 
-AUDIOFILE=/home/joel/audio/instr-1.wav
+AUDIOFILE=/home/joel/audio/Vyvn/Hello/stems/Hello-1.wav
 
 
 MP4=$PROJ.mp4
