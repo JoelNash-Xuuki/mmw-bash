@@ -1,5 +1,5 @@
-PROJ=test-proj
-PROJLOC=mmw/test
+PROJ=Tablet_Proj
+PROJLOC=projects_
 PROJPATH=$HOME/$PROJLOC/$PROJ
 ARTIST=Vyvn
 SERVICE=Xuuki.xyz
