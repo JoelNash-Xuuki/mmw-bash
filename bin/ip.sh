@@ -1,5 +1,3 @@
-source $HOME/mmw/tmp/config
-
 runMethod(){
   echo $PROJ
 }
@@ -13,7 +11,7 @@ createTextPNG(){
 }
 
 createMP4(){
-  ffmpeg -ss 00:00:00 -i $AUDIOFILE -t $LENGTH -filter_complex "[0:a]showspectrum=s=854x480:mode=combined:slide=scroll:saturation=0.2:scale=log,format=yuv420p[v]" -map "[v]" -map 0:a -b:v 700k -b:a 360k $MP4
+  ffmpeg -ss 00:00:00 -i $1 -t $2 -filter_complex "[0:a]showspectrum=s=854x480:mode=combined:slide=scroll:saturation=0.2:scale=log,format=yuv420p[v]" -map "[v]" -map 0:a -b:v 700k -b:a 360k $3
 }
 
 #ffplay -f lavfi -i mandelbrot -vf "format=yuv444p,split=4[a][b][c][d],[a]waveform[aa],[b][aa]vstack[V],[c]waveform=m=0[cc],[d]vectorscope=color4[dd],[cc][dd]vstack[V2],[V][V2]hstack"
