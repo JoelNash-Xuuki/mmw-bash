@@ -17,12 +17,12 @@ createMP4(){
 #ffplay -f lavfi -i mandelbrot -vf "format=yuv444p,split=4[a][b][c][d],[a]waveform[aa],[b][aa]vstack[V],[c]waveform=m=0[cc],[d]vectorscope=color4[dd],[cc][dd]vstack[V2],[V][V2]hstack"
 
 rotateMP4(){
-  ffmpeg -i $MP4 -vf "transpose=1" $MP4R
+  ffmpeg -i $1 -vf "transpose=1" $2
 }
 
-overlayWatermarktt(){
-  ffmpeg -i $MP4R -vf "movie=$WATERMARK[watermark]; [watermark]scale=240x135 [watermark2];[in][watermark2] overlay=W-w-0.1:H-h-0.1:enable='between(t,(0),($LENGTH))'[out]" $MP4RTEMP
-  mv $MP4RTEMP $MP4R
+overlayWatermark_v(){
+  ffmpeg -i $1 -vf "movie=$2[watermark]; [watermark]scale=240x135 [watermark2];[in][watermark2] overlay=W-w-0.1:H-h-0.1:enable='between(t,(0),($3))'[out]" $4
+  mv $4 $1
 }
 
 setSub(){
