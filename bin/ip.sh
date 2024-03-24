@@ -42,4 +42,8 @@ overlayImage(){
   mv $MP4RTEMP $MP4R
 }
 
+getAudioInfo() {
+  ffprobe -hide_banner $HOME/audio/Vyvn/The_Date_And_Time_Titles/1.wav -select_streams a -show_format
+}
+
 "$@"
