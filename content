@@ -1,3 +1,23 @@
+<<<<<<< HEAD
+
+<<<<<<< HEAD
 
 
-
+=======
+overlayTitle(){
+  ffmpeg -i $1 -vf "movie=$2[layer];[layer]scale=400:-1[layer2];[in][layer2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:enable='between(t,($4),($5))'[out]" $3
+  mv $3 $1
+}
+=======
+**************************************************************************
+*        ecasound v2.9.3 (C) 1997-2020 Kai Vehmanen and others
+**************************************************************************
+(eca-chainsetup-parser) Setting chainsetup name to "test-proj".
+(audioio_jack_manager) JACK transport: send/receive disabled (mode: notransport)
+(eca-chainsetup) Chainsetup "test-proj"
+(eca-chainsetup) Multitrack-mode enabled.
+(eca-chainsetup) "rt" buffering mode selected.
+ERROR:  Connecting chainsetup failed: "Enabling chainsetup: AUDIOIO-WAVE: Only WAVE_FORMAT_PCM and WAVE_FORMAT_IEEE_FLOAT
+... are supported."
+>>>>>>> iss26
+>>>>>>> develop

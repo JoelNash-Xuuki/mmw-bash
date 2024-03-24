@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 PROJ=202210030854-idea
 PROJLOC=projects_/$PROJ
+=======
+PROJ=Hello
+PROJLOC=projects_/Hello
+LOC=audio
+>>>>>>> iss26
 PROJPATH=$HOME/$PROJLOC
 ARTIST=Vyvn
 SERVICE=Xuuki.xyz
@@ -8,7 +14,9 @@ LILY=$SCORE
 MIDI=$HOME/$PROJLOC/tmp/$PROJ.mid
 PDF=$HOME/Xuuki_Site_Node/site-app/public/doc/$PROJ.pdf
 WAV=$HOME/audio/$ARTIST/$PROJ/1/stems/$PROJ.wav
+AUDIO=$HOME/$LOC/$ARTIST/$PROJ/stems/
 TEMPO=84
+FILE=.wav
 
 BEAT=$(bc <<< "scale=4; (120/$TEMPO)")
 BAR=$(bc <<< "scale=4;$BEAT*4")
