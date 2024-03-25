@@ -1,9 +1,0 @@
-Welcome to MMW
-
-The tests will descibe what the app can do:
-
-For mmw:
-$HOME/$USER/mmw/bin/run-mmw-project-tests
-
-For ip:
-$HOME/$USER/mmw/bin/run-multi-media-tests*
