@@ -1,97 +1,91 @@
-Multi Media Workstation (MMW) Project
-The Multi Media Workstation (MMW) is a command-line software that brings automation to audio/visual media processing. 
-It comprises two main components: the Digital Audio Workstation (DAW) and the Image Processing (IP).
+Welcome to MMW
 
-Digital Audio Workstation (DAW)
-The DAW allows users to arrange and write their music in a .ly file. 
-The DAW compiles the .ly file, producing a .pdf for sheet music and a .midi. 
-Each instrument written to the sheet music is allocated its own channel in the midi file. 
-The midi file is then processed by a .csd file. The .csd file is where users can design the sound 
-for each instrument they've arranged in the .ly score. To hear the music, users utilize a .mix file 
-to instruct the software on how, where, and when the music should be played.
+* Multiple Media Workstation * 
 
-Image Processing (IP)
-The IP handles the visual aspects of MMW, including features like subtitles. Lyrics can be written 
-to a .ly file, and the midi file can generate the timings for printing the subtitles on the screen. 
-This also allows users to make any tweaks to the midi notes if required.
+A brief description the project and repo.
+A project management tool for audio production. It includes 
+functions for setting project parameters, creating project 
+directories, configuring recording settings, recording audio, 
+playing audio, building sheet music, creating sound design, 
+rendering audio, moving audio files, and converting audio formats.
 
-How It Works
-The MMW program works in three main parts: Project File Management, Audio Processing, and Image Processing.
+* Description * 
+  The follow wil provide a more detailed overview of the project, 
+  its purpose, and any key features.
 
-Project File Management
-This part is handled by the ProjectFileManager class. It reads project configuration files and extracts useful metadata like the sample rate. It also provides functionality for creating directories for storing project data.
-
-Audio Processing
-This part is handled by the AudioEngine class. It uses the Csound library to perform various audio operations like playing and rendering audio. It also allows reading audio files and extracting their contents into a string for further processing.
-
-Image Processing
-Image Processing allows for the creation of visual elements in sync with the audio. It is responsible for elements such as subtitles, timings, and other visual elements that may be required for a multimedia project.
-
-Usage
-The user edits a file(s), then MMW processes it. This is a fundamental pattern of working with MMW. MMW supports instruction-based processing, meaning that you write instructions into a .mix file, and MMW performs the tasks as per the instructions.
-
-For example, if a user wants to hear from 12 bars in, up to 24 bars, and have that section looped 4 times, they can write this as an instruction in the .mix file. MMW will perform this task accordingly.
-
-MMW also supports multi-track recording. Users can monitor a microphone input channel and record it to a file with specified effects, such as EQ, reverb, and delay. Users write instructions for this in a .rec file, specifying where/what file to record into.
-
-Building and Running the Program
-TODO: Add instructions for building and running the program.
-
-Contributing
-Contributions are welcome. Please fork the repository and create a pull request with your changes.
-
-NOTES
-The user needs a stable workflow.
-
-aplay -D plughw:1,0 file.wav
+  Key features of the project:
+    - Setting project parameters such as project name, location, 
+      and session.
+    - Creating project directories with specific subdirectories 
+      for audio files and sessions.
+    - Configuring recording settings using ecasound commands.
+    - Recording audio based on the configured settings.
+    - Playing back recorded audio.
+    - Building sheet music using a sheet builder tool.
+    - Creating LilyPond score and MIDI files.
+    - Generating sound design using a modsyn tool.
+    - Rendering audio using Csound.
+    - Moving rendered audio files to a specific directory for a 
+      website.
+    - Converting audio formats using FFmpeg.
 
 
-#How to run tests
-in the home dir of the repo run the following binery to run the tests.s
-./test/bats/bin/bats --tap test/test.bats
+* Installation * 
+Instructions on how to install and set up the project.
 
-#rm $HOME/audio/Vyvn/Flock/1/$PROJ.wav
-  #csound -d -o$HOME/audio/Vyvn/Flock/1/$PROJ.wav -F\ 
-  #  $HOME/projects_/flock/tmp/$PROJ.mid $HOME/projects_/flock/src/sound-design/$PROJ.orc \ 
-  #  $HOME/projects_/flock/src/sound-design/$PROJ.sco
+* Usage * 
+These functions provide a comprehensive set of tools for 
+managing audio production projects efficiently.
+How to use the project, including any commands or configurations.
 
-projSco="
-    f0 $LENGTH
-    t 0 $TEMPO
-    a 0 0 0
-    f1 0 1024 10 1
-    f2 0 1024 10 1 0.5 0.3 0.25 0.2 0.167 0.14 0.125 .111
-    f3 0 1024 10 1 0   0.3 0    0.2 0     0.14 0     .111   ; Square with a small amount of data
-    f4 0 1024 10 1 1   1   1    0.7 0.5   0.3  0.1      
-  "
+  - Source the configuration file by running 
+    `source $HOME/mmw/test/tmp/config`.
+  - Use `setProj`, `setProjLoc`, and `setSession` functions to set 
+    project parameters.
+  - Use `createProj` to create a new project directory structure.
+  - Use `configRec` to configure recording settings.
+  - Use `rec` to start recording audio.
+  - Use `play` to play back recorded audio.
+  - Use `buildSheetMusic` to generate sheet music.
+  - Use `createLyScoreAndMidiFile` to create LilyPond score and 
+    MIDI files.
+  - Use `createSoundDesign` to generate sound design.
+  - Use `renderAudio` to render audio files.
+  - Use `mvAudioToSite` to move audio files to a website directory.
+  - Use `convertAudio` to convert audio formats.
 
-  echo "$projSco" > /home/joel/projects_/flock/src/sound-design/$PROJ.sco
-  
-}
+* Contributing * Guidelines for contributing to the project, such as 
+  how to report issues or submit pull requests.
 
-you could desribe the mmw features. 
-make sure test/functions validate data
+* License * Specify the project's license and any terms or conditions 
+  for use.
 
+* Additional sections * Depending on the project, you may also 
+  include sections for troubleshooting, acknowledgments, or contact 
+  information.
 
-To change a value in a CSV file and then check it using the `cut` command, you can follow these steps:
+To helps users and contributors verify that the project is 
+functioning correctly and, provides guidance on how to test their 
+own contributions. 
 
-1. Open the CSV file in a text editor or use a command-line text manipulation tool like `sed` or `awk`.
-2. Locate the line that contains the value you want to change.
-3. Modify the value as desired.
-4. Save the changes to the CSV file.
+* Running Tests *
 
-For example, let's say you want to change the value in the second column of the third line in the `filename.csv` file. You can use the following command:
+1. **Test requirements**: Mention any specific tools or libraries 
+  needed to run the tests, and provide instructions on how to 
+  install them.
+2. **Test execution**: Explain how to execute the tests, 
+  including any necessary commands or configurations. For example, 
+  you might include a command like `npm test` or `pytest` to run 
+  tests for JavaScript or Python projects, respectively.
 
-```bash
-sed -i '3s/old_value/new_value/' filename.csv
-```
+$HOME/$USER/mmw/bin/run-mmw-project-tests
 
-This command uses `sed` with the `-i` option to edit the file in-place. It replaces the `old_value` with the `new_value` in the third line of the file.
+$HOME/$USER/mmw/bin/run-mmw-project-tests
 
-After making the necessary changes, you can check the modified value using the `cut` command you mentioned:
+3. **Test coverage**: Briefly mention what percentage of the 
+  codebase is covered by the tests and whether there are any known 
+  gaps in the test suite.
 
-```bash
-cut -d ',' -f 2 filename.csv | sed -n 2p
-```
-
-This command will display the updated value in the second column of the CSV file.
+4. **Test results**: Explain how to interpret the test results, 
+  including any relevant logs or reports generated during the test 
+  execution.

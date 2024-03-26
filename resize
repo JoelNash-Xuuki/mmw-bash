@@ -1,1 +1,1 @@
-magick display -resize 960x960\> photo.jpg
+magick display -resize 960x960\> $1 $1-resized
