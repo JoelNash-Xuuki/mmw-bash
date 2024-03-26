@@ -1,9 +1,10 @@
-PROJ=Hello
-PROJLOC=projects_/Hello
-PROJPATH=$HOME/$PROJLOC
+PROJ=Tablet_Proj
+PROJLOC=projects_
+PROJPATH=$HOME/$PROJLOC/$PROJ
 ARTIST=Vyvn
 SERVICE=Xuuki.xyz
-SCORE=$PROJPATH/src/$PROJ.ly
+SESSION=session/1
+SCORE=$PROJPATH/src/score/$PROJ.ly
 LILY=$SCORE
 MIDI=$HOME/$PROJLOC/tmp/$PROJ.mid
 PDF=$HOME/Xuuki_Site_Node/site-app/public/doc/$PROJ.pdf
@@ -15,6 +16,8 @@ LENGTH=$(bc <<< "scale=4;$BAR*18")
 DUR=$(bc <<< "scale=4;$BAR*4")
 START_TIME=$(bc <<< "scale=2;$BAR*1")
 MP4=$PROJ.mp4
+FILE=.wav
+AUDIO=$HOME/audio/$ARTIST/$PROJ/stems/
 
 SYNTH=$PROJPATH/audio/synth.ewf
 BASS=$PROJPATH/audio/bass.ewf
