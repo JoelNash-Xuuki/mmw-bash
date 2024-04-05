@@ -49,4 +49,10 @@ getAudioInfo() {
   ffprobe -hide_banner $1 -select_streams a -show_format
 }
 
+generate_noise_image(){
+  magick -size 1920x1920 xc:  -channel G +noise Random \
+         -virtual-pixel Tile -blur 0x5 -auto-level \
+         -separate +channel   random_5_gray.png
+}
+
 "$@"
