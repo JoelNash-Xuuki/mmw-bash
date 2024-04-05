@@ -33,6 +33,7 @@ rendering audio, moving audio files, and converting audio formats.
 
 # Installation # 
 Instructions on how to install and set up the project.
+FFMPEG required.
 
 # Usage # 
 These functions provide a comprehensive set of tools for 
