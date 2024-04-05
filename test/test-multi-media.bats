@@ -10,5 +10,6 @@ source ./test/tmp/config
 }
 
 @test "Generate Image" {
-
+  ip generate_noise_image
+  [ -f "$HOME/test.png"]
 }
