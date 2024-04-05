@@ -31,10 +31,10 @@ rendering audio, moving audio files, and converting audio formats.
    Key features for ip:
     - Generate an image.
 
-* Installation * 
+# Installation # 
 Instructions on how to install and set up the project.
 
-* Usage * 
+# Usage # 
 These functions provide a comprehensive set of tools for 
 managing audio production projects efficiently.
 How to use the project, including any commands or configurations.
@@ -55,33 +55,35 @@ How to use the project, including any commands or configurations.
   - Use `mvAudioToSite` to move audio files to a website directory.
   - Use `convertAudio` to convert audio formats.
 
-* Contributing * Guidelines for contributing to the project, such as 
+# Contributing # 
+  Guidelines for contributing to the project, such as 
   how to report issues or submit pull requests.
 
-* License * Specify the project's license and any terms or conditions 
-  for use.
+  - run tests: to confirm features.
 
-* Additional sections * Depending on the project, you may also 
-  include sections for troubleshooting, acknowledgments, or contact 
-  information.
+# License # 
+  Specify the project's license and any terms or conditions for use.
+
+# Additional sections # 
+Depending on the project, you may also include sections for 
+troubleshooting, acknowledgments, or contact information.
 
 To helps users and contributors verify that the project is 
 functioning correctly and, provides guidance on how to test their 
 own contributions. 
 
-* Running Tests *
+# Running Tests #
 
-1. **Test requirements**: Mention any specific tools or libraries 
-  needed to run the tests, and provide instructions on how to 
-  install them.
+1. **Test requirements**: Mention any specific tools or libraries needed to 
+run the tests, and provide instructions on how to install them.
+
 2. **Test execution**: Explain how to execute the tests, 
   including any necessary commands or configurations. For example, 
   you might include a command like `npm test` or `pytest` to run 
   tests for JavaScript or Python projects, respectively.
 
-$HOME/$USER/mmw/bin/run-mmw-project-tests
+  '$HOME/$USER/mmw/bin/run-mmw-project-tests'
 
-$HOME/$USER/mmw/bin/run-mmw-project-tests
 
 3. **Test coverage**: Briefly mention what percentage of the 
   codebase is covered by the tests and whether there are any known 
