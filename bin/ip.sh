@@ -1,3 +1,7 @@
+runTests(){
+  ./test/bats/bin/bats --tap test/test-multi-media.bats
+}
+
 runMethod(){
   echo $PROJ
 }
