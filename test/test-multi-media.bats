@@ -8,3 +8,7 @@ source ./test/tmp/config
   [[ $result == $expected ]]
   rm $HOME/test.wav
 }
+
+@test "Generate Image" {
+
+}
