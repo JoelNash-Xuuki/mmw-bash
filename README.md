@@ -1,6 +1,6 @@
 Welcome to MMW
 
-* Multiple Media Workstation * 
+# Multiple Media Workstation Suite # 
 
 A brief description the project and repo.
 A project management tool for audio production. It includes 
@@ -9,11 +9,11 @@ directories, configuring recording settings, recording audio,
 playing audio, building sheet music, creating sound design, 
 rendering audio, moving audio files, and converting audio formats.
 
-* Description * 
+# Description # 
   The follow wil provide a more detailed overview of the project, 
   its purpose, and any key features.
 
-  Key features of the project:
+  Key features for mmm:
     - Setting project parameters such as project name, location, 
       and session.
     - Creating project directories with specific subdirectories 
@@ -28,7 +28,8 @@ rendering audio, moving audio files, and converting audio formats.
     - Moving rendered audio files to a specific directory for a 
       website.
     - Converting audio formats using FFmpeg.
-
+   Key features for ip:
+    - Generate an image.
 
 * Installation * 
 Instructions on how to install and set up the project.
