@@ -1,3 +1,0 @@
-magick $1 -separate -background white \
-          -compose ModulusAdd -flatten -channel R -combine +channel \
-          -set colorspace HSB -colorspace RGB random_hues.png
