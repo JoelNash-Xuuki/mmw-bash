@@ -50,9 +50,9 @@ getAudioInfo() {
 }
 
 generate_noise_image(){
-  convert -size 1920x1920 xc:  -channel G +noise Random \
+  convert -size 1920x1920 xc: -channel G +noise Random \
          -virtual-pixel Tile -blur 0x5 -auto-level \
-         -separate +channel   $HOME/test.png
+         -separate +channel $1
 }
 
 "$@"
