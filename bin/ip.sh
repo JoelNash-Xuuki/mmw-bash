@@ -7,6 +7,7 @@ runMethod(){
 }
 
 createTextPNG(){
+  # Text appears to high ip the y axis of the png file
   width=485
   height=155
   convert -background transparent -fill lightblue \
