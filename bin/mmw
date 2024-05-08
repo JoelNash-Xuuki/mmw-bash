@@ -1,6 +1,13 @@
-source $HOME/mmw/test/tmp/config
+source /usr/local/bin/test/tmp/config
+
+help(){
+  echo "Welcome to MMW"
+  echo "Usage: mmw [option]"
+  echo "Options: "
+  echo "  setProj"
+}
 setProj(){
-  sed -i "s/PROJ=.*/PROJ=$1/g" $HOME/mmw/test/tmp/config
+  sed -i "s/PROJ=.*/PROJ=$1/g" /usr/local/bin/test/tmp/config
 }
 
 setProjLoc(){
