@@ -59,5 +59,3 @@ generate_noise_image(){
 }
 
 "$@"
-
-

@@ -1,5 +1,4 @@
 source $HOME/config
-
 help(){
   echo "Welcome to MMW"
   echo "Usage: mmw [option]"
@@ -66,7 +65,6 @@ createProj(){
       fi
    fi
 }
-
 configRec(){
   # Set the variables
   tempo=$1
@@ -92,11 +90,9 @@ configRec(){
   chmod +x "$PROJPATH/$SESSION/rec.eca"
   cat $PROJPATH/$SESSION/rec.eca
 }
-
 rec(){
   $PROJPATH/$SESSION/rec.eca
 }
-
 configPlay(){
   # Set the variables
   tempo=$1
@@ -118,7 +114,6 @@ configPlay(){
   chmod +x "$PROJPATH/$SESSION/play.eca"
   cat $PROJPATH/$SESSION/play.eca
 }
-
 play(){
   $PROJPATH/$SESSION/play.eca
 }
@@ -150,6 +145,14 @@ convertAudio(){
   trackName="$1"
   channelNo="$2"  
   ffmpeg -i input_audio.wav -map_channel 0.$channelNo.0 $trackName.wav
+}
+
+createScorePDFandMIDI(){
+  # originally used source $HOME/projects_/Flock/config
+  lilypond -dmidi-extension=mid $LILY
+  mv $PROJ.mid tmp/$PROJ.mid
+  #lilypond-book --output=out --format=html $1.lytex
+  echo "Created $LILY"
 }
 
 "$@"

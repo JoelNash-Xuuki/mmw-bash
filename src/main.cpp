@@ -5,8 +5,7 @@
 int main(int argc, char **argv){
 
   if (argc != 7) {
-      printf("Usage: %s <filename> <service> 
-              <title> <artist>\n", argv[0]);
+      printf("Usage: %s <filename> <service> <title> <artist>\n", argv[0]);
       return 1;
   }
 
