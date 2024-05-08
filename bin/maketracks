@@ -1,0 +1,8 @@
+./bin/maketracka synth 2
+./bin/maketracka bass 3
+./bin/maketracka snare 4                      
+./bin/maketracka brush 5
+./bin/maketracka hihat 6
+./bin/maketracka kick 7
+
+

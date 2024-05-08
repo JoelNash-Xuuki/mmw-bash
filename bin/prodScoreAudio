@@ -1,0 +1,4 @@
+source $HOME/projects_/Flock/config
+rm $HOME/audio/Vyvn/Flock/1/stems/$PROJ.wav
+csound -d -o$HOME/audio/Vyvn/Flock/1/stems/$PROJ.wav -F tmp/$PROJ.mid src/sound-design/$PROJ.orc src/sound-design/$PROJ.sco
+
