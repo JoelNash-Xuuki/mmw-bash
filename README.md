@@ -1,8 +1,7 @@
 Welcome to MMW
 
-# Multiple Media Workstation Suite # 
+# Multiple Media Workstation Suite 
 
-A brief description the project and repo.
 A project management tool for audio production. It includes 
 functions for setting project parameters, creating project 
 directories, configuring recording settings, recording audio, 

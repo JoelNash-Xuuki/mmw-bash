@@ -787,4 +787,7 @@ f4 0 1024 10 1 1   1   1    0.7 0.5   0.3  0.1
 
 echo "$projSco" > $PROJPATH/sound_design/$PROJ.sco
 }
+setCard(){
+  sed -i "s/CARD=.*/CARD=$1/g" $HOME/config
+}
 "$@"
