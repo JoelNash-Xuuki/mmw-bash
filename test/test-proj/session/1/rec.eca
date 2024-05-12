@@ -1,6 +1,6 @@
 ecasound -n test-proj -f:16,2,48000 \
-  -a:instr -i /data/data/com.termux/files/home/audio/Vyvn/test-proj/stems/input_1.wav -ea:250 \
+  -a:instr -i /home/joel/audio/Vyvn/test-proj/stems/input_1.wav -ea:250 \
   -a:2,3 -i jack,system,1,0 \
-  -a:2 -o /data/data/com.termux/files/home/audio/Vyvn/test-proj/stems/input_2.wav -ea:250 \
+  -a:2 -o /home/joel/audio/Vyvn/test-proj/stems/input_2.wav -ea:250 \
   -a:met -i:null -pn:metronome,98 -ea:1 \
   -a:instr,3,met -o jack,system
