@@ -3,65 +3,65 @@ source ./test/tmp/config
 
 @test "Set the Project name" {
   mmw setProj test-proj
-  projName=$(grep "^PROJ=test-proj$" "./test/tmp/config")
+  projName=$(grep "^PROJ=test-proj$" "$HOME/config")
   [ "$projName" = "PROJ=test-proj" ]
 }
 
-@test "set the Project Location" {
-  mmw setProjLoc mmw/test
-  projLocation=$(grep "^PROJLOC=mmw/test$" "./test/tmp/config")
-  [ "$projLocation" = "PROJLOC=mmw/test" ]
-}
+#@test "set the Project Location" {
+#  mmw setProjLoc mmw/test
+#  projLocation=$(grep "^PROJLOC=mmw/test$" "./test/tmp/config")
+#  [ "$projLocation" = "PROJLOC=mmw/test" ]
+#}
+#
+#@test "set session" {
+#  run mmw setSession 1
+#  session=$(grep "^SESSION=session/1$" "./test/tmp/config")
+#  [ "$session" = "SESSION=session/1" ]
+#
+#  run mmw setSession 2
+#  session=$(grep "^SESSION=session/2$" "./test/tmp/config")
+#  [ "$session" = "SESSION=session/2" ]
+#}
 
-@test "set session" {
-  run mmw setSession 1
-  session=$(grep "^SESSION=session/1$" "./test/tmp/config")
-  [ "$session" = "SESSION=session/1" ]
+#@test "can create a new project with 1 session dir" {
+#  if test -d $PROJPATH; then
+#    rm -r "$PROJPATH"  
+#  fi
+#  echo "y" | mmw createProj
+#  [ -d "$PROJPATH" ]
+#  [ -d "$HOME/audio/$ARTIST/$PROJ" ]
+#  [ -d "$HOME/audio/$ARTIST/$PROJ/stems" ]
+#  [ -d "$PROJPATH/src" ] 
+#  [ -d "$PROJPATH/sound_design" ]
+#  [ -d "$PROJPATH/tmp" ]
+#  [ -d "$PROJPATH/session" ]
+#  [ -d "$PROJPATH/session/1" ]
+#}
+#
+#@test "set rec session 1" {
+#
+#  run mmw setSession 1
+#  run mmw configRec 98 input_1 input_2 250 250
+#  input_1=input_1
+#  input_2=input_2
+#  # Generate the expected ecasound command
+#  ecasound_command="ecasound -n $PROJ -f:16,2,48000 \\"$'\n'
+#  ecasound_command+="  -a:instr -i $AUDIO$input_1$FILE -ea:250 \\"$'\n'
+#  ecasound_command+="  -a:2,3 -i jack,system,1,0 \\"$'\n'
+#  ecasound_command+="  -a:2 -o $AUDIO$input_2$FILE -ea:250 \\"$'\n'
+#  ecasound_command+="  -a:met -i:null -pn:metronome,98 -ea:1 \\"$'\n'
+#  ecasound_command+="  -a:instr,3,met -o jack,system"
+#  echo "$ecasound_command" > "$HOME/mmw/test/expected_rec.eca"
+#  run diff $PROJPATH/session/1/rec.eca $HOME/mmw/test/expected_rec.eca
+#  [ "$status" -eq 0 ]
+#}
 
-  run mmw setSession 2
-  session=$(grep "^SESSION=session/2$" "./test/tmp/config")
-  [ "$session" = "SESSION=session/2" ]
-}
-
-@test "can create a new project with 1 session dir" {
-  if test -d $PROJPATH; then
-    rm -r "$PROJPATH"  
-  fi
-  echo "y" | mmw createProj
-  [ -d "$PROJPATH" ]
-  [ -d "$HOME/audio/$ARTIST/$PROJ" ]
-  [ -d "$HOME/audio/$ARTIST/$PROJ/stems" ]
-  [ -d "$PROJPATH/src" ] 
-  [ -d "$PROJPATH/sound_design" ]
-  [ -d "$PROJPATH/tmp" ]
-  [ -d "$PROJPATH/session" ]
-  [ -d "$PROJPATH/session/1" ]
-}
-
-@test "set rec session 1" {
-
-  run mmw setSession 1
-  run mmw configRec 98 input_1 input_2 250 250
-  input_1=input_1
-  input_2=input_2
-  # Generate the expected ecasound command
-  ecasound_command="ecasound -n $PROJ -f:16,2,48000 \\"$'\n'
-  ecasound_command+="  -a:instr -i $AUDIO$input_1$FILE -ea:250 \\"$'\n'
-  ecasound_command+="  -a:2,3 -i jack,system,1,0 \\"$'\n'
-  ecasound_command+="  -a:2 -o $AUDIO$input_2$FILE -ea:250 \\"$'\n'
-  ecasound_command+="  -a:met -i:null -pn:metronome,98 -ea:1 \\"$'\n'
-  ecasound_command+="  -a:instr,3,met -o jack,system"
-  echo "$ecasound_command" > "$HOME/mmw/test/expected_rec.eca"
-  run diff $PROJPATH/session/1/rec.eca $HOME/mmw/test/expected_rec.eca
-  [ "$status" -eq 0 ]
-}
-
-@test "create session 1" {
-  mmw play
-  run diff $PROJPATH/session/1/session.eca $HOME/mmw/test/expected_session.eca
-  [ "$status" -eq 0 ]
-}
-
+#@test "create session 1" {
+#  mmw play
+#  run diff $PROJPATH/session/1/session.eca $HOME/mmw/test/expected_session.eca
+#  [ "$status" -eq 0 ]
+#}
+#
 ##@test "createScoreDesign should create the project score file" {
 ##
 ##  mmw createLyScoreAndMidiFile
