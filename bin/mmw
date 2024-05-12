@@ -1,10 +1,84 @@
 source $HOME/config
+runTest(){
+  ./test/bats/bin/bats --tap test/test-project.bats
+}
+
 help(){
   echo "Welcome to MMW"
   echo "Usage: mmw [option]"
   echo "Options: "
   echo "  setProj"
 }
+createConfig(){
+cat << EOF > $HOME/.config/mmw.config
+#MMW config file
+PROJ=test-proj
+
+PROJLOC=projects_
+PROJPATH=$HOME/$PROJLOC/$PROJ
+ARTIST=Vyvn
+SERVICE=Xuuki.xyz
+SESSION=session/1
+SCORE=$PROJPATH/src/score/$PROJ.ly
+LILY=$SCORE
+MIDI=$HOME/$PROJLOC/tmp/$PROJ.mid
+PDF=$HOME/Xuuki_Site_Node/site-app/public/doc/$PROJ.pdf
+WAV=$HOME/audio/$ARTIST/$PROJ/1/stems/$PROJ.wav
+TEMPO=84
+BEAT=$(bc <<< "scale=4; (60/$TEMPO)")
+BAR=$(bc <<< "scale=4;$BEAT*4")
+LENGTH=$(bc <<< "scale=4;$BAR*18")
+DUR=$(bc <<< "scale=4;$BAR*4")
+START_TIME=$(bc <<< "scale=2;$BAR*1")
+MP4=$PROJ.mp4
+FILE=.wav
+AUDIO=$HOME/audio/$ARTIST/$PROJ/stems/
+
+SYNTH=$PROJPATH/audio/synth.ewf
+BASS=$PROJPATH/audio/bass.ewf
+SNARE=$PROJPATH/audio/snare.ewf
+BRUSH=$PROJPATH/audio/brush.ewf
+HIHAT=$PROJPATH/audio/hihat.ewf
+KICK=$PROJPATH/audio/kick.ewf
+
+INSTR1=/home/joel/audio/flock/flock-bounce.wav
+INSTR2=/home/joel/audio/flock/flock-remix-1.wav
+
+GUITAR1=/home/joel/audio/Vyvn/Flock/2/guitar-1.wav
+GUITAR2=/home/joel/audio/Vyvn/Flock/2/guitar-2.wav
+
+GUITAR3=/home/joel/audio/Vyvn/Flock/1/stems/guitar-1.wav
+GUITAR4=/home/joel/audio/Vyvn/Flock/1/stems/guitar-2.wav
+
+#VOCAL1=/home/joel/audio/flock/vocal-1.wav
+VOCAL=/home/joel/audio/flock/2/vocal.wav
+PIANO=/home/joel/audio/flock/2/piano.wav
+
+MIX1WAV=/home/joel/audio/Vyvn/Flock/1/$PROJ-mix-1.wav
+MIX1MP3=/home/joel/audio/Vyvn/Flock/1/$PROJ-mix-1-1.mp3
+
+MIX1MP3TWO=/home/joel/audio/Vyvn/Flock/2/$PROJ-mix-1-1-1.mp3
+MIX1MP3TEMP=/home/joel/audio/Vyvn/Flock/2/$PROJ-mix-1-temp.mp3
+
+MIX1WAVTWO=/home/joel/audio/Vyvn/Flock/1/$PROJ-mix-1-1-1.wav
+
+MIX1WAVTHREE=/home/joel/audio/Vyvn/Flock/3/$PROJ-mix-1-1-2.wav
+MIX1WAVTEMP=/home/joel/audio/Vyvn/Flock/3/$PROJ-mix-temp.wav
+
+MIX1MP3TWOSCREWED=/home/joel/audio/Vyvn/Flock/1/$PROJ-mix-1-1-1-screwed.mp3
+
+#voice #1#
+#harmony #2# 
+#bass #3#
+#snare #4#
+#brush #5#
+#hihat #6#
+#kick #7#
+ 
+EOF
+
+}
+
 setProj(){
   sed -i "s/PROJ=.*/PROJ=$1/g" $HOME/config
 }
@@ -791,3 +865,4 @@ setCard(){
   sed -i "s/CARD=.*/CARD=$1/g" $HOME/config
 }
 "$@"
+
