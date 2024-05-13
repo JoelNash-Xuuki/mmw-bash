@@ -1,13 +1,18 @@
+runTest(){
+  ./test/bats/bin/bats --tap test/test-mmw-config.bats
+}
+
 createConfigFile(){
   touch $HOME/.config/mmw.config
 }
 
-addProjName(){
-  echo "PROJ=test-proj" >> $HOME/.config/mmw.config
+
+addProjNameDeclaration(){
+  echo "PROJ=" >> $HOME/.config/mmw.config
 }
 
 addProjLocation(){
-  echo "PROJLOC=projects_" >> $HOME/.config/mmw.config
+  echo "PROJLOC=" >> $HOME/.config/mmw.config
 }
 
 addProjFilePath(){
