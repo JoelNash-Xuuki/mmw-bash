@@ -1,12 +1,4 @@
 #!/usr/bin/env bats
-setup() {
-  mmw-config createConfigFile
-}
-
-teardown() {
-  rm $HOME/.config/mmw.config
-}
-
 @test "Can create config file" { 
   mmw-config createConfigFile 
   [ -f $HOME/.config/mmw.config ]
