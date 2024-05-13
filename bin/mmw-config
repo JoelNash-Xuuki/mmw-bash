@@ -1,0 +1,24 @@
+createConfigFile(){
+  touch $HOME/.config/mmw.config
+}
+
+addProjName(){
+  echo "PROJ=test-proj" >> $HOME/.config/mmw.config
+}
+
+addProjLocation(){
+  echo "PROJLOC=projects_" >> $HOME/.config/mmw.config
+}
+
+addProjFilePath(){
+  echo "PROJPATH=\$HOME\$PROJLOC\$PROJ" >> $HOME/.config/mmw.config
+}
+
+create(){
+  createConfigFile
+  addProjName
+  addProjLocation
+  addProjFilePath
+}
+
+"$@"
