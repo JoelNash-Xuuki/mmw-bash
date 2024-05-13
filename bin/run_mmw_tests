@@ -1,0 +1,1 @@
+./test/bats/bin/bats --tap test/test-mmw.bats
