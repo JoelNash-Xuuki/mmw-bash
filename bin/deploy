@@ -1,2 +1,2 @@
 sudo cp bin/mmw /usr/local/bin/mmw
-sudo cp test/tmp/config /usr/local/bin/test/tmp/config
+sudo cp bin/mmw-config /usr/local/bin/mmw-config
