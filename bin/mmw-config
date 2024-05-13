@@ -18,6 +18,10 @@ addProjFilePath(){
   echo "PROJPATH=\$HOME\$PROJLOC\$PROJ" >> $HOME/.config/mmw.config
 }
 
+
+addArtistDeclaration(){
+  echo "ARTIST=" >> $HOME/.config/mmw.config
+}
 create(){
   createConfigFile
   addProjName
