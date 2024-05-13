@@ -14,11 +14,11 @@ addProjNameDeclaration(){
   echo "PROJ=" >> $HOME/.config/mmw.config
 }
 
-addProjLocation(){
+addProjLocationDeclaration(){
   echo "PROJLOC=" >> $HOME/.config/mmw.config
 }
 
-addProjFilePath(){
+addProjFilePathDeclaration(){
   echo "PROJPATH=\$HOME\$PROJLOC\$PROJ" >> $HOME/.config/mmw.config
 }
 
@@ -32,9 +32,9 @@ addServiceDeclaration(){
 
 create(){
   createConfigFile
-  addProjName
-  addProjLocation
-  addProjFilePath
+  addProjNameDeclaration
+  addProjLocationDeclaration
+  addProjFilePathDeclaration
 }
 
 "$@"
