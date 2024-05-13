@@ -27,11 +27,21 @@
   projFilePath=$(grep "^PROJPATH=\$HOME\$PROJLOC\$PROJ$" \
                       "$HOME/.config/mmw.config")
   [ "$projFilePath" = "PROJPATH=\$HOME\$PROJLOC\$PROJ" ]
+  rm $HOME/.config/mmw.config
 }
 
 @test "Can declare the artist" {
+  mmw-config createConfigFile
   mmw-config addArtistDeclaration
   artistName=$(grep "^ARTIST=$" "$HOME/.config/mmw.config")
   [ "$artistName" = "ARTIST=" ]
+  rm $HOME/.config/mmw.config
+}
+
+@test "Can declare the service" {
+  mmw-config addServiceDeclaration
+  service=$(grep "^SERVICE=$" "$HOME/.config/mmw.config")
+  [ "$service" = "SERVICE=" ]
+  rm $HOME/.config/mmw.config
 }
 

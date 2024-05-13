@@ -22,6 +22,10 @@ addProjFilePath(){
 addArtistDeclaration(){
   echo "ARTIST=" >> $HOME/.config/mmw.config
 }
+addServiceDeclaration(){
+  echo "SERVICE=" >> $HOME/.config/mmw.config
+}
+
 create(){
   createConfigFile
   addProjName
