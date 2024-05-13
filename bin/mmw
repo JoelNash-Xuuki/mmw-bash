@@ -1,6 +1,6 @@
 source $HOME/.config/mmw.config
 runTest(){
-  ./test/bats/bin/bats --tap test/test-project.bats
+  ./test/bats/bin/bats --tap test/test-mmw.bats
 }
 
 help(){
