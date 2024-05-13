@@ -1,8 +1,4 @@
 source $HOME/.config/mmw.config
-runTest(){
-  ./test/bats/bin/bats --tap test/test-mmw.bats
-}
-
 help(){
   echo "Welcome to MMW"
   echo "Usage: mmw [option]"
