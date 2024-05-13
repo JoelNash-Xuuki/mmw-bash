@@ -1,12 +1,5 @@
-Welcome to MMW
-
-# Multiple Media Workstation Suite 
-
-A project management tool for audio production. It includes 
-functions for setting project parameters, creating project 
-directories, configuring recording settings, recording audio, 
-playing audio, building sheet music, creating sound design, 
-rendering audio, moving audio files, and converting audio formats.
+# Welcome to Multiple Media Workstation Suite (MMWS)
+Navigate to test section
 
 # Description # 
   The follow wil provide a more detailed overview of the project, 
@@ -73,7 +66,17 @@ To helps users and contributors verify that the project is
 functioning correctly and, provides guidance on how to test their 
 own contributions. 
 
-# Running Tests #
+# Tests #
+First run: 
+```bash
+mmw-config runTest
+```
+
+```bash
+run_mmw_tests
+```
+
+The tests will describe the features of mmw for the user
 
 1. **Test requirements**: Mention any specific tools or libraries needed to 
 run the tests, and provide instructions on how to install them.
