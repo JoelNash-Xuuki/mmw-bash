@@ -6,7 +6,6 @@ createConfigFile(){
   touch $HOME/.config/mmw.config
 }
 
-
 addProjNameDeclaration(){
   echo "PROJ=" >> $HOME/.config/mmw.config
 }
