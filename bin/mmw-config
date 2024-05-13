@@ -10,6 +10,10 @@ addProjNameDeclaration(){
   echo "PROJ=" >> $HOME/.config/mmw.config
 }
 
+addProjNameDeclaration(){
+  echo "PROJ=" >> $HOME/.config/mmw.config
+}
+
 addProjLocation(){
   echo "PROJLOC=" >> $HOME/.config/mmw.config
 }
