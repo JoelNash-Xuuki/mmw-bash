@@ -1,6 +1,15 @@
 #!/usr/bin/env bats
+setup() {
+  mmw-config createConfigFile
+  mmw-config addProjNameDeclaration
+}
+
+teardown() {
+  rm $HOME/.config/mmw.config
+}
 
 @test "Set the Project name" {
+  mmw-config createConfigFile
   mmw setProj test-proj
   projName=$(grep "^PROJ=test-proj$" "$HOME/.config/mmw.config")
   [ "$projName" = "PROJ=test-proj" ]
@@ -223,3 +232,4 @@
 #  [ -f "$HOME/projects_/flock/src/sound-design/$PROJ.orc" ]
 #  assert_success
 #}
+
