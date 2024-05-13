@@ -795,5 +795,3 @@ setCard(){
   sed -i "s/CARD=.*/CARD=$1/g" $HOME/config
 }
 "$@"
-
-
