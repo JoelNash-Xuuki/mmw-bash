@@ -3,9 +3,12 @@ setup() {
   mmw-config create
   mmw setProj test-proj
   mmw setProjLoc mmw/test
+  mmw setArtist Vyvn
 }
 
 teardown() {
+  source $HOME/.config/mmw.config
+  rm -r "$PROJPATH"
   rm $HOME/.config/mmw.config
 }
 
@@ -21,32 +24,67 @@ teardown() {
   [ "$projLocation" = "PROJLOC=mmw/test" ]
 }
 
-#@test "set session" {
-#  run mmw setSession 1
-#  session=$(grep "^SESSION=session/1$" "$HOME/.config/mmw.config")
-#  [ "$session" = "SESSION=session/1" ]
-#
-#  run mmw setSession 2
-#  session=$(grep "^SESSION=session/2$" "$HOME/.config/mmw.config")
-#  [ "$session" = "SESSION=session/2" ]
-#}
-#
-#@test "can create a new project with 1 session dir" {
-#  #if test -d $HOME/.config/mmw.config; then
-#  #  rm -r "$PROJPATH"  
-#  #fi
-#  #echo "y" | mmw createProj
-#
-#  cp $HOME/.config/mmw.config $HOME/mmw/mmw-debug
-#  [ -d "$PROJPATH" ]
-#  #[ -d "$HOME/audio/$ARTIST/$PROJ" ]
-#  #[ -d "$HOME/audio/$ARTIST/$PROJ/stems" ]
-#  #[ -d "$PROJPATH/src" ] 
-#  #[ -d "$PROJPATH/sound_design" ]
-#  #[ -d "$PROJPATH/tmp" ]
-#  #[ -d "$PROJPATH/session" ]
-#  #[ -d "$PROJPATH/session/1" ]
-#}
+@test "creates a new project dir location" {
+  source $HOME/.config/mmw.config
+  echo "y" | mmw createProj
+
+  [ -d "$PROJPATH" ]
+  #[ -d "$HOME/audio/$ARTIST/$PROJ" ]
+  #[ -d "$HOME/audio/$ARTIST/$PROJ/stems" ]
+  #[ -d "$PROJPATH/src" ] 
+  #[ -d "$PROJPATH/sound_design" ]
+  #[ -d "$PROJPATH/tmp" ]
+  #[ -d "$PROJPATH/session" ]
+  #[ -d "$PROJPATH/session/1" ]
+}
+
+@test "creates corresponding location for audio" {
+  source $HOME/.config/mmw.config
+  
+  echo "y" | mmw createProj
+
+  [ -d "$PROJPATH" ]
+  [ -d "$HOME/audio/$ARTIST/$PROJ" ]
+  #[ -d "$HOME/audio/$ARTIST/$PROJ/stems" ]
+  #[ -d "$PROJPATH/src" ] 
+  #[ -d "$PROJPATH/sound_design" ]
+  #[ -d "$PROJPATH/tmp" ]
+  #[ -d "$PROJPATH/session" ]
+  #[ -d "$PROJPATH/session/1" ]
+}
+
+@test "creates corresponding location for audio stems" {
+  source $HOME/.config/mmw.config
+  
+  echo "y" | mmw createProj
+
+  [ -d "$PROJPATH" ]
+  [ -d "$HOME/audio/$ARTIST/$PROJ/stems" ]
+  #[ -d "$PROJPATH/src" ] 
+  #[ -d "$PROJPATH/sound_design" ]
+  #[ -d "$PROJPATH/tmp" ]
+  #[ -d "$PROJPATH/session" ]
+  #[ -d "$PROJPATH/session/1" ]
+}
+
+@test "creates sound design dir in proj location" {
+  source $HOME/.config/mmw.config
+  echo "y" | mmw createProj
+  [ -d "$PROJPATH" ]
+  [ -d "$PROJPATH/sound_design" ]
+}
+
+@test "set session" {
+  run mmw setSession 1
+  session=$(grep "^SESSION=session/1$" \
+                 "$HOME/.config/mmw.config")
+  [ "$session" = "SESSION=session/1" ]
+
+  run mmw setSession 2
+  session=$(grep "^SESSION=session/2$" \
+                 "$HOME/.config/mmw.config")
+  [ "$session" = "SESSION=session/2" ]
+}
 
 ##@test "set rec session 1" {
 ##  run mmw setSession 1
