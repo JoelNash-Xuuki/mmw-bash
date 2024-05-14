@@ -37,6 +37,12 @@ teardown() {
   [ "$score" = "SCORE=" ]
 }
 
+@test "Can declare the session" {
+  session=$(grep "^SESSION=session/$" \
+                 "$HOME/.config/mmw.config")
+  [ "$session" = "SESSION=session/" ]
+}
+
 #@test "Can declare the service" {
 #  mmw-config addServiceDeclaration
 #  service=$(grep "^SERVICE=$" "$HOME/.config/mmw.config")
