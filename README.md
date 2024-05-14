@@ -1,5 +1,6 @@
 # Welcome to Multiple Media Workstation Suite (MMWS)
-Navigate to test section
+# TODO
+- Navigate to section Tests and action the bash cmds.
 
 # Description # 
   The follow wil provide a more detailed overview of the project, 
