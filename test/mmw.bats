@@ -28,36 +28,18 @@ teardown() {
 @test "creates a new project dir location" {
   source $HOME/.config/mmw.config
   [ -d "$PROJPATH" ]
-  #[ -d "$HOME/audio/$ARTIST/$PROJ" ]
-  #[ -d "$HOME/audio/$ARTIST/$PROJ/stems" ]
-  #[ -d "$PROJPATH/src" ] 
-  #[ -d "$PROJPATH/sound_design" ]
-  #[ -d "$PROJPATH/tmp" ]
-  #[ -d "$PROJPATH/session" ]
-  #[ -d "$PROJPATH/session/1" ]
 }
 
 @test "creates corresponding location for audio" {
   source $HOME/.config/mmw.config
   [ -d "$PROJPATH" ]
   [ -d "$HOME/audio/$ARTIST/$PROJ" ]
-  #[ -d "$HOME/audio/$ARTIST/$PROJ/stems" ]
-  #[ -d "$PROJPATH/src" ] 
-  #[ -d "$PROJPATH/sound_design" ]
-  #[ -d "$PROJPATH/tmp" ]
-  #[ -d "$PROJPATH/session" ]
-  #[ -d "$PROJPATH/session/1" ]
 }
 
 @test "creates corresponding location for audio stems" {
   source $HOME/.config/mmw.config
   [ -d "$PROJPATH" ]
   [ -d "$HOME/audio/$ARTIST/$PROJ/stems" ]
-  #[ -d "$PROJPATH/src" ] 
-  #[ -d "$PROJPATH/sound_design" ]
-  #[ -d "$PROJPATH/tmp" ]
-  #[ -d "$PROJPATH/session" ]
-  #[ -d "$PROJPATH/session/1" ]
 }
 
 @test "creates sound design dir in proj location" {
