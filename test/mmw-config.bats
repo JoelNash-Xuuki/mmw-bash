@@ -22,14 +22,19 @@ teardown() {
 }
 
 @test "Can declare and proj file path" {
-  projFilePath=$(grep "^PROJPATH=\$HOME\$PROJLOC\$PROJ$" \
+  projFilePath=$(grep "^PROJPATH=\$HOME/\$PROJLOC/\$PROJ$" \
                       "$HOME/.config/mmw.config")
-  [ "$projFilePath" = "PROJPATH=\$HOME\$PROJLOC\$PROJ" ]
+  [ "$projFilePath" = "PROJPATH=\$HOME/\$PROJLOC/\$PROJ" ]
 }
 
 @test "Can declare the artist" {
   artistName=$(grep "^ARTIST=$" "$HOME/.config/mmw.config")
   [ "$artistName" = "ARTIST=" ]
+}
+
+@test "Can declare the score" {
+  score=$(grep "^SCORE=$" "$HOME/.config/mmw.config")
+  [ "$score" = "SCORE=" ]
 }
 
 #@test "Can declare the service" {
