@@ -86,7 +86,7 @@ teardown() {
   ecasound_command+="  -a:instr,3,met -o jack,system"
   echo "$ecasound_command" > "$HOME/mmw/test/$PROJ/expected_rec.eca"
 
-  result=$(diff $PROJPATH/session/rec.eca $HOME/mmw/test/expected_rec.eca)
+  result=$(diff $PROJPATH/session/rec.eca $HOME/mmw/test/$PROJ/expected_rec.eca)
   [ "$result" == "" ]
 }
 
