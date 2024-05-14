@@ -74,7 +74,7 @@ teardown() {
   [ -d "$PROJPATH/sound_design" ]
 }
 
-@test "set session" {
+@test "set session(s)" {
   run mmw setSession 1
   session=$(grep "^SESSION=session/1$" \
                  "$HOME/.config/mmw.config")
