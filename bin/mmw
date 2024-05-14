@@ -263,17 +263,15 @@ createProj(){
         mkdir $PROJPATH/score
         mkdir $PROJPATH/.bin
         mkdir $PROJPATH/session
-        mkdir $PROJPATH/$SESSION
+#        mkdir $PROJPATH/$SESSION
         mkdir $PROJPATH/sound_design
         echo "$PROJ created"
       else
         echo "$PROJ not created"
       fi
    fi
-
-createLilyFile
-
 }
+
 configRec(){
   # Set the variables
   tempo=$1
