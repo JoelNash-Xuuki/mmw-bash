@@ -4,6 +4,7 @@ setup() {
   mmw setProj test-proj
   mmw setProjLoc mmw/test
   mmw setArtist Vyvn
+  echo "y" | mmw createProj
 }
 
 teardown() {
@@ -26,8 +27,6 @@ teardown() {
 
 @test "creates a new project dir location" {
   source $HOME/.config/mmw.config
-  echo "y" | mmw createProj
-
   [ -d "$PROJPATH" ]
   #[ -d "$HOME/audio/$ARTIST/$PROJ" ]
   #[ -d "$HOME/audio/$ARTIST/$PROJ/stems" ]
@@ -40,9 +39,6 @@ teardown() {
 
 @test "creates corresponding location for audio" {
   source $HOME/.config/mmw.config
-  
-  echo "y" | mmw createProj
-
   [ -d "$PROJPATH" ]
   [ -d "$HOME/audio/$ARTIST/$PROJ" ]
   #[ -d "$HOME/audio/$ARTIST/$PROJ/stems" ]
@@ -55,9 +51,6 @@ teardown() {
 
 @test "creates corresponding location for audio stems" {
   source $HOME/.config/mmw.config
-  
-  echo "y" | mmw createProj
-
   [ -d "$PROJPATH" ]
   [ -d "$HOME/audio/$ARTIST/$PROJ/stems" ]
   #[ -d "$PROJPATH/src" ] 
@@ -69,35 +62,33 @@ teardown() {
 
 @test "creates sound design dir in proj location" {
   source $HOME/.config/mmw.config
-  echo "y" | mmw createProj
   [ -d "$PROJPATH" ]
   [ -d "$PROJPATH/sound_design" ]
 }
 
 @test "creates session dir in proj location" {
   source $HOME/.config/mmw.config
-  echo "y" | mmw createProj
   [ -d "$PROJPATH" ]
   [ -d "$PROJPATH/session" ]
 }
 
-#@test "set rec session 1" {
-#  run mmw setSession 1
-#  run mmw configRec 98 input_1 input_2 250 250
-#  input_1=input_1
-#  input_2=input_2
-#  # Generate the expected ecasound command
-#  ecasound_command="ecasound -n $PROJ -f:16,2,48000 \\"$'\n'
-#
-#  ecasound_command+="  -a:instr -i $AUDIO$input_1$FILE -ea:250 \\"$'\n'
-#  ecasound_command+="  -a:2,3 -i jack,system,1,0 \\"$'\n'
-#  ecasound_command+="  -a:2 -o $AUDIO$input_2$FILE -ea:250 \\"$'\n'
-#  ecasound_command+="  -a:met -i:null -pn:metronome,98 -ea:1 \\"$'\n'
-#  ecasound_command+="  -a:instr,3,met -o jack,system"
-#  run echo "$ecasound_command" > "$HOME/mmw/test/expected_rec.eca"
-#  run diff $PROJPATH/session/1/rec.eca $HOME/mmw/test/expected_rec.eca
-#  [ "$status" -eq 0 ]
-#}
+@test "define rec session" {
+  source $HOME/.config/mmw.config
+  mmw configRec 98 input_1 input_2 250 250
+  input_1=input_1
+  input_2=input_2
+  # Generate the expected ecasound command
+  ecasound_command="ecasound -n $PROJ -f:16,2,48000 \\"$'\n'
+  ecasound_command+="  -a:instr -i $AUDIO$input_1$FILE -ea:250 \\"$'\n'
+  ecasound_command+="  -a:2,3 -i jack,system,1,0 \\"$'\n'
+  ecasound_command+="  -a:2 -o $AUDIO$input_2$FILE -ea:250 \\"$'\n'
+  ecasound_command+="  -a:met -i:null -pn:metronome,98 -ea:1 \\"$'\n'
+  ecasound_command+="  -a:instr,3,met -o jack,system"
+  echo "$ecasound_command" > "$HOME/mmw/test/$PROJ/expected_rec.eca"
+
+  result=$(diff $PROJPATH/session/rec.eca $HOME/mmw/test/expected_rec.eca)
+  [ "$result" == "" ]
+}
 
 ##@test "create session 1" {
 ##  mmw play
