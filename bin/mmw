@@ -11,7 +11,7 @@ setProj(){
 }
 
 setProjLoc(){
-  sed -i "s|PROJLOC=.*|PROJLOC=$1|g" $$HOME/.config/mmw.config
+  sed -i "s|PROJLOC=.*|PROJLOC=$1|g" $HOME/.config/mmw.config
 }
 
 setSession(){
