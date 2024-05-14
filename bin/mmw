@@ -14,13 +14,18 @@ setProjLoc(){
   sed -i "s|PROJLOC=.*|PROJLOC=$1|g" $HOME/.config/mmw.config
 }
 
-setSession(){
-  sed -i "s|SESSION=session/.*|SESSION=session/$1|g" $HOME/config
-  displaySession
+setArtist(){
+  sed -i "s|ARTIST=.*|ARTIST=$1|g" $HOME/.config/mmw.config
 }
 
 displaySession(){
   echo $SESSION | grep -o '[0-9]'
+}
+
+setSession(){
+  sed -i "s|SESSION=session/.*|SESSION=session/$1|g" \
+          $HOME/.config/mmw.config
+  displaySession
 }
 
 displayProj(){
