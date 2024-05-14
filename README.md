@@ -26,6 +26,13 @@
 
 # Installation # 
 Instructions on how to install and set up the project.
+
+To build sheetbuilder, testsheetbuilder, modsyn and testmodyn:
+```bash
+make
+```
+
+
 FFMPEG required.
 Image Magick
 
@@ -55,6 +62,8 @@ How to use the project, including any commands or configurations.
   how to report issues or submit pull requests.
 
   - run tests: to confirm features.
+
+  testsheetbuilder then the src/main  file to follow the  story for sheetbuilder.
 
 # License # 
   Specify the project's license and any terms or conditions for use.
