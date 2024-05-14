@@ -1,6 +1,7 @@
 #!/usr/bin/env bats
 setup() {
   mmw-config create
+  source $HOME/.config/mmw.config
   mmw setProj test-proj
   mmw setProjLoc mmw/test
   mmw setArtist Vyvn
@@ -26,7 +27,6 @@ teardown() {
 }
 
 @test "creates a new project dir location" {
-  source $HOME/.config/mmw.config
   [ -d "$PROJPATH" ]
 }
 
