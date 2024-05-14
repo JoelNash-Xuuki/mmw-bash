@@ -2,6 +2,13 @@ runTest(){
   ./test/bats/bin/bats --tap test/test-mmw-config.bats
 }
 
+help(){
+  echo "Welcome to MMW (config)"
+  echo "Usage: mmw-config [option]"
+  echo "Options: "
+  echo "  create"
+}
+
 createConfigFile(){
   touch $HOME/.config/mmw.config
 }
