@@ -22,13 +22,16 @@ addProjLocationDeclaration(){
 }
 
 addProjFilePathDeclaration(){
-  echo "PROJPATH=\$HOME\$PROJLOC\$PROJ" >> $HOME/.config/mmw.config
+  echo "PROJPATH=\$HOME/\$PROJLOC/\$PROJ" >> $HOME/.config/mmw.config
 }
-
 
 addArtistDeclaration(){
   echo "ARTIST=" >> $HOME/.config/mmw.config
 }
+addScoreDeclaration(){
+  echo "SCORE=" >> $HOME/.config/mmw.config
+}
+
 addServiceDeclaration(){
   echo "SERVICE=" >> $HOME/.config/mmw.config
 }
@@ -39,6 +42,7 @@ create(){
   addProjLocationDeclaration
   addProjFilePathDeclaration
   addArtistDeclaration
+  addScoreDeclaration
 }
 
 "$@"
