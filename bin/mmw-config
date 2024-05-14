@@ -1,5 +1,5 @@
 runTest(){
-  ./test/bats/bin/bats --tap test/test-mmw-config.bats
+  ./test/bats/bin/bats --tap test/mmw-config.bats
 }
 
 help(){
@@ -38,6 +38,7 @@ create(){
   addProjNameDeclaration
   addProjLocationDeclaration
   addProjFilePathDeclaration
+  addArtistDeclaration
 }
 
 "$@"
