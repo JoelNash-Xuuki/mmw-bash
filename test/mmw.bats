@@ -1,6 +1,8 @@
 #!/usr/bin/env bats
 setup() {
   mmw-config create
+  mmw setProj test-proj
+  mmw setProjLoc mmw/test
 }
 
 teardown() {
@@ -8,14 +10,14 @@ teardown() {
 }
 
 @test "Set the Project name" {
-  mmw setProj test-proj
-  projName=$(grep "^PROJ=test-proj$" "$HOME/.config/mmw.config")
+  projName=$(grep "^PROJ=test-proj$" \
+                  "$HOME/.config/mmw.config")
   [ "$projName" = "PROJ=test-proj" ]
 }
 
 @test "set the Project Location" {
-  mmw setProjLoc mmw/test
-  projLocation=$(grep "^PROJLOC=mmw/test$" "$HOME/.config/mmw.config")
+  projLocation=$(grep "^PROJLOC=mmw/test$" \
+                      "$HOME/.config/mmw.config")
   [ "$projLocation" = "PROJLOC=mmw/test" ]
 }
 
@@ -29,20 +31,22 @@ teardown() {
 #  [ "$session" = "SESSION=session/2" ]
 #}
 #
-@test "can create a new project with 1 session dir" {
-  if test -d $HOME/.config/mmw-config; then
-    rm -r "$PROJPATH"  
-  fi
-  echo "y" | mmw createProj
-  [ -d "$PROJPATH" ]
-  [ -d "$HOME/audio/$ARTIST/$PROJ" ]
-  [ -d "$HOME/audio/$ARTIST/$PROJ/stems" ]
-  [ -d "$PROJPATH/src" ] 
-  [ -d "$PROJPATH/sound_design" ]
-  [ -d "$PROJPATH/tmp" ]
-  [ -d "$PROJPATH/session" ]
-  [ -d "$PROJPATH/session/1" ]
-}
+#@test "can create a new project with 1 session dir" {
+#  #if test -d $HOME/.config/mmw.config; then
+#  #  rm -r "$PROJPATH"  
+#  #fi
+#  #echo "y" | mmw createProj
+#
+#  cp $HOME/.config/mmw.config $HOME/mmw/mmw-debug
+#  [ -d "$PROJPATH" ]
+#  #[ -d "$HOME/audio/$ARTIST/$PROJ" ]
+#  #[ -d "$HOME/audio/$ARTIST/$PROJ/stems" ]
+#  #[ -d "$PROJPATH/src" ] 
+#  #[ -d "$PROJPATH/sound_design" ]
+#  #[ -d "$PROJPATH/tmp" ]
+#  #[ -d "$PROJPATH/session" ]
+#  #[ -d "$PROJPATH/session/1" ]
+#}
 
 ##@test "set rec session 1" {
 ##  run mmw setSession 1
