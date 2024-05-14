@@ -29,21 +29,21 @@ teardown() {
 #  [ "$session" = "SESSION=session/2" ]
 #}
 #
-#@test "can create a new project with 1 session dir" {
-#  if test -d $HOME/.config/mmw-config; then
-#    rm -r "$PROJPATH"  
-#  fi
-#  echo "y" | mmw createProj
-#  [ -d "$PROJPATH" ]
-#  [ -d "$HOME/audio/$ARTIST/$PROJ" ]
-#  [ -d "$HOME/audio/$ARTIST/$PROJ/stems" ]
-#  [ -d "$PROJPATH/src" ] 
-#  [ -d "$PROJPATH/sound_design" ]
-#  [ -d "$PROJPATH/tmp" ]
-#  [ -d "$PROJPATH/session" ]
-#  [ -d "$PROJPATH/session/1" ]
-#}
-#
+@test "can create a new project with 1 session dir" {
+  if test -d $HOME/.config/mmw-config; then
+    rm -r "$PROJPATH"  
+  fi
+  echo "y" | mmw createProj
+  [ -d "$PROJPATH" ]
+  [ -d "$HOME/audio/$ARTIST/$PROJ" ]
+  [ -d "$HOME/audio/$ARTIST/$PROJ/stems" ]
+  [ -d "$PROJPATH/src" ] 
+  [ -d "$PROJPATH/sound_design" ]
+  [ -d "$PROJPATH/tmp" ]
+  [ -d "$PROJPATH/session" ]
+  [ -d "$PROJPATH/session/1" ]
+}
+
 ##@test "set rec session 1" {
 ##  run mmw setSession 1
 ##  run mmw configRec 98 input_1 input_2 250 250
