@@ -31,7 +31,6 @@ teardown() {
 }
 
 @test "creates corresponding location for audio" {
-  source $HOME/.config/mmw.config
   [ -d "$PROJPATH" ]
   [ -d "$HOME/audio/$ARTIST/$PROJ" ]
 }
