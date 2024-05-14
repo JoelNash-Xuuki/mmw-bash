@@ -99,8 +99,7 @@ configRec(){
     echo "$ecasound_command" > "$PROJPATH/session/rec.eca"
   fi
   # Make the file executable
-  #chmod +x "$PROJPATH/$SESSION/rec.eca"
-  #cat $PROJPATH/$SESSION/rec.eca
+  chmod +x "$PROJPATH/session/rec.eca"
 }
 
 
