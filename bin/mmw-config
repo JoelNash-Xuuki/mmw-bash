@@ -28,6 +28,10 @@ addProjFilePathDeclaration(){
 addArtistDeclaration(){
   echo "ARTIST=" >> $HOME/.config/mmw.config
 }
+addSessionDeclaration(){
+  echo "SESSION=session/" >> $HOME/.config/mmw.config
+}
+
 addScoreDeclaration(){
   echo "SCORE=" >> $HOME/.config/mmw.config
 }
@@ -42,6 +46,7 @@ create(){
   addProjLocationDeclaration
   addProjFilePathDeclaration
   addArtistDeclaration
+  addSessionDeclaration
   addScoreDeclaration
 }
 
