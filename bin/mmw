@@ -5,6 +5,7 @@ help(){
   echo "Options: "
   echo "  setProj"
 }
+
 setProj(){
   sed -i "s/PROJ=.*/PROJ=$1/g" $HOME/.config/mmw.config
 }
