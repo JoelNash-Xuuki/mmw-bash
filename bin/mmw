@@ -102,7 +102,6 @@ configRec(){
   chmod +x "$PROJPATH/session/rec.eca"
 }
 
-
 createLilyFile(){
 cat << EOF > $SCORE
 \version "2.22.0"
