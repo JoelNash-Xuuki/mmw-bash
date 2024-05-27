@@ -1,9 +1,0 @@
-sgpt "
-  Regard the following script
-  $(cat printlilypondfilewFunc)
-  Upon execution i get the error:
-  /home/joel/mmw/bin/printlilypondfilewFunc: line 178: syntax error: unexpected end of file
-
-  can you spot a missing brace anywhere in the code?
-  point it  out to me if you see it?
-"
