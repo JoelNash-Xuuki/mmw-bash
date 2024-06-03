@@ -304,10 +304,8 @@ buildSheetMusic(){
   sheetbuilder $1 $2 $3 $4 $5 $6
 }
 
-createLyScoreAndMidiFile(){
-  lilypond -dmidi-extension=mid $LILY
-  mv $PROJ.mid $MIDI 
-  mv $PROJ.pdf $PDF
+createScorePDFAndMIDIFiles(){
+  lilypond -dmidi-extension=mid --output=$HOME/$PROJLOC/$PROJ $SCORE
   #lilypond-book --output=out --format=html $1.lytex
 }
 
@@ -766,3 +764,4 @@ setCard(){
   sed -i "s/CARD=.*/CARD=$1/g" $HOME/config
 }
 "$@"
+
