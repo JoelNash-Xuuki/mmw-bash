@@ -76,6 +76,10 @@ To helps users and contributors verify that the project is
 functioning correctly and, provides guidance on how to test their 
 own contributions. 
 
+# Deploy 
+```bash
+sudo cp bin/mmw /usr/local/bin/mmw
+```
 # Tests #
 First run: 
 ```bash
