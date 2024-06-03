@@ -2,8 +2,5 @@ src/*.o
 app.log
 src/*.swp
 *.swp
-<<<<<<< HEAD
 test/src/score/Test*
-=======
 tmp/config
->>>>>>> 97e7a5130eaf44ec04565a4e39bcf65ab082efb8
