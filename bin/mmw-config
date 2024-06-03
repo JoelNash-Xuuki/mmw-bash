@@ -21,8 +21,11 @@ addProjLocationDeclaration(){
   echo "PROJLOC=" >> $HOME/.config/mmw.config
 }
 
-addProjFilePathDeclaration(){
-  echo "PROJPATH=\$HOME/\$PROJLOC/\$PROJ" >> $HOME/.config/mmw.config
+addProjFilePathDeclaration(){ echo "PROJPATH=\$HOME/\$PROJLOC/\$PROJ" >> $HOME/.config/mmw.config
+}
+
+addScoreDeclarationAndDefinition(){
+  echo "SCORE=\$HOME/\$PROJLOC/\$PROJ.ly" >> $HOME/.config/mmw.config
 }
 
 addArtistDeclaration(){
@@ -30,10 +33,6 @@ addArtistDeclaration(){
 }
 addSessionDeclaration(){
   echo "SESSION=session/" >> $HOME/.config/mmw.config
-}
-
-addScoreDeclaration(){
-  echo "SCORE=" >> $HOME/.config/mmw.config
 }
 
 addServiceDeclaration(){
@@ -47,7 +46,7 @@ create(){
   addProjFilePathDeclaration
   addArtistDeclaration
   addSessionDeclaration
-  addScoreDeclaration
+  addScoreDeclarationAndDefinition
 }
 
 "$@"
