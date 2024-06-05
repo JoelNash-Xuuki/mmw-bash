@@ -35,6 +35,7 @@ addTempoDeclaration(){
 
 addDurDeclaration(){
   echo "DUR=" >> $HOME/.config/mmw.config
+  echo "LENGTH=" >> $HOME/.config/mmw.config
 }
 
 addProjFilePathDeclaration(){ 
