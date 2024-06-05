@@ -553,7 +553,7 @@ cat << EOF > $HOME/Projects/Landing/session/session_1.eca
      -a:synth,snare,brush,hihat,bass,kick -o alsa,hw:3
 EOF
 
-  chmod +x $HOME/\$PROJLOC/\$PROJ/session/session_1.eca
+  chmod +x $HOME/$PROJLOC/$PROJ/session/session_1.eca
 }
 
 buildInstrSoundDesignFiles(){
