@@ -21,7 +21,24 @@ addProjLocationDeclaration(){
   echo "PROJLOC=" >> $HOME/.config/mmw.config
 }
 
-addProjFilePathDeclaration(){ echo "PROJPATH=\$HOME/\$PROJLOC/\$PROJ" >> $HOME/.config/mmw.config
+addStartTimeDeclaration(){
+  echo "START_TIME=" >> $HOME/.config/mmw.config
+}
+
+addDurDeclaration(){
+  echo "DUR=" >> $HOME/.config/mmw.config
+}
+
+addTempoDeclaration(){
+  echo "TEMPO=" >> $HOME/.config/mmw.config
+}
+
+addDurDeclaration(){
+  echo "DUR=" >> $HOME/.config/mmw.config
+}
+
+addProjFilePathDeclaration(){ 
+  echo "PROJPATH=\$HOME/\$PROJLOC/\$PROJ" >> $HOME/.config/mmw.config
 }
 
 addScoreDeclarationAndDefinition(){
@@ -31,8 +48,12 @@ addScoreDeclarationAndDefinition(){
 addArtistDeclaration(){
   echo "ARTIST=" >> $HOME/.config/mmw.config
 }
+addWAVDeclaration(){
+  echo "WAV=\$HOME/audio/\$ARTIST/\$PROJ/stems/\$PROJ.wav" >> $HOME/.config/mmw.config
+}
+
 addSessionDeclaration(){
-  echo "SESSION=session/" >> $HOME/.config/mmw.config
+  echo "SESSION=session/*." >> $HOME/.config/mmw.config
 }
 
 addServiceDeclaration(){
@@ -46,7 +67,10 @@ create(){
   addProjFilePathDeclaration
   addArtistDeclaration
   addSessionDeclaration
+  addTempoDeclaration
   addScoreDeclarationAndDefinition
+  addStartTimeDeclaration
+  addDurDeclaration
 }
 
 "$@"
