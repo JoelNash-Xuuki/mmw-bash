@@ -1,5 +1,5 @@
 runTests(){
-  ./test/bats/bin/bats --tap test/test-multi-media.bats
+  ./test/bats/bin/bats --tap test/test-ip.bats
 }
 
 runMethod(){
