@@ -281,4 +281,6 @@ set up.
 The hypothesis at this point is there should be access to install a newer version of 
 ImageMagick that includes the 'magick' command on your Raspberry Pi.
 
+# Documentation
+https://imagemagick.org/Usage/
 
