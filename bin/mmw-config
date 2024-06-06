@@ -1,4 +1,4 @@
-runTest(){
+runTests(){
   ./test/bats/bin/bats --tap test/mmw-config.bats
 }
 
@@ -7,6 +7,19 @@ help(){
   echo "Usage: mmw-config [option]"
   echo "Options: "
   echo "  create"
+}
+
+create(){
+  createConfigFile
+  addProjNameDeclaration
+  addProjLocationDeclaration
+  addProjFilePathDeclaration
+  addSessionDeclaration
+  addTempoDeclaration
+  addScoreDeclarationAndDefinition
+  addDurDeclaration
+  addStartTimeDeclaration
+  addArtistDeclaration
 }
 
 createConfigFile(){
@@ -21,16 +34,20 @@ addProjLocationDeclaration(){
   echo "PROJLOC=" >> $HOME/.config/mmw.config
 }
 
-addStartTimeDeclaration(){
-  echo "START_TIME=" >> $HOME/.config/mmw.config
+addProjFilePathDeclaration(){ 
+  echo "PROJPATH=\$HOME/\$PROJLOC/\$PROJ" >> $HOME/.config/mmw.config
 }
 
-addDurDeclaration(){
-  echo "DUR=" >> $HOME/.config/mmw.config
+addSessionDeclaration(){
+  echo "SESSION=session/session.eca" >> $HOME/.config/mmw.config
 }
 
 addTempoDeclaration(){
   echo "TEMPO=" >> $HOME/.config/mmw.config
+}
+
+addScoreDeclarationAndDefinition(){
+  echo "SCORE=\$HOME/\$PROJLOC/\$PROJ.ly" >> $HOME/.config/mmw.config
 }
 
 addDurDeclaration(){
@@ -38,40 +55,20 @@ addDurDeclaration(){
   echo "LENGTH=" >> $HOME/.config/mmw.config
 }
 
-addProjFilePathDeclaration(){ 
-  echo "PROJPATH=\$HOME/\$PROJLOC/\$PROJ" >> $HOME/.config/mmw.config
-}
-
-addScoreDeclarationAndDefinition(){
-  echo "SCORE=\$HOME/\$PROJLOC/\$PROJ.ly" >> $HOME/.config/mmw.config
+addStartTimeDeclaration(){
+  echo "START_TIME=" >> $HOME/.config/mmw.config
 }
 
 addArtistDeclaration(){
   echo "ARTIST=" >> $HOME/.config/mmw.config
 }
+
 addWAVDeclaration(){
   echo "WAV=\$HOME/audio/\$ARTIST/\$PROJ/stems/\$PROJ.wav" >> $HOME/.config/mmw.config
 }
 
-addSessionDeclaration(){
-  echo "SESSION=session/*." >> $HOME/.config/mmw.config
-}
-
 addServiceDeclaration(){
   echo "SERVICE=" >> $HOME/.config/mmw.config
-}
-
-create(){
-  createConfigFile
-  addProjNameDeclaration
-  addProjLocationDeclaration
-  addProjFilePathDeclaration
-  addArtistDeclaration
-  addSessionDeclaration
-  addTempoDeclaration
-  addScoreDeclarationAndDefinition
-  addStartTimeDeclaration
-  addDurDeclaration
 }
 
 "$@"
