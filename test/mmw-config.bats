@@ -33,20 +33,12 @@ teardown() {
 }
 
 @test "Can declare the score" {
-  score=$(grep "^SCORE=$" "$HOME/.config/mmw.config")
-  [ "$score" = "SCORE=" ]
+  score=$(grep "^SCORE=\$HOME/\$PROJLOC/\$PROJ.ly" "$HOME/.config/mmw.config")
+  [ "$score" = "SCORE=\$HOME/\$PROJLOC/\$PROJ.ly" ]
 }
 
 @test "Can declare the session" {
-  session=$(grep "^SESSION=session/$" \
-                 "$HOME/.config/mmw.config")
-  [ "$session" = "SESSION=session/" ]
+  session=$(grep "^SESSION=session/session.eca$" "$HOME/.config/mmw.config")
+  [ "$session" = "SESSION=session/session.eca" ]
 }
 
-#@test "Can declare the service" {
-#  mmw-config addServiceDeclaration
-#  service=$(grep "^SERVICE=$" "$HOME/.config/mmw.config")
-#  [ "$service" = "SERVICE=" ]
-#  rm $HOME/.config/mmw.config
-#}
-#
