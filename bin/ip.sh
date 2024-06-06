@@ -2,6 +2,12 @@ runTests(){
   ./test/bats/bin/bats --tap test/test-ip.bats
 }
 
+generate_noise_image(){
+  convert -size $2x$3 xc: -channel G +noise Random \
+         -virtual-pixel Tile -blur 0x5 -auto-level \
+         -separate +channel $1
+}
+
 runMethod(){
   echo $PROJ
 }
@@ -48,12 +54,6 @@ overlayImage(){
 
 getAudioInfo() {
   ffprobe -hide_banner $1 -select_streams a -show_format
-}
-
-generate_noise_image(){
-  convert -size $2x$3 xc: -channel G +noise Random \
-         -virtual-pixel Tile -blur 0x5 -auto-level \
-         -separate +channel $1
 }
 
 "$@"
