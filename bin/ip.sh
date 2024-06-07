@@ -1,6 +1,9 @@
+DISPLAY=/var/www/display_video/display.png
+
 help(){
   echo "Usage:"
   echo "  generate_noise_image"
+  echo "  canvasSolidColorKhaki"
 }
 
 runTests(){
@@ -8,7 +11,7 @@ runTests(){
 }
 
 canvasSolidColorKhaki(){
-  magick -size 100x100 canvas:khaki  canvas_khaki.gif
+  sudo convert -size 100x100 canvas:khaki $DISPLAY 
 }
 
 generate_noise_image(){
