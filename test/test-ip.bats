@@ -8,7 +8,7 @@
   rm $HOME/test.wav
 }
 
-@test "Generate Image" {
+@test "Generate noise image" {
   ip.sh generate_noise_image $HOME/test.png 720 720
   [ -f "$HOME/test.png" ]
   rm $HOME/test.png
