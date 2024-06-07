@@ -21,7 +21,7 @@
 }
 
 @test "specify xc canvas image, size and colour as single input image " {
-
+  ip.sh canvasxcSingleInput $HOME/test.png 700 700
   [ -f "$HOME/test.png" ]
   rm $HOME/test.png
 }
