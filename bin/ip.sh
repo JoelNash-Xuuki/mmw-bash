@@ -1,5 +1,5 @@
 runTests(){
-  ./test/bats/bin/bats --tap test/test-ip.bats
+  $HOME/test/bats/bin/bats --tap $HOME/mmw/test/test-ip.bats
 }
 
 generate_noise_image(){
