@@ -16,6 +16,10 @@ listCanvasColours(){
   convert -list color
 }
 
+canvasxcSingleInput(){
+  convert 'xc:turquoise4[100x100!]' $1
+}
+
 canvasSolidColorwheatxc(){
   convert -size $2x$3  xc:wheat $1
 }
