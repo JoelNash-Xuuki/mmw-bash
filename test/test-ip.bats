@@ -20,6 +20,12 @@
   rm $HOME/test.png
 }
 
+@test "specify xc canvas image, size and colour as single input image " {
+
+  [ -f "$HOME/test.png" ]
+  rm $HOME/test.png
+}
+
 @test "Generate noise image" {
   ip.sh generate_noise_image $HOME/test.png 720 720
   [ -f "$HOME/test.png" ]
