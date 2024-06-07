@@ -6,6 +6,7 @@ help(){
   echo "  generate_noise_image"
   echo "  canvasSolidColorKhaki"
   echo "  listCanvasColours"
+  echo "  canvasSolidColorwheatxc"
 }
 
 runTests(){
@@ -13,6 +14,10 @@ runTests(){
 }
 listCanvasColours(){
   convert -list color
+}
+
+canvasSolidColorwheatxc(){
+  convert -size $2x$3  xc:wheat $1
 }
 
 canvasSolidColorKhaki(){

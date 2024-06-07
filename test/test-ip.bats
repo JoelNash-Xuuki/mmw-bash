@@ -14,6 +14,12 @@
   rm $HOME/test.png
 }
 
+@test "Generate solid colour canvas (xc short hand) " {
+  ip.sh canvasSolidColorwheatxc $HOME/test.png 720 720
+  [ -f "$HOME/test.png" ]
+  rm $HOME/test.png
+}
+
 @test "Generate noise image" {
   ip.sh generate_noise_image $HOME/test.png 720 720
   [ -f "$HOME/test.png" ]
