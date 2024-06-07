@@ -1,5 +1,14 @@
+help(){
+  echo "Usage:"
+  echo "  generate_noise_image"
+}
+
 runTests(){
   $HOME/test/bats/bin/bats --tap $HOME/mmw/test/test-ip.bats
+}
+
+canvasSolidColorKhaki(){
+  magick -size 100x100 canvas:khaki  canvas_khaki.gif
 }
 
 generate_noise_image(){
