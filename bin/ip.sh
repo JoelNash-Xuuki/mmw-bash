@@ -2,6 +2,7 @@ DISPLAY=/var/www/display_video/display.png
 
 help(){
   echo "Usage:"
+  echo "  runTests"
   echo "  generate_noise_image"
   echo "  canvasSolidColorKhaki"
 }
@@ -10,7 +11,7 @@ runTests(){
   $HOME/test/bats/bin/bats --tap $HOME/mmw/test/test-ip.bats
 }
 canvasSolidColorKhaki(){
-  sudo convert -size 100x100 canvas:khaki /var/www/display_video/display.png
+  convert -size $2x$3  canvas:khaki $1
 }
 
 generate_noise_image(){
