@@ -1,5 +1,5 @@
 runTests(){
-  ./test/bats/bin/bats --tap test/mmw-config.bats
+  $HOME/test/bats/bin/bats --tap $HOME/mmw/test/mmw-config.bats
 }
 
 help(){
