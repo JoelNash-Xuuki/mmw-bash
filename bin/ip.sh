@@ -5,11 +5,16 @@ help(){
   echo "  runTests"
   echo "  generate_noise_image"
   echo "  canvasSolidColorKhaki"
+  echo "  listCanvasColours"
 }
 
 runTests(){
   $HOME/test/bats/bin/bats --tap $HOME/mmw/test/test-ip.bats
 }
+listCanvasColours(){
+  convert -list color
+}
+
 canvasSolidColorKhaki(){
   convert -size $2x$3  canvas:khaki $1
 }
@@ -67,5 +72,4 @@ overlayImage(){
 getAudioInfo() {
   ffprobe -hide_banner $1 -select_streams a -show_format
 }
-
 "$@"
