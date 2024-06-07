@@ -9,9 +9,8 @@ help(){
 runTests(){
   $HOME/test/bats/bin/bats --tap $HOME/mmw/test/test-ip.bats
 }
-
 canvasSolidColorKhaki(){
-  sudo convert -size 100x100 canvas:khaki $DISPLAY 
+  sudo convert -size 100x100 canvas:khaki /var/www/display_video/display.png
 }
 
 generate_noise_image(){
