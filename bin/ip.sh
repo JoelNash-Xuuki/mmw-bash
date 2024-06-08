@@ -1,5 +1,4 @@
 DISPLAY=/var/www/display_video/display.png
-
 help(){
   echo "Usage:"
   echo "  runTests"
@@ -7,13 +6,19 @@ help(){
   echo "  canvasSolidColorKhaki"
   echo "  listCanvasColours"
   echo "  canvasSolidColorwheatxc"
+  echo "  changeCanvasColour"
 }
+
 
 runTests(){
   $HOME/test/bats/bin/bats --tap $HOME/mmw/test/test-ip.bats
 }
 listCanvasColours(){
   convert -list color
+}
+
+changeCanvasColour(){
+  convert $1 -fill tomato -opaque khaki $HOME/display_recoloured.png
 }
 
 canvasxcSingleInput(){
