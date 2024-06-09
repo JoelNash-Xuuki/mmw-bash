@@ -40,3 +40,9 @@
   rm $HOME/test.png
 }
 
+@test "Grab single pixel from existing image" {
+  ip.sh grabPixelFromBuiltInRose $HOME/test.png
+  [ -f "$HOME/test.png" ]
+  rm $HOME/test.png
+}
+
