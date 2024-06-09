@@ -17,7 +17,12 @@ listCanvasColours(){
   convert -list color
 }
 
+grabPixelFromBuiltInRose(){
+  convert rose: -crop 1x1+40+30 +repage -scale 100x100\! $1 
+}
+
 changeCanvasColour(){
+  # the colour of the current imaged needs to be known
   convert $1 -fill tomato -opaque khaki $HOME/display_recoloured.png
 }
 
