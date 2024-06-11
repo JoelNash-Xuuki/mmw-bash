@@ -1,27 +1,26 @@
 DISPLAY=/var/www/display_video/display.png
 help(){
   echo "Usage:"
+  echo "  canvasSolidColorKhaki"
+  echo "  changekhakiCanvasColourToTomato"
+  echo "  listCanvasColours"
   echo "  runTests"
   echo "  generate_noise_image"
-  echo "  canvasSolidColorKhaki"
-  echo "  listCanvasColours"
   echo "  canvasSolidColorwheatxc"
-  echo "  changeCanvasColour"
 }
-
 
 runTests(){
   $HOME/test/bats/bin/bats --tap $HOME/mmw/test/test-ip.bats
 }
+
 listCanvasColours(){
   convert -list color
 }
-
 grabPixelFromBuiltInRose(){
   convert rose: -crop 1x1+40+30 +repage -scale 100x100\! $1 
 }
 
-changeCanvasColour(){
+changekhakiCanvasColourToTomato(){
   # the colour of the current imaged needs to be known
   convert $1 -fill tomato -opaque khaki $HOME/display_recoloured.png
 }
