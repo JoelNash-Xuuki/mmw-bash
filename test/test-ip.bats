@@ -34,7 +34,7 @@
 
 @test "Input canvas, Change it colour" {
   ip.sh generate_noise_image $HOME/test.png 720 720
-  ip.sh changeCanvasColour $HOME/test.png
+  ip.sh changekhakiCanvasColourToTomato $HOME/test.png
   [ -f "$HOME/test.png" ]
   [ -f "$HOME/display_recoloured.png" ]
   rm $HOME/test.png
