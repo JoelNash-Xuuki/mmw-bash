@@ -67,3 +67,21 @@
   rm $HOME/images/test.png
 }
 
+@test "Flexiable (but slow) of canvas generation with FX" {
+  ip.sh generateTestImage
+  convert $HOME/images/test.png -alpha off \
+          -fx Gold $HOME/images/color_fx_constant.gif
+  [ -f "$HOME/images/color_fx_constant.gif" ]
+  hb mvFileToSourceDir $HOME/images/color_fx_constant.gif 
+  rm $HOME/images/test.png
+}
+
+@test "FX with colour percentage specified" {
+  ip.sh generateTestImage
+  convert $HOME/images/test.png -alpha off \
+          -fx Gold*.7 $HOME/images/color_fx_math.gif
+  [ -f "$HOME/images/color_fx_math.gif" ]
+  hb mvFileToSourceDir $HOME/images/color_fx_math.gif 
+  rm $HOME/images/test.png
+}
+
