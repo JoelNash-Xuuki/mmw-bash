@@ -85,3 +85,13 @@
   rm $HOME/images/test.png
 }
 
+@test "Semi transparent red (creates transparent canvas)" {
+  ip.sh generateTestImage
+  convert $HOME/images/test.png \
+          -alpha set -fill '#FF000040' -draw 'color 0,0 reset' \
+          $HOME/images/color_semitrans.gif
+  [ -f "$HOME/images/color_semitrans.gif" ]
+  hb mvFileToSourceDir $HOME/images/color_semitrans.gif 
+  rm $HOME/images/test.png
+}
+
