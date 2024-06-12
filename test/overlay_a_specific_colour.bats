@@ -49,3 +49,21 @@
   rm $HOME/images/test.png
 }
 
+@test "Grab images meta-data replace image with specifc colour w' -extent" {
+  ip.sh generateTestImage
+  convert $HOME/images/test.png -background LemonChiffon \
+          -compose Dst -extent 100x100 $HOME/images/color_extent.gif
+  [ -f "$HOME/images/color_extent.gif" ]
+  hb mvFileToSourceDir $HOME/images/color_extent.gif 
+  rm $HOME/images/test.png
+}
+
+@test "Grab images meta-data replace image with specifc colour w' -border" {
+  ip.sh generateTestImage
+  convert $HOME/images/test.png -background LemonChiffon \
+          -compose Dst -border 0 $HOME/images/color_border.gif
+  [ -f "$HOME/images/color_border.gif" ]
+  hb mvFileToSourceDir $HOME/images/color_border.gif 
+  rm $HOME/images/test.png
+}
+
