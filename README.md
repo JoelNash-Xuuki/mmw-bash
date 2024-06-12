@@ -89,7 +89,7 @@ First run:
 ```
 Test 1 fails if 'mmw-config runTest' is not run beforehand.
 ```bash
-./bin/run_mmw_tests
+bats test/mmw.bats
 ```
 
 ```bash
