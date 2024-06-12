@@ -12,7 +12,7 @@
   rm $HOME/images/test.png $HOME/images/color_levelc.gif
 }
 
-@test "Use Colorize (older technique) All to set all colours" {
+@test "Use Colorize (older technique) to set all colours" {
   ip.sh generateTestImage
   # Alpha off because v6.7.9 colorize did not change the original images alpha
   # channel.
@@ -20,5 +20,23 @@
           $HOME/images/color_levelc.gif
   [ -f "$HOME/images/color_levelc.gif" ]
   rm $HOME/images/test.png $HOME/images/color_levelc.gif
+}
+
+@test "As of IM v6.4.3-0: Use spare-color, sets a point to colour wanted" {
+  ip.sh generateTestImage
+  convert $HOME/images/test.png -alpha off \
+          -sparse-color Voronoi '0,0 Peru' $HOME/images/color_sparse.gif
+  [ -f "$HOME/images/color_sparse.gif" ]
+  hb mvFileToSourceDir $HOME/images/color_sparse.gif 
+  rm $HOME/images/test.png
+}
+
+@test "A more general overlay technique using draw, directly reset all colours" {
+  ip.sh generateTestImage
+  convert $HOME/images/test.png -fill Tan \
+          -draw 'color 0,0 reset' $HOME/images/color_reset.gif
+  [ -f "$HOME/images/color_reset.gif" ]
+  hb mvFileToSourceDir $HOME/images/color_reset.gif 
+  rm $HOME/images/test.png
 }
 
