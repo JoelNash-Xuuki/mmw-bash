@@ -39,7 +39,7 @@ void TestSheetBuilder::canPrintScoreHeader(void){
 }
 
 void TestSheetBuilder::canReadPatchFileStaffGroupsStaffCountAndNoteCount(void){
-  sheetBuilder.setPatchFile("/home/joel/projects_/patches/testPatch");
+  sheetBuilder.setPatchFile("/home/joel/mmw/test/testPatch");
   sheetBuilder.readPatchFile();
   CPPUNIT_ASSERT_EQUAL(1, sheetBuilder.getStaffGroupCount());
   CPPUNIT_ASSERT_EQUAL(1, sheetBuilder.getStaffCount());
