@@ -1,5 +1,48 @@
+DISPLAY=/var/www/display_video/display.png
+help(){
+  echo "Usage:"
+  echo "  canvasSolidColorKhaki"
+  echo "  changekhakiCanvasColourToTomato"
+  echo "  listCanvasColours"
+  echo "  runTests"
+  echo "  generate_noise_image"
+  echo "  generateTestImage"
+  echo "  canvasSolidColorwheatxc"
+}
+
 runTests(){
-  ./test/bats/bin/bats --tap test/test-multi-media.bats
+  $HOME/test/bats/bin/bats --tap $HOME/mmw/test/test-ip.bats
+  $HOME/test/bats/bin/bats --tap $HOME/mmw/test/overlay_a_specific_colour.bats
+}
+
+listCanvasColours(){
+  convert -list color
+}
+grabPixelFromBuiltInRose(){
+  convert rose: -crop 1x1+40+30 +repage -scale 100x100\! $1 
+}
+
+changekhakiCanvasColourToTomato(){
+  # the colour of the current imaged needs to be known
+  convert $1 -fill tomato -opaque khaki $HOME/display_recoloured.png
+}
+
+canvasxcSingleInput(){
+  convert 'xc:turquoise4[100x100!]' $1
+}
+
+canvasSolidColorwheatxc(){
+  convert -size $2x$3  xc:wheat $1
+}
+
+canvasSolidColorKhaki(){
+  convert -size $2x$3  canvas:khaki $1
+}
+
+generate_noise_image(){
+  convert -size $2x$3 xc: -channel G +noise Random \
+         -virtual-pixel Tile -blur 0x5 -auto-level \
+         -separate +channel $1
 }
 
 runMethod(){
@@ -50,10 +93,75 @@ getAudioInfo() {
   ffprobe -hide_banner $1 -select_streams a -show_format
 }
 
-generate_noise_image(){
-  convert -size $2x$3 xc: -channel G +noise Random \
-         -virtual-pixel Tile -blur 0x5 -auto-level \
-         -separate +channel $1
+generateTestImage(){
+  # Generate a test image for IM examples.
+  #
+  # The Image contains fully-transparent, half-transparent and fully-opaque
+  # reagions of the a full greyscale (black to white). It also contains regions
+  # of pure black, white, and other colors, so as to give IM a good workout when
+  # used in testing canvas and color modifications.
+  #
+  # This could actually be done all in one operation, but for debugging I like
+  # to be able to see the intermediate images.
+  #
+  ####
+  #
+  # Anthony Thyssen  Feburary 2004    <A.Thyssen@griffith.edu.au>
+  
+  # Draw fancy horizontal gradient...
+  # convert -size 100x25 xc:white -size 100x100 gradient: -size 100x25 xc:black \
+  #         -append -rotate 90 -blur 0x5 +repage  test_gradient.png
+  convert -size 100x150 gradient: -rotate 90 \
+          -sigmoidal-contrast 7x50% test_gradient.png
+  
+  # Create a semi-transparent rectangle of the gradient and flop it left-right
+  convert -size 150x100 xc:black \
+          -draw 'fill grey50  rectangle  8,8  142,92' +matte \
+          test_gradient.png +swap -compose CopyOpacity -composite \
+          -flop   ${png_format}test_bgnd.png
+  
+  # Draw two overlaping circles and fill then with same (non-flopped) gradient.
+  convert -size 150x100 xc:black \
+          -draw 'fill white circle    40,50  40,12' \
+          -draw 'fill white circle   110,50 110,12' +matte \
+          test_gradient.png +swap -compose CopyOpacity -composite \
+          test_fgnd.png
+  
+  # Create a rainbow gradient
+  convert -size 12x100 xc:Lime -colorspace HSB \
+          gradient:gray66 -compose CopyRed -composite \
+          -colorspace sRGB -rotate 90  -compose Over \
+          -bordercolor black -border 0x1 test_hue.png
+  
+  # Overlay the images and add some extra colors to result.
+  #       -draw 'fill green rectangle 40,64 110,96' \
+  convert test_bgnd.png  test_fgnd.png  -composite \
+          -draw 'fill red   circle    25,80  25,98' \
+          -draw 'fill green circle    75,80  75,98' \
+          -draw 'fill blue  circle   125,80 125,98' \
+          test_hue.png -geometry +25+80 -composite \
+          test.png
+  
+  
+  # Remove the intermediate images (comment if debugging)
+  rm -f test_gradient.png test_bgnd.png test_fgnd.png test_hue.png
+  
+  # Overlay on the pages background color to generate a JPEG
+  # For stupid IE web clients that do not understand PNG transparency
+  #convert test.png \
+  #        \( +clone -fill "$page_bg_color"  -draw 'color 0,0 reset' \) \
+  #        -compose Dst_Over -composite  $jpg_opt   test.jpg
+  
+  # set permissions
+  chmod 644 test.png
+  if [ ! -d "$HOME/images" ]; then
+        mkdir "$HOME/images"
+    fi
+  mv test.png $HOME/images
+
 }
 
+
+
 "$@"
+

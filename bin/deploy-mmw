@@ -1,3 +1,4 @@
 sudo cp bin/mmw /usr/local/bin/mmw
+sudo cp bin/ip.sh /usr/local/bin/ip.sh
 sudo cp bin/mmw-config /usr/local/bin/mmw-config
 sudo cp bin/sheetbuilder /usr/local/bin/sheetbuilder

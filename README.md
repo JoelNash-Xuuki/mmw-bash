@@ -81,14 +81,22 @@ own contributions.
 sudo cp bin/mmw /usr/local/bin/mmw
 ```
 # Tests #
+Description of current testing method:
+
 First run: 
 ```bash
-mmw-config runTest
+,bin/mmw-config runTest
+```
+Test 1 fails if 'mmw-config runTest' is not run beforehand.
+```bash
+bats test/mmw.bats
 ```
 
 ```bash
-run_mmw_tests
+./bin/ip.sh runTests
 ```
+
+
 
 The tests will describe the features of mmw for the user
 
