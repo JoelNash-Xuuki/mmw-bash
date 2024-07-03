@@ -1,6 +1,6 @@
 # Welcome to Multiple Media Workstation Suite (MMWS)
 # TODO
-- Navigate to section Tests and action the bash cmds.
+- run 'mmw-config h'.
 
 # Description # 
   The follow wil provide a more detailed overview of the project, 
@@ -85,7 +85,7 @@ Description of current testing method:
 
 First run: 
 ```bash
-,bin/mmw-config runTest
+,bin/mmw-config runTests
 ```
 Test 1 fails if 'mmw-config runTest' is not run beforehand.
 ```bash

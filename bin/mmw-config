@@ -1,12 +1,14 @@
 runTests(){
-  $HOME/test/bats/bin/bats --tap $HOME/mmw/test/mmw-config.bats
+  bats test/mmw-config.bats
+  bats test/mmw.bats
+  ./bin/ip.sh runTests
 }
 
-help(){
+h(){
   echo "Welcome to MMW (config)"
   echo "Usage: mmw-config [option]"
   echo "Options: "
-  echo "  create"
+  echo "  run 'mmw-config runTests first' "
 }
 
 create(){
