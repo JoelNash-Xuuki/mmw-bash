@@ -189,18 +189,7 @@ cat << EOF > $SCORE
          \tempo 4 = 84
          \clef percussion
          \xNotesOn
-         r8 r r r d r r r
-         r  r r r d r r r
-         r8 r r r r d r r
-         r  r r r d r r r
-
-         r8 d r r d r d d
-         r  d r r r d r r
-         r  r r r d r r r
-         r  r r r d r r r
-
-         d8 r r r d r r r
-         r  r d r d r r r
+         
        }
 
       \new Staff \with { %Brush
