@@ -141,8 +141,7 @@ cat << EOF > $SCORE
     \new StaffGroup << %Harmony
       \new Staff \with  
       { 
-        instrumentName= "Harmony"
-        shortInstrumentName= "Hrm"
+        instrumentName= "FM"
       } \relative {
         \time 4/4
         \tempo 4 = 84
@@ -153,34 +152,19 @@ cat << EOF > $SCORE
     >> 
     \new StaffGroup << %Bass
        \new Staff \with { 
-         instrumentName= "Bass"
-         shortInstrumentName= "Bs"}
+         instrumentName= " "
+         shortInstrumentName= " "}
          { 
          \time 4/4
          \tempo 4 = 84
          \clef bass
          \key c \major
-         r4 a, r fis,
-         r r r r
-         r fis, r r
-         gis, r r r
-
-         e, e, r d,
-         d, r  r  r
-         cis cis r r 
-         r r r r
-
-         gis,2. 
-         e,2. d,8
-         cis,4.
-         b,,2.
-         cis,1
        }
     >>
     \new StaffGroup << %Percussion
        \new Staff \with { %Snare
-         instrumentName= "Snare"
-         shortInstrumentName= "Sn"
+         instrumentName= " "
+         shortInstrumentName= " "
        } 
        {
          \tempo 4 = 84
@@ -190,8 +174,8 @@ cat << EOF > $SCORE
        }
 
       \new Staff \with { %Brush
-        instrumentName= "Brush"
-        shortInstrumentName= "Bsh"
+        instrumentName= " "
+        shortInstrumentName= " "
       } 
       {
         \clef percussion
@@ -214,8 +198,8 @@ cat << EOF > $SCORE
         }
 
         \new Staff \with { %Kick
-          instrumentName= "Kick"
-          shortInstrumentName= "Kc" 
+          instrumentName= " "
+          shortInstrumentName= " " 
         }
         \relative { 
           \clef percussion
