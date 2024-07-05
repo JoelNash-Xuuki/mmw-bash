@@ -147,11 +147,11 @@ cat << EOF > $SCORE
         \tempo 4 = 84
         \clef bass
         \key a \major 
-         <a, e' gis cis>1
-         <a' cis e gis>
-         <cis, gis' b dis>
-         <cis gis' b e>2
-         <cis gis' b dis>
+         <a, e' gis cis>4 r2.
+         r4 <a' cis e gis>4 r2
+         <cis, gis' b dis>4 r2.
+         r4 <cis gis' b e> r8 
+         <cis gis' b dis>4 r8
       }
     >> 
     \new StaffGroup << %Bass
