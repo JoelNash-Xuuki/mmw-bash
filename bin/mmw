@@ -471,7 +471,7 @@ prodTracks(){
 createSession(){
 cat << EOF > $HOME/Projects/Landing/session/session.eca
    ecasound -n $PROJ -b:512 -t:$DUR -f:16,2,48000 \\
-     -a:synth -i $SYNTH -y:$START_TIME -erc:1,2 -epp:50 -efh:500 -ea:0  \\
+     -a:synth -i $SYNTH -y:$START_TIME -erc:1,2 -epp:50 -efh:500 -eadb:1  \\
      -a:bass  -i $BASS  -y:$START_TIME -erc:1,2 -epp:50 -efl:80 -ea:0 \\
      -a:snare -i $SNARE -y:$START_TIME -erc:1,2 -epp:50 -efl:10700  -ea:0  \\
      -a:brush -i $BRUSH -y:$START_TIME -erc:1,2 -epp:50 -efl:2400  -ea:0 \\
