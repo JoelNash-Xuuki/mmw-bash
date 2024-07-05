@@ -150,19 +150,8 @@ cat << EOF > $SCORE
         \time 4/4
         \tempo 4 = 84
         \clef bass
-        \key c \major 
-        fis'1
-        cis1
-        cis1
-        b1
-        a1
-        a1
-        a1
-        b1
-        cis1
-        a1
-        a1
-        a1
+        \key a \major 
+         <a, e' gis cis>
       }
     >> 
     \new StaffGroup << %Bass
