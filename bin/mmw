@@ -129,16 +129,13 @@ cat << EOF > $SCORE
   <<
     \new StaffGroup << %Melody
       \new Staff \with  { 
-        instrumentName=  "Voice"
-        shortInstrumentName= "Voi"
+        instrumentName=  " "
+        shortInstrumentName= " "
       } 
         \relative {
         \clef percussion
         \time 4/4
         \tempo 4 = 84
-        \xNotesOn
-        a'4.   r ges   ges r4 ges    
-        des'4. r fes,   fes r4 fes
       }
     >> 
     \new StaffGroup << %Harmony
@@ -200,15 +197,6 @@ cat << EOF > $SCORE
         \clef percussion
         \tempo 4 = 84
         \xNotesOn
-        r2 r4 d
-        r2 r4 d
-        r2 r4 d
-        r2 r4 r
-
-        r2 r4 d
-        r2 r4 d
-        r2 r4 r
-        r2 r4 r
       }
 
       \new Staff \with { % HiHat
@@ -232,15 +220,7 @@ cat << EOF > $SCORE
         \relative { 
           \clef percussion
           \tempo 4 = 84
-          r4 d r d
-          d r r  r
-          d r d  r
-          r d d  d
-
-          r8 d4 r d4 r8
-          r8 d4 r4. d4 
-          d r r r
-          r d r r
+          
         }
     >>
   >>
