@@ -247,18 +247,10 @@ cat << EOF > $SCORE
           \tempo 4 = 84
           r1
           \xNotesOn
-          d8  d  d  d  d d  d   d 
-          d   d  d  d  d r  r   d   
-          d   d  d  d  r r  d   d
-          d   d  d  d  r d  r   r
-
-          r8   d     r   d   r d d r
-          d8   d     r   d   r d d d  
-          d    d     d   r   d r d r 
-          d    d     d   d   r d d d
-
-          r d d d r d d d
-          d d d d d r r d
+          d8 d d d d d d d 
+          d  d d d d d d d   
+          d  d d d d d d d
+          d  d d d d d d d
         }
 
         \new Staff \with { %Kick
