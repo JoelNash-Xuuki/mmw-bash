@@ -174,7 +174,10 @@ cat << EOF > $SCORE
          \tempo 4 = 84
          \clef percussion
          \xNotesOn
-         
+         r2 d4 r8 d
+         r2 d4 r4
+         r2 d4 r4
+         r2 d4 r4
        }
 
       \new Staff \with { %Brush
@@ -477,7 +480,7 @@ cat << EOF > $HOME/Projects/Landing/session/session.eca
    ecasound -n $PROJ -b:512 -t:$DUR -f:16,2,48000 \\
      -a:synth -i $SYNTH -y:$START_TIME -erc:1,2 -epp:50 -efh:500 -eadb:1  \\
      -a:bass  -i $BASS  -y:$START_TIME -erc:1,2 -epp:50 -efl:80 -ea:0 \\
-     -a:snare -i $SNARE -y:$START_TIME -erc:1,2 -epp:50 -efl:10700  -ea:0  \\
+     -a:snare -i $SNARE -y:$START_TIME -erc:1,2 -epp:50 -efl:10700  -eadb:1  \\
      -a:brush -i $BRUSH -y:$START_TIME -erc:1,2 -epp:50 -efl:2400  -ea:0 \\
      -a:hihat -i $HIHAT  -y:$START_TIME -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-15 \\
      -a:kick -i $KICK     -y:$START_TIME -erc:1,2 -epp:50 -ea:0 -efl:200 \\
