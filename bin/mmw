@@ -479,7 +479,7 @@ cat << EOF > $HOME/Projects/Landing/session/session.eca
      -a:bass  -i $BASS  -y:$START_TIME -erc:1,2 -epp:50 -efl:80 -ea:0 \\
      -a:snare -i $SNARE -y:$START_TIME -erc:1,2 -epp:50 -efl:10700  -ea:0  \\
      -a:brush -i $BRUSH -y:$START_TIME -erc:1,2 -epp:50 -efl:2400  -ea:0 \\
-     -a:hihat -i $HIHAT  -y:$START_TIME -erc:1,2 -epp:50 -ete:70,60,5 -efh:3520 -eadb:0 \\
+     -a:hihat -i $HIHAT  -y:$START_TIME -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-15 \\
      -a:kick -i $KICK     -y:$START_TIME -erc:1,2 -epp:50 -ea:0 -efl:200 \\
      -a:synth,snare,brush,hihat,bass,kick -o jack,system #$HOME/audio\/$ARTIST\/$PROJ/$PROJ.wav
 EOF
