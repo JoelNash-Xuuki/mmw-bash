@@ -148,7 +148,10 @@ cat << EOF > $SCORE
         \clef bass
         \key a \major 
          <a, e' gis cis>1
-         <a' cis e gis >
+         <a' cis e gis>
+         <cis, gis' b dis>
+         <cis gis' b e>2
+         <cis gis' b dis>
       }
     >> 
     \new StaffGroup << %Bass
