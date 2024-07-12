@@ -163,7 +163,10 @@ cat << EOF > $SCORE
          \tempo 4 = 84
          \clef bass
          \key a \major
-         a,8 r8 a4 r r
+         a,4\staccato a4\staccato r a4\staccato
+         r4 r4 r8 cis8 b4\staccato  
+         a4\staccato gis4\staccato r gis4\staccato 
+         r fis4\staccato r8 gis4\staccato 
        }
     >>
     \new StaffGroup << %Percussion
