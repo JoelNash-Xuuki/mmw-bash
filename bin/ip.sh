@@ -11,8 +11,8 @@ help(){
 }
 
 runTests(){
-  $HOME/test/bats/bin/bats --tap $HOME/mmw/test/test-ip.bats
-  $HOME/test/bats/bin/bats --tap $HOME/mmw/test/overlay_a_specific_colour.bats
+  bats --tap $HOME/mmw/test/test-ip.bats
+  bats --tap $HOME/mmw/test/overlay_a_specific_colour.bats
 }
 
 listCanvasColours(){
