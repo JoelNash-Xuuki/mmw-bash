@@ -3,7 +3,7 @@ help(){
   echo "Welcome to MMW"
   echo "Usage: mmw [option]"
   echo "Options: "
-  echo "  setProj"
+  echo "  run 'mmw-config runTests' first "
 }
 
 setProj(){
@@ -129,113 +129,69 @@ cat << EOF > $SCORE
   <<
     \new StaffGroup << %Melody
       \new Staff \with  { 
-        instrumentName=  "Voice"
-        shortInstrumentName= "Voi"
+        instrumentName=  " "
+        shortInstrumentName= " "
       } 
         \relative {
         \clef percussion
         \time 4/4
         \tempo 4 = 84
-        r1
-        \xNotesOn
-        a'4.   r ges   ges r4 ges    
-        des'4. r fes,   fes r4 fes
       }
     >> 
     \new StaffGroup << %Harmony
       \new Staff \with  
       { 
-        instrumentName= "Harmony"
-        shortInstrumentName= "Hrm"
+        instrumentName= "FM"
       } \relative {
         \time 4/4
         \tempo 4 = 84
         \clef bass
-        \key c \major 
-        r1
-        fis'1
-        cis1
-        cis1
-        b1
-        a1
-        a1
-        a1
-        b1
-        cis1
-        a1
-        a1
-        a1
+        \key a \major 
+         <a, e' gis cis>4 r2.
+         r4 <a' cis e gis>4 r2
+         <cis, gis' b dis>4 r2.
+         r4 <cis gis' b e> r8 
+         <cis gis' b dis>4 r8
       }
     >> 
     \new StaffGroup << %Bass
        \new Staff \with { 
-         instrumentName= "Bass"
-         shortInstrumentName= "Bs"}
-         { 
+         instrumentName= " "
+         shortInstrumentName= " "}
+        \relative  { 
          \time 4/4
          \tempo 4 = 84
          \clef bass
-         \key c \major
-         r1
-         r4 a, r fis,
-         r r r r
-         r fis, r r
-         gis, r r r
-
-         e, e, r d,
-         d, r  r  r
-         cis cis r r 
-         r r r r
-
-         gis,2. 
-         e,2. d,8
-         cis,4.
-         b,,2.
-         cis,1
+         \key a \major
+         a,4\staccato a4\staccato r a4\staccato
+         r4 r4 r8 cis8 b4\staccato  
+         a4\staccato gis4\staccato r gis4\staccato 
+         r fis4\staccato r8 gis4\staccato 
        }
     >>
     \new StaffGroup << %Percussion
        \new Staff \with { %Snare
-         instrumentName= "Snare"
-         shortInstrumentName= "Sn"
+         instrumentName= " "
+         shortInstrumentName= " "
        } 
        {
          \tempo 4 = 84
          \clef percussion
          \xNotesOn
-         d4 d d d
-         r8 r r r d r r r
-         r  r r r d r r r
-         r8 r r r r d r r
-         r  r r r d r r r
-
-         r8 d r r d r d d
-         r  d r r r d r r
-         r  r r r d r r r
-         r  r r r d r r r
-
-         d8 r r r d r r r
-         r  r d r d r r r
+         r2 d4 r8 d
+         r2 d4 r4
+         r2 d4 r4
+         r2 d4 r4
        }
 
       \new Staff \with { %Brush
-        instrumentName= "Brush"
-        shortInstrumentName= "Bsh"
+        instrumentName= " "
+        shortInstrumentName= " "
       } 
       {
         \clef percussion
         \tempo 4 = 84
         \xNotesOn
-        r1
-        r2 r4 d
-        r2 r4 d
-        r2 r4 d
-        r2 r4 r
-
-        r2 r4 d
-        r2 r4 d
-        r2 r4 r
-        r2 r4 r
       }
 
       \new Staff \with { % HiHat
@@ -245,39 +201,19 @@ cat << EOF > $SCORE
         { 
           \clef percussion
           \tempo 4 = 84
-          r1
           \xNotesOn
-          d8  d  d  d  d d  d   d 
-          d   d  d  d  d r  r   d   
-          d   d  d  d  r r  d   d
-          d   d  d  d  r d  r   r
-
-          r8   d     r   d   r d d r
-          d8   d     r   d   r d d d  
-          d    d     d   r   d r d r 
-          d    d     d   d   r d d d
-
-          r d d d r d d d
-          d d d d d r r d
+          d4 d d d d d d d 
+          d  d d d d d d d   
         }
 
         \new Staff \with { %Kick
-          instrumentName= "Kick"
-          shortInstrumentName= "Kc" 
+          instrumentName= " "
+          shortInstrumentName= " " 
         }
         \relative { 
           \clef percussion
           \tempo 4 = 84
-          r1
-          r4 d r d
-          d r r  r
-          d r d  r
-          r d d  d
-
-          r8 d4 r d4 r8
-          r8 d4 r4. d4 
-          d r r r
-          r d r r
+          
         }
     >>
   >>
@@ -544,13 +480,13 @@ prodTracks(){
 createSession(){
 cat << EOF > $HOME/Projects/Landing/session/session.eca
    ecasound -n $PROJ -b:512 -t:$DUR -f:16,2,48000 \\
-     -a:synth -i $SYNTH -y:$START_TIME -erc:1,2 -epp:50 -efh:500 -eadb:7.91518  \\
-     -a:bass  -i $BASS  -y:$START_TIME -erc:1,2 -epp:50 -efl:80 -eadb:0 \\
-     -a:snare -i $SNARE -y:$START_TIME -erc:1,2 -epp:50 -efl:10700  -eadb:2.97  \\
-     -a:brush -i $BRUSH -y:$START_TIME -erc:1,2 -epp:50 -efl:2400  -eadb:-8.0 \\
-     -a:hihat -i $HIHAT  -y:$START_TIME -erc:1,2 -epp:50 -ete:70,60,5 -efl:2200  -eadb:0 \\
-     -a:kick -i $KICK     -y:$START_TIME -erc:1,2 -epp:50 -eadb:0 -efl:200 \\
-     -a:synth,snare,brush,hihat,bass,kick -o $HOME/audio\/$ARTIST\/$PROJ/$PROJ.wav
+     -a:synth -i $SYNTH -y:$START_TIME -erc:1,2 -epp:50 -efh:500 -eadb:1  \\
+     -a:bass  -i $BASS  -y:$START_TIME -erc:1,2 -epp:50 -efl:80 -eadb:1 \\
+     -a:snare -i $SNARE -y:$START_TIME -erc:1,2 -epp:50 -efl:10700  -eadb:-10 \\
+     -a:brush -i $BRUSH -y:$START_TIME -erc:1,2 -epp:50 -efl:2400  -ea:0 \\
+     -a:hihat -i $HIHAT  -y:$START_TIME -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-15 \\
+     -a:kick -i $KICK     -y:$START_TIME -erc:1,2 -epp:50 -ea:0 -efl:200 \\
+     -a:synth,snare,brush,hihat,bass,kick -o jack,system #$HOME/audio\/$ARTIST\/$PROJ/$PROJ.wav
 EOF
 
   chmod +x $HOME/Projects/Landing/session/session.eca
