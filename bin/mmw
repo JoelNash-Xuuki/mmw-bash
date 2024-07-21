@@ -3,7 +3,7 @@ help(){
   echo "Welcome to MMW"
   echo "Usage: mmw [option]"
   echo "Options: "
-  echo "  run 'mmw-config runTests first' "
+  echo "  run 'mmw-config runTests' first "
 }
 
 setProj(){
