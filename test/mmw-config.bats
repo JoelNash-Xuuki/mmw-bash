@@ -42,3 +42,9 @@ teardown() {
   [ "$score" = "SCORE=\$HOME/\$PROJLOC/\$PROJ.ly" ]
 }
 
+@test "Can declare the session" {
+  mmw-config addSessionDeclaration
+  session=$(grep "^SESSION=session/session.eca$" "$HOME/.config/mmw.config")
+  [ "$session" = "SESSION=session/session.eca" ]
+}
+
