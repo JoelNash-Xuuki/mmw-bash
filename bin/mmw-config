@@ -14,7 +14,6 @@ h(){
 create(){
   createConfigFile
   addProjFilePathDeclaration
-  addTempoDeclaration
   addDurDeclaration
   addStartTimeDeclaration
 }

@@ -48,3 +48,9 @@ teardown() {
   [ "$session" = "SESSION=session/session.eca" ]
 }
 
+@test "Can declare tempo " {
+  mmw-config addTempoDeclaration
+  tempo=$(grep "^TEMPO=$" "$HOME/.config/mmw.config")
+  [ "$tempo" = "TEMPO=" ]
+}
+
