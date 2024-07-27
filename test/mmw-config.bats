@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 setup() { 
-  mmw-config create
+  $HOME/mmw/bin/mmw-config create
 }
 
 teardown() {
@@ -9,5 +9,11 @@ teardown() {
 
 @test "Can create config file" { 
   [ -f $HOME/.config/mmw.config ]
+}
+
+@test "Can declare the project name" {
+  $HOME/mmw/bin/mmw-config addProjNameDeclaration
+  declareProjName=$(grep "^PROJ=$" "$HOME/.config/mmw.config")
+  [ "$declareProjName" = "PROJ=" ]
 }
 

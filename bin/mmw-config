@@ -13,7 +13,6 @@ h(){
 
 create(){
   createConfigFile
-  addProjNameDeclaration
   addProjLocationDeclaration
   addProjFilePathDeclaration
   addSessionDeclaration
@@ -24,7 +23,14 @@ create(){
   addArtistDeclaration
 }
 
+doesDotConfigExist(){
+  if [ ! -d $HOME/.config/ ]; then
+    mkdir -v $HOME/.config/
+  fi
+}
+
 createConfigFile(){
+  doesDotConfigExist
   touch $HOME/.config/mmw.config
 }
 
