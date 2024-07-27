@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 setup() { 
-  $HOME/mmw/bin/mmw-config create
+  mmw-config create
 }
 
 teardown() {
