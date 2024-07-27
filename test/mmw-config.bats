@@ -12,8 +12,14 @@ teardown() {
 }
 
 @test "Can declare the project name" {
-  $HOME/mmw/bin/mmw-config addProjNameDeclaration
+  mmw-config addProjNameDeclaration
   declareProjName=$(grep "^PROJ=$" "$HOME/.config/mmw.config")
   [ "$declareProjName" = "PROJ=" ]
+}
+
+@test "Can declare project location dir" {
+  mmw-config addProjLocationDeclaration
+  projLoc=$(grep "^PROJLOC=$" "$HOME/.config/mmw.config")
+  [ "$projLoc" = "PROJLOC=" ]
 }
 

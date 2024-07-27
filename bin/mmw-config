@@ -13,7 +13,6 @@ h(){
 
 create(){
   createConfigFile
-  addProjLocationDeclaration
   addProjFilePathDeclaration
   addSessionDeclaration
   addTempoDeclaration
