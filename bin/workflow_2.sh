@@ -2,8 +2,8 @@ rm $HOME/.config/mmw.config
 rm -r audio
 rm -r Projects
 mmw-config create
-sed -i "s|PROJ=.*|PROJ=$1|g" $HOME/.config/mmw.config
-$HOME/mmw/bin/mmw setProj Landing
+
+$HOME/mmw/bin/mmw setProj
 #mmw setProjLoc Projects
 #mmw setArtist Dev_1
 #mmw-config addWAVDeclaration
