@@ -30,3 +30,9 @@ teardown() {
   [ "$projFilePath" = "PROJPATH=\$HOME/\$PROJLOC/\$PROJ" ]
 }
 
+@test "Can declare the artist" {
+  mmw-config addArtistDeclaration
+  artistName=$(grep "^ARTIST=$" "$HOME/.config/mmw.config")
+  [ "$artistName" = "ARTIST=" ]
+}
+
