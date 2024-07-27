@@ -16,7 +16,6 @@ create(){
   addProjFilePathDeclaration
   addSessionDeclaration
   addTempoDeclaration
-  addScoreDeclarationAndDefinition
   addDurDeclaration
   addStartTimeDeclaration
 }
@@ -46,6 +45,10 @@ addProjFilePathDeclaration(){
 
 addArtistDeclaration(){
   echo "ARTIST=" >> $HOME/.config/mmw.config
+}
+
+addScoreDeclarationAndDefinition(){
+  echo "SCORE=\$HOME/\$PROJLOC/\$PROJ.ly" >> $HOME/.config/mmw.config
 }
 
 addSessionDeclaration(){

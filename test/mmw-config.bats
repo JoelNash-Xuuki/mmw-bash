@@ -36,3 +36,9 @@ teardown() {
   [ "$artistName" = "ARTIST=" ]
 }
 
+@test "Can declare the score" {
+  mmw-config addScoreDeclarationAndDefinition
+  score=$(grep "^SCORE=\$HOME/\$PROJLOC/\$PROJ.ly" "$HOME/.config/mmw.config")
+  [ "$score" = "SCORE=\$HOME/\$PROJLOC/\$PROJ.ly" ]
+}
+
