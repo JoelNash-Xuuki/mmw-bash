@@ -8,8 +8,11 @@ help(){
 }
 
 setProj(){
- projectName=$1
  sed -i "s|PROJ=.*|PROJ=$1|g" $HOME/.config/mmw.config
+}
+
+setProjLoc(){
+  sed -i "s|PROJLOC=.*|PROJLOC=$1|g" $HOME/.config/mmw.config
 }
 
 "$@"
