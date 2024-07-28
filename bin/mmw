@@ -15,4 +15,8 @@ setProjLoc(){
   sed -i "s|PROJLOC=.*|PROJLOC=$1|g" $HOME/.config/mmw.config
 }
 
+setArtist(){
+  sed -i "s|ARTIST=.*|ARTIST=$1|g" $HOME/.config/mmw.config
+}
+
 "$@"

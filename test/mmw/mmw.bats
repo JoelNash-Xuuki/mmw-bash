@@ -12,7 +12,7 @@ teardown() {
   rm $HOME/.config/mmw.config
 }
 
-@test "Set the Project name" {
+@test "Define: project name" {
   mmw-config addProjNameDeclaration
   mmw setProj test-proj
   projName=$(grep "^PROJ=test-proj$" \
@@ -20,11 +20,18 @@ teardown() {
   [ "$projName" = "PROJ=test-proj" ]
 }
 
-@test "set the Project Location" {
+@test "project location" {
   mmw-config addProjLocationDeclaration
   mmw setProjLoc mmw/test
   projLocation=$(grep "^PROJLOC=mmw/test$" \
                       "$HOME/.config/mmw.config")
   [ "$projLocation" = "PROJLOC=mmw/test" ]
+}
+
+@test "artist" {
+  mmw-config addArtistDeclaration
+  mmw setArtist test-artist
+  artistName=$(grep "^ARTIST=test-artist$" "$HOME/.config/mmw.config")
+  [ "$artistName" = "ARTIST=test-artist" ]
 }
 
