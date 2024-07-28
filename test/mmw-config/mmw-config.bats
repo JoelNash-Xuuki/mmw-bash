@@ -60,3 +60,11 @@ teardown() {
   [ "$startTime" = "START_TIME=\$(bc <<< \"scale=2;\$BAR*0\")" ]
 }
 
+@test "duration" {
+  mmw-config addDurDeclaration
+  dur=$(grep "^DUR=$" "$HOME/.config/mmw.config")
+  [ "$dur" = "DUR=" ]
+  length=$(grep "^LENGTH=$" "$HOME/.config/mmw.config")
+  [ "$length" = "LENGTH=" ]
+}
+
