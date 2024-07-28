@@ -19,4 +19,8 @@ setArtist(){
   sed -i "s|ARTIST=.*|ARTIST=$1|g" $HOME/.config/mmw.config
 }
 
+setTempo(){
+  sed -i "s|TEMPO=.*|TEMPO=$1|g" $HOME/.config/mmw.config
+}
+
 "$@"

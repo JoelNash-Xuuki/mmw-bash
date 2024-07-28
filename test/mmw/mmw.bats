@@ -35,3 +35,10 @@ teardown() {
   [ "$artistName" = "ARTIST=test-artist" ]
 }
 
+@test "tempo" {
+  mmw-config addTempoDeclaration
+  mmw setTempo 84
+  tempo=$(grep "^TEMPO=84$" "$HOME/.config/mmw.config")
+  [ "$tempo" = "TEMPO=84" ]
+}
+
