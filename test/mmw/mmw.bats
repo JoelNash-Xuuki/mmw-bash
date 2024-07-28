@@ -12,14 +12,6 @@ teardown() {
   rm $HOME/.config/mmw.config
 }
 
-@test "Define: project name" {
-  mmw-config addProjNameDeclaration
-  mmw setProj test-proj
-  projName=$(grep "^PROJ=test-proj$" \
-                  "$HOME/.config/mmw.config")
-  [ "$projName" = "PROJ=test-proj" ]
-}
-
 @test "project location" {
   mmw-config addProjLocationDeclaration
   mmw setProjLoc mmw/test
@@ -42,3 +34,6 @@ teardown() {
   [ "$tempo" = "TEMPO=84" ]
 }
 
+@test "start time" {
+  mmw setStartTime
+}

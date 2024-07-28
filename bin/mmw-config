@@ -15,7 +15,6 @@ create(){
   createConfigFile
   addProjFilePathDeclaration
   addDurDeclaration
-  addStartTimeDeclaration
 }
 
 doesDotConfigExist(){
@@ -45,16 +44,25 @@ addArtistDeclaration(){
   echo "ARTIST=" >> $HOME/.config/mmw.config
 }
 
+addTempoDeclaration(){
+  echo "TEMPO=" >> $HOME/.config/mmw.config
+}
+
+addStartTimeDeclaration(){
+  echo "BEAT=\$(bc <<< \"scale=4; (60/\$TEMPO)\")" >> $HOME/.config/mmw.config
+  echo "BAR=\$(bc <<< \"scale=4;\$BEAT*4\")" >> $HOME/.config/mmw.config
+  echo "LENGTH=\$(bc <<< \"scale=4;\$BAR*16\")" >> $HOME/.config/mmw.config
+  echo "DUR=\$(bc <<< \"scale=4;\$BAR*4\")" >> $HOME/.config/mmw.config
+  #echo "START_TIME=\$(bc <<< \"scale=2;\$BAR*0\")" >> $HOME/.config/mmw.config
+  echo "START_TIME=" >> $HOME/.config/mmw.config
+}
+
 addScoreDeclarationAndDefinition(){
   echo "SCORE=\$HOME/\$PROJLOC/\$PROJ.ly" >> $HOME/.config/mmw.config
 }
 
 addSessionDeclaration(){
   echo "SESSION=session/session.eca" >> $HOME/.config/mmw.config
-}
-
-addTempoDeclaration(){
-  echo "TEMPO=" >> $HOME/.config/mmw.config
 }
 
 addScoreDeclarationAndDefinition(){
@@ -64,14 +72,6 @@ addScoreDeclarationAndDefinition(){
 addDurDeclaration(){
   echo "DUR=" >> $HOME/.config/mmw.config
   echo "LENGTH=" >> $HOME/.config/mmw.config
-}
-
-addStartTimeDeclaration(){
-  echo "BEAT=\$(bc <<< \"scale=4; (60/\$TEMPO)\")" >> $HOME/.config/mmw.config
-  echo "BAR=\$(bc <<< \"scale=4;\$BEAT*4\")" >> $HOME/.config/mmw.config
-  echo "LENGTH=\$(bc <<< \"scale=4;\$BAR*16\")" >> $HOME/.config/mmw.config
-  echo "DUR=\$(bc <<< \"scale=4;\$BAR*4\")" >> $HOME/.config/mmw.config
-  echo "START_TIME=\$(bc <<< \"scale=2;\$BAR*0\")" >> $HOME/.config/mmw.config
 }
 
 addWAVDeclaration(){

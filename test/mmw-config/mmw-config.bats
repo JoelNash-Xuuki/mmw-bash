@@ -54,3 +54,9 @@ teardown() {
   [ "$tempo" = "TEMPO=" ]
 }
 
+@test "start time" {
+  mmw-config addStartTimeDeclaration
+  startTime=$(grep "^START_TIME=$" "$HOME/.config/mmw.config")
+  [ "$startTime" = "START_TIME=" ]
+}
+

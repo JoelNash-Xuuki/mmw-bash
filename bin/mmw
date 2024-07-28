@@ -23,4 +23,8 @@ setTempo(){
   sed -i "s|TEMPO=.*|TEMPO=$1|g" $HOME/.config/mmw.config
 }
 
+setStartTime(){
+  sed -i "s|START_TIME=.*|START_TIME=$1|g" $HOME/.config/mmw.config
+}
+
 "$@"
