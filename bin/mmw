@@ -27,4 +27,9 @@ setStartTime(){
   sed -i "s|START_TIME=.*|START_TIME=$1|g" $HOME/.config/mmw.config
 }
 
+setDur(){
+  sed -i "s|DUR=.*|DUR=$1|g" $HOME/.config/mmw.config
+  sed -i "s|LENGTH=.*|LENGTH=$1|g" $HOME/.config/mmw.config
+}
+
 "$@"

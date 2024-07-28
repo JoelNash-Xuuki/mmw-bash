@@ -35,5 +35,6 @@ teardown() {
 }
 
 @test "start time" {
+  mmw-config addStartTimeDeclaration
   mmw setStartTime
 }
