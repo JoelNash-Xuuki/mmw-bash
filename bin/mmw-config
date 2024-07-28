@@ -53,8 +53,7 @@ addStartTimeDeclaration(){
   echo "BAR=\$(bc <<< \"scale=4;\$BEAT*4\")" >> $HOME/.config/mmw.config
   echo "LENGTH=\$(bc <<< \"scale=4;\$BAR*16\")" >> $HOME/.config/mmw.config
   echo "DUR=\$(bc <<< \"scale=4;\$BAR*4\")" >> $HOME/.config/mmw.config
-  #echo "START_TIME=\$(bc <<< \"scale=2;\$BAR*0\")" >> $HOME/.config/mmw.config
-  echo "START_TIME=" >> $HOME/.config/mmw.config
+  echo "START_TIME=\$(bc <<< \"scale=2;\$BAR*0\")" >> $HOME/.config/mmw.config
 }
 
 addScoreDeclarationAndDefinition(){

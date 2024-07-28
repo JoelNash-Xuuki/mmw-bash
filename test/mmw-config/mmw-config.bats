@@ -56,7 +56,7 @@ teardown() {
 
 @test "start time" {
   mmw-config addStartTimeDeclaration
-  startTime=$(grep "^START_TIME=$" "$HOME/.config/mmw.config")
-  [ "$startTime" = "START_TIME=" ]
+  startTime=$(grep "^START_TIME=\$(bc <<< \"scale=2;\$BAR\*0\")$" "$HOME/.config/mmw.config")
+  [ "$startTime" = "START_TIME=\$(bc <<< \"scale=2;\$BAR*0\")" ]
 }
 
