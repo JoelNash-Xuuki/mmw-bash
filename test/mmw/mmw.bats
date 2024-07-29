@@ -12,7 +12,7 @@ teardown() {
   rm $HOME/.config/mmw.config
 }
 
-@test "project location" {
+@test "Can set: project location" {
   mmw-config addProjLocationDeclaration
   mmw setProjLoc mmw/test
   projLocation=$(grep "^PROJLOC=mmw/test$" \
@@ -38,3 +38,13 @@ teardown() {
   mmw-config addStartTimeDeclaration
   mmw setStartTime
 }
+
+@test "dur/length" {
+  mmw-config addStartTimeDeclaration
+  mmw setDur 8
+  dur=$(grep "^DUR=8$" "$HOME/.config/mmw.config")
+  length=$(grep "^LENGTH=8$" "$HOME/.config/mmw.config")
+  [ "$dur" = "DUR=8" ]
+  [ "$length" = "LENGTH=8" ]
+}
+
