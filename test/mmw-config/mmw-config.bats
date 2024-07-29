@@ -24,7 +24,7 @@ teardown() {
 }
 
 @test "proj file path" {
-  mmw-config addSessionDeclaration
+  mmw-config addProjFilePathDeclaration
   projFilePath=$(grep "^PROJPATH=\$HOME/\$PROJLOC/\$PROJ$" \
                       "$HOME/.config/mmw.config")
   [ "$projFilePath" = "PROJPATH=\$HOME/\$PROJLOC/\$PROJ" ]
