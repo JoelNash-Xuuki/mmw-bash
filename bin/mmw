@@ -1,4 +1,4 @@
-#source $HOME/.config/mmw.config
+source $HOME/.config/mmw.config
 
 help(){
   echo "Welcome to MMW"
@@ -30,6 +30,65 @@ setStartTime(){
 setDur(){
   sed -i "s|DUR=.*|DUR=$1|g" $HOME/.config/mmw.config
   sed -i "s|LENGTH=.*|LENGTH=$1|g" $HOME/.config/mmw.config
+}
+
+
+mkProjDir(){
+  mkdir $PROJPATH
+}
+
+mkStemsDir(){
+  mkdir $HOME/audio/$ARTIST/$PROJ/stems
+}
+
+displayProj(){
+  echo $PROJPATH
+}
+
+createProj(){
+  if [ -d $HOME/audio/ ]; then
+      echo "audio directory exists"
+  else
+    mkdir -p $HOME/audio/
+    echo " audio directory created"
+  fi
+
+  if [ -d $PROJLOC ]; then
+      echo "Project location directory exists"
+  else
+    mkdir -p $PROJLOC
+    echo " Project location directory created"
+  fi
+
+  if [ -d $HOME/audio/$ARTIST ]; then
+      echo "Artist directory exists"
+  else
+    mkdir -p $HOME/audio/$ARTIST;
+    echo "Artist directory created"
+  fi
+  
+  if [ -d $PROJPATH ]; then
+    echo "Directory exists"
+  else
+    read -p "$PROJPATH does not exist. Do you want to create it? (y/n): " choice
+      if [[ $choice == "y" ]]; then
+        mkdir $PROJPATH
+        
+        mkdir $PROJPATH/score
+        mkdir $PROJPATH/.bin
+        mkdir $PROJPATH/session
+        mkdir $PROJPATH/sound_design
+        echo "$PROJ created"
+      else
+        echo "$PROJ not created"
+      fi
+   fi
+
+  if [ ! -d $HOME/audio/$ARTIST/$PROJ ]; then
+     mkdir $HOME/audio/$ARTIST/$PROJ
+     mkdir $HOME/audio/$ARTIST/$PROJ/stems
+     #ffmpeg -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=48000 -t 5 $HOME/audio/$ARTIST/$PROJ/stems/input_1.wav
+  fi
 }
 
 "$@"

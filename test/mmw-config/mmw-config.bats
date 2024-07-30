@@ -24,10 +24,11 @@ teardown() {
 }
 
 @test "proj file path" {
-  mmw-config addProjFilePathDeclaration
+  mmw-config addProjFilePathDeclarationAndDefinition
   projFilePath=$(grep "^PROJPATH=\$HOME/\$PROJLOC/\$PROJ$" \
                       "$HOME/.config/mmw.config")
   [ "$projFilePath" = "PROJPATH=\$HOME/\$PROJLOC/\$PROJ" ]
+   
 }
 
 @test "artist" {

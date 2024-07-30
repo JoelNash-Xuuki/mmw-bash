@@ -31,7 +31,7 @@ addProjLocationDeclaration(){
   echo "PROJLOC=" >> $HOME/.config/mmw.config
 }
 
-addProjFilePathDeclaration(){ 
+addProjFilePathDeclarationAndDefinition(){ 
   echo "PROJPATH=\$HOME/\$PROJLOC/\$PROJ" >> $HOME/.config/mmw.config
 }
 

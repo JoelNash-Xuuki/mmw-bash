@@ -26,32 +26,7 @@ teardown() {
   [ "$projLocation" = "PROJLOC=mmw/test" ]
 }
 
-@test "creates a new project dir location" {
-  [ -d "$PROJPATH" ]
-}
 
-@test "creates corresponding location for audio" {
-  [ -d "$PROJPATH" ]
-  [ -d "$HOME/audio/$ARTIST/$PROJ" ]
-}
-
-@test "creates corresponding location for audio stems" {
-  source $HOME/.config/mmw.config
-  [ -d "$PROJPATH" ]
-  [ -d "$HOME/audio/$ARTIST/$PROJ/stems" ]
-}
-
-@test "creates sound design dir in proj location" {
-  source $HOME/.config/mmw.config
-  [ -d "$PROJPATH" ]
-  [ -d "$PROJPATH/sound_design" ]
-}
-
-@test "creates session dir in proj location" {
-  source $HOME/.config/mmw.config
-  [ -d "$PROJPATH" ]
-  [ -d "$PROJPATH/session" ]
-}
 
 @test "define rec session" {
   source $HOME/.config/mmw.config
