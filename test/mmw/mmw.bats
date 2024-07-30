@@ -9,6 +9,12 @@ teardown() {
   rm $HOME/.config/mmw.config
 }
 
+@test "Can set: project" {
+  mmw-config addProjNameDeclaration
+  projName=$(grep "^PROJ=$" "$HOME/.config/mmw.config")
+  [ "$projName" = "PROJ=" ]
+}
+
 @test "artist" {
   mmw-config addArtistDeclaration
   mmw setArtist test-artist
@@ -37,13 +43,7 @@ teardown() {
   [ "$length" = "LENGTH=8" ]
 }
 
-@test "project" {
-  mmw-config addProjNameDeclaration
-  projName=$(grep "^PROJ=$" "$HOME/.config/mmw.config")
-  [ "$projName" = "PROJ=" ]
-}
-
-@test "creates a new project dirs" {
+@test "creates a new project" {
   source $HOME/.config/mmw.config
   mmw-config addProjNameDeclaration
   mmw setProj My_Test_MMW_project
