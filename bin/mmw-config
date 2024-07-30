@@ -1,31 +1,26 @@
-runTests(){
-  bats test/mmw-config.bats
-  bats test/mmw.bats
-  ./bin/ip.sh runTests
-}
-
 h(){
   echo "Welcome to MMW (config)"
   echo "Usage: mmw-config [option]"
   echo "Options: "
-  echo "  run 'mmw-config runTests' first"
 }
 
 create(){
   createConfigFile
-  addProjNameDeclaration
-  addProjLocationDeclaration
-  addProjFilePathDeclaration
-  addSessionDeclaration
-  addTempoDeclaration
-  addScoreDeclarationAndDefinition
-  addDurDeclaration
-  addStartTimeDeclaration
-  addArtistDeclaration
+}
+
+doesDotConfigExist(){
+  if [ ! -d $HOME/.config/ ]; then
+    mkdir -v $HOME/.config/
+  fi
 }
 
 createConfigFile(){
+  doesDotConfigExist
   touch $HOME/.config/mmw.config
+}
+
+del() {
+  rm $HOME/.config/mmw.config
 }
 
 addProjNameDeclaration(){
@@ -36,25 +31,16 @@ addProjLocationDeclaration(){
   echo "PROJLOC=" >> $HOME/.config/mmw.config
 }
 
-addProjFilePathDeclaration(){ 
+addProjFilePathDeclarationAndDefinition(){ 
   echo "PROJPATH=\$HOME/\$PROJLOC/\$PROJ" >> $HOME/.config/mmw.config
 }
 
-addSessionDeclaration(){
-  echo "SESSION=session/session.eca" >> $HOME/.config/mmw.config
+addArtistDeclaration(){
+  echo "ARTIST=" >> $HOME/.config/mmw.config
 }
 
 addTempoDeclaration(){
   echo "TEMPO=" >> $HOME/.config/mmw.config
-}
-
-addScoreDeclarationAndDefinition(){
-  echo "SCORE=\$HOME/\$PROJLOC/\$PROJ.ly" >> $HOME/.config/mmw.config
-}
-
-addDurDeclaration(){
-  echo "DUR=" >> $HOME/.config/mmw.config
-  echo "LENGTH=" >> $HOME/.config/mmw.config
 }
 
 addStartTimeDeclaration(){
@@ -65,8 +51,21 @@ addStartTimeDeclaration(){
   echo "START_TIME=\$(bc <<< \"scale=2;\$BAR*0\")" >> $HOME/.config/mmw.config
 }
 
-addArtistDeclaration(){
-  echo "ARTIST=" >> $HOME/.config/mmw.config
+addScoreDeclarationAndDefinition(){
+  echo "SCORE=\$HOME/\$PROJLOC/\$PROJ.ly" >> $HOME/.config/mmw.config
+}
+
+addSessionDeclaration(){
+  echo "SESSION=session/session.eca" >> $HOME/.config/mmw.config
+}
+
+addScoreDeclarationAndDefinition(){
+  echo "SCORE=\$HOME/\$PROJLOC/\$PROJ.ly" >> $HOME/.config/mmw.config
+}
+
+addDurDeclaration(){
+  echo "DUR=" >> $HOME/.config/mmw.config
+  echo "LENGTH=" >> $HOME/.config/mmw.config
 }
 
 addWAVDeclaration(){
