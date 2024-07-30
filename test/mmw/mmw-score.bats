@@ -24,3 +24,15 @@ teardown() {
   [ -d  $(mmw displayProj)/sound_design ]
   [ -d $(mmw displayProj)/session ]
 }
+
+@test "createScoreDesign should create the project score file" {
+  source $HOME/.config/mmw.config
+  mmw createLyScoreAndMidiFile
+  [ -f "$LILY" ]
+  #[ -f "$MIDI" ]
+  #[ -f "$PDF" ]
+
+  #Validate data
+  #[ "$(cat "$HOME/projects_/flock/src/$PROJ.ly)" = "$projOrc" ]
+}
+
