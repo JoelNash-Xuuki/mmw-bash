@@ -52,7 +52,7 @@ teardown() {
   #[ "$(cat "$HOME/projects_/flock/src/$PROJ.ly)" = "$projOrc" ]
 }
 
-@test "create PDF score" {
+@test "create sheet music as PDF and Midi file" {
   mmw-config addProjNameDeclaration
   mmw setProj My_Test_MMW_project
   mmw-config addProjLocationDeclaration 
@@ -69,6 +69,7 @@ teardown() {
   mmw writeLilyFile
   mmw createScorePDFAndMIDIFiles
   [ -f "$HOME/mmw/My_Test_MMW_project/My_Test_MMW_project.pdf" ]
+  [ -f "$HOME/mmw/My_Test_MMW_project/My_Test_MMW_project.mid" ]
 
   #[ -f "$MIDI" ]
 }
