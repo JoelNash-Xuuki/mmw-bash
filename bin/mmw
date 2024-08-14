@@ -206,8 +206,7 @@ EOF
 }
 
 createScorePDFAndMIDIFiles(){
-  echo "$HOME/$PROJLOC/$PROJ.pdf"
-  #lilypond -dmidi-extension=mid --output=$HOME/$PROJLOC/$PROJ.pdf
+  lilypond -dmidi-extension=mid --output=$HOME/$PROJLOC/$PROJ $SCORE
 }
 
 "$@"
