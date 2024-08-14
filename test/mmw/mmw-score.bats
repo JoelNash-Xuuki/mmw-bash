@@ -68,7 +68,7 @@ teardown() {
   [ "$HOME/mmw/My_Test_MMW_project.ly" = "$(mmw getScore)" ]
   mmw writeLilyFile
   mmw createScorePDFAndMIDIFiles
-  [ -f "/home/Dev_1/mmw/My_Test_MMW_project/My_Test_MMW_project.pdf" ]
+  [ -f "$HOME/mmw/My_Test_MMW_project/My_Test_MMW_project.pdf" ]
 
   #[ -f "$MIDI" ]
 }
