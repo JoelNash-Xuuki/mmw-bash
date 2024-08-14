@@ -69,3 +69,9 @@ teardown() {
   [ "$length" = "LENGTH=" ]
 }
 
+@test "score (and definition)" {
+  mmw-config addScoreDeclarationAndDefinition
+  projFilePath=$(grep "^SCORE=\$HOME/\$PROJLOC/\$PROJ.ly$" \
+                      "$HOME/.config/mmw.config")
+}
+

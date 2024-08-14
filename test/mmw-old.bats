@@ -52,18 +52,7 @@ teardown() {
 ##  [ "$status" -eq 0 ]
 ##}
 ##
-###@test "createScoreDesign should create the project score file" {
-##
-##  mmw createLyScoreAndMidiFile
-##  [ -f "$LILY" ]
-##  [ -f "$MIDI" ]
-##  [ -f "$PDF" ]
-##
-##  #Validate data
-##  #[ "$(cat "$HOME/projects_/flock/src/$PROJ.ly)" = "$projOrc" ]
-##
-##}
-#
+
 #@test "create recording session" {
 #
 #}
