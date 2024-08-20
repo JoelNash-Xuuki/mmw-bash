@@ -83,10 +83,10 @@ createProj(){
       fi
    fi
 
+  ffmpeg -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=48000 -t 5 $HOME/audio/$ARTIST/$PROJ/stems/input_1.wav
   if [ ! -d $HOME/audio/$ARTIST/$PROJ ]; then
      mkdir $HOME/audio/$ARTIST/$PROJ
      mkdir $HOME/audio/$ARTIST/$PROJ/stems
-     ffmpeg -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=48000 -t 5 $HOME/audio/$ARTIST/$PROJ/stems/input_1.wav
   fi
 }
 

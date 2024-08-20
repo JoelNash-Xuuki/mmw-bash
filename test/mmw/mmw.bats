@@ -52,11 +52,10 @@ teardown() {
   mmw-config addProjFilePathDeclarationAndDefinition
   mmw-config addArtistDeclaration
   mmw setArtist test-artist
-  rm -r $HOME/audio/test-artist/My_Test_MMW_project/
   echo "y" | mmw createProj
   [ -d "$(mmw displayProj)" ] # PROJPATH
-  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/input_1.wav ]            
-  [ -d  $(mmw displayProj)/sound_design ]
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/input_1.wav ]
+  [ -d  "$(mmw displayProj)/sound_design" ]
   [ -d $(mmw displayProj)/session ]
 }
 
