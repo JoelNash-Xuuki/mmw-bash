@@ -17,9 +17,6 @@ teardown() {
   mmw-config addProjFilePathDeclarationAndDefinition
   mmw-config addArtistDeclaration
   mmw setArtist test-artist
-  if [ -d $HOME/audio/test-artist/My_Test_MMW_project/ ]; then 
-    rm -r $HOME/audio/test-artist/My_Test_MMW_project/
-  fi
 
   echo "y" | mmw createProj
   [ -d "$(mmw displayProj)" ] # PROJPATH
