@@ -42,9 +42,6 @@ teardown() {
   mmw writeLilyFile
   [ -f "$(mmw getScore)" ]
 
-  #[ -f "$MIDI" ]
-  #[ -f "$PDF" ]
-
   #Validate data
   #[ "$(cat "$HOME/projects_/flock/src/$PROJ.ly)" = "$projOrc" ]
 }
