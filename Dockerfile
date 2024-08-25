@@ -1,14 +1,20 @@
-# Use a base image with bash
-FROM alpine:latest
+# Use Arch Linux as the base image
+FROM archlinux:latest
 
-# Set working directory
-WORKDIR /mmw
+# Install necessary packages, such as bash and bc (required for your script)
+RUN pacman -Syu --noconfirm bash bc
 
-# Copy all your scripts into the container
-COPY . .
+# Create a user and set up the home directory
+RUN useradd -m -s /bin/bash mmw-user
 
-# Make all your scripts executable
-RUN chmod +x *.sh
+COPY bin/mmw-config /usr/local/bin/
 
-# Specify the script to run when the container starts
-CMD ["./bin/mmw-config"]
+# Set the working directory to the user's home directory
+WORKDIR /home/mmw-user
+
+# Switch to the new user
+USER mmw-user
+
+# Set the entry point to start a bash session or run the mmw-config script
+ENTRYPOINT ["/bin/bash"]
+
