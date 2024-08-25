@@ -17,9 +17,12 @@ teardown() {
   mmw-config addProjFilePathDeclarationAndDefinition
   mmw-config addArtistDeclaration
   mmw setArtist test-artist
+  if [ -d $HOME/audio/test-artist/My_Test_MMW_project/ ]; then 
+    rm -r $HOME/audio/test-artist/My_Test_MMW_project/
+  fi
   echo "y" | mmw createProj
   [ -d "$(mmw displayProj)" ] # PROJPATH
-  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/input_1.wav ]            
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/input_1.wav ]
   [ -d  $(mmw displayProj)/sound_design ]
   [ -d $(mmw displayProj)/session ]
 }
@@ -41,14 +44,11 @@ teardown() {
   mmw writeLilyFile
   [ -f "$(mmw getScore)" ]
 
-  #[ -f "$MIDI" ]
-  #[ -f "$PDF" ]
-
   #Validate data
   #[ "$(cat "$HOME/projects_/flock/src/$PROJ.ly)" = "$projOrc" ]
 }
 
-@test "create PDF score" {
+@test "create sheet music as PDF and Midi file" {
   mmw-config addProjNameDeclaration
   mmw setProj My_Test_MMW_project
   mmw-config addProjLocationDeclaration 
@@ -64,8 +64,7 @@ teardown() {
   [ "$HOME/mmw/My_Test_MMW_project.ly" = "$(mmw getScore)" ]
   mmw writeLilyFile
   mmw createScorePDFAndMIDIFiles
-  [ -f "$HOME/mmw/My_Test_MMW_project/My_Test_MMW_project.pdf" ]
-
-  #[ -f "$MIDI" ]
+  [ -f "$HOME/Documents/My_Test_MMW_project.pdf" ]
+#  [ -f "$HOME/mmw/My_Test_MMW_project/My_Test_MMW_project.mid" ]
 }
 

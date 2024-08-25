@@ -1,6 +1,8 @@
 # Welcome to Multiple Media Workstation Suite (MMWS)
 # TODO
 - run 'mmw-config h'.
+bats test/mmw/mmw.bats | grep "tempo"
+
 
 # Description # 
   The follow wil provide a more detailed overview of the project, 
@@ -291,4 +293,22 @@ ImageMagick that includes the 'magick' command on your Raspberry Pi.
 
 # Documentation
 https://imagemagick.org/Usage/
+
+
+
+
+
+
+vim Dockerfile 
+sudo docker build -t mmw-image .
+sudo docker images
+clear && sudo docker build -t mmw-image . && clear && sudo docker run --rm -it mmw-image
+clear && sudo docker image prune -f && sudo docker images
+sudo docker rmi archlinux
+sudo docker rmi docker/welcome-to-docker
+docker tag Xuuki/mmw-image Xuuki/mmw:latest
+sudo docker run --rm -it mmw-image
+sudo docker login -u xuuki
+sudo docker push xuuki/mmw:latest
+docker run --rm -it -v $HOME/Documents/:$HOME/Documents/ mmw
 
