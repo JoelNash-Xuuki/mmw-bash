@@ -21,7 +21,6 @@ WORKDIR /home/mmw-user
 USER mmw-user
 
 RUN git init
-
 RUN git submodule add https://github.com/bats-core/bats-core.git test/bats
 RUN git submodule add https://github.com/bats-core/bats-support.git test/test_helper/bats-support
 RUN git submodule add https://github.com/bats-core/bats-assert.git test/test_helper/bats-assert
