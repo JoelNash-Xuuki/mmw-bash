@@ -1,6 +1,8 @@
 # Welcome to Multiple Media Workstation Suite (MMWS)
 # TODO
 - run 'mmw-config h'.
+bats test/mmw/mmw.bats | grep "tempo"
+
 
 # Description # 
   The follow wil provide a more detailed overview of the project, 
@@ -308,3 +310,5 @@ docker tag Xuuki/mmw-image Xuuki/mmw:latest
 sudo docker run --rm -it mmw-image
 sudo docker login -u xuuki
 sudo docker push xuuki/mmw:latest
+docker run --rm -it -v $HOME/Documents/:$HOME/Documents/ mmw
+
