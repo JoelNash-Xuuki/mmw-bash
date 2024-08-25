@@ -2,7 +2,7 @@
 FROM archlinux:latest
 
 # Install necessary packages, such as bash and bc (required for your script)
-RUN pacman -Syu --noconfirm bash bc git
+RUN pacman -Syu --noconfirm bash bc git ffmpeg lilypond csound 
 
 # Create a user and set up the home directory
 RUN useradd -m -s /bin/bash mmw-user
