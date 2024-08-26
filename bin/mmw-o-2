@@ -219,7 +219,6 @@ createScorePDFandMIDI(){
 }
 
 prodScoreAudio(){
-  # source $HOME/projects_/Flock/config
   rm $HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav
   csound -d -o$HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav -F $PROJPATH/$PROJ.mid $PROJPATH/sound_design/$PROJ.orc $PROJPATH/sound_design/$PROJ.sco
 }

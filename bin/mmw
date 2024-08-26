@@ -76,7 +76,7 @@ createProj(){
         mkdir $PROJPATH/score
         mkdir $PROJPATH/.bin
         mkdir $PROJPATH/session
-        mkdir $PROJPATH/sound_design
+        mkdir $PROJPATH/sound-design
         echo "$PROJ created"
       else
         echo "$PROJ not created"
@@ -421,7 +421,7 @@ buildInstrSoundDesignFiles(){
   			endin
   "
   
-  echo "$projOrc" > $PROJPATH/sound_design/$PROJ.orc
+  echo "$projOrc" > $PROJPATH/sound-design/$PROJ.orc
   
   projSco="
   f0 $LENGTH
@@ -433,7 +433,14 @@ buildInstrSoundDesignFiles(){
   f4 0 1024 10 1 1   1   1    0.7 0.5   0.3  0.1      
   "
   
-  echo "$projSco" > $PROJPATH/sound_design/$PROJ.sco
+  echo "$projSco" > $PROJPATH/sound-design/$PROJ.sco
+}
+
+prodScoreAudio(){
+  if [ -f $HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav ]; then
+    rm $HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav
+  fi
+  csound -d -o$HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav -F /tmp/$PROJ.mid $PROJPATH/sound-design/$PROJ.orc $PROJPATH/sound-design/$PROJ.sco
 }
 
 "$@"
