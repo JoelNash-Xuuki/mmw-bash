@@ -8,7 +8,7 @@ teardown() {
   rm $HOME/.config/mmw.config
 }
 
-@test "create sheet music as PDF and Midi file" {
+@test "create sound design" {
   mmw-config addProjNameDeclaration
   mmw setProj My_Test_MMW_project
   mmw-config addProjLocationDeclaration 
@@ -24,8 +24,8 @@ teardown() {
   [ "$HOME/mmw/My_Test_MMW_project.ly" = "$(mmw getScore)" ]
   mmw writeLilyFile
   mmw createScorePDFAndMIDIFiles
-  [ -f "$HOME/mmw/My_Test_MMW_project/My_Test_MMW_project.pdf" ]
-  [ -f "$HOME/mmw/My_Test_MMW_project/My_Test_MMW_project.mid" ]
+  [ -f "$HOME/Documents/My_Test_MMW_project.pdf" ]
+  [ -f "/tmp/My_Test_MMW_project.mid" ]
 
   mmw buildInstrSoundDesignFiles
   [ -f $HOME/mmw/My_Test_MMW_project/sound_design/My_Test_MMW_project.orc ]
