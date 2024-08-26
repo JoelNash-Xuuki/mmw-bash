@@ -65,6 +65,6 @@ teardown() {
   mmw writeLilyFile
   mmw createScorePDFAndMIDIFiles
   [ -f "$HOME/Documents/My_Test_MMW_project.pdf" ]
-#  [ -f "$HOME/mmw/My_Test_MMW_project/My_Test_MMW_project.mid" ]
+  [ -f "/tmp/My_Test_MMW_project.mid" ]
 }
 
