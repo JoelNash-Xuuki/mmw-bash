@@ -463,18 +463,27 @@ makeTrack(){
 
 createSession(){
 cat << EOF > $PROJPATH/session/session.eca
-   ecasound -n $PROJ -b:512 -t:$DUR -f:16,2,48000 \\
-     -a:synth -i $HOME/audio/test-artist/My_Test_MMW_project/stems/synth.wav -y:$START_TIME -erc:1,2 -epp:50 -efh:500 -eadb:1  \\
-     -a:bass  -i $BASS  -y:$START_TIME -erc:1,2 -epp:50 -efl:80 -eadb:1 \\
-     -a:snare -i $SNARE -y:$START_TIME -erc:1,2 -epp:50 -efl:10700  -eadb:-10 \\
-     -a:brush -i $BRUSH -y:$START_TIME -erc:1,2 -epp:50 -efl:2400  -ea:0 \\
-     -a:hihat -i $HIHAT  -y:$START_TIME -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-15 \\
-     -a:kick  -i $KICK     -y:$START_TIME -erc:1,2 -epp:50 -ea:0 -efl:200 \\
-     -a:synth,snare,brush,hihat,bass,kick -o jack,system #$HOME/audio\/$ARTIST\/$PROJ/$PROJ.wav
+   ecasound -n $PROJPATH/session/session.eca -b:512 -t:$DUR -f:16,2,48000 \\
+     -a:synth -i $HOME/audio/$ARTIST/$PROJ/stems/synth.wav -y:$START_TIME -erc:1,2 -epp:50 -efh:500 -eadb:1  \\
+     -a:bass  -i $HOME/audio/$ARTIST/$PROJ/stems/bass.wav  -y:$START_TIME -erc:1,2 -epp:50 -efl:80 -eadb:1 \\
+     -a:snare -i $HOME/audio/$ARTIST/$PROJ/stems/snare.wav -y:$START_TIME -erc:1,2 -epp:50 -efl:10700  -eadb:-10 \\
+     -a:brush -i $HOME/audio/$ARTIST/$PROJ/stems/drums.wav -y:$START_TIME -erc:1,2 -epp:50 -efl:2400  -ea:0 \\
+     -a:hihat -i $HOME/audio/$ARTIST/$PROJ/stems/hihat.wav -y:$START_TIME -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-15 \\
+     -a:kick -i  $HOME/audio/$ARTIST/$PROJ/stems/kick.wav  -y:$START_TIME -erc:1,2 -epp:50 -ea:0 -efl:200 \\
+     -a:synth,snare,brush,hihat,bass,kick -o alsa,hw:0,0 #$HOME/audio\/$ARTIST\/$PROJ/$PROJ.wav
 EOF
-
   chmod +x $PROJPATH/session/session.eca
   $PROJPATH/session/session.eca
+
+  exit_code=$?
+  
+  if [ $exit_code -eq 0 ]; then
+    echo "Ecasound command executed successfully with exit code $exit_code."
+  else
+    echo "Ecasound command failed with exit code $exit_code."
+  fi
+  
+  return $exit_code
 }
 
 "$@"

@@ -3,12 +3,53 @@ setup() {
 }
 
 teardown() {
-  source $HOME/.config/mmw.config
-  rm -r $PROJPATH
-  rm $HOME/.config/mmw.config
+  echo ""
 }
 
 @test "create sound design" {
+  mmw-config addProjNameDeclaration
+  mmw setProj My_Test_MMW_project
+  mmw-config addProjLocationDeclaration 
+  mmw setProjLoc mmw
+  mmw-config addProjFilePathDeclarationAndDefinition
+  mmw-config addArtistDeclaration
+  mmw setArtist test-artist
+  mmw-config addScoreDeclarationAndDefinition
+  if [ -d $HOME/audio/test-artist/My_Test_MMW_project/ ]; then 
+    rm -r $HOME/audio/test-artist/My_Test_MMW_project/
+  fi
+  echo "y" | mmw createProj
+  [ "$HOME/mmw/My_Test_MMW_project.ly" = "$(mmw getScore)" ]
+  mmw writeLilyFile
+  mmw createScorePDFAndMIDIFiles
+  [ -f "$HOME/Documents/My_Test_MMW_project.pdf" ]
+  [ -f "/tmp/My_Test_MMW_project.mid" ]
+
+  mmw buildInstrSoundDesignFiles
+  [ -f $HOME/mmw/My_Test_MMW_project/sound-design/My_Test_MMW_project.orc ]
+  [ -f $HOME/mmw/My_Test_MMW_project/sound-design/My_Test_MMW_project.sco ]
+
+  mmw-config addTempoDeclaration
+  mmw setTempo 84
+  mmw-config addDurDeclaration
+  mmw setDur 16
+  mmw prodScoreAudio
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/My_Test_MMW_project.wav ]
+
+  mmw makeTrack
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/synth.wav ]
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/drums.wav ]
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/bass.wav ]
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/guitar.wav ]
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/hihat.wav ]
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/snare.wav ]
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/kick.wav ]
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/piano.wav ]
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/vocal.wav ]
+}
+
+@test "play sound design" {
+  source $HOME/.config/mmw.config
   mmw-config addProjNameDeclaration
   mmw setProj My_Test_MMW_project
   mmw-config addProjLocationDeclaration 
@@ -44,5 +85,10 @@ teardown() {
   [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/kick.wav ]
   [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/piano.wav ]
   [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/vocal.wav ]
-}
 
+  mmw createSession
+  [ $? -eq 0 ]
+
+  rm -r $PROJPATH
+  rm $HOME/.config/mmw.config
+}

@@ -43,6 +43,11 @@ addTempoDeclaration(){
   echo "TEMPO=" >> $HOME/.config/mmw.config
 }
 
+addDurDeclaration(){
+  echo "DUR=" >> $HOME/.config/mmw.config
+  echo "LENGTH=" >> $HOME/.config/mmw.config
+}
+
 addStartTimeDeclaration(){
   echo "BEAT=\$(bc <<< \"scale=4; (60/\$TEMPO)\")" >> $HOME/.config/mmw.config
   echo "BAR=\$(bc <<< \"scale=4;\$BEAT*4\")" >> $HOME/.config/mmw.config
@@ -61,11 +66,6 @@ addSessionDeclaration(){
 
 addScoreDeclarationAndDefinition(){
   echo "SCORE=\$HOME/\$PROJLOC/\$PROJ.ly" >> $HOME/.config/mmw.config
-}
-
-addDurDeclaration(){
-  echo "DUR=" >> $HOME/.config/mmw.config
-  echo "LENGTH=" >> $HOME/.config/mmw.config
 }
 
 addWAVDeclaration(){
