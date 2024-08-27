@@ -223,7 +223,14 @@ prodScoreAudio(){
   csound -d -o$HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav -F $PROJPATH/$PROJ.mid $PROJPATH/sound_design/$PROJ.orc $PROJPATH/sound_design/$PROJ.sco
 }
 
-makeTrack(){ # make track sound design 
+makeTrack(){
+  if [ $# -ne 2 ]; then
+      echo "Usage: $0 <trackName> <channelNumber>"
+      exit 1
+  fi
+}
+
+makeTrack-o(){ # make track sound design 
   # Check if the user provided exactly two arguments
   if [ $# -ne 2 ]; then
       echo "Usage: $0 <trackName> <channelNumber>"

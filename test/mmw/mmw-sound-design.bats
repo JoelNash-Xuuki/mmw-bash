@@ -33,5 +33,16 @@ teardown() {
 
   mmw prodScoreAudio
   [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/My_Test_MMW_project.wav ]
+
+  mmw makeTrack
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/synth.wav ]
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/drums.wav ]
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/bass.wav ]
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/guitar.wav ]
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/hihat.wav ]
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/snare.wav ]
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/kick.wav ]
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/piano.wav ]
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/vocal.wav ]
 }
 

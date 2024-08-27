@@ -443,4 +443,38 @@ prodScoreAudio(){
   csound -d -o$HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav -F /tmp/$PROJ.mid $PROJPATH/sound-design/$PROJ.orc $PROJPATH/sound-design/$PROJ.sco
 }
 
+makeTrack(){
+  # Define the input file
+  input_file="$HOME/audio/test-artist/My_Test_MMW_project/stems/My_Test_MMW_project.wav"
+  
+  # Define the output directory
+  output_dir="$HOME/audio/test-artist/My_Test_MMW_project/stems/"
+  
+  # Define an array of instrument names corresponding to each channel
+  instruments=("synth" "drums" "bass" "guitar" "hihat" "snare" "kick" "piano" "vocal")
+  
+  # Loop through each instrument and channel number
+  for i in "${!instruments[@]}"; do
+    channel=$((i + 1))
+    output_file="${output_dir}${instruments[$i]}.wav"
+    sox "$input_file" "$output_file" remix "$channel"
+  done
+}
+
+createSession(){
+cat << EOF > $PROJPATH/session/session.eca
+   ecasound -n $PROJ -b:512 -t:$DUR -f:16,2,48000 \\
+     -a:synth -i $HOME/audio/test-artist/My_Test_MMW_project/stems/synth.wav -y:$START_TIME -erc:1,2 -epp:50 -efh:500 -eadb:1  \\
+     -a:bass  -i $BASS  -y:$START_TIME -erc:1,2 -epp:50 -efl:80 -eadb:1 \\
+     -a:snare -i $SNARE -y:$START_TIME -erc:1,2 -epp:50 -efl:10700  -eadb:-10 \\
+     -a:brush -i $BRUSH -y:$START_TIME -erc:1,2 -epp:50 -efl:2400  -ea:0 \\
+     -a:hihat -i $HIHAT  -y:$START_TIME -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-15 \\
+     -a:kick  -i $KICK     -y:$START_TIME -erc:1,2 -epp:50 -ea:0 -efl:200 \\
+     -a:synth,snare,brush,hihat,bass,kick -o jack,system #$HOME/audio\/$ARTIST\/$PROJ/$PROJ.wav
+EOF
+
+  chmod +x $PROJPATH/session/session.eca
+  $PROJPATH/session/session.eca
+}
+
 "$@"
