@@ -95,7 +95,7 @@ getScore(){
 }
 
 writeLilyFile(){
-touch $HOME/$CORE
+touch $SCORE
 cat << EOF > $SCORE
 \version "2.22.0"
 
@@ -211,7 +211,7 @@ createScorePDFAndMIDIFiles(){
   fi
 
   lilypond -dmidi-extension=mid --output=$HOME/Documents/$PROJ $SCORE
-  mv $HOME/Documents/$PROJ.mid /tmp
+  mv $HOME/Documents/$PROJ.mid $PROJPATH
 }
 
 buildInstrSoundDesignFiles(){
@@ -440,7 +440,7 @@ prodScoreAudio(){
   if [ -f $HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav ]; then
     rm $HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav
   fi
-  csound -d -o$HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav -F /tmp/$PROJ.mid $PROJPATH/sound-design/$PROJ.orc $PROJPATH/sound-design/$PROJ.sco
+  csound -d -o$HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav -F $PROJPATH/$PROJ.mid $PROJPATH/sound-design/$PROJ.orc $PROJPATH/sound-design/$PROJ.sco
 }
 
 makeTrack(){

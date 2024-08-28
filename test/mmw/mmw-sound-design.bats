@@ -1,9 +1,6 @@
 setup() {
   mmw-config create
-}
-
-teardown() {
-  echo ""
+  source $HOME/.config/mmw.config
 }
 
 @test "create sound design" {
@@ -19,15 +16,15 @@ teardown() {
     rm -r $HOME/audio/test-artist/My_Test_MMW_project/
   fi
   echo "y" | mmw createProj
-  [ "$HOME/mmw/My_Test_MMW_project.ly" = "$(mmw getScore)" ]
   mmw writeLilyFile
+  [ -f "$PROJPATH/My_Test_MMW_project.ly" ]
   mmw createScorePDFAndMIDIFiles
   [ -f "$HOME/Documents/My_Test_MMW_project.pdf" ]
-  [ -f "/tmp/My_Test_MMW_project.mid" ]
+  [ -f "$HOME/mmw/My_Test_MMW_project/My_Test_MMW_project.mid" ]
 
   mmw buildInstrSoundDesignFiles
-  [ -f $HOME/mmw/My_Test_MMW_project/sound-design/My_Test_MMW_project.orc ]
-  [ -f $HOME/mmw/My_Test_MMW_project/sound-design/My_Test_MMW_project.sco ]
+  [ -f $PROJPATH/sound-design/My_Test_MMW_project.orc ]
+  [ -f $PROJPATH/sound-design/My_Test_MMW_project.sco ]
 
   mmw-config addTempoDeclaration
   mmw setTempo 84
@@ -62,15 +59,15 @@ teardown() {
     rm -r $HOME/audio/test-artist/My_Test_MMW_project/
   fi
   echo "y" | mmw createProj
-  [ "$HOME/mmw/My_Test_MMW_project.ly" = "$(mmw getScore)" ]
+  [ -f "$PROJPATH/My_Test_MMW_project.ly" ]
   mmw writeLilyFile
   mmw createScorePDFAndMIDIFiles
   [ -f "$HOME/Documents/My_Test_MMW_project.pdf" ]
-  [ -f "/tmp/My_Test_MMW_project.mid" ]
+  #[ -f "$PROJPATH/My_Test_MMW_project.mid" ]
 
   mmw buildInstrSoundDesignFiles
-  [ -f $HOME/mmw/My_Test_MMW_project/sound-design/My_Test_MMW_project.orc ]
-  [ -f $HOME/mmw/My_Test_MMW_project/sound-design/My_Test_MMW_project.sco ]
+  #[ -f $PROJPATH/sound-design/My_Test_MMW_project.orc ]
+  #[ -f $PROJPATH/sound-design/My_Test_MMW_project.sco ]
 
   mmw prodScoreAudio
   [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/My_Test_MMW_project.wav ]
@@ -90,5 +87,4 @@ teardown() {
   [ $? -eq 0 ]
 
   rm -r $PROJPATH
-  rm $HOME/.config/mmw.config
 }

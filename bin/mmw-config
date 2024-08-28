@@ -57,15 +57,11 @@ addStartTimeDeclaration(){
 }
 
 addScoreDeclarationAndDefinition(){
-  echo "SCORE=\$HOME/\$PROJLOC/\$PROJ.ly" >> $HOME/.config/mmw.config
+  echo "SCORE=\$PROJPATH/\$PROJ.ly" >> $HOME/.config/mmw.config
 }
 
 addSessionDeclaration(){
   echo "SESSION=session/session.eca" >> $HOME/.config/mmw.config
-}
-
-addScoreDeclarationAndDefinition(){
-  echo "SCORE=\$HOME/\$PROJLOC/\$PROJ.ly" >> $HOME/.config/mmw.config
 }
 
 addWAVDeclaration(){
