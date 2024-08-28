@@ -17,7 +17,7 @@ setup() {
   fi
   echo "y" | mmw createProj
   mmw writeLilyFile
-  [ -f "$PROJPATH/My_Test_MMW_project.ly" ]
+  [ -f $SCORE ]
   mmw createScorePDFAndMIDIFiles
   [ -f "$HOME/Documents/My_Test_MMW_project.pdf" ]
   [ -f "$HOME/mmw/My_Test_MMW_project/My_Test_MMW_project.mid" ]
@@ -84,7 +84,7 @@ setup() {
   [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/vocal.wav ]
 
   mmw createSession
-  [ $? -eq 0 ]
+  [ -f $HOME/audio/test-artist/My_Test_MMW_project/My_Test_MMW_project.wav ]
 
   rm -r $PROJPATH
 }

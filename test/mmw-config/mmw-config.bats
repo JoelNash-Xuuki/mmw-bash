@@ -39,8 +39,8 @@ teardown() {
 
 @test "score" {
   mmw-config addScoreDeclarationAndDefinition
-  score=$(grep "^SCORE=\$HOME/\$PROJLOC/\$PROJ.ly" "$HOME/.config/mmw.config")
-  [ "$score" = "SCORE=\$HOME/\$PROJLOC/\$PROJ.ly" ]
+  score=$(grep "^SCORE=\$PROJPATH/\$PROJ.ly" "$HOME/.config/mmw.config")
+  [ "$score" = "SCORE=\$PROJPATH/\$PROJ.ly" ]
 }
 
 @test "session" {
@@ -71,7 +71,7 @@ teardown() {
 
 @test "score (and definition)" {
   mmw-config addScoreDeclarationAndDefinition
-  projFilePath=$(grep "^SCORE=\$HOME/\$PROJLOC/\$PROJ.ly$" \
+  projFilePath=$(grep "^SCORE=\$PROJPATH/\$PROJ.ly$" \
                       "$HOME/.config/mmw.config")
 }
 

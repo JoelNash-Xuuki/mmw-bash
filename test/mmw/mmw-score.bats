@@ -23,8 +23,8 @@ teardown() {
   echo "y" | mmw createProj
   [ -d "$(mmw displayProj)" ] # PROJPATH
   [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/input_1.wav ]
-  [ -d  $(mmw displayProj)/sound_design ]
-  [ -d $(mmw displayProj)/session ]
+  [ -d "$(mmw displayProj)"/sound-design ]
+  [ -d "$(mmw displayProj)"/session ]
 }
 
 @test "createScoreDesign should create the project score file" {
@@ -40,7 +40,7 @@ teardown() {
     rm -r $HOME/audio/test-artist/My_Test_MMW_project/
   fi
   echo "y" | mmw createProj
-  [ "$HOME/mmw/My_Test_MMW_project.ly" = "$(mmw getScore)" ]
+  [ "$HOME/mmw/My_Test_MMW_project/My_Test_MMW_project.ly" = "$(mmw getScore)" ]
   mmw writeLilyFile
   [ -f "$(mmw getScore)" ]
 
@@ -61,10 +61,10 @@ teardown() {
     rm -r $HOME/audio/test-artist/My_Test_MMW_project/
   fi
   echo "y" | mmw createProj
-  [ "$HOME/mmw/My_Test_MMW_project.ly" = "$(mmw getScore)" ]
+  [ "$HOME/mmw/My_Test_MMW_project/My_Test_MMW_project.ly" = "$(mmw getScore)" ]
   mmw writeLilyFile
   mmw createScorePDFAndMIDIFiles
   [ -f "$HOME/Documents/My_Test_MMW_project.pdf" ]
-  [ -f "/tmp/My_Test_MMW_project.mid" ]
+  [ -f "$(mmw displayProj)"/My_Test_MMW_project.mid ]
 }
 

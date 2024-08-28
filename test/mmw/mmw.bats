@@ -58,7 +58,7 @@ teardown() {
   echo "y" | mmw createProj
   [ -d "$(mmw displayProj)" ] # PROJPATH
   [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/input_1.wav ]
-  [ -d  "$(mmw displayProj)/sound_design" ]
-  [ -d $(mmw displayProj)/session ]
+  [ -d "$(mmw displayProj)"/sound-design ]
+  [ -d "$(mmw displayProj)"/session ]
 }
 
