@@ -1,0 +1,489 @@
+source $HOME/.config/mmw.config
+
+help(){
+  echo "Welcome to MMW"
+  echo "Usage: mmw [option]"
+  echo "Options: "
+  echo "  run 'mmw-config runTests' first "
+}
+
+setProj(){
+ sed -i "s|PROJ=.*|PROJ=$1|g" $HOME/.config/mmw.config
+}
+
+setProjLoc(){
+  sed -i "s|PROJLOC=.*|PROJLOC=$1|g" $HOME/.config/mmw.config
+}
+
+setArtist(){
+  sed -i "s|ARTIST=.*|ARTIST=$1|g" $HOME/.config/mmw.config
+}
+
+setTempo(){
+  sed -i "s|TEMPO=.*|TEMPO=$1|g" $HOME/.config/mmw.config
+}
+
+setStartTime(){
+  sed -i "s|START_TIME=.*|START_TIME=$1|g" $HOME/.config/mmw.config
+}
+
+setDur(){
+  sed -i "s|DUR=.*|DUR=$1|g" $HOME/.config/mmw.config
+  sed -i "s|LENGTH=.*|LENGTH=$1|g" $HOME/.config/mmw.config
+}
+
+mkProjDir(){
+  mkdir $PROJPATH
+}
+
+mkStemsDir(){
+  mkdir $HOME/audio/$ARTIST/$PROJ/stems
+}
+
+displayProj(){
+  echo $PROJPATH
+}
+
+createProj(){
+  if [ -d $HOME/audio/ ]; then
+      echo "audio directory exists"
+  else
+    mkdir -p $HOME/audio/
+    echo " audio directory created"
+  fi
+
+  if [ -d $PROJLOC ]; then
+      echo "Project location directory exists"
+  else
+    mkdir -p $PROJLOC
+    echo " Project location directory created"
+  fi
+
+  if [ -d $HOME/audio/$ARTIST ]; then
+      echo "Artist directory exists"
+  else
+    mkdir -p $HOME/audio/$ARTIST;
+    echo "Artist directory created"
+  fi
+  
+  if [ -d $PROJPATH ]; then
+    echo "Directory exists"
+  else
+    read -p "$PROJPATH does not exist. Do you want to create it? (y/n): " choice
+      if [[ $choice == "y" ]]; then
+        mkdir $PROJPATH
+        
+        mkdir $PROJPATH/score
+        mkdir $PROJPATH/.bin
+        mkdir $PROJPATH/session
+        mkdir $PROJPATH/sound-design
+        echo "$PROJ created"
+      else
+        echo "$PROJ not created"
+      fi
+   fi
+
+  if [ ! -d $HOME/audio/$ARTIST/$PROJ ]; then
+     mkdir $HOME/audio/$ARTIST/$PROJ
+     mkdir $HOME/audio/$ARTIST/$PROJ/stems
+     ffmpeg -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=48000 -t 5 $HOME/audio/$ARTIST\/$PROJ/stems/input_1.wav
+  fi
+}
+
+getScore(){
+  echo $SCORE
+}
+
+writeLilyFile(){
+touch $SCORE
+cat << EOF > $SCORE
+\version "2.22.0"
+
+\header {
+  tagline = "Xuuki.xyz"
+  title = "Flock"
+  composer = "Vyvyan"
+}
+
+\score {
+  <<
+    \new StaffGroup << %Melody
+      \new Staff \with  { 
+        instrumentName=  " "
+        shortInstrumentName= " "
+      } 
+        \relative {
+        \clef percussion
+        \time 4/4
+        \tempo 4 = 84
+      }
+    >> 
+    \new StaffGroup << %Harmony
+      \new Staff \with  
+      { 
+        instrumentName= "FM"
+      } \relative {
+        \time 4/4
+        \tempo 4 = 84
+        \clef bass
+        \key a \major 
+         <a, e' gis cis>4 r2.
+         r4 <a' cis e gis>4 r2
+         <cis, gis' b dis>4 r2.
+         r4 <cis gis' b e> r8 
+         <cis gis' b dis>4 r8
+      }
+    >> 
+    \new StaffGroup << %Bass
+       \new Staff \with { 
+         instrumentName= " "
+         shortInstrumentName= " "}
+        \relative  { 
+         \time 4/4
+         \tempo 4 = 84
+         \clef bass
+         \key a \major
+         a,4\staccato a4\staccato r a4\staccato
+         r4 r4 r8 cis8 b4\staccato  
+         a4\staccato gis4\staccato r gis4\staccato 
+         r fis4\staccato r8 gis4\staccato 
+       }
+    >>
+    \new StaffGroup << %Percussion
+       \new Staff \with { %Snare
+         instrumentName= " "
+         shortInstrumentName= " "
+       } 
+       {
+         \tempo 4 = 84
+         \clef percussion
+         \xNotesOn
+         r2 d4 r8 d
+         r2 d4 r4
+         r2 d4 r4
+         r2 d4 r4
+       }
+
+      \new Staff \with { %Brush
+        instrumentName= " "
+        shortInstrumentName= " "
+      } 
+      {
+        \clef percussion
+        \tempo 4 = 84
+        \xNotesOn
+      }
+
+      \new Staff \with { % HiHat
+          instrumentName= "Hi Hat"
+          shortInstrumentName= "HH" 
+        }
+        { 
+          \clef percussion
+          \tempo 4 = 84
+          \xNotesOn
+          d4 d d d d d d d 
+          d  d d d d d d d   
+        }
+
+        \new Staff \with { %Kick
+          instrumentName= " "
+          shortInstrumentName= " " 
+        }
+        \relative { 
+          \clef percussion
+          \tempo 4 = 84
+          
+        }
+    >>
+  >>
+  \layout {}
+  \midi {
+    \tempo 4 = 84
+  }
+}
+EOF
+}
+
+createScorePDFAndMIDIFiles(){
+  if [ ! -d $HOME/Documents ]; then 
+    mkdir $HOME/Documents
+  fi
+
+  lilypond -dmidi-extension=mid --output=$HOME/Documents/$PROJ $SCORE
+  mv $HOME/Documents/$PROJ.mid $PROJPATH
+}
+
+buildInstrSoundDesignFiles(){
+  projOrc="
+  sr        = 48000
+  kr 	  = 4800
+  ksmps	  = 10
+  nchnls    = 9
+  0dbfs	  = 1
+  
+  ; gah	  init 0
+  ; gahh	  init 0
+  
+  ; Instr Definitions
+  
+  #define   voice #1#
+  #define   harmony #2# 
+  #define   bass #3#
+  #define   snare #4#
+  #define   brush #5#
+  #define   hihat #6#
+  #define   kick #7#
+  
+  ; Map Midi Channels
+  massign   \$voice, \$voice
+  massign   \$harmony, \$harmony
+  massign   \$bass, \$bass
+  massign   \$snare, \$snare
+  massign   \$brush, \$brush
+  massign   \$hihat, \$hihat
+  massign   \$kick, \$kick 
+  
+  ; Globals
+  gicps  	  init 256
+  
+            instr \$voice
+  ivibdel   = 0.114
+  iamp      veloc 0, 0.25
+  kfrq      cpsmidib 2
+  kenv      linsegr 0.001, 0.950, iamp, 0.950, 0.001
+  kvibenv   linseg 0.001, ivibdel, 0.1, ivibdel, 0.001
+  
+  kfrq      = kfrq*1
+  
+  klfo      oscil kvibenv, 0.714, 1
+  kindex    expon 1, 0.2, 0.30
+  
+  asig1     oscili  kenv*iamp, kfrq, 1
+  asig2     oscili  kenv*iamp, kfrq*1.005, 1
+  asig3     oscili  kenv*iamp, kfrq*.995, 2
+  asig4     foscil  kenv, kfrq, 3.5, 2.5, kindex
+  
+  amix      = (asig1+(asig2*0.015)+(asig3*0.015)+(asig4*0.00006))*6
+  anoise    rand kfrq
+  ;afilt     tone adis+(anoise*0.0000005*klfo), 1000
+  alpf      butterlp amix, 20000 ; cut freqs above
+  ahpf      butterhp alpf, 105  ; pass fres above
+            outch \$voice, (ahpf*kenv)
+            endin
+  
+            instr \$harmony ;character
+  ivibdel   = 0.714
+  iamp      veloc 0, 0.25
+  kfrq      cpsmidib 0.95
+  kenv      linsegr 0.001, 0.614, iamp, 0.614, 0.001
+  kvibenv   linseg 0.001, ivibdel, 1, ivibdel, 0.001
+  
+  klfo      oscil kvibenv, 0.714, 1
+  kindex    expon 1, 0.2, 0.30
+  
+  asig1     oscili  kenv*iamp, kfrq, 1
+  asig2     oscili  kenv*iamp, kfrq*1.001, 1
+  asig3     oscili  kenv*iamp, kfrq*.999, 2
+  asig4     foscil  kenv, kfrq, 3.5, 2.5, kindex
+  
+  amix      = (asig1+(asig2*0.5)+(asig3*0.01)+(asig4*0.005))*6
+  anoise    rand kfrq
+  ;afilt     tone adis+(anoise*0.0000025klfo), 1000
+  alpf     butterlp amix, 300 ;cut freqs above
+  ahpf     butterhp alpf, 100 ;pass freqs above
+  
+            outch \$harmony, (ahpf*kenv)
+            endin
+  
+    instr \$bass 
+  idec 	  = 3
+  iamp 	  veloc 0, 1 
+  kfrq 	  cpsmidib 1
+  kenv 	  expsegr 0.9, idec, 0.01, 0.5, 0.001
+  
+  asig 	  oscili  kenv*iamp, kfrq, 1 
+  
+  afilt	  tone asig, 150
+  
+  	      outch \$bass, afilt
+  		  endin
+    instr \$snare
+  idur 	  = 0.01
+  iamp 	  veloc 0, 0.8
+  ifrq 	  cpsmidib 1
+  iatk	  =		.01
+  irel	  =		.01
+  icf1	  =		15000
+  icf2	  =		100
+  ibw1	  =		10
+  ibw2	  =		1900
+  ipan	  =		0.5
+  kenv	  expseg	.001, iatk, iamp, idur/6, iamp*.4, idur-(iatk+irel+idur/6), iamp*.6, irel,.01
+  asig	  rand	ifrq
+  kcf		  expon	icf1, idur, icf2
+  kbw		  line	ibw1, idur, ibw2
+  afilt	  reson	asig*0.01, kcf, kbw, 2
+  	      outch \$snare, (afilt*kenv)*ipan
+  
+  		  endin
+  instr \$brush
+  idur 	= 1.357
+  iamp 	veloc 0, 0.002
+  ifrq 	cpsmidib 1
+  iatk	=		1.357
+  irel	=		1.357
+  icf1	=		22000
+  icf2	=		2500
+  ibw1	=		22000
+  ibw2	=		15000
+  ipan	=		0.5
+  kenv	expseg	.001, iatk, iamp, idur/6, iamp, idur-(iatk+irel+idur/6), iamp, irel,.01
+  asig	rand	ifrq
+  kcf		expon	icf1, idur, icf2
+  kbw		line	ibw1, idur, ibw2
+  afilt	reson	asig*0.01, kcf, kbw, 2
+  klfo	oscil   1.428, 0.714, 1
+  		outch   \$brush, ((afilt*klfo)*kenv)*ipan
+  		endin
+  
+  
+            instr \$hihat
+  idur      = 0.001
+  iamp      veloc 0, 1
+  ifrq      cpsmidib 1
+  iatk      =                .00714
+  irel      =                .0357
+  icf1      =                17850
+  icf2      =                714
+  ibw1      =                714
+  ibw2      =                7140
+  ipan      =                0.5
+  kenv      expseg        .001, iatk, iamp, idur/6, iamp*.4, idur-(iatk+irel+idur/6), iamp*.6, irel,.01
+  
+  ; ;kenv linsegr 0, .1, 1, .05, .75, .2, 0
+  ;; generate a modulation signal that follows the pitch of the note
+  ;  kmod = foscil(kenv, ifrq, 1) * 500
+  ;;  kcut modfilt kmod, ifrq, 12
+  ;
+  ;; VCO
+  asig      rand ifrq
+  ;
+  
+  kcf               expon icf1, idur, icf2
+  kbw               line  ibw1, idur, ibw2
+  afilt     reson asig, kcf, kbw, 2
+  
+  ;min_value = 400
+  ;max_value = 2000
+  ;min_ifrq = 400
+  ;max_ifrq = 2000
+  ;s_ifrq = min_value + (ifrq - min_ifrq) * (max_value - min_value) / (max_ifrq - min_ifrq)
+  
+  ;afilp_lp   lowres  afilt, s_ifrq, 90
+  
+  ;
+  ;
+  ;;
+  ;
+              outch \$hihat, ((afilt*kenv)*ipan) * .02
+                  endin
+  
+  instr \$kick
+  idur		=	 0.2	
+  imaxamp 	veloc 	0, 0.7
+  icarrfreq	=		32.7
+  imodfreq	=		40
+  ilowndx		=		0.1
+  indxdiff	=		5-0
+  
+   ;PARAMETERS DEFINING THE ADSR AMPLITUDE ENVELOPE
+   ;TIMES ARE A PERCENTAGE OF p3
+   ;  attack amp  = p9     attack length  = p14
+   ;  decay amp   = p10    decay length   = p15
+   ;  sustain amp = p11    sustain length = p16
+   ;  release amp = p12    release length = p17
+   ;  end amp     = p13
+  
+   ;;PARAMETERS DEFINING THE ADSR FREQ DEVIATION ENVELOPE
+   ;;TIMES ARE A PERCENTAGE OF p3
+   ;  attack amp  = p18    attack length  = p23
+   ;  decay amp   = p19    decay length   = p24
+   ;  sustain amp = p20    sustain length = p25
+   ;  release amp = p21    release length = p26
+   ;  end amp     = p22
+  
+  aampenv		linseg	.75, .125*idur, .8, .125*idur, 1.0, .25*idur, .15, .5*idur, .0
+  adevenv		linseg	1.0, .125*idur, .0, .25*idur, .0, .25*idur, .0, .25*idur, .0
+  amodosc		oscili	(ilowndx+indxdiff*adevenv)*imodfreq, imodfreq, 1
+  acarosc		oscili	imaxamp*aampenv, icarrfreq+amodosc, 1
+  			outch \$kick, acarosc
+  			endin
+  "
+  
+  echo "$projOrc" > $PROJPATH/sound-design/$PROJ.orc
+  
+  projSco="
+  f0 $LENGTH
+  t 0 $TEMPO
+  a 0 0 0
+  f1 0 1024 10 1
+  f2 0 1024 10 1 0.5 0.3 0.25 0.2 0.167 0.14 0.125 .111
+  f3 0 1024 10 1 0   0.3 0    0.2 0     0.14 0     .111   ; Square with a small amount of data
+  f4 0 1024 10 1 1   1   1    0.7 0.5   0.3  0.1      
+  "
+  
+  echo "$projSco" > $PROJPATH/sound-design/$PROJ.sco
+}
+
+prodScoreAudio(){
+  if [ -f $HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav ]; then
+    rm $HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav
+  fi
+  csound -d -o$HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav -F $PROJPATH/$PROJ.mid $PROJPATH/sound-design/$PROJ.orc $PROJPATH/sound-design/$PROJ.sco
+}
+
+makeTrack(){
+  # Define the input file
+  input_file="$HOME/audio/test-artist/My_Test_MMW_project/stems/My_Test_MMW_project.wav"
+  
+  # Define the output directory
+  output_dir="$HOME/audio/test-artist/My_Test_MMW_project/stems/"
+  
+  # Define an array of instrument names corresponding to each channel
+  instruments=("synth" "drums" "bass" "guitar" "hihat" "snare" "kick" "piano" "vocal")
+  
+  # Loop through each instrument and channel number
+  for i in "${!instruments[@]}"; do
+    channel=$((i + 1))
+    output_file="${output_dir}${instruments[$i]}.wav"
+    sox "$input_file" "$output_file" remix "$channel"
+  done
+}
+
+createSession(){
+cat << EOF > $PROJPATH/session/session.eca
+   ecasound -n $PROJPATH/session/session.eca -b:512 -t:$DUR -f:16,2,48000 \\
+     -a:synth -i $HOME/audio/$ARTIST/$PROJ/stems/synth.wav -y:$START_TIME -erc:1,2 -epp:50 -efh:500 -eadb:1  \\
+     -a:bass  -i $HOME/audio/$ARTIST/$PROJ/stems/bass.wav  -y:$START_TIME -erc:1,2 -epp:50 -efl:80 -eadb:1 \\
+     -a:snare -i $HOME/audio/$ARTIST/$PROJ/stems/snare.wav -y:$START_TIME -erc:1,2 -epp:50 -efl:10700  -eadb:-10 \\
+     -a:brush -i $HOME/audio/$ARTIST/$PROJ/stems/drums.wav -y:$START_TIME -erc:1,2 -epp:50 -efl:2400  -ea:0 \\
+     -a:hihat -i $HOME/audio/$ARTIST/$PROJ/stems/hihat.wav -y:$START_TIME -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-15 \\
+     -a:kick -i  $HOME/audio/$ARTIST/$PROJ/stems/kick.wav  -y:$START_TIME -erc:1,2 -epp:50 -ea:0 -efl:200 \\
+     -a:synth,snare,brush,hihat,bass,kick -o $HOME/audio\/$ARTIST\/$PROJ/$PROJ.wav
+EOF
+  chmod +x $PROJPATH/session/session.eca
+  $PROJPATH/session/session.eca
+
+  exit_code=$?
+  
+  if [ $exit_code -eq 0 ]; then
+    echo "Ecasound command executed successfully with exit code $exit_code."
+  else
+    echo "Ecasound command failed with exit code $exit_code."
+  fi
+  
+  return $exit_code
+}
+
+"$@"
