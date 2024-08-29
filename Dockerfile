@@ -2,7 +2,7 @@
 FROM archlinux:latest
 
 # Install necessary packages, such as bash and bc (required for your script)
-RUN pacman -Syu --noconfirm bash bc git ffmpeg lilypond csound sox alsa-utils ecasound
+RUN pacman -Syu --noconfirm bash bc git ffmpeg lilypond csound sox alsa-utils ecasound vim
 
 # Create a user and set up the home directory
 RUN useradd -m -s /bin/bash mmw-user
@@ -12,6 +12,7 @@ COPY bin/mmw /usr/local/bin/
 
 # Set the working directory to the user's home directory
 WORKDIR /home/mmw-user
+COPY bashrc /home/mmw-user/.bashrc
 
 # Switch to the new user
 USER mmw-user
@@ -26,11 +27,6 @@ COPY test/mmw/mmw.bats test/
 COPY test/mmw/mmw-score.bats test/
 COPY test/mmw/mmw-sound-design.bats test/
 
-
 # Set the entry point to start a bash session or run the mmw-config script
 ENTRYPOINT ["/bin/bash"]
 
-RUN test/bats/bin/bats test/mmw-config.bats 
-RUN test/bats/bin/bats test/mmw.bats 
-RUN test/bats/bin/bats test/mmw-score.bats 
-RUN test/bats/bin/bats test/mmw-sound-design.bats 

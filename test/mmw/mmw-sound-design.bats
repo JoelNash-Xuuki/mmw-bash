@@ -23,8 +23,8 @@ setup() {
   [ -f "$HOME/mmw/My_Test_MMW_project/My_Test_MMW_project.mid" ]
 
   mmw buildInstrSoundDesignFiles
-  [ -f $PROJPATH/sound-design/My_Test_MMW_project.orc ]
-  [ -f $PROJPATH/sound-design/My_Test_MMW_project.sco ]
+  [ -f "$PROJPATH/sound-design/My_Test_MMW_project.orc" ]
+  [ -f "$PROJPATH/sound-design/My_Test_MMW_project.sco" ]
 
   mmw-config addTempoDeclaration
   mmw setTempo 84
@@ -85,6 +85,4 @@ setup() {
 
   mmw createSession
   [ -f $HOME/audio/test-artist/My_Test_MMW_project/My_Test_MMW_project.wav ]
-
-  rm -r $PROJPATH
 }

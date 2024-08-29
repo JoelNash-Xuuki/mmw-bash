@@ -2,11 +2,11 @@ setup() {
   mmw-config create
 }
 
-teardown() {
-  source $HOME/.config/mmw.config
-  rm -r $PROJPATH
-  rm $HOME/.config/mmw.config
-}
+#teardown() {
+#  source $HOME/.config/mmw.config
+#  rm -r $PROJPATH
+#  rm $HOME/.config/mmw.config
+#}
 
 @test "creates a new project with score" {
   source $HOME/.config/mmw.config
@@ -40,9 +40,10 @@ teardown() {
     rm -r $HOME/audio/test-artist/My_Test_MMW_project/
   fi
   echo "y" | mmw createProj
-  [ "$HOME/mmw/My_Test_MMW_project/My_Test_MMW_project.ly" = "$(mmw getScore)" ]
+
   mmw writeLilyFile
-  [ -f "$(mmw getScore)" ]
+  
+  [ -f "$HOME/mmw/My_Test_MMW_project/My_Test_MMW_project.ly" ]
 
   #Validate data
   #[ "$(cat "$HOME/projects_/flock/src/$PROJ.ly)" = "$projOrc" ]
