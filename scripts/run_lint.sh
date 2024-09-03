@@ -1,9 +1,8 @@
 #!/bin/bash
 
-set -x
+# Specify the script you want to lint
+SCRIPT_TO_LINT="/home/runner/test-shellcheck-mount-container/script-from-host.sh"
 
-docker run --rm -it \
-  -v "$(pwd)"/test/mmw/:/home/user/test/mmw/ xuuki/mmw-runner \
-  shellcheck /home/user/test/mmw/mmw.bats
+# Run the container and automatically run shellcheck on the specified script
+docker run --rm -v /home/jnash/mmw/test-shellcheck-mount-host:/home/runner/test-shellcheck-mount-container xuuki/mmw-runner "$SCRIPT_TO_LINT"
 
-#docker run --rm -it -v $HOME/mmw/test/mmw/:/home/user/mmw/test/mmw/ xuuki/mmw-runner

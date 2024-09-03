@@ -5,24 +5,10 @@ FROM archlinux:latest
 RUN pacman -Syu --noconfirm bash bc git ffmpeg lilypond csound sox alsa-utils ecasound vim shellcheck
 
 # Create a user and set up the home directory
-RUN useradd -m -s /bin/bash user
+RUN useradd -m -s /bin/bash runner
 
-COPY bin/mmw-config /usr/local/bin/
-COPY bin/mmw /usr/local/bin/
+WORKDIR /home/runner
 
-# Set the working directory to the user's home directory
-WORKDIR /home/user
-COPY bashrc /home/user/.bashrc
+RUN mkdir /home/runner/test-shellcheck-mount-container/
 
-# Switch to the new user
-USER user
-
-RUN git init
-RUN git submodule add https://github.com/bats-core/bats-core.git test/bats
-RUN git submodule add https://github.com/bats-core/bats-support.git test/test_helper/bats-support
-RUN git submodule add https://github.com/bats-core/bats-assert.git test/test_helper/bats-assert
-
-RUN mkdir test/mmw
-
-# Set the entry point to start a bash session or run the mmw-config script
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["shellcheck"]
