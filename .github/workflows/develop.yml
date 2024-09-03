@@ -1,23 +1,22 @@
-name: Pull code to user device
+name: CI Workflow
 
 on:
-  push:
-    branches:
-      - develop
+  workflow_dispatch:
+    # Allows you to manually trigger the workflow
 
 jobs:
-  stage-the-dev-feature:
+  test:
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.5.0
-        with:
-          ssh-private-key: ${{ secrets.USER_DEVICE_SSH_PRIVATE_KEY }}
-
-      - name: Pull code
+      - name: Set up Bats
         run: |
-          ssh -o StrictHostKeyChecking=yes -A -t joel@192.168.1.135 "cd $HOME/mmw/ && git pull origin develop"
+          sudo pacman -Syu --noconfirm
+          sudo pacman -S --noconfirm bats
+
+      - name: Run Bats test
+        run: bats -f "Can set: project" test/mmw/mmw.bats
+

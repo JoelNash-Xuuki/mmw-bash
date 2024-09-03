@@ -1,29 +1,28 @@
-# Use Arch Linux as the base image
+# Use the latest Arch Linux base image
 FROM archlinux:latest
 
-# Install necessary packages, such as bash and bc (required for your script)
+# Update the package database and install necessary packages
 RUN pacman -Syu --noconfirm bash bc git ffmpeg lilypond csound sox alsa-utils ecasound vim shellcheck
 
 # Create a user and set up the home directory
-RUN useradd -m -s /bin/bash mmw-user
+RUN useradd -m -s /bin/bash user
 
 COPY bin/mmw-config /usr/local/bin/
 COPY bin/mmw /usr/local/bin/
 
 # Set the working directory to the user's home directory
-WORKDIR /home/mmw-user
-COPY bashrc /home/mmw-user/.bashrc
+WORKDIR /home/user
+COPY bashrc /home/user/.bashrc
 
 # Switch to the new user
-USER mmw-user
+USER user
 
 RUN git init
 RUN git submodule add https://github.com/bats-core/bats-core.git test/bats
 RUN git submodule add https://github.com/bats-core/bats-support.git test/test_helper/bats-support
 RUN git submodule add https://github.com/bats-core/bats-assert.git test/test_helper/bats-assert
 
-COPY test/mmw/
+RUN mkdir test/mmw
 
 # Set the entry point to start a bash session or run the mmw-config script
 ENTRYPOINT ["/bin/bash"]
-

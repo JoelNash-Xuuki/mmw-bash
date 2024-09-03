@@ -9,7 +9,8 @@ setup() {
 #}
 
 @test "creates a new project with score" {
-  source $HOME/.config/mmw.config
+  # shellcheck source=/dev/null
+  source "$HOME/.config/mmw.config"
   mmw-config addProjNameDeclaration
   mmw setProj My_Test_MMW_project
   mmw-config addProjLocationDeclaration 
@@ -17,12 +18,12 @@ setup() {
   mmw-config addProjFilePathDeclarationAndDefinition
   mmw-config addArtistDeclaration
   mmw setArtist test-artist
-  if [ -d $HOME/audio/test-artist/My_Test_MMW_project/ ]; then 
-    rm -r $HOME/audio/test-artist/My_Test_MMW_project/
+  if [ -d "$HOME/audio/test-artist/My_Test_MMW_project/" ]; then 
+    rm -r "$HOME/audio/test-artist/My_Test_MMW_project/"
   fi
   echo "y" | mmw createProj
   [ -d "$(mmw displayProj)" ] # PROJPATH
-  [ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/input_1.wav ]
+  [ -f "$HOME/audio/test-artist/My_Test_MMW_project/stems/input_1.wav" ]
   [ -d "$(mmw displayProj)"/sound-design ]
   [ -d "$(mmw displayProj)"/session ]
 }
@@ -36,8 +37,8 @@ setup() {
   mmw-config addArtistDeclaration
   mmw setArtist test-artist
   mmw-config addScoreDeclarationAndDefinition
-  if [ -d $HOME/audio/test-artist/My_Test_MMW_project/ ]; then 
-    rm -r $HOME/audio/test-artist/My_Test_MMW_project/
+  if [ -d "$HOME/audio/test-artist/My_Test_MMW_project/" ]; then 
+    rm -r "$HOME/audio/test-artist/My_Test_MMW_project/"
   fi
   echo "y" | mmw createProj
 
@@ -58,8 +59,8 @@ setup() {
   mmw-config addArtistDeclaration
   mmw setArtist test-artist
   mmw-config addScoreDeclarationAndDefinition
-  if [ -d $HOME/audio/test-artist/My_Test_MMW_project/ ]; then 
-    rm -r $HOME/audio/test-artist/My_Test_MMW_project/
+  if [ -d "$HOME/audio/test-artist/My_Test_MMW_project/" ]; then 
+    rm -r "$HOME/audio/test-artist/My_Test_MMW_project/"
   fi
   echo "y" | mmw createProj
   [ "$HOME/mmw/My_Test_MMW_project/My_Test_MMW_project.ly" = "$(mmw getScore)" ]
