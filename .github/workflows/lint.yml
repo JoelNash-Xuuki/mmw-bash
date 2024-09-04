@@ -15,3 +15,4 @@ jobs:
         run: |
           chmod +x scripts/run_lint.sh
           scripts/run_lint.sh "/home/runner/test-shellcheck-mount-host/script-from-host.sh"
+# Force recognition
