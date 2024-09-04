@@ -1,18 +1,14 @@
----
 name: Lint Scripts
 
 on:
   workflow_dispatch:
-
 jobs:
   lint:
     runs-on: self-hosted
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-
       - name: Run Linting
         run: |
           chmod +x scripts/run_lint.sh
           scripts/run_lint.sh "/home/runner/test-shellcheck-mount-host/script-from-host.sh"
-# Force recognition
