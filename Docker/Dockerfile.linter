@@ -5,10 +5,10 @@ FROM archlinux:latest
 RUN pacman -Syu --noconfirm bash bc git ffmpeg lilypond csound sox alsa-utils ecasound vim shellcheck
 
 # Create a user and set up the home directory
-RUN useradd -m -s /bin/bash runner
+RUN useradd -m -s /bin/bash linter
 
-WORKDIR /home/runner
+WORKDIR /home/linter
 
-RUN mkdir /home/runner/test-shellcheck-mount-container/
+RUN mkdir /home/linter/test-shellcheck-mount-container/
 
 ENTRYPOINT ["shellcheck"]
