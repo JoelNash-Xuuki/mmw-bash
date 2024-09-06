@@ -11,10 +11,9 @@ PS1='[\u@\h \W]\$ '
 
 export PATH="$HOME/test/bats/bin:$PATH"
 
-bats test/mmw-config.bats 
-bats test/mmw.bats  
-bats test/mmw-score.bats 
-bats test/mmw-sound-design.bats 
+bats test/mmw/mmw.bats  
+bats test/mmw/mmw-score.bats 
+bats test/mmw/mmw-sound-design.bats 
 
 echo "Yah baby, where the party at homie?!"
 echo "After the follwoing step check your 'Documents' folder."

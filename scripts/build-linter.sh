@@ -1,2 +1,2 @@
-sudo docker build -t mmw-linter -f Docker/Dockerfile.linter .
+sudo docker build -t mmw-linter -f docker/Dockerfile.linter .
 

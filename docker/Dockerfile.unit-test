@@ -12,7 +12,6 @@ COPY bin/mmw /usr/local/bin/
 
 # Set the working directory to the user's home directory
 WORKDIR /home/mmw-user
-COPY bashrc /home/mmw-user/.bashrc
 
 # Switch to the new user
 USER mmw-user
@@ -21,9 +20,11 @@ RUN git init
 RUN git submodule add https://github.com/bats-core/bats-core.git test/bats
 RUN git submodule add https://github.com/bats-core/bats-support.git test/test_helper/bats-support
 RUN git submodule add https://github.com/bats-core/bats-assert.git test/test_helper/bats-assert
+RUN git submodule init
+RUN git submodule update
 
-COPY test/mmw/
+COPY bashrc /home/mmw-user/.bashrc
+RUN source ~/.bashrc
 
 # Set the entry point to start a bash session or run the mmw-config script
 ENTRYPOINT ["/bin/bash"]
-
