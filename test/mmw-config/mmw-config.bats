@@ -4,11 +4,11 @@ setup() {
 }
 
 teardown() {
-  rm $HOME/.config/mmw.config
+  rm "$HOME"/.config/mmw.config
 }
 
 @test "Create config file" { 
-  [ -f $HOME/.config/mmw.config ]
+  [ -f "$HOME"/.config/mmw.config ]
 }
 
 @test "Can declare: project name" {

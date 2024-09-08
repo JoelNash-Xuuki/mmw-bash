@@ -1,7 +1,7 @@
 setup() {
   mmw-config create
   # shellcheck source=/dev/null
-  source $HOME/.config/mmw.config
+  source "$HOME"/.config/mmw.config
 }
 
 @test "create sound design" {
@@ -48,7 +48,7 @@ setup() {
 
 @test "play sound design" {
   # shellcheck source=/dev/null
-  source $HOME/.config/mmw.config
+  source "$HOME"/.config/mmw.config
   mmw-config addProjNameDeclaration
   mmw setProj My_Test_MMW_project
   mmw-config addProjLocationDeclaration 
