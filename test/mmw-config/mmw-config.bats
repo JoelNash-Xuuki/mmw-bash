@@ -74,4 +74,3 @@ teardown() {
   projFilePath=$(grep "^SCORE=\$PROJPATH/\$PROJ.ly$" \
                       "$HOME/.config/mmw.config")
 }
-

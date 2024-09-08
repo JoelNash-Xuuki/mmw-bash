@@ -55,8 +55,8 @@ addStartTimeDeclaration(){
     echo "BEAT=\$(bc <<< \"scale=4; (60/\$TEMPO)\")"
     echo "BAR=\$(bc <<< \"scale=4;\$BEAT*4\")"
     echo "LENGTH=\$(bc <<< \"scale=4;\$BAR*16\")"
-    #echo "DUR=\$(bc <<< \"scale=4;\$BAR*4\")"
-    #echo "START_TIME=\$(bc <<< \"scale=2;\$BAR*0\")"
+    echo "DUR=\$(bc <<< \"scale=4;\$BAR*4\")"
+    echo "START_TIME=\$(bc <<< \"scale=2;\$BAR*0\")"
   } >> "$HOME"/.config/mmw.config
 }
 
