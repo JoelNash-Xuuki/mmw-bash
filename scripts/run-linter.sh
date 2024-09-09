@@ -1,9 +1,14 @@
 #!/bin/bash
 GIT_COMMIT=$(git rev-parse --short HEAD)
 
-# Specify the script you want to lint
-SCRIPT_TO_LINT="/home/linter/test/mmw/mmw.bats"
+# Specify the files you want to lint
+LINT_UNIT_TEST="/home/linter/test/mmw/mmw.bats"
+LINT_BIN="/usr/local/bin/mmw"
 
-# Run the container and automatically run shellcheck on the specified script
-docker run --rm -v $HOME/mmw/test/mmw/:/home/linter/test/mmw/ \
-                   mmw-linter:$GIT_COMMIT "$SCRIPT_TO_LINT"
+# Run the container and automatically run shellcheck on both scripts
+docker run --rm \
+  -v "$HOME/Xuuki/src/mmw/test/mmw/":/home/linter/test/mmw/ \
+  -v "$HOME/Xuuki/src/mmw/bin/":/usr/local/bin/ \
+  mmw-linter:"$GIT_COMMIT" \
+  "$LINT_UNIT_TEST" "$LINT_BIN"
+

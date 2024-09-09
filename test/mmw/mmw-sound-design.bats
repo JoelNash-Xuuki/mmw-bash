@@ -86,6 +86,6 @@ setup() {
   [ -f "$HOME/audio/test-artist/My_Test_MMW_project/stems/vocal.wav" ]
 
   # ensure sound server is active 
-  mmw createSession
-  #[ -f "$HOME/audio/test-artist/My_Test_MMW_project/My_Test_MMW_project.wav" ]
+  mmw createSessionFile
+  [ -f "$HOME/audio/test-artist/My_Test_MMW_project/My_Test_MMW_project.wav" ]
 }
