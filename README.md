@@ -1,5 +1,16 @@
 # Welcome to Multiple Media Workstation Suite (MMWS)
 # TODO
+
+You need: 
+  sudo pacman -S imagemagick
+  sudo pacman -S lilypond
+  sudo pacman -S ecasound
+  sudo pacman -S ffmpeg
+  sudo pacman -S csound
+  sudo pacman -S sox
+
+
+
 - run 'mmw-config h'.
 bats test/mmw/mmw.bats | grep "tempo"
 

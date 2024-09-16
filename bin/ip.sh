@@ -24,7 +24,7 @@ grabPixelFromBuiltInRose(){
 
 changekhakiCanvasColourToTomato(){
   # the colour of the current imaged needs to be known
-  convert $1 -fill tomato -opaque khaki $HOME/display_recoloured.png
+  magick $1 -fill tomato -opaque khaki $HOME/Xuuki/src/sites/public/output.png
 }
 
 canvasxcSingleInput(){
@@ -39,10 +39,10 @@ canvasSolidColorKhaki(){
   convert -size $2x$3  canvas:khaki $1
 }
 
-generate_noise_image(){
-  convert -size $2x$3 xc: -channel G +noise Random \
+generateNoiseImage(){
+  magick -size 1080x1920 xc: -channel G +noise Random \
          -virtual-pixel Tile -blur 0x5 -auto-level \
-         -separate +channel $1
+         -separate +channel $HOME/Xuuki/src/sites/public/output.png
 }
 
 runMethod(){
@@ -53,10 +53,10 @@ createTextPNG(){
   # Text appears to high ip the y axis of the png file
   width=485
   height=155
-  convert -background transparent -fill lightblue \
-          -extent $widthx$height\
-          -font ~/.fonts/xuukitype1.ttf -pointsize 36 label:$1\
-           $HOME/images/$2.png
+  magick -background transparent -fill lightblue \
+         -extent $widthx$height\
+         -font ~/.fonts/xuukitype1.ttf -pointsize 36 label:$1\
+          $HOME/Xuuki/src/sites/public/output.png
 }
 createMP4(){
   ffmpeg -ss 00:00:00 -i $1 -t $2 -filter_complex "[0:a]showspectrum=s=854x480:mode=combined:slide=scroll:saturation=0.2:scale=log,format=yuv420p[v]" -map "[v]" -map 0:a -b:v 700k -b:a 360k $3
@@ -111,31 +111,31 @@ generateTestImage(){
   # Draw fancy horizontal gradient...
   # convert -size 100x25 xc:white -size 100x100 gradient: -size 100x25 xc:black \
   #         -append -rotate 90 -blur 0x5 +repage  test_gradient.png
-  convert -size 100x150 gradient: -rotate 90 \
+  magick -size 100x150 gradient: -rotate 90 \
           -sigmoidal-contrast 7x50% test_gradient.png
   
   # Create a semi-transparent rectangle of the gradient and flop it left-right
-  convert -size 150x100 xc:black \
-          -draw 'fill grey50  rectangle  8,8  142,92' +matte \
+  magick -size 150x100 xc:black \
+          -draw 'fill grey50  rectangle  8,8  142,92' -alpha Off \
           test_gradient.png +swap -compose CopyOpacity -composite \
           -flop   ${png_format}test_bgnd.png
   
   # Draw two overlaping circles and fill then with same (non-flopped) gradient.
-  convert -size 150x100 xc:black \
+  magick -size 150x100 xc:black \
           -draw 'fill white circle    40,50  40,12' \
-          -draw 'fill white circle   110,50 110,12' +matte \
+          -draw 'fill white circle   110,50 110,12' -alpha Off \
           test_gradient.png +swap -compose CopyOpacity -composite \
           test_fgnd.png
   
   # Create a rainbow gradient
-  convert -size 12x100 xc:Lime -colorspace HSB \
+  magick -size 12x100 xc:Lime -colorspace HSB \
           gradient:gray66 -compose CopyRed -composite \
           -colorspace sRGB -rotate 90  -compose Over \
           -bordercolor black -border 0x1 test_hue.png
   
   # Overlay the images and add some extra colors to result.
   #       -draw 'fill green rectangle 40,64 110,96' \
-  convert test_bgnd.png  test_fgnd.png  -composite \
+  magick test_bgnd.png  test_fgnd.png  -composite \
           -draw 'fill red   circle    25,80  25,98' \
           -draw 'fill green circle    75,80  75,98' \
           -draw 'fill blue  circle   125,80 125,98' \
@@ -153,12 +153,11 @@ generateTestImage(){
   #        -compose Dst_Over -composite  $jpg_opt   test.jpg
   
   # set permissions
-  chmod 644 test.png
-  if [ ! -d "$HOME/images" ]; then
-        mkdir "$HOME/images"
-    fi
-  mv test.png $HOME/images
-
+  #chmod 644 test.png
+  #if [ ! -d "$HOME/images" ]; then
+  #      mkdir "$HOME/images"
+  #  fi
+  mv test.png $HOME/Xuuki/src/sites/public/output.png
 }
 
 

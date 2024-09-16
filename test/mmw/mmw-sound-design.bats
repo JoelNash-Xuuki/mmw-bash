@@ -8,11 +8,13 @@ setup() {
   mmw-config addProjNameDeclaration
   mmw setProj My_Test_MMW_project
   mmw-config addProjLocationDeclaration 
-  mmw setProjLoc mmw
+  mmw setProjLoc 
   mmw-config addProjFilePathDeclarationAndDefinition
   mmw-config addArtistDeclaration
+
   mmw setArtist test-artist
   mmw-config addScoreDeclarationAndDefinition
+
   if [ -d "$HOME/audio/test-artist/My_Test_MMW_project/" ]; then 
     rm -r "$HOME/audio/test-artist/My_Test_MMW_project/"
   fi
@@ -21,7 +23,7 @@ setup() {
   [ -f "$SCORE" ]
   mmw createScorePDFAndMIDIFiles
   [ -f "$HOME/Documents/My_Test_MMW_project.pdf" ]
-  [ -f "$HOME/mmw/My_Test_MMW_project/My_Test_MMW_project.mid" ]
+  [ -f "$HOME/My_Test_MMW_project/My_Test_MMW_project.mid" ]
 
   mmw buildInstrSoundDesignFiles
   [ -f "$PROJPATH/sound-design/My_Test_MMW_project.orc" ]
@@ -52,11 +54,12 @@ setup() {
   mmw-config addProjNameDeclaration
   mmw setProj My_Test_MMW_project
   mmw-config addProjLocationDeclaration 
-  mmw setProjLoc mmw
+  mmw setProjLoc
   mmw-config addProjFilePathDeclarationAndDefinition
   mmw-config addArtistDeclaration
-  mmw setArtist test-artist
   mmw-config addScoreDeclarationAndDefinition
+  mmw setArtist test-artist
+
   if [ -d "$HOME/audio/test-artist/My_Test_MMW_project/" ]; then 
     rm -r "$HOME/audio/test-artist/My_Test_MMW_project/"
   fi
@@ -88,4 +91,5 @@ setup() {
   # ensure sound server is active 
   mmw createSessionFile
   [ -f "$HOME/audio/test-artist/My_Test_MMW_project/My_Test_MMW_project.wav" ]
+  mv "$HOME/audio/test-artist/My_Test_MMW_project/My_Test_MMW_project.wav" $HOME/Xuuki/src/sites/public/metronome.wav
 }

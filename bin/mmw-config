@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Ensure score declaration before set artist
+
 h(){
   echo "Welcome to MMW (config)"
   echo "Usage: mmw-config [option]"

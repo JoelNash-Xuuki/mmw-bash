@@ -50,7 +50,7 @@ teardown() {
   source "$HOME/.config/mmw.config"
   mmw setProj My_Test_MMW_project
   mmw-config addProjLocationDeclaration 
-  mmw setProjLoc mmw
+  mmw setProjLoc 
   mmw-config addProjFilePathDeclarationAndDefinition
   mmw-config addArtistDeclaration
   mmw setArtist test-artist
