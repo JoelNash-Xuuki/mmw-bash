@@ -323,3 +323,117 @@ sudo docker login -u xuuki
 sudo docker push xuuki/mmw:latest
 docker run --rm -it -v $HOME/Documents/:$HOME/Documents/ mmw
 
+Your understanding of Continuous Integration (CI) is on the right track, and 
+your Dockerfile is a good start. Here are some suggestions   
+
+Dockerfile Improvements                                       
+
+1 Minimize Layers: Combine RUN commands to reduce the number of layers in 
+your Docker image.       
+
+2 Use COPY Efficiently: Copy all necessary files in a single COPY command to 
+reduce layers.        
+
+ 3 Avoid source in Dockerfile: The RUN source ~/.bashrc command won't 
+persist in the final image.   
+   Instead, ensure your environment variables are set correctly within the 
+Dockerfile or entrypoint script.                                                                                          
+
+                        Refined Dockerfile
+
+# Use Arch Linux as the base image
+ FROM archlinux:latest
+
+# Install necessary packages
+
+RUN pacman -Syu --noconfirm bash bc git ffmpeg lilypond csound sox 
+alsa-utils ecasound vim shellcheck
+
+# Create a user and set up the home directory
+RUN useradd -m -s /bin/bash user
+
+# Copy necessary files
+COPY bin/mmw-config /usr/local/bin/
+COPY bin/mmw /usr/local/bin/
+COPY bashrc /home/mmw-user/.bashrc
+
+# Set the working directory to the user's home directory
+WORKDIR /home/mmw-user
+# Switch to the new user                                                                           
+ USER mmw-user                                                                                      
+                                                                                                    
+ # Initialize git and add submodules in a single RUN command                                        
+ RUN git init && \                                                                                  
+     git submodule add https://github.com/bats-core/bats-core.git test/bats && \                    
+     git submodule add https://github.com/bats-core/bats-support.git test/test_helper/bats-support  
+ \                                                                                                  
+     git submodule add https://github.com/bats-core/bats-assert.git test/test_helper/bats-assert && 
+     git submodule init && \                                                                        
+     git submodule update                                                                           
+                                                                                                    
+ # Set the entry point to start a bash session or run the mmw-config script                         
+ ENTRYPOINT ["/bin/bash"]                                                                           
+                                                                                                    
+
+                                        Mounting Directories                                        
+
+You can mount directories from your host to the Docker container using the -v option with docker    
+run. This allows you to edit files on your host and have them reflected in the container.           
+
+                                                                                                    
+ docker run -it --rm \                                                                              
+   -v $(pwd)/bin:/home/mmw-user/bin \                                                               
+   -v $(pwd)/test:/home/mmw-user/test \                                                             
+   -v $(pwd)/src:/home/mmw-user/src \                                                               
+   your-docker-image                                                                                
+                                                                                                    
+
+                                           Running Tests                                            
+
+To run tests inside the container, you can use docker exec:                                         
+
+ 1 Start the container in detached mode:                                                            
+                                                                                                    
+    docker run -d --name mmw-container \                                                            
+      -v $(pwd)/bin:/home/mmw-user/bin \                                                            
+      -v $(pwd)/test:/home/mmw-user/test \                                                          
+      -v $(pwd)/src:/home/mmw-user/src \                                                            
+      your-docker-image                                                                             
+                                                                                                    
+ 2 Execute your test script:                                                                        
+                                                                                                    
+    docker exec -it mmw-container /bin/bash -c "cd /home/mmw-user/test && bats mmw.bats"            
+                                                                                                    
+
+                                           CI Integration                                           
+
+For CI, you can use tools like GitHub Actions, GitLab CI, or Jenkins to automate the build and test 
+process. Here's a simple example using GitHub Actions:                                              
+
+                                                                                                    
+ name: CI                                                                                           
+                                                                                                    
+ on: [push, pull_request]                                                                           
+                                                                                                    
+ jobs:                                                                                              
+   build-and-test:                                                                                  
+     runs-on: ubuntu-latest                                                                         
+                                                                                                    
+     steps:                                                                                         
+     - uses: actions/checkout@v2                                                                    
+                                                                                                    
+     - name: Build Docker image                                                                     
+       run: docker build -t mmw-image .                                                             
+                                                                                                    
+     - name: Run tests                                                                              
+       run: |                                                                                       
+         docker run -d --name mmw-container \                                                       
+           -v $(pwd)/bin:/home/mmw-user/bin \                                                       
+           -v $(pwd)/test:/home/mmw-user/test \                                                     
+           -v $(pwd)/src:/home/mmw-user/src \                                                       
+           mmw-image                                                                                
+         docker exec -it mmw-container /bin/bash -c "cd /home/mmw-user/test && bats mmw.bats"       
+                                                                                                    
+
+This setup ensures that your code is continuously tested in an isolated environment, adhering to CI 
+best practices.                                                                                     
