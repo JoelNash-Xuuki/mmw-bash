@@ -117,7 +117,7 @@ cat << EOF > "$SCORE"
         \relative {
         \clef percussion
         \time 4/4
-        \tempo 4 = 84
+        \tempo 4 = $TEMPO
       }
     >> 
     \new StaffGroup << %Harmony
@@ -126,14 +126,12 @@ cat << EOF > "$SCORE"
         instrumentName= "FM"
       } \relative {
         \time 4/4
-        \tempo 4 = 84
+        \tempo 4 = $TEMPO
         \clef bass
         \key a \major 
-         <a, e' gis cis>4 r2.
-         r4 <a' cis e gis>4 r2
-         <cis, gis' b dis>4 r2.
-         r4 <cis gis' b e> r8 
-         <cis gis' b dis>4 r8
+        d1 d  
+        d  d  
+         
       }
     >> 
     \new StaffGroup << %Bass
@@ -142,7 +140,7 @@ cat << EOF > "$SCORE"
          shortInstrumentName= " "}
         \relative  { 
          \time 4/4
-         \tempo 4 = 84
+         \tempo 4 = $TEMPO
          \clef bass
          \key a \major
          a,4\staccato a4\staccato r a4\staccato
@@ -157,7 +155,7 @@ cat << EOF > "$SCORE"
          shortInstrumentName= " "
        } 
        {
-         \tempo 4 = 84
+         \tempo 4 = $TEMPO
          \clef percussion
          \xNotesOn
          r2 d4 r8 d
@@ -172,8 +170,15 @@ cat << EOF > "$SCORE"
       } 
       {
         \clef percussion
-        \tempo 4 = 84
+        \tempo 4 = $TEMPO
         \xNotesOn
+          \xNotesOn
+         <a, e' gis cis>4 r2.
+         r4 <a' cis e gis>4 r2
+         <cis, gis' b dis>4 r2.
+         r4 <cis gis' b e> r8 
+         <cis gis' b dis>4 r8
+           
       }
 
       \new Staff \with { % HiHat
@@ -182,7 +187,7 @@ cat << EOF > "$SCORE"
         }
         { 
           \clef percussion
-          \tempo 4 = 84
+          \tempo 4 = $TEMPO
           \xNotesOn
           d4 d d d d d d d 
           d  d d d d d d d   
@@ -194,14 +199,13 @@ cat << EOF > "$SCORE"
         }
         \relative { 
           \clef percussion
-          \tempo 4 = 84
-          
+          \tempo 4 = $TEMPO
         }
     >>
   >>
   \layout {}
   \midi {
-    \tempo 4 = 84
+    \tempo 4 = $TEMPO
   }
 }
 EOF
@@ -230,10 +234,10 @@ buildInstrSoundDesignFiles(){
   ; Instr Definitions
   
   #define   voice #1#
-  #define   harmony #2# 
+  #define   harmony #5# 
   #define   bass #3#
   #define   snare #4#
-  #define   brush #5#
+  #define   brush #2#
   #define   hihat #6#
   #define   kick #7#
   
@@ -330,22 +334,22 @@ buildInstrSoundDesignFiles(){
   
   		  endin
   instr \$brush
-  idur 	= 1.357
-  iamp 	veloc 0, 0.002
+  idur 	= 1.450
+  iamp 	veloc 0, 0.050
   ifrq 	cpsmidib 1
-  iatk	=		1.357
-  irel	=		1.357
+  iatk	=		0.500
+  irel	=		0.500
   icf1	=		22000
   icf2	=		2500
   ibw1	=		22000
   ibw2	=		15000
   ipan	=		0.5
-  kenv	expseg	.001, iatk, iamp, idur/6, iamp, idur-(iatk+irel+idur/6), iamp, irel,.01
+  kenv	expseg	.001, iatk, iamp, idur/3, iamp, idur-(iatk+irel+idur/6), iamp, irel,.01
   asig	rand	ifrq
   kcf		expon	icf1, idur, icf2
   kbw		line	ibw1, idur, ibw2
   afilt	reson	asig*0.01, kcf, kbw, 2
-  klfo	oscil   1.428, 0.714, 1
+  klfo	oscil   1.000, 0.200, 1
   		outch   \$brush, ((afilt*klfo)*kenv)*ipan
   		endin
   
@@ -491,12 +495,12 @@ EOF
 createSessionFile(){
 cat << EOF > "$PROJPATH/session/session.eca"
    ecasound -n "$PROJPATH/session/session.eca" -b:512 -t:$DUR -f:16,2,48000 \\
-     -a:synth -i "$HOME/audio/$ARTIST/$PROJ/stems/synth.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efh:500 -eadb:1  \\
-     -a:bass  -i "$HOME/audio/$ARTIST/$PROJ/stems/bass.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -efl:80 -eadb:1 \\
-     -a:snare -i "$HOME/audio/$ARTIST/$PROJ/stems/snare.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:10700  -eadb:-10 \\
-     -a:brush -i "$HOME/audio/$ARTIST/$PROJ/stems/drums.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:2400  -ea:0 \\
-     -a:hihat -i "$HOME/audio/$ARTIST/$PROJ/stems/hihat.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-15 \\
-     -a:kick -i  "$HOME/audio/$ARTIST/$PROJ/stems/kick.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -ea:0 -efl:200 \\
+     -a:synth -i "$HOME/audio/$ARTIST/$PROJ/stems/synth.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efh:500 -ea:0  \\
+     -a:bass  -i "$HOME/audio/$ARTIST/$PROJ/stems/bass.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -efl:80 -ea:0 \\
+     -a:snare -i "$HOME/audio/$ARTIST/$PROJ/stems/snare.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:10700  -ea:0 \\
+     -a:brush -i "$HOME/audio/$ARTIST/$PROJ/stems/drums.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:2400  -ea:100 \\
+     -a:hihat -i "$HOME/audio/$ARTIST/$PROJ/stems/hihat.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -ea:0 \\
+     -a:kick -i  "$HOME/audio/$ARTIST/$PROJ/stems/kick.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -ea:0 -efl:200\\
      -a:synth,snare,brush,hihat,bass,kick -o "$HOME/audio/$ARTIST/$PROJ/$PROJ.wav"
 EOF
   chmod +x "$PROJPATH/session/session.eca"

@@ -4,6 +4,7 @@ setup() {
   source "$HOME"/.config/mmw.config
 }
 
+
 @test "create sound design" {
   mmw-config addProjNameDeclaration
   mmw setProj My_Test_MMW_project
@@ -19,6 +20,8 @@ setup() {
     rm -r "$HOME/audio/test-artist/My_Test_MMW_project/"
   fi
   echo "y" | mmw createProj
+  mmw-config addTempoDeclaration
+  mmw setTempo 100
   mmw writeLilyFile
   [ -f "$SCORE" ]
   mmw createScorePDFAndMIDIFiles
@@ -29,10 +32,9 @@ setup() {
   [ -f "$PROJPATH/sound-design/My_Test_MMW_project.orc" ]
   [ -f "$PROJPATH/sound-design/My_Test_MMW_project.sco" ]
 
-  mmw-config addTempoDeclaration
-  mmw setTempo 84
+  
   mmw-config addDurDeclaration
-  mmw setDur 16
+  mmw setDur 8
   mmw prodScoreAudio
   [ -f "$HOME/audio/test-artist/My_Test_MMW_project/stems/My_Test_MMW_project.wav" ]
 
@@ -57,24 +59,29 @@ setup() {
   mmw setProjLoc
   mmw-config addProjFilePathDeclarationAndDefinition
   mmw-config addArtistDeclaration
-  mmw-config addScoreDeclarationAndDefinition
+
   mmw setArtist test-artist
+  mmw-config addScoreDeclarationAndDefinition
 
   if [ -d "$HOME/audio/test-artist/My_Test_MMW_project/" ]; then 
     rm -r "$HOME/audio/test-artist/My_Test_MMW_project/"
   fi
   echo "y" | mmw createProj
-  [ -f "$PROJPATH/My_Test_MMW_project.ly" ]
+  mmw-config addTempoDeclaration
+  mmw setTempo 60
+  mmw-config addDurDeclaration
+  mmw setDur 8
   mmw writeLilyFile
+  [ -f "$PROJPATH/My_Test_MMW_project.ly" ]
   mmw createScorePDFAndMIDIFiles
   [ -f "$HOME/Documents/My_Test_MMW_project.pdf" ]
-  #[ -f "$PROJPATH/My_Test_MMW_project.mid" ]
+  #[ -f "$HOME/My_Test_MMW_project/My_Test_MMW_project.mid" ] -f "$PROJPATH/My_Test_MMW_project.mid" ]
 
   mmw buildInstrSoundDesignFiles
-  #[ -f $PROJPATH/sound-design/My_Test_MMW_project.orc ]
-  #[ -f $PROJPATH/sound-design/My_Test_MMW_project.sco ]
+  [ -f $PROJPATH/sound-design/My_Test_MMW_project.orc ]
+  [ -f $PROJPATH/sound-design/My_Test_MMW_project.sco ]
 
-  mmw prodScoreAudio
+    mmw prodScoreAudio
   [ -f "$HOME/audio/test-artist/My_Test_MMW_project/stems/My_Test_MMW_project.wav" ]
 
   mmw makeTrack
