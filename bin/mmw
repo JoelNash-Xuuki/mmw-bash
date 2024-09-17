@@ -457,7 +457,7 @@ makeTrack(){
   output_dir="$HOME/audio/test-artist/My_Test_MMW_project/stems/"
   
   # Define an array of instrument names corresponding to each channel
-  instruments=("synth" "drums" "bass" "guitar" "hihat" "snare" "kick" "piano" "vocal")
+  instruments=( "synth" "drums"  "bass" "guitar" "hihat" "snare" "kick" "piano" "vocal")
   
   # Loop through each instrument and channel number
   for i in "${!instruments[@]}"; do
