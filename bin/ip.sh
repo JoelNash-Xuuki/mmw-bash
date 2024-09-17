@@ -24,7 +24,7 @@ grabPixelFromBuiltInRose(){
 
 changekhakiCanvasColourToTomato(){
   # the colour of the current imaged needs to be known
-  magick $1 -fill tomato -opaque khaki $HOME/Xuuki/src/sites/public/output.png
+  magick $1 -fill tomato -opaque khaki $HOME/recoloured.png
 }
 
 canvasxcSingleInput(){
@@ -41,8 +41,8 @@ canvasSolidColorKhaki(){
 
 generateNoiseImage(){
   magick -size 1080x1920 xc: -channel G +noise Random \
-         -virtual-pixel Tile -blur 0x5 -auto-level \
-         -separate +channel $HOME/Xuuki/src/sites/public/output.png
+         -virtual-pixel Tile -blur 0x1 -auto-level \
+         -separate +channel $1
 }
 
 runMethod(){

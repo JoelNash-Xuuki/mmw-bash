@@ -62,14 +62,17 @@ teardown() {
   mmw-config addArtistDeclaration
   mmw setArtist test-artist
   mmw-config addScoreDeclarationAndDefinition
+
   if [ -d "$HOME/audio/test-artist/My_Test_MMW_project/" ]; then 
     rm -r "$HOME/audio/test-artist/My_Test_MMW_project/"
   fi
   echo "y" | mmw createProj
   [ "$HOME/My_Test_MMW_project/My_Test_MMW_project.ly" ]
+  mmw-config addTempoDeclaration
+  mmw setTempo 100
   mmw writeLilyFile
   mmw createScorePDFAndMIDIFiles
   [ -f "$HOME/Documents/My_Test_MMW_project.pdf" ]
-  [ -f ""$HOME/My_Test_MMW_project/My_Test_MMW_project.mid ]
+  [ -f "$HOME/My_Test_MMW_project/My_Test_MMW_project.mid" ]
 }
 

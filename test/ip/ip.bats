@@ -26,16 +26,16 @@
 }
 
 @test "Generate noise image" {
-  ip.sh generate_noise_image $HOME/test.png 720 720
+  ip.sh generateNoiseImage $HOME/test.png
   [ -f "$HOME/test.png" ]
-  rm $HOME/test.png
+  mv $HOME/test.png $HOME/Xuuki/src/sites/public/output.png
 }
 
 @test "Input canvas, Change it colour" {
-  ip.sh generate_noise_image $HOME/test.png 720 720
+  ip.sh generateNoiseImage $HOME/test.png 720 720
   ip.sh changekhakiCanvasColourToTomato $HOME/test.png
   [ -f "$HOME/test.png" ]
-  [ -f "$HOME/display_recoloured.png" ]
+  [ -f "$HOME/recoloured.png" ]
   rm $HOME/test.png
 }
 

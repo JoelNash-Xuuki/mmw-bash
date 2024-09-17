@@ -36,7 +36,7 @@ addProjLocationDeclaration(){
 }
 
 addProjFilePathDeclarationAndDefinition(){ 
-  echo "PROJPATH=\$HOME/\$PROJLOC/\$PROJ" >> "$HOME"/.config/mmw.config
+  echo "PROJPATH=\$HOME/\$PROJLOC/\$PROJ" >> /home/jnash/.config/mmw.config
 }
 
 addArtistDeclaration(){
