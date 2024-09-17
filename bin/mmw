@@ -334,11 +334,11 @@ buildInstrSoundDesignFiles(){
   
   		  endin
   instr \$brush
-  idur 	= 1.450
-  iamp 	veloc 0, 0.050
+  idur 	= 2.000
+  iamp 	veloc 0, 0.035
   ifrq 	cpsmidib 1
   iatk	=		0.500
-  irel	=		0.500
+  irel	=		0.700
   icf1	=		22000
   icf2	=		2500
   ibw1	=		22000
