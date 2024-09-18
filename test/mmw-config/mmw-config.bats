@@ -2,7 +2,6 @@
 setup() {
   mmw-config create
   mmw-config addProjNameDeclaration
-  mmw-config addProjLocationDeclaration
   mmw-config addProjFilePathDeclarationAndDefinition
   mmw-config addTempoDeclaration
   mmw-config addScoreDeclarationAndDefinition
@@ -13,7 +12,6 @@ setup() {
 }
 
 teardown() {
-  cp "$HOME"/.config/mmw.config mmw.config
   rm "$HOME"/.config/mmw.config
 }
 
@@ -26,14 +24,9 @@ teardown() {
   [ "$declareProjName" = "PROJ=" ]
 }
 
-@test "project location dir" {
-  projLoc=$(grep "^PROJLOC=$" "$HOME/.config/mmw.config")
-  [ "$projLoc" = "PROJLOC=" ]
-}
-
 @test "proj file path" {
-   projFilePath=$(grep "^PROJPATH=\$HOME/\$PROJLOC/\$PROJ$" "$HOME/.config/mmw.config")
-   [ "$projFilePath" = "PROJPATH=\$HOME/\$PROJLOC/\$PROJ" ]
+   projFilePath=$(grep "^PROJPATH=\$HOME/\$PROJ$" "$HOME/.config/mmw.config")
+   [ "$projFilePath" = "PROJPATH=\$HOME/\$PROJ" ]
 }
 
 @test "tempo" {

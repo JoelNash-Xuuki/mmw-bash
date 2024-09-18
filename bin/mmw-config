@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Ensure score declaration before set artist
-
 h(){
   echo "Welcome to MMW (config)"
   echo "Usage: mmw-config [option]"
@@ -31,12 +29,8 @@ addProjNameDeclaration(){
   echo "PROJ=" >> "$HOME"/.config/mmw.config
 }
 
-addProjLocationDeclaration(){
-  echo "PROJLOC=" >> "$HOME"/.config/mmw.config
-}
-
 addProjFilePathDeclarationAndDefinition(){ 
-  echo "PROJPATH=\$HOME/\$PROJLOC/\$PROJ" >> /home/jnash/.config/mmw.config
+  echo "PROJPATH=\$HOME/\$PROJ" >> $HOME/.config/mmw.config
 }
 
 addArtistDeclaration(){

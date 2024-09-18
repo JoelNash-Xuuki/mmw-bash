@@ -3,17 +3,19 @@ setup() {
   mmw-config create
   mmw-config addProjNameDeclaration
   mmw setProj My-Test-MMW-Proj
+  mmw-config addProjFilePathDeclarationAndDefinition
+
   mmw-config addArtistDeclaration
   mmw setArtist Test-Artist
   mmw-config addTempoDeclaration
   mmw setTempo 84
   mmw-config addStartTimeDeclaration
   mmw setStartTime 0
+  echo "y" | mmw createProj
 }
 
 teardown() {
   rm -r "$PROJPATH"
-  cp "$HOME/.config/mmw.config" .
   rm "$HOME/.config/mmw.config"
 }
 
@@ -57,23 +59,10 @@ teardown() {
   [ "$length" = "$expected_length" ]                                                     
 }
 
-#@test "creates a new project" {
-#  mmw-config addProjNameDeclaration
-#  mmw setProj My_Test_MMW_project
-#  mmw-config addProjLocationDeclaration 
-#  mmw setProjLoc 
-#  mmw-config addProjFilePathDeclarationAndDefinition
-#  mmw-config addArtistDeclaration
-#  mmw setArtist test-artist
-#  if [ -d "$HOME"/audio/test-artist/My_Test_MMW_project/ ]; then
-#    rm -r "$HOME"/audio/test-artist/My_Test_MMW_project/
-#  fi
-#  echo "y" | mmw createProj
-#  [ -d "$(mmw displayProj)" ] # PROJPATH
-#  #[ -f $HOME/audio/test-artist/My_Test_MMW_project/stems/input_1.wav ]
-#  #[ -d "$(mmw displayProj)"/sound-design ]
-#  #[ -d "$(mmw displayProj)"/session ]
-#}
-#
-#
-                                                                               
+@test "creates a new project" {
+  [ -d "$(mmw displayProj)" ] 
+  [ -f $HOME/audio/Test-Artist/My-Test-MMW-Proj/stems/input-1.wav ]
+  #[ -d "$(mmw displayProj)"/sound-design ]
+  #[ -d "$(mmw displayProj)"/session ]
+}
+
