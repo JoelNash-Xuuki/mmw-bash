@@ -15,7 +15,7 @@ setup() {
   mmw buildInstrSoundDesignFiles
   mmw prodScoreAudio
   mmw makeTrack
-  # mmw createSessionFile
+  mmw createSessionFile
 }
 
 teardown() {
@@ -37,10 +37,5 @@ teardown() {
   [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/kick.wav ]
   [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/piano.wav ]
   [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/vocal.wav ]
+  [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/My-Test-MMW-Proj.wav ]
 }
-
-#@test "play sound design" {
-#  [ -f "$HOME/audio/Test-Artist/My-Test-MMW-Proj/My-Test-MMW-Proj.wav" ]
-#  mv "$HOME/audio/Test-Artist/My-Test-MMW-Proj/My_Test_MMW_Proj.wav" $HOME/Xuuki/src/sites/public/metronome.wav
-#}
-#
