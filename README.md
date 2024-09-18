@@ -8,6 +8,7 @@ You need:
   sudo pacman -S ffmpeg
   sudo pacman -S csound
   sudo pacman -S sox
+  sudo pacman -S bc
 
 
 
