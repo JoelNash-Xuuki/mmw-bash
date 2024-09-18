@@ -4,7 +4,6 @@ setup() {
   mmw-config addProjNameDeclaration
   mmw setProj My-Test-MMW-Proj
   mmw-config addProjFilePathDeclarationAndDefinition
-
   mmw-config addArtistDeclaration
   mmw setArtist Test-Artist
   mmw-config addTempoDeclaration
@@ -62,7 +61,7 @@ teardown() {
 @test "creates a new project" {
   [ -d "$(mmw displayProj)" ] 
   [ -f $HOME/audio/Test-Artist/My-Test-MMW-Proj/stems/input-1.wav ]
-  #[ -d "$(mmw displayProj)"/sound-design ]
-  #[ -d "$(mmw displayProj)"/session ]
+  [ -d "$(mmw displayProj)"/sound-design ]
+  [ -d "$(mmw displayProj)"/session ]
 }
 

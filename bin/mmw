@@ -217,7 +217,7 @@ createScorePDFAndMIDIFiles(){
   fi
 
   lilypond -dmidi-extension=mid --output="$HOME/Documents/$PROJ" "$SCORE"
-  mv "$HOME/Documents/$PROJ".mid "$PROJPATH"
+  #mv "$HOME/Documents/$PROJ".mid "$PROJPATH"
 }
 
 buildInstrSoundDesignFiles(){
@@ -446,15 +446,15 @@ prodScoreAudio(){
   if [ -f "$HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav" ]; then
     rm "$HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav"
   fi
-  csound -d -o"$HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav" -F "$PROJPATH/$PROJ.mid" "$PROJPATH/sound-design/$PROJ.orc" "$PROJPATH/sound-design/$PROJ.sco"
+  csound -d -o"$HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav" -F "$HOME/Documents/$PROJ.mid"  "$PROJPATH/sound-design/$PROJ.orc" "$PROJPATH/sound-design/$PROJ.sco"
 }
 
 makeTrack(){
   # Define the input file
-  input_file="$HOME/audio/test-artist/My_Test_MMW_project/stems/My_Test_MMW_project.wav"
+  input_file="$HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav"
   
   # Define the output directory
-  output_dir="$HOME/audio/test-artist/My_Test_MMW_project/stems/"
+  output_dir="$HOME/audio/$ARTIST/$PROJ/stems/"
   
   # Define an array of instrument names corresponding to each channel
   instruments=( "synth" "drums"  "bass" "guitar" "hihat" "snare" "kick" "piano" "vocal")

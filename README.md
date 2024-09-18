@@ -9,6 +9,7 @@ You need:
   sudo pacman -S csound
   sudo pacman -S sox
   sudo pacman -S bc
+  sudo pacman -S portmidi
 
 
 
