@@ -39,3 +39,4 @@ teardown() {
   [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/vocal.wav ]
   [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/My-Test-MMW-Proj.wav ]
 }
+

@@ -104,7 +104,7 @@ generateTestImage(){
   # This could actually be done all in one operation, but for debugging I like
   # to be able to see the intermediate images.
   #
-  ####
+  #
   #
   # Anthony Thyssen  Feburary 2004    <A.Thyssen@griffith.edu.au>
   
@@ -140,7 +140,7 @@ generateTestImage(){
           -draw 'fill green circle    75,80  75,98' \
           -draw 'fill blue  circle   125,80 125,98' \
           test_hue.png -geometry +25+80 -composite \
-          test.png
+          $HOME/images/test.png
   
   
   # Remove the intermediate images (comment if debugging)
@@ -157,7 +157,6 @@ generateTestImage(){
   #if [ ! -d "$HOME/images" ]; then
   #      mkdir "$HOME/images"
   #  fi
-  mv test.png $HOME/Xuuki/src/sites/public/output.png
 }
 
 
