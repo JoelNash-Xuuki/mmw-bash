@@ -11,7 +11,10 @@ setup() {
   mmw setStartTime 0
   mmw-config addDurDeclaration
   mmw setDur 8
+  mmw-config addScoreDeclarationAndDefinition
   echo "y" | mmw createProj
+  mmw writeLilyFile
+  mmw createScorePDFAndMIDIFiles
   mmw buildInstrSoundDesignFiles
   mmw prodScoreAudio
   mmw makeTrack
