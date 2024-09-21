@@ -159,7 +159,53 @@ generateTestImage(){
   #  fi
 }
 
+rawRandomNoise() {                                                              
+  # As of IM v6.3.5 you can generate a purely random image from an existing 
+  # image using Noise Generator, "+noise" method 'Random'.
+  magick -size 100x100 xc:   +noise Random   $HOME/images/random.png
+}
 
+randomFlux() {                                                              
+  for i in `seq 0 30 359`; do
+    magick $HOME/images/random.png -channel G  -function Sinusoid 1,${i} \
+            -virtual-pixel tile -blur 0x8 -auto-level \
+            -separate $HOME/images/flux_${i}.png
+  done
+}
+
+multiPageImage() {
+  magick -delay 10 -size 100x100 \
+         $HOME/images/flux_0.png \
+         $HOME/images/flux_30.png \
+         $HOME/images/flux_60.png \
+         $HOME/images/flux_90.png \
+         $HOME/images/flux_120.png \
+         $HOME/images/flux_150.png \
+         $HOME/images/flux_180.png \
+         $HOME/images/flux_210.png \
+         $HOME/images/flux_240.png \
+         $HOME/images/flux_270.png \
+         $HOME/images/flux_300.png \
+         $HOME/images/flux_330.png \
+         -loop 0 $HOME/images/multi-page-image.gif
+}
+
+electricalFilaments(){
+  magick $HOME/images/multi-page-image.gif  \
+          -sigmoidal-contrast 30x50% -solarize 50% -auto-level \
+          -set delay 20 $HOME/images/electrical-filaments.gif
+}
+
+randomRipples() {
+   magick $HOME/images/flux_0.png -function Sinusoid 4,90 $HOME/Xuuki/src/sites/public/output.png
+}
+
+basicLabels(){
+  magick -background white -fill black \
+            -font Candice -size 512x512 -font /usr/share/fonts/adobe-source-code-pro/SourceCodePro-Light.otf -gravity center label:'The present is quickly irrelivant' \
+            $HOME/Xuuki/src/sites/public/output.png
+}
 
 "$@"
-
+                                                                                      
+                                                                                    
