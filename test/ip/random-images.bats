@@ -18,7 +18,7 @@
 
 @test "electrical filaments" {
   ip.sh electricalFilaments
-  [ -f $HOME/Xuuki/src/sites/public/output.gif ]
+  [ -f $HOME/images/electrical-filaments.gif ]
 }
 
 @test "random ripples" {

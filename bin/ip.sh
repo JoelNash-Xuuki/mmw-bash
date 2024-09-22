@@ -179,7 +179,7 @@ randomFlux() {
 }
 
 multiPageImage() {
-  magick -delay 10 -size 100x100 \
+  magick -delay 33 -size 100x100 \
          $HOME/images/flux_0.png \
          $HOME/images/flux_30.png \
          $HOME/images/flux_60.png \
@@ -198,7 +198,7 @@ multiPageImage() {
 electricalFilaments(){
   magick $HOME/images/multi-page-image.gif  \
           -sigmoidal-contrast 30x50% -solarize 50% -auto-level \
-          -set delay 20 $HOME/images/electrical-filaments.gif
+          -set delay 33 $HOME/Xuuki/src/sites/public/output.gif # $HOME/images/electrical-filaments.gif
 }
 
 randomRipples() {
