@@ -115,9 +115,11 @@ cat << EOF > "$SCORE"
         shortInstrumentName= " "
       } 
         \relative {
-        \clef percussion
         \time 4/4
         \tempo 4 = $TEMPO
+        \clef treble
+        gis'4 a  
+        b2   
       }
     >> 
     \new StaffGroup << %Harmony
@@ -127,11 +129,10 @@ cat << EOF > "$SCORE"
       } \relative {
         \time 4/4
         \tempo 4 = $TEMPO
-        \clef bass
+        \clef treble
         \key a \major 
-        d1 d  
-        d  d  
-         
+
+                 
       }
     >> 
     \new StaffGroup << %Bass
@@ -172,13 +173,12 @@ cat << EOF > "$SCORE"
         \clef percussion
         \tempo 4 = $TEMPO
         \xNotesOn
-          \xNotesOn
+         \xNotesOn
          <a, e' gis cis>4 r2.
          r4 <a' cis e gis>4 r2
          <cis, gis' b dis>4 r2.
          r4 <cis gis' b e> r8 
          <cis gis' b dis>4 r8
-           
       }
 
       \new Staff \with { % HiHat
@@ -189,8 +189,10 @@ cat << EOF > "$SCORE"
           \clef percussion
           \tempo 4 = $TEMPO
           \xNotesOn
-          d4 d d d d d d d 
-          d  d d d d d d d   
+          d8 d d d d d d d 
+          d d d d d d d d
+          d d d d d d d d
+          d d d d d d d d   
         }
 
         \new Staff \with { %Kick
@@ -232,21 +234,30 @@ buildInstrSoundDesignFiles(){
   ; gahh	  init 0
   
   ; Instr Definitions
+  ; score stave names
+  #define   smelody #1#
+  #define   sharmony #2#
+  #define   sbass #3#
+  #define   ssnare #4#
+  #define   sbrush #5#
+  #define   shihat #6#
+  #define   skick #7#
+
   
   #define   voice #1#
-  #define   harmony #5# 
+  #define   harmony #2# 
+  #define   brush #5#
   #define   bass #3#
   #define   snare #4#
-  #define   brush #2#
   #define   hihat #6#
   #define   kick #7#
   
   ; Map Midi Channels
-  massign   \$voice, \$voice
-  massign   \$harmony, \$harmony
+  massign   \$voice, \$smelody
+  massign   \$harmony, \$sharmony
   massign   \$bass, \$bass
   massign   \$snare, \$snare
-  massign   \$brush, \$brush
+  massign   \$brush, \$sharmony ; like this sound changing to sbrush makes it silent
   massign   \$hihat, \$hihat
   massign   \$kick, \$kick 
   
@@ -457,7 +468,7 @@ makeTrack(){
   output_dir="$HOME/audio/$ARTIST/$PROJ/stems/"
   
   # Define an array of instrument names corresponding to each channel
-  instruments=( "synth" "drums"  "bass" "guitar" "hihat" "snare" "kick" "piano" "vocal")
+  instruments=( "vocal" "synth" "bass" "snare" "brush" "hihat" "kick" )
   
   # Loop through each instrument and channel number
   for i in "${!instruments[@]}"; do
@@ -470,13 +481,13 @@ makeTrack(){
 sendSessionToStdout(){
 cat << EOF > "$PROJPATH/session/session.eca"
    ecasound -n "$PROJPATH/session/session.eca" -b:512 -t:$DUR -f:16,2,48000 \\
-     -a:synth -i "$HOME/audio/$ARTIST/$PROJ/stems/synth.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efh:500 -eadb:1  \\
-     -a:bass  -i "$HOME/audio/$ARTIST/$PROJ/stems/bass.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -efl:80 -eadb:1 \\
+     -a:synth -i "$HOME/audio/$ARTIST/$PROJ/stems/synth.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efh:500 -eadb:0 \\
+     -a:bass  -i "$HOME/audio/$ARTIST/$PROJ/stems/bass.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -efl:80 -eadb:-10 \\
      -a:snare -i "$HOME/audio/$ARTIST/$PROJ/stems/snare.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:10700  -eadb:-10 \\
      -a:brush -i "$HOME/audio/$ARTIST/$PROJ/stems/drums.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:2400  -ea:0 \\
-     -a:hihat -i "$HOME/audio/$ARTIST/$PROJ/stems/hihat.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-15 \\
+     -a:hihat -i "$HOME/audio/$ARTIST/$PROJ/stems/hihat.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-95 \\
      -a:kick -i  "$HOME/audio/$ARTIST/$PROJ/stems/kick.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -ea:0 -efl:200 \\
-     -a:synth,snare,brush,hihat,bass,kick -o stdout
+     -a:vocal,synth,bass,snare,brush,hihat,kick -o stdout
 EOF
   chmod +x "$PROJPATH/session/session.eca"
   "$PROJPATH/session/session.eca"
@@ -495,13 +506,14 @@ EOF
 createSessionFile(){
 cat << EOF > "$PROJPATH/session/session.eca"
    ecasound -n "$PROJPATH/session/session.eca" -b:512 -t:$DUR -f:16,2,48000 \\
-     -a:synth -i "$HOME/audio/$ARTIST/$PROJ/stems/synth.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efh:500 -ea:0 \\
-     -a:bass  -i "$HOME/audio/$ARTIST/$PROJ/stems/bass.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -efl:80 -eadb:10 \\
+     -a:vocal -i "$HOME/audio/$ARTIST/$PROJ/stems/vocal.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -ea:0 \\
+     -a:synth -i "$HOME/audio/$ARTIST/$PROJ/stems/synth.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:10 \\
+     -a:bass  -i "$HOME/audio/$ARTIST/$PROJ/stems/bass.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -efl:80 -ea:0 \\
      -a:snare -i "$HOME/audio/$ARTIST/$PROJ/stems/snare.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:10700  -ea:0 \\
      -a:brush -i "$HOME/audio/$ARTIST/$PROJ/stems/drums.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:2400  -ea:0 \\
      -a:hihat -i "$HOME/audio/$ARTIST/$PROJ/stems/hihat.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -ea:0 \\
      -a:kick -i  "$HOME/audio/$ARTIST/$PROJ/stems/kick.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -ea:0 -efl:200\\
-     -a:synth,snare,brush,hihat,bass,kick -o "$HOME/audio/$ARTIST/$PROJ/$PROJ.wav"
+     -a:vocal,synth,bass,snare,brush,hihat,kick -o "$HOME/audio/$ARTIST/$PROJ/$PROJ.wav"
 EOF
   chmod +x "$PROJPATH/session/session.eca"
   "$PROJPATH/session/session.eca"
@@ -516,8 +528,6 @@ EOF
   
   return $exit_code
 }
-
-
 
 createSession(){
 cat << EOF > "$PROJPATH/session/session.eca"
