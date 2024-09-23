@@ -3,7 +3,7 @@ setup() {
   if [ -f $HOME/Xuuki/src/sites/public/output.mp4 ]; then
     rm $HOME/Xuuki/src/sites/public/output.mp4
   fi 
-  ip.sh createMP4 $HOME/Xuuki/src/sites/public/output.wav 4 $HOME/Xuuki/src/sites/public/output.mp4
+  ip.sh createMP4 $HOME/Xuuki/src/sites/public/output.wav 6 $HOME/Xuuki/src/sites/public/output.mp4
 }
 
 @test "Can generate: mp4" {

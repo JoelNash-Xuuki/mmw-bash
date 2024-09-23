@@ -6,11 +6,11 @@ setup() {
   mmw-config addArtistDeclaration
   mmw setArtist Test-Artist
   mmw-config addTempoDeclaration
-  mmw setTempo 84
+  mmw setTempo 100
   mmw-config addStartTimeDeclaration
   mmw setStartTime 0
   mmw-config addDurDeclaration
-  mmw setDur 8
+  mmw setDur 16
   mmw-config addScoreDeclarationAndDefinition
   echo "y" | mmw createProj
   mmw writeLilyFile
@@ -23,6 +23,7 @@ setup() {
 
 teardown() {
   source $HOME/.config/mmw.config
+  mv "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/My-Test-MMW-Proj.wav "$HOME"/Xuuki/src/sites/public/output.wav
   rm -r $PROJPATH
   rm $HOME/.config/mmw.config
 }

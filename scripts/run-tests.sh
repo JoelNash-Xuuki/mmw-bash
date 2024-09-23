@@ -7,7 +7,8 @@ tests=("test/mmw-config/mmw-config.bats"
        "test/mmw/mmw-score.bats" 
        "test/mmw/mmw-sound-design.bats"
        "test/ip/ip.bats"
-       "test/ip/overlay_a_specific_colour.bats"
+       "test/ip/random-images.bats"
+       "test/ip/moving-image.bats"
 )
                                                                                       
 # Loop through each test file and run it                                              
