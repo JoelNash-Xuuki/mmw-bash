@@ -131,8 +131,13 @@ cat << EOF > "$SCORE"
         \tempo 4 = $TEMPO
         \clef treble
         \key a \major 
+         <a, e' gis cis>4 r2.
+         r4 <a' cis e gis>4 r2
+         <cis, gis' b dis>4 r2.
+         r4 <cis gis' b e> r8 
+         <cis gis' b dis>4 r8
 
-                 
+        
       }
     >> 
     \new StaffGroup << %Bass
@@ -159,10 +164,10 @@ cat << EOF > "$SCORE"
          \tempo 4 = $TEMPO
          \clef percussion
          \xNotesOn
-         r2 d4 r8 d
-         r2 d4 r4
-         r2 d4 r4
-         r2 d4 r4
+         d4 d4 r4 r8 r
+         r2 r4 r8 r 
+         r2 r4 r4
+         r2 r4 r8 d
        }
 
       \new Staff \with { %Brush
@@ -189,10 +194,10 @@ cat << EOF > "$SCORE"
           \clef percussion
           \tempo 4 = $TEMPO
           \xNotesOn
-          d8 d d d d d d d 
-          d d d d d d d d
-          d d d d d d d d
-          d d d d d d d d   
+          d8 r d r d d d d 
+          r r r r d d d d
+          d r d r d d d d
+          r r d r d d d d   
         }
 
         \new Staff \with { %Kick
@@ -202,6 +207,10 @@ cat << EOF > "$SCORE"
         \relative { 
           \clef percussion
           \tempo 4 = $TEMPO
+         d4 r4   r2 
+         d4 r4   r2 
+         d4 r8 d r2 
+         d4 r4   r2 
         }
     >>
   >>
@@ -243,12 +252,11 @@ buildInstrSoundDesignFiles(){
   #define   shihat #6#
   #define   skick #7#
 
-  
   #define   voice #1#
   #define   harmony #2# 
-  #define   brush #5#
   #define   bass #3#
   #define   snare #4#
+  #define   brush #5#
   #define   hihat #6#
   #define   kick #7#
   
@@ -257,7 +265,7 @@ buildInstrSoundDesignFiles(){
   massign   \$harmony, \$sharmony
   massign   \$bass, \$bass
   massign   \$snare, \$snare
-  massign   \$brush, \$sharmony ; like this sound changing to sbrush makes it silent
+  massign   \$brush, \$sbrush ; why does changing \$sharmony to \$sbrush looses chords? 
   massign   \$hihat, \$hihat
   massign   \$kick, \$kick 
   
@@ -506,13 +514,13 @@ EOF
 createSessionFile(){
 cat << EOF > "$PROJPATH/session/session.eca"
    ecasound -n "$PROJPATH/session/session.eca" -b:512 -t:$DUR -f:16,2,48000 \\
-     -a:vocal -i "$HOME/audio/$ARTIST/$PROJ/stems/vocal.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -ea:0 \\
-     -a:synth -i "$HOME/audio/$ARTIST/$PROJ/stems/synth.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:10 \\
-     -a:bass  -i "$HOME/audio/$ARTIST/$PROJ/stems/bass.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -efl:80 -ea:0 \\
-     -a:snare -i "$HOME/audio/$ARTIST/$PROJ/stems/snare.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:10700  -ea:0 \\
-     -a:brush -i "$HOME/audio/$ARTIST/$PROJ/stems/drums.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:2400  -ea:0 \\
-     -a:hihat -i "$HOME/audio/$ARTIST/$PROJ/stems/hihat.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -ea:0 \\
-     -a:kick -i  "$HOME/audio/$ARTIST/$PROJ/stems/kick.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -ea:0 -efl:200\\
+     -a:vocal -i "$HOME/audio/$ARTIST/$PROJ/stems/vocal.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:0 \\
+     -a:synth -i "$HOME/audio/$ARTIST/$PROJ/stems/synth.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:15 \\
+     -a:bass  -i "$HOME/audio/$ARTIST/$PROJ/stems/bass.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -efl:80 -eadb:0 \\
+     -a:snare -i "$HOME/audio/$ARTIST/$PROJ/stems/snare.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:10700  -eadb:-20 \\
+     -a:brush -i "$HOME/audio/$ARTIST/$PROJ/stems/brush.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:2400  -eadb:-25 \\
+     -a:hihat -i "$HOME/audio/$ARTIST/$PROJ/stems/hihat.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-35 \\
+     -a:kick -i  "$HOME/audio/$ARTIST/$PROJ/stems/kick.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -ea:10 -efl:200\\
      -a:vocal,synth,bass,snare,brush,hihat,kick -o "$HOME/audio/$ARTIST/$PROJ/$PROJ.wav"
 EOF
   chmod +x "$PROJPATH/session/session.eca"

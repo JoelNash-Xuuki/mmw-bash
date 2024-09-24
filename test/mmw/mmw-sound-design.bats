@@ -25,6 +25,7 @@ teardown() {
   source $HOME/.config/mmw.config
   mv "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/My-Test-MMW-Proj.wav "$HOME"/Xuuki/src/sites/public/output.wav
   rm -r $PROJPATH
+  rm -r "$HOME"/audio/"$PROJ"
   rm $HOME/.config/mmw.config
 }
 
@@ -32,15 +33,13 @@ teardown() {
   [ -f "$(mmw displayProj)"/sound-design/My-Test-MMW-Proj.orc ]
   [ -f "$(mmw displayProj)"/sound-design/My-Test-MMW-Proj.sco ]
   [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/My-Test-MMW-Proj.wav ]
-  [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/synth.wav ]
-  [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/drums.wav ]
-  [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/bass.wav ]
-  [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/guitar.wav ]
-  [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/hihat.wav ]
-  [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/snare.wav ]
-  [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/kick.wav ]
-  [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/piano.wav ]
   [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/vocal.wav ]
+  [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/synth.wav ]
+  [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/bass.wav ]
+  [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/snare.wav ]
+  [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/brush.wav ]
+  [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/hihat.wav ]
+  [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/kick.wav ]
   [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/My-Test-MMW-Proj.wav ]
 }
 
