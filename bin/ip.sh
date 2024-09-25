@@ -178,27 +178,32 @@ randomFlux() {
   done
 }
 
-multiPageImage() {
-  magick -delay 33 -size 100x100 \
-         $HOME/images/flux_0.png \
-         $HOME/images/flux_30.png \
-         $HOME/images/flux_60.png \
-         $HOME/images/flux_90.png \
-         $HOME/images/flux_120.png \
-         $HOME/images/flux_150.png \
-         $HOME/images/flux_180.png \
-         $HOME/images/flux_210.png \
-         $HOME/images/flux_240.png \
-         $HOME/images/flux_270.png \
-         $HOME/images/flux_300.png \
-         $HOME/images/flux_330.png \
-         -loop 0 $HOME/images/multi-page-image.gif
+multiPageImagea() {                                                                                                                                                                  
+  local delays=(59.9808 59.9808 29.9904 29.9904 29.9904 149.9520 29.9904 29.9904 29.9904 29.9904 59.9808 59.9808 29.9904 29.9904 29.9904 89.9712 59.9808 29.9904 29.9904 29.9904 )
+  local images=()                                                                                                                                                                   
+                                                                                                                                                                                    
+  for i in {0..11}; do                                                                                                                                                              
+    images+=("-delay" "${delays[$i]}" "$HOME/images/flux_$((i * 30)).png")                                                                                                          
+  done                                                                                                                                                                              
+                                                                                                                                                                                    
+  magick -size 200x200 "${images[@]}" -loop 0 $HOME/images/multi-page-image.gif                                                                                                     
 }
+
+multiPageImage() {                                                                          
+    local delays=("$@")                                                                     
+    local images=()                                                                         
+                                                                                            
+    for i in {0..11}; do                                                                    
+        images+=("-delay" "${delays[$i]}" "$HOME/images/flux_$((i * 30)).png")              
+    done                                                                                    
+                                                                                            
+    magick -size 200x200 "${images[@]}" -loop 0 $HOME/images/multi-page-image.gif           
+}                                                                                           
 
 electricalFilaments(){
   magick $HOME/images/multi-page-image.gif  \
           -sigmoidal-contrast 30x50% -solarize 50% -auto-level \
-          -set delay 33 $HOME/Xuuki/src/sites/public/output.gif # $HOME/images/electrical-filaments.gif
+          -set delay 33 $HOME/images/electrical-filaments.gif 
 }
 
 randomRipples() {
@@ -211,6 +216,50 @@ basicLabels(){
             $HOME/Xuuki/src/sites/public/output.png
 }
 
+processMidiCSV() {                                                                        
+    local csv_file="$1"                                                                     
+    local target_track="$2"                                                                 
+    local current_track=-1                                                                  
+    local last_time=0                                                                       
+    local rest_time=0                                                                       
+    local -A time_diffs                                                                     
+    local tempo=600000  # microseconds per quarter note                                     
+    local resolution=384  # ticks per quarter note                                          
+    local tick_duration=$(echo "scale=4; $tempo / 10000 / $resolution" | bc)  # ms per tick 
+                                                                                            
+    while IFS=, read -r track time event_type channel note velocity; do                     
+        # Trim leading and trailing whitespace                                              
+        track=$(echo "$track" | xargs)                                                      
+        time=$(echo "$time" | xargs)                                                        
+        event_type=$(echo "$event_type" | xargs)                                            
+        velocity=$(echo "$velocity" | xargs)                                                
+                                                                                            
+        if [[ "$event_type" == "Note_on_c" ]]; then                                         
+            if [[ "$velocity" -eq 0 ]]; then                                                
+                # Accumulate rest time                                                      
+                rest_time=$((rest_time + time - last_time))                                 
+                last_time="$time"                                                           
+            else                                                                            
+                if [[ "$track" -ne "$current_track" ]]; then                                
+                    current_track="$track"                                                  
+                    last_time="$time"                                                       
+                    rest_time=0                                                             
+                    time_diffs["$track"]=""                                                 
+                else                                                                        
+                    time_diff=$((time - last_time + rest_time))                             
+                    time_diff_ms=$(echo "$time_diff * $tick_duration" | bc)                 
+                    time_diffs["$track"]+="$time_diff_ms "                                  
+                    last_time="$time"                                                       
+                    rest_time=0                                                             
+                fi                                                                          
+            fi                                                                              
+        fi                                                                                  
+    done < "$csv_file"                                                                      
+                                                                                            
+    # Return the array for the target track                                                 
+    echo "${time_diffs[$target_track]}"                                                     
+}                                                                                           
+
 "$@"
-                                                                                      
-                                                                                    
+                                                                                                                                                                                  
+                                                                                                                                                                                   

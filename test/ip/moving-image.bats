@@ -29,7 +29,7 @@ setup() {
   ip.sh rotateMP4 $HOME/Xuuki/src/sites/public/output.mp4 $HOME/Xuuki/src/sites/public/output-temp.mp4
   mv $HOME/Xuuki/src/sites/public/output-temp.mp4 $HOME/Xuuki/src/sites/public/output.mp4
 
-  ip.sh overlayImage $HOME/Xuuki/src/sites/public/output.mp4 $HOME/Xuuki/src/sites/public/output.gif 0 4 $HOME/Xuuki/src/sites/public/output-temp.mp4 
+  ip.sh overlayImage $HOME/Xuuki/src/sites/public/output.mp4 $HOME/Xuuki/src/sites/public/output.gif 0 6 $HOME/Xuuki/src/sites/public/output-temp.mp4 
   [ -f $HOME/Xuuki/src/sites/public/output.mp4 ]
 }
 

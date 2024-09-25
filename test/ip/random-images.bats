@@ -12,7 +12,13 @@
 }
 
 @test "multi page image" {
-  ip.sh multiPageImage
+  csv_file="/home/jnash/Documents/My-Test-MMW-Proj.csv"  # Replace with your actual CSV file  
+  track_number=7  # Replace with the desired track number                                     
+  delays_str=$(ip.sh processMidiCSV "$csv_file" "$track_number")                                  
+  IFS=' ' read -r -a delays <<< "$delays_str"                                                 
+                                                                                             
+  ip.sh multiPageImage "${delays[@]}" 
+  cp $HOME/images/multi-page-image.gif $HOME/Xuuki/src/sites/public/output.gif
   [ -f $HOME/images/multi-page-image.gif ]
 }
 
