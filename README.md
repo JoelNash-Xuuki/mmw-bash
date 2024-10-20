@@ -2,14 +2,17 @@
 # TODO
 
 You need: 
-  sudo pacman -S imagemagick
-  sudo pacman -S lilypond
-  sudo pacman -S ecasound
-  sudo pacman -S ffmpeg
-  sudo pacman -S csound
-  sudo pacman -S sox
-  sudo pacman -S bc
-  sudo pacman -S portmidi
+
+```bash
+sudo pacman -S imagemagick
+sudo pacman -S lilypond
+sudo pacman -S ecasound
+sudo pacman -S ffmpeg
+sudo pacman -S csound
+sudo pacman -S sox
+sudo pacman -S bc
+sudo pacman -S portmidi
+```
 
 
 
