@@ -1,8 +1,6 @@
 # Welcome to Multiple Media Workstation Suite (MMWS)
-# TODO
 
-You need: 
-
+Package dependancies:
 ```bash
 sudo pacman -S imagemagick
 sudo pacman -S lilypond
@@ -14,7 +12,7 @@ sudo pacman -S bc
 sudo pacman -S portmidi
 ```
 
-Install yay
+Install yay/midicsv:
 ```bash
 cd                                                                           
 git clone https://aur.archlinux.org/yay.git                                 
@@ -30,5 +28,3 @@ sudo cp bin/mmw-config bin/mmw /usr/local/bin/
 ```bash
 bats test/mmw-config/mmw-config.bats
 ```
-
-                                                                                     
