@@ -21,10 +21,18 @@ makepkg -si
 yay -S midicsv
 ```
 
+Make scripts accessible to user. (Remember this step to test any changes)
 ```bash
-sudo cp bin/mmw-config bin/mmw /usr/local/bin/
+sudo cp bin/mmw-config bin/mmw bin/ip.sh /usr/local/bin/
 ```
 
 ```bash
 bats test/mmw-config/mmw-config.bats
+bats test/mmw/mmw.bats 
+bats test/mmw/mmw-score.bats 
+bats test/mmw/mmw-sound-design.bats
 ```
+
+
+
+ 
