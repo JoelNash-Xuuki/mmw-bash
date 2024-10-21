@@ -54,6 +54,13 @@ createProj(){
     echo " audio directory created"
   fi
 
+  if [ -d "$HOME/images/" ]; then
+      echo "images directory exists"
+  else
+    mkdir -p "$HOME/images/"
+    echo "images directory created"
+  fi
+
   if [ -d "$PROJLOC" ]; then
       echo "Project location directory exists"
   else

@@ -29,7 +29,6 @@
 @test "Generate noise image" {
   ip.sh generateNoiseImage $HOME/test.png
   [ -f "$HOME/test.png" ]
-  mv $HOME/test.png $HOME/Xuuki/src/sites/public/output.png
 }
 
 @test "Input canvas, Change it colour" {

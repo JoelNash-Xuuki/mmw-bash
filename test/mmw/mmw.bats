@@ -63,5 +63,7 @@ teardown() {
   [ -f $HOME/audio/Test-Artist/My-Test-MMW-Proj/stems/input-1.wav ]
   [ -d "$(mmw displayProj)"/sound-design ]
   [ -d "$(mmw displayProj)"/session ]
+  [ -d $HOME/images ]
+  [ -d $HOME/audio ]
 }
 
