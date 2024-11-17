@@ -207,7 +207,7 @@ electricalFilaments(){
 }
 
 randomRipples() {
-   magick $HOME/images/flux_0.png -function Sinusoid 4,90 $HOME/Xuuki/src/sites/public/output.png
+   magick $1 -function Sinusoid 4,90 $2 
 }
 
 basicLabels(){
