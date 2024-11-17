@@ -23,7 +23,6 @@ setup() {
 
 teardown() {
   source $HOME/.config/mmw.config
-  mv "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/My-Test-MMW-Proj.wav "$HOME"/Xuuki/src/sites/public/output.wav
   rm -r $PROJPATH
   rm -r "$HOME"/audio/"$PROJ"
   rm $HOME/.config/mmw.config
