@@ -569,6 +569,21 @@ EOF
   return $exit_code
 }
 
+createRecSession(){
+tempo=$1
+cat << EOF > "$PROJPATH/session/rec.eca"
+ ecasound -n "$PROJPATH/session/session.eca" -b:512 -t:$DUR -f:16,2,48000 \\
+     -a:track1 -i "$HOME/audio/$ARTIST/$PROJ/stems/input.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:1  \\
+
+     -a:2,3 -i jack,system "$HOME/audio/$ARTIST/$PROJ/$PROJ.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:80 -eadb:0 \\
+     -a:2 -o "$HOME/audio/$ARTIST/$PROJ/$PROJ.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:0 \\
+     -a:met -i:null -pn:metronome,$tempo -ea:1 -y:"$START_TIME" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:0 \\
+     -a:track1 -o jack,system
+EOF
+chmod +x "$PROJPATH/session/rec.eca"
+  
+}
+
 getVolume() {
   ffmpeg -i $1 -af "volumedetect" -f null /dev/null
 }
