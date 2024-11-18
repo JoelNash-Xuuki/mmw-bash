@@ -2,12 +2,12 @@
 # https://usage.imagemagick.org/canvas/
 
 @test "Can generate: noise" {
-  ip.sh rawRandomNoise
+  ip.sh rawRandomNoise $HOME/images/random.png
   [ -f $HOME/images/random.png ]
 }
 
 @test "random flux" {
-  ip.sh randomFlux
+  ip.sh randomFlux $HOME/images/random.png
   [ -f $HOME/images/flux_30.png ]
 }
 

@@ -26,11 +26,20 @@ Make scripts accessible to user. (Remember this step to test any changes)
 sudo cp bin/mmw-config bin/mmw bin/ip.sh /usr/local/bin/
 ```
 
+Run tests in following order
 ```bash
-bats test/mmw-config/mmw-config.bats
-bats test/mmw/mmw.bats 
-bats test/mmw/mmw-score.bats 
-bats test/mmw/mmw-sound-design.bats
+bats tests/mmw-config/mmw-config.bats
+bats tests/mmw/mmw.bats 
+bats tests/mmw/mmw-score.bats 
+bats tests/mmw/mmw-sound-design.bats
+```
+
+```bash
+bats tests/ip/ip.bats
+bats tests/ip/overlay_a_specific_colour.bats
+bats tests/ip/text-to-image-handling.bats
+bats tests/ip/random-images.bats
+bats tests/ip/moving-image.bats
 ```
 
 

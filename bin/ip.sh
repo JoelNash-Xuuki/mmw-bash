@@ -167,12 +167,12 @@ generateTestImage(){
 rawRandomNoise() {                                                              
   # As of IM v6.3.5 you can generate a purely random image from an existing 
   # image using Noise Generator, "+noise" method 'Random'.
-  magick -size 100x100 xc:   +noise Random   $HOME/images/random.png
+  magick -size 100x100 xc:   +noise Random  $1 
 }
 
 randomFlux() {                                                              
   for i in `seq 0 30 359`; do
-    magick $HOME/images/random.png -channel G  -function Sinusoid 1,${i} \
+    magick $1 -channel G  -function Sinusoid 1,${i} \
             -virtual-pixel tile -blur 0x8 -auto-level \
             -separate $HOME/images/flux_${i}.png
   done
@@ -212,8 +212,8 @@ randomRipples() {
 
 basicLabels(){
   magick -background white -fill black \
-            -font Candice -size 512x512 -font /usr/share/fonts/adobe-source-code-pro/SourceCodePro-Light.otf -gravity center label:'The present is quickly irrelivant' \
-            $HOME/Xuuki/src/sites/public/output.png
+            -font Candice -size 512x512 -font /usr/share/fonts/gsfonts/URWGothic-Book.otf -gravity center label:'The present is quickly irrelivant' \
+            $1
 }
 
 processMidiCSV() {                                                                        
