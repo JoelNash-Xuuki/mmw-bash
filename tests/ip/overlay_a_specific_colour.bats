@@ -1,6 +1,9 @@
 setup() {
   ip.sh generateTestImage
+}
 
+teardown() {
+  rm $HOME/images/test.png 
 }
 
 @test "As of IM v6.4.2-1 use +level-colors to set all colours" {
@@ -13,7 +16,7 @@ setup() {
   magick $HOME/images/test.png -alpha Opaque +level-colors Sienna \
           $HOME/images/color_levelc.gif
   [ -f "$HOME/images/color_levelc.gif" ]
-  rm $HOME/images/test.png $HOME/images/color_levelc.gif
+  rm $HOME/images/color_levelc.gif
 }
 
 @test "Use Colorize (older technique) to set all colours" {
@@ -23,7 +26,7 @@ setup() {
   magick $HOME/images/test.png -alpha off -fill Chocolate -colorize 100% \
           $HOME/images/color_levelc.gif
   [ -f "$HOME/images/color_levelc.gif" ]
-  rm $HOME/images/test.png $HOME/images/color_levelc.gif
+  rm $HOME/images/color_levelc.gif
 }
 
 @test "As of IM v6.4.3-0: Use spare-color, sets a point to colour wanted" {
@@ -31,14 +34,12 @@ setup() {
   magick $HOME/images/test.png -alpha off \
           -sparse-color Voronoi '0,0 Peru' $HOME/images/color_sparse.gif
   [ -f "$HOME/images/color_sparse.gif" ]
-  rm $HOME/images/test.png
 }
 
 @test "A more general overlay technique using draw, directly reset all colours" {
   magick $HOME/images/test.png -fill Tan \
           -draw 'color 0,0 reset' $HOME/images/color_reset.gif
   [ -f "$HOME/images/color_reset.gif" ]
-  rm $HOME/images/test.png
 }
 
 @test "Alpha composition with Dst" {
@@ -57,21 +58,18 @@ setup() {
   magick $HOME/images/test.png -background LemonChiffon \
           -compose Dst -border 0 $HOME/images/color_border.gif
   [ -f "$HOME/images/color_border.gif" ]
-  rm $HOME/images/test.png
 }
 
 @test "Flexiable (but slow) of canvas generation with FX" {
   magick $HOME/images/test.png -alpha off \
           -fx Gold $HOME/images/color_fx_constant.gif
   [ -f "$HOME/images/color_fx_constant.gif" ]
-  rm $HOME/images/test.png
 }
 
 @test "FX with colour percentage specified" {
   magick $HOME/images/test.png -alpha off \
           -fx Gold*.7 $HOME/images/color_fx_math.gif
   [ -f "$HOME/images/color_fx_math.gif" ]
-  rm $HOME/images/test.png
 }
 
 @test "Semi transparent red (creates transparent canvas)" {
@@ -79,6 +77,5 @@ setup() {
           -alpha set -fill '#FF000040' -draw 'color 0,0 reset' \
           $HOME/images/color_semitrans.gif
   [ -f "$HOME/images/color_semitrans.gif" ]
-  rm $HOME/images/test.png
 }
 
