@@ -26,15 +26,14 @@ teardown_file() {
   [ -f $OUTPUT-Rotate.mp4 ]
 }
 
-# @test "overlay" { 
-#   ip.sh scaleMP4 $OUTPUT $HOME/output-temp.mp4
-#   mv $HOME/output-temp.mp4 $OUTPUT
-# 
-#   ip.sh rotateMP4 $OUTPUT $HOME/output-temp.mp4
-#   mv $HOME/output-temp.mp4 $OUTPUT 
-# 
-#   [ -f $HOME/images/multi-page-image.gif ]
-#   ip.sh overlayImage $OUTPUT $HOME/images/multi-page-image.gif 0 6 $HOME/output-temp.mp4 
-#   sudo cp $OUTPUT /data/images
-# }
-# 
+@test "overlay" { 
+  ip.sh scaleMP4 $OUTPUT $HOME/output-temp.mp4
+  mv $HOME/output-temp.mp4 $OUTPUT
+
+  ip.sh rotateMP4 $OUTPUT $HOME/output-temp.mp4
+  mv $HOME/output-temp.mp4 $OUTPUT 
+
+  [ -f $HOME/images/multi-page-image.gif ]
+  ip.sh overlayImage $OUTPUT $HOME/images/multi-page-image.gif 0 6 $HOME/output-temp.mp4 
+}
+
