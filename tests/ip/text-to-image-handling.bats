@@ -1,4 +1,4 @@
 @test "basic text" {
-  ip.sh basicLabels
-  [ -f $HOME/Xuuki/src/sites/public/output.png ]
+  ip.sh basicLabels $HOME/images/output.png
+  [ -f $HOME/images/output.png ]
 }
