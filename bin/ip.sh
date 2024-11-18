@@ -216,6 +216,14 @@ basicLabels(){
             $1
 }
 
+basicOverMultiplLines(){
+  magick -size 512x512 -background black -fill yellow -font /usr/share/fonts/gsfonts/NimbusMonoPS-Regular.otf \
+         label:@$1 $2
+}
+
+
+
+
 processMidiCSV() {                                                                        
     local csv_file="$1"                                                                     
     local target_track="$2"                                                                 
