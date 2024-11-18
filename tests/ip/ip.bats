@@ -29,3 +29,7 @@ teardown() {
   [ -f "$HOME/test.png" ]
 }
 
+@test "Generate image built from sound file" {
+   ffmpeg -i $HOME/audio/Test-Artist/My-Test-MMW-Proj/My-Test-MMW-Proj.wav -lavfi showspectrumpic=s=512x512:mode=combined $HOME/images/stills/test.png
+}
+
