@@ -28,6 +28,5 @@
 
 @test "random ripples" {
   ip.sh randomRipples $HOME/images/flux_0.png  $HOME/images/output.png 
-  sudo mv  $HOME/images/output.png /data/images/output.png
   [ -f /data/images/output.png ]
 }
