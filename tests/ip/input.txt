@@ -1,0 +1,6 @@
+jackd -d alsa -d hw:1 -r 48000 -p 512 -n 3 
+ • -d alsa: Use ALSA as the backend.
+ • -d hw:1: Select card 1 (USB Audio CODEC).
+ • -r 48000: Set the sample rate to 48000 Hz.
+ • -p 512: Set the buffer size to 512 frames.
+ • -n 3: Set the number of periods to 3. 
