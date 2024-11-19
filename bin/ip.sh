@@ -200,6 +200,10 @@ multiPageImage() {
     magick -size 200x200 "${images[@]}" -loop 0 $HOME/images/multi-page-image.gif           
 }                                                                                           
 
+appendImages() {
+  magick $HOME/images/flux_0.png $HOME/images/flux_150.png -append $HOME/images/flux_300.png +append $1
+}
+
 electricalFilaments(){
   magick $HOME/images/multi-page-image.gif  \
           -sigmoidal-contrast 30x50% -solarize 50% -auto-level \
