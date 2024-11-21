@@ -5,6 +5,6 @@
      -a:snare -i "/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/snare.wav" -y:"0" -erc:1,2 -epp:50 -efl:10700  -eadb:-20 \
      -a:brush -i "/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/brush.wav" -y:"0" -erc:1,2 -epp:50 -efl:2400  -eadb:-25 \
      -a:hihat -i "/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/hihat.wav" -y:"0" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-35 \
-     -a:kick -i  "/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/kick.wav"  -y:"0" -erc:1,2 -epp:50 -ea:10 -efl:200\
-     -a:rec -i "/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/rec-output.wav" -y:"4.8" -erc:1,2 -epp:50 -eadb:20 \
+     -a:kick  -i "/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/kick.wav"  -y:"0" -erc:1,2 -epp:50 -ea:10 -efl:200\
+     -a:rec   -i "/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/rec-output.wav" -y:"4.8" -erc:1,2 -epp:50 -eadb:20 \
      -a:vocal,synth,bass,snare,brush,hihat,kick,rec -o jack,system #"/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/My-Test-MMW-Proj.wav"

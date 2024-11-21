@@ -5,7 +5,7 @@ ecasound -n "/home/jnash/My-Test-MMW-Proj/session/rec.eca" -b:512 -t:16 -f:16,2,
      -a:snare -i playat,4.8,"/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/snare.wav" -y:"0" -erc:1,2 -epp:50 -efl:10700  -eadb:-20 \
      -a:brush -i playat,4.8,"/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/brush.wav" -y:"0" -erc:1,2 -epp:50 -efl:2400  -eadb:-25 \
      -a:hihat -i playat,4.8,"/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/hihat.wav" -y:"0" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-35 \
-     -a:kick -i  playat,4.8,"/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/kick.wav"  -y:"0" -erc:1,2 -epp:50 -ea:10 -efl:200\
+     -a:kick  -i playat,4.8,"/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/kick.wav"  -y:"0" -erc:1,2 -epp:50 -ea:10 -efl:200\
      -a:2,3 -i jack,system,1,0 \
      -a:2 -o /home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/rec-output.wav -eadb:0 \
      -a:met -i:null -pn:metronome,100 -eadb:-50 \
