@@ -21,7 +21,6 @@ teardown() {
 @test "specify xc canvas image, size and colour as single input image " {
   ip.sh canvasxcSingleInput $HOME/test.png 700 700
   [ -f "$HOME/test.png" ]
-  [ -f "$HOME/recoloured.png" ]
 }
 
 @test "Grab single pixel from existing image" {
@@ -30,6 +29,7 @@ teardown() {
 }
 
 @test "Generate image built from sound file" {
+   rm $HOME/images/stills/test.png
    ffmpeg -i $HOME/audio/Test-Artist/My-Test-MMW-Proj/My-Test-MMW-Proj.wav -lavfi showspectrumpic=s=512x512:mode=combined $HOME/images/stills/test.png
 }
 

@@ -178,17 +178,6 @@ randomFlux() {
   done
 }
 
-multiPageImagea() {                                                                                                                                                                  
-  local delays=(59.9808 59.9808 29.9904 29.9904 29.9904 149.9520 29.9904 29.9904 29.9904 29.9904 59.9808 59.9808 29.9904 29.9904 29.9904 89.9712 59.9808 29.9904 29.9904 29.9904 )
-  local images=()                                                                                                                                                                   
-                                                                                                                                                                                    
-  for i in {0..11}; do                                                                                                                                                              
-    images+=("-delay" "${delays[$i]}" "$HOME/images/flux_$((i * 30)).png")                                                                                                          
-  done                                                                                                                                                                              
-                                                                                                                                                                                    
-  magick -size 200x200 "${images[@]}" -loop 0 $HOME/images/multi-page-image.gif                                                                                                     
-}
-
 multiPageImage() {                                                                          
     local delays=("$@")                                                                     
     local images=()                                                                         
