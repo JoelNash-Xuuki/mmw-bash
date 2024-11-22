@@ -4,7 +4,7 @@ AUDIO=$HOME/audio/Test-Artist/My-Test-MMW-Proj/My-Test-MMW-Proj.wav
 OUTPUT=$HOME/images/movies/output.mp4
 
 setup_file() {
-  ip.sh createMP4 $AUDIO 6 $OUTPUT 512 512 
+  ip.sh createMP4 $AUDIO 6 $OUTPUT 240 240 
   #ip.sh scaleMP4 $OUTPUT $OUTPUT-Scaled.mp4
   #ip.sh rotateMP4 $OUTPUT $OUTPUT-Rotate.mp4
 }

@@ -62,7 +62,7 @@ createTextPNG(){
 createMP4(){
   width=$4
   height=$5
-  ffmpeg -ss 00:00:00 -i $1 -t $2 -filter_complex "[0:a]showspectrum=s=${width}x${height}:color=cividis:mode=separate:slide=replace:slide=0.5:saturation=1:scale=log,format=yuv420p[v]" -map "[v]" -map 0:a -b:v 700k -b:a 360k $3
+  ffmpeg -ss 00:00:00 -i $1 -t $2 -filter_complex "[0:a]showspectrum=s=${width}x${height}:color=cividis:mode=separate:saturation=1:scale=log,format=yuv420p[v]" -map "[v]" -map 0:a -b:v 700k -b:a 360k $3
 }
 
 scaleMP4() {
