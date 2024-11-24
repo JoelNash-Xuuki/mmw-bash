@@ -1,12 +1,13 @@
-ecasound -n "/home/jnash/My-Test-MMW-Proj/session/rec.eca" -b:512 -t:16 -f:16,2,48000 \
-     -a:vocal -i playat,4.8,"/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/vocal.wav" -y:"0" -erc:1,2 -epp:50 -eadb:0 \
+ecasound -n "/home/jnash/My-Test-MMW-Proj/session/rec.eca" -b:512 -t:24.0 -f:16,2,48000 \
+     -a:vocal -i playat,4.8,audioloop,select,0,4.8,"/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/vocal.wav" -y:"0" -erc:1,2 -epp:50 -eadb:0 \
      -a:synth -i playat,4.8,"/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/synth.wav" -y:"0" -erc:1,2 -epp:50 -eadb:15 \
      -a:bass  -i playat,4.8,"/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/bass.wav"  -y:"0" -erc:1,2 -epp:50 -efl:80 -eadb:0 \
-     -a:snare -i playat,4.8,"/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/snare.wav" -y:"0" -erc:1,2 -epp:50 -efl:10700  -eadb:-20 \
-     -a:brush -i playat,4.8,"/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/brush.wav" -y:"0" -erc:1,2 -epp:50 -efl:2400  -eadb:-25 \
-     -a:hihat -i playat,4.8,"/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/hihat.wav" -y:"0" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-35 \
-     -a:kick  -i playat,4.8,"/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/kick.wav"  -y:"0" -erc:1,2 -epp:50 -ea:10 -efl:200\
+     -a:snare -i playat,4.8,audioloop,select,0,4.8,"/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/snare.wav" -y:"0" -erc:1,2 -epp:50 -efl:10700  -eadb:-20 \
+     -a:brush -i playat,4.8,audioloop,select,0,4.8,"/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/brush.wav" -y:"0" -erc:1,2 -epp:50 -efl:2400  -eadb:-25 \
+     -a:hihat -i playat,4.8,audioloop,select,0,4.8,"/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/hihat.wav" -y:"0" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-35 \
+     -a:kick  -i playat,4.8,audioloop,select,0,4.8,"/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/kick.wav"  -y:"0" -erc:1,2 -epp:50 -ea:10 -efl:200\
+     -a:guitar -i playat,4.8,"/home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/guitar.wav" -y:"0" -erc:1,2 -epp:65 -efl:3400 -ete:70,50,5  -eadb:10 \
      -a:2,3 -i jack,system,1,0 \
      -a:2 -o /home/jnash/audio/Test-Artist/My-Test-MMW-Proj/stems/rec-output.wav -eadb:0 \
      -a:met -i:null -pn:metronome,100 -eadb:-50 \
-     -a:3,vocal,synth,bass,snare,brush,hihat,kick,met -o jack,system                                        
+     -a:3,vocal,synth,bass,snare,brush,hihat,kick,met,guitar -o jack,system
