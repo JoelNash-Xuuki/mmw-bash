@@ -192,7 +192,13 @@ multiPageImage() {
 }                                                                                           
 
 appendImages() {
-  magick $HOME/images/flux_0.png $HOME/images/flux_150.png -append $HOME/images/flux_300.png +append $1
+#  magick $HOME/images/flux_0.png $HOME/images/flux_150.png -append $HOME/images/flux_0.png $HOME/images/flux_150.png +append  $1
+
+  magick \( $HOME/images/flux_0.png $HOME/images/flux_0.png $HOME/images/flux_0.png +smush -20 \) \
+         \( $HOME/images/flux_0.png $HOME/images/flux_0.png $HOME/images/flux_0.png +smush -20 \) \
+         \( $HOME/images/flux_0.png $HOME/images/text-to-image.png +append \) \
+         -background none -append $1 
+
 }
 
 electricalFilaments(){
