@@ -42,6 +42,3 @@ bats tests/ip/random-images.bats
 bats tests/ip/moving-image.bats
 ```
 
-
-
- 
