@@ -6,5 +6,5 @@
 
 
 @test "Label using input file" {
-  ip.sh basicOverMultiplLines tests/ip/input.txt $HOME/images/text-to-image.png
+  ip.sh basicOverMultiplLines tests/ip/input-2.txt $HOME/images/text-to-image.png
 }

@@ -169,13 +169,13 @@ generateTestImage(){
 rawRandomNoise() {                                                              
   # As of IM v6.3.5 you can generate a purely random image from an existing 
   # image using Noise Generator, "+noise" method 'Random'.
-  magick -size 100x100 xc:   +noise Random  $1 
+  magick -size 360x360 xc:   +noise Random  $1 
 }
 
 randomFlux() {                                                              
   for i in `seq 0 30 359`; do
     magick $1 -channel G  -function Sinusoid 1,${i} \
-            -virtual-pixel tile -blur 0x8 -auto-level \
+            -virtual-pixel tile -blur 0x8 -auto-level -size 360x360 \
             -separate $HOME/images/flux_${i}.png
   done
 }
@@ -188,15 +188,15 @@ multiPageImage() {
         images+=("-delay" "${delays[$i]}" "$HOME/images/flux_$((i * 30)).png")              
     done                                                                                    
                                                                                             
-    magick -size 200x200 "${images[@]}" -loop 0 $HOME/images/multi-page-image.gif           
+    magick -size 360x360 "${images[@]}" -loop 0 $HOME/images/multi-page-image.gif           
 }                                                                                           
 
 appendImages() {
 #  magick $HOME/images/flux_0.png $HOME/images/flux_150.png -append $HOME/images/flux_0.png $HOME/images/flux_150.png +append  $1
 
-  magick \( $HOME/images/flux_0.png $HOME/images/flux_0.png $HOME/images/flux_0.png +append \) \
+  magick \( $HOME/images/text-to-image.png $HOME/images/flux_0.png $HOME/images/flux_0.png +append \) \
          \( $HOME/images/flux_0.png $HOME/images/flux_0.png $HOME/images/flux_0.png +append \) \
-         \( $HOME/images/flux_0.png $HOME/images/flux_0.png +append \) \
+         \( $HOME/images/flux_0.png $HOME/images/flux_0.png $HOME/images/flux_0.png +append \) \
          -background none -append $1 
 
 }
@@ -213,12 +213,12 @@ randomRipples() {
 
 basicLabels(){
   magick -background white -fill black \
-            -font Candice -size 512x512 -font /usr/share/fonts/gsfonts/URWGothic-Book.otf -gravity center label:'The present is quickly irrelivant' \
+            -font Candice -size 360x360 -font /usr/share/fonts/gsfonts/URWGothic-Book.otf -gravity center label:'The present is quickly irrelivant' \
             $1
 }
 
 basicOverMultiplLines(){
-  magick -size 512x512 -background black -fill yellow -font /usr/share/fonts/gsfonts/NimbusMonoPS-Regular.otf \
+  magick -size 360x360 -background black -fill yellow -pointsize 36 -font /usr/share/fonts/gsfonts/NimbusMonoPS-Regular.otf \
          label:@$1 $2
 }
 
