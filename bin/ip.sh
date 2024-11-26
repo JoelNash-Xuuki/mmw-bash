@@ -96,6 +96,25 @@ overlayImage(){
   mv $5 $1
 }
 
+overlayMedia() {                                                                
+    ffmpeg -i $1 -i $2 -filter_complex [0][1]overlay=W-w:H-h $3
+
+    #local input_video="$1"                                                      
+    #local overlay_media="$2"                                                    
+    #local output_file="$3"                                                      
+    #local overlay_position="${4:-W-w:H-h}"  # Default to bottom-right           
+    #local scale="${5:-350:-1}"              # Default scale                     
+    #local time_range="${6:-}"               # Optional time range               
+    #                                                                            
+    #ffmpeg -i "$input_video" -i "$overlay_media" -filter_complex \              
+    #"[1:v]scale=$scale[overlay];[0:v][overlay]overlay=$overlay_position$time_rate" \                                                                            
+    #-c:a copy "$output_file"                                                    
+}                                                                               
+                                                                                 
+ # Usage example:                                                                
+ # overlayMedia input.mp4 overlay.gif output.mp4 "10:10" "200:200" ":enable='between(t,0,10)'"                                                     
+ 
+
 getAudioInfo() {
   ffprobe -hide_banner $1 -select_streams a -show_format
 }
@@ -267,9 +286,6 @@ processMidiCSV() {
     echo "${time_diffs[$target_track]}"                                                     
 }                                                                                           
 
-"$@"
-                                                                                                                                                                                  
-                                                                                                                                                                                   
-                                                                                           
-                                                                                             
+                                                                                
 
+"$@"
