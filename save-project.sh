@@ -7,7 +7,7 @@ gdrive_path="gdrive:Source/audio/$project_name/$session_date/"
 
 # Create the directory structure on Google Drive                                         
 rclone mkdir "$gdrive_path"                                                              
-rclone copy "/home/jnash/audio/Test-Artist/$PROJ" "$gdrive_path"                         
+rclone copy "$HOME/audio/Test-Artist/$PROJ" "$gdrive_path"                         
 rclone ls "$gdrive_path"                                                                 
  
 # Database credentials                                                                   
