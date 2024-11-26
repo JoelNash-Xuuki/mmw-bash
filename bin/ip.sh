@@ -191,12 +191,10 @@ multiPageImage() {
     magick -size 360x360 "${images[@]}" -loop 0 $HOME/images/multi-page-image.gif           
 }                                                                                           
 
-appendImages() {
-#  magick $HOME/images/flux_0.png $HOME/images/flux_150.png -append $HOME/images/flux_0.png $HOME/images/flux_150.png +append  $1
-
-  magick \( $HOME/images/text-to-image.png $HOME/images/flux_0.png $HOME/images/flux_0.png +append \) \
-         \( $HOME/images/flux_0.png $HOME/images/flux_0.png $HOME/images/flux_0.png +append \) \
-         \( $HOME/images/flux_0.png $HOME/images/flux_0.png $HOME/images/flux_0.png +append \) \
+appendImages3x3() {
+  magick \( $3 $3 $3 +append \) \
+         \( $2 $3 $3 +append \) \
+         \( $3 $3 $3 +append \) \
          -background none -append $1 
 
 }
