@@ -528,59 +528,28 @@ cat << EOF > "$PROJPATH/session/session.eca"
      -a:brush -i "$HOME/audio/$ARTIST/$PROJ/stems/brush.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:2400  -eadb:-25 \\
      -a:hihat -i "$HOME/audio/$ARTIST/$PROJ/stems/hihat.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-35 \\
      -a:kick -i  "$HOME/audio/$ARTIST/$PROJ/stems/kick.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -ea:10 -efl:200\\
-     -a:vocal,synth,bass,snare,brush,hihat,kick -o "$HOME/audio/$ARTIST/$PROJ/$PROJ.wav"
+     -a:rec -i "$HOME/audio/$ARTIST/$PROJ/stems/input.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:0 \\
+     -a:vocal,synth,bass,snare,brush,hihat,kick,rec -o jack,system
 EOF
   chmod +x "$PROJPATH/session/session.eca"
-  "$PROJPATH/session/session.eca"
-
-  exit_code=$?
-  
-  if [ $exit_code -eq 0 ]; then
-    echo "Ecasound command executed successfully with exit code $exit_code."
-  else
-    echo "Ecasound command failed with exit code $exit_code."
-  fi
-  
-  return $exit_code
-}
-
-createSession(){
-cat << EOF > "$PROJPATH/session/session.eca"
-   ecasound -n "$PROJPATH/session/session.eca" -b:512 -t:$DUR -f:16,2,48000 \\
-     -a:synth -i "$HOME/audio/$ARTIST/$PROJ/stems/synth.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efh:500 -eadb:1  \\
-     -a:bass  -i "$HOME/audio/$ARTIST/$PROJ/stems/bass.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -efl:80 -eadb:1 \\
-     -a:snare -i "$HOME/audio/$ARTIST/$PROJ/stems/snare.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:10700  -eadb:16.6 \\
-     -a:brush -i "$HOME/audio/$ARTIST/$PROJ/stems/drums.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:2400  -ea:0 \\
-     -a:hihat -i "$HOME/audio/$ARTIST/$PROJ/stems/hihat.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-15 \\
-     -a:kick -i  "$HOME/audio/$ARTIST/$PROJ/stems/kick.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -ea:0 -efl:200 \\
-     -a:synth,snare,brush,hihat,bass,kick -o jack,system
-EOF
-  chmod +x "$PROJPATH/session/session.eca"
-  "$PROJPATH/session/session.eca"
-
-  exit_code=$?
-  
-  if [ $exit_code -eq 0 ]; then
-    echo "Ecasound command executed successfully with exit code $exit_code."
-  else
-    echo "Ecasound command failed with exit code $exit_code."
-  fi
-  
-  return $exit_code
 }
 
 createRecSession(){
 tempo=$1
 cat << EOF > "$PROJPATH/session/rec.eca"
- ecasound -n "$PROJPATH/session/rec.eca" -b:512 -t:$DUR -f:16,2,48000 \\
-     -a:track1 -i "$HOME/audio/$ARTIST/$PROJ/stems/input.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:1  \\
-     -a:2,3 -i jack,system "$HOME/audio/$ARTIST/$PROJ/$PROJ.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:80 -eadb:0 \\
-     -a:2 -o "$HOME/audio/$ARTIST/$PROJ/$PROJ.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:0 \\
-     -a:met -i:null -pn:metronome,$tempo -ea:1 -y:"$START_TIME" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:0 \\
-     -a:track1 -o jack,system
+ecasound -n "$PROJPATH/session/rec.eca" -b:512 -t:24.0 -f:16,2,48000 \\
+     -a:synth -i playat,4.8,audioloop,select,0,4.8,"$HOME/audio/$ARTIST/$PROJ/stems/synth.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:1  \\
+     -a:bass  -i playat,4.8,audioloop,select,0,4.8,"$HOME/audio/$ARTIST/$PROJ/stems/bass.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -efl:80 -eadb:0 \\
+     -a:snare -i playat,4.8,audioloop,select,0,4.8,"$HOME/audio/$ARTIST/$PROJ/stems/snare.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:10700  -eadb:-20 \\
+     -a:hihat -i playat,4.8,audioloop,select,0,4.8,"$HOME/audio/$ARTIST/$PROJ/stems/hihat.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-35 \\
+     -a:kick  -i playat,4.8,audioloop,select,0,4.8,"$HOME/audio/$ARTIST/$PROJ/stems/kick.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -ea:10 -efl:200 \\
+     -a:brush -i playat,4.8,audioloop,select,0,4.8,"$HOME/audio/$ARTIST/$PROJ/stems/brush.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:2400  -eadb:-25 \\
+     -a:2,3 -i jack,system,1,0 \\
+     -a:2 -o "$HOME/audio/$ARTIST/$PROJ/input.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:0 \\
+     -a:met -i:null -pn:metronome,$tempo -eadb:-50 \\
+     -a:3,synth,bass,snare,brush,hihat,kick,met -o jack,system
 EOF
 chmod +x "$PROJPATH/session/rec.eca"
-  
 }
 
 getVolume() {
