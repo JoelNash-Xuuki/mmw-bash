@@ -556,6 +556,41 @@ getVolume() {
   ffmpeg -i $1 -af "volumedetect" -f null /dev/null
 }
 
+saveProject() {
+  # Define variables                                                                       
+  PROJ="$1"                                                                  
+  project_name="$PROJ"                                                                     
+  session_date="$(date +"%Y%m%d-%H%M%S")"                                                  
+  gdrive_path="gdrive:Source/Projects/$project_name/$session_date/"                           
+  
+  # Create the directory structure on Google Drive                                         
+  rclone mkdir "$gdrive_path"                                                              
+  rclone copy "$HOME/$PROJLOC/$PROJ" "$gdrive_path"                         
+  rclone ls "$gdrive_path"                                                                 
+   
+  # Database credentials                                                                   
+  USERNAME="$USER"                                                                         
+  PASSWORD="x"                                                                             
+  HOST="localhost"                                                                         
+  DATABASE="xuuki"                                                                         
+                                                                                             
+  # SQL command                                                                            
+  SQL_COMMAND="INSERT INTO projects (project_name, session_date, gdrive_path) VALUES       
+  ('$project_name', '$session_date', '$gdrive_path');"                                     
+                                                                                           
+  # Execute SQL command                                                                    
+  echo "$SQL_COMMAND" | mariadb -u "$USERNAME" -p"$PASSWORD" -h "$HOST" "$DATABASE"        
+}
+
+viewProjects() {
+  echo "**********     Projects     **********"
+  USERNAME="$USER"
+  PASSWORD="x" 
+  HOST="localhost"
+  DATABASE="xuuki"
+  
+  mariadb -u $USERNAME -p$PASSWORD -h $HOST xuuki -e "SELECT * FROM projects;"
+}
 
 
 "$@"
