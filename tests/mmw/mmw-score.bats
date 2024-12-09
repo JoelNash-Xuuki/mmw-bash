@@ -24,7 +24,7 @@ teardown() {
 
 @test "creates a new project with score design (lilypond file)" {
   [ -d "$(mmw displayProj)" ] 
-  [ -f $HOME/audio/Test-Artist/My-Test-MMW-Proj/stems/input-1.wav ]
+  [ -f $HOME/audio/Test-Artist/My-Test-MMW-Proj/stems/input.wav ]
   [ -f "$HOME/My-Test-MMW-Proj/My-Test-MMW-Proj.ly" ]
 }
 @test "create sheet music as PDF and Midi file" {

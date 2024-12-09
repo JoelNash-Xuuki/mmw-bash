@@ -2,6 +2,7 @@ setup() {
   mmw-config create
   mmw-config addProjNameDeclaration
   mmw setProj My-Test-MMW-Proj
+  mmw setProjLoc Projects
   mmw-config addProjFilePathDeclarationAndDefinition
   mmw-config addArtistDeclaration
   mmw setArtist Test-Artist
@@ -39,6 +40,7 @@ teardown() {
   [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/brush.wav ]
   [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/hihat.wav ]
   [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/kick.wav ]
+  [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/stems/input.wav ]
   [ -f "$HOME"/audio/Test-Artist/My-Test-MMW-Proj/My-Test-MMW-Proj.wav ]
 }
 

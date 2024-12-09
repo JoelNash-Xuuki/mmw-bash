@@ -60,7 +60,7 @@ teardown() {
 
 @test "creates a new project" {
   [ -d "$(mmw displayProj)" ] 
-  [ -f $HOME/audio/Test-Artist/My-Test-MMW-Proj/stems/input-1.wav ]
+  [ -f $HOME/audio/Test-Artist/My-Test-MMW-Proj/stems/input.wav ]
   [ -d "$(mmw displayProj)"/sound-design ]
   [ -d "$(mmw displayProj)"/session ]
   [ -d $HOME/images ]
