@@ -39,7 +39,7 @@ mkProjDir(){
 }
 
 mkStemsDir(){
-  mkdir "$HOME/audio/$ARTIST/$PROJ/stems"
+  mkdir "$HOME/audio/$PROJ/stems"
 }
 
 displayProj(){
@@ -47,20 +47,6 @@ displayProj(){
 }
 
 createProj(){
-  if [ -d "$HOME/audio/" ]; then
-      echo "audio directory exists"
-  else
-    mkdir -p "$HOME/audio/"
-    echo " audio directory created"
-  fi
-
-  if [ -d "$HOME/images/" ]; then
-      echo "images directory exists"
-  else
-    mkdir -p "$HOME/images/"
-    echo "images directory created"
-  fi
-
   if [ -d "$PROJLOC" ]; then
       echo "Project location directory exists"
   else
@@ -68,13 +54,6 @@ createProj(){
     echo " Project location directory created"
   fi
 
-  if [ -d "$HOME/audio/$ARTIST" ]; then
-      echo "Artist directory exists"
-  else
-    mkdir -p "$HOME/audio/$ARTIST";
-    echo "Artist directory created"
-  fi
-  
   if [ -d "$PROJPATH" ]; then
     echo "Directory exists"
   else
@@ -85,18 +64,16 @@ createProj(){
         mkdir "$PROJPATH/.bin"
         mkdir "$PROJPATH/session"
         mkdir "$PROJPATH/sound-design"
+        mkdir "$PROJPATH/audio"
+        mkdir "$PROJPATH/audio/mix"
+        mkdir "$PROJPATH/audio/stems"
+        mkdir "$PROJPATH/audio/stems/recorded/"
+        ffmpeg -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=48000 -t 5 "$PROJPATH/audio/stems/recorded/input.wav"
         echo "$PROJ created"
       else
         echo "$PROJ not created"
       fi
    fi
-
-  if [ ! -d "$HOME/audio/$ARTIST/$PROJ" ]; then
-     mkdir "$HOME/audio/$ARTIST/$PROJ"
-     mkdir "$HOME/audio/$ARTIST/$PROJ/stems"
-     ffmpeg -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=48000 -t 5 "$HOME/audio/$ARTIST/$PROJ/stems/input.wav"
-  fi
-
 }
 
 getScore(){
@@ -469,18 +446,18 @@ buildInstrSoundDesignFiles(){
 }
 
 prodScoreAudio(){
-  if [ -f "$HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav" ]; then
-    rm "$HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav"
+  if [ -f "$PROJPATH/audio/stems/$PROJ.wav" ]; then
+    rm "$PROJPATH/audio/stems/$PROJ.wav"
   fi
-  csound -d -o"$HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav" -F "$HOME/Documents/$PROJ.mid"  "$PROJPATH/sound-design/$PROJ.orc" "$PROJPATH/sound-design/$PROJ.sco"
+  csound -d -o"$PROJPATH/audio/stems/$PROJ.wav" -F "$HOME/Documents/$PROJ.mid"  "$PROJPATH/sound-design/$PROJ.orc" "$PROJPATH/sound-design/$PROJ.sco"
 }
 
 makeTrack(){
   # Define the input file
-  input_file="$HOME/audio/$ARTIST/$PROJ/stems/$PROJ.wav"
+  input_file="$PROJPATH/audio/stems/$PROJ.wav"
   
   # Define the output directory
-  output_dir="$HOME/audio/$ARTIST/$PROJ/stems/"
+  output_dir="$PROJPATH/audio/stems/"
   
   # Define an array of instrument names corresponding to each channel
   instruments=( "vocal" "synth" "bass" "snare" "brush" "hihat" "kick" )
@@ -496,12 +473,12 @@ makeTrack(){
 sendSessionToStdout(){
 cat << EOF > "$PROJPATH/session/session.eca"
    ecasound -n "$PROJPATH/session/session.eca" -b:512 -t:$DUR -f:16,2,48000 \\
-     -a:synth -i "$HOME/audio/$ARTIST/$PROJ/stems/synth.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efh:500 -eadb:0 \\
-     -a:bass  -i "$HOME/audio/$ARTIST/$PROJ/stems/bass.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -efl:80 -eadb:-10 \\
-     -a:snare -i "$HOME/audio/$ARTIST/$PROJ/stems/snare.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:10700  -eadb:-10 \\
-     -a:brush -i "$HOME/audio/$ARTIST/$PROJ/stems/drums.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:2400  -ea:0 \\
-     -a:hihat -i "$HOME/audio/$ARTIST/$PROJ/stems/hihat.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-95 \\
-     -a:kick -i  "$HOME/audio/$ARTIST/$PROJ/stems/kick.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -ea:0 -efl:200 \\
+     -a:synth -i "$HOME/audio/$PROJ/stems/synth.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efh:500 -eadb:0 \\
+     -a:bass  -i "$HOME/audio/$PROJ/stems/bass.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -efl:80 -eadb:-10 \\
+     -a:snare -i "$HOME/audio/$PROJ/stems/snare.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:10700  -eadb:-10 \\
+     -a:brush -i "$HOME/audio/$PROJ/stems/drums.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:2400  -ea:0 \\
+     -a:hihat -i "$HOME/audio/$PROJ/stems/hihat.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-95 \\
+     -a:kick -i  "$HOME/audio//$PROJ/stems/kick.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -ea:0 -efl:200 \\
      -a:vocal,synth,bass,snare,brush,hihat,kick -o stdout
 EOF
   chmod +x "$PROJPATH/session/session.eca"
@@ -521,15 +498,15 @@ EOF
 createSessionFile(){
 cat << EOF > "$PROJPATH/session/session.eca"
    ecasound -n "$PROJPATH/session/session.eca" -b:512 -t:$DUR -f:16,2,48000 \\
-     -a:vocal -i "$HOME/audio/$ARTIST/$PROJ/stems/vocal.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:0 \\
-     -a:synth -i "$HOME/audio/$ARTIST/$PROJ/stems/synth.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:15 \\
-     -a:bass  -i "$HOME/audio/$ARTIST/$PROJ/stems/bass.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -efl:80 -eadb:0 \\
-     -a:snare -i "$HOME/audio/$ARTIST/$PROJ/stems/snare.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:10700  -eadb:-20 \\
-     -a:brush -i "$HOME/audio/$ARTIST/$PROJ/stems/brush.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:2400  -eadb:-25 \\
-     -a:hihat -i "$HOME/audio/$ARTIST/$PROJ/stems/hihat.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-35 \\
-     -a:kick -i  "$HOME/audio/$ARTIST/$PROJ/stems/kick.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -ea:10 -efl:200\\
-     -a:rec -i "$HOME/audio/$ARTIST/$PROJ/stems/input.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:0 \\
-     -a:vocal,synth,bass,snare,brush,hihat,kick,rec -o jack,system
+     -a:vocal -i "$PROJPATH/audio/stems/vocal.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:0 \\
+     -a:synth -i "$PROJPATH/audio/stems/synth.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:15 \\
+     -a:bass  -i "$PROJPATH/audio/stems/bass.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -efl:80 -eadb:0 \\
+     -a:snare -i "$PROJPATH/audio/stems/snare.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:10700  -eadb:-20 \\
+     -a:brush -i "$PROJPATH/audio/stems/brush.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:2400  -eadb:-25 \\
+     -a:hihat -i "$PROJPATH/audio/stems/hihat.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-35 \\
+     -a:kick -i  "$PROJPATH/audio/stems/kick.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -ea:10 -efl:200\\
+     -a:rec -i "$PROJPATH/audio/stems/recorded/input.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:0 \\
+     -a:vocal,synth,bass,snare,brush,hihat,kick,rec -o "$PROJPATH/audio/mix/$PROJ.wav" # jack,system
 EOF
   chmod +x "$PROJPATH/session/session.eca"
 }
@@ -538,14 +515,14 @@ createRecSession(){
 tempo=$1
 cat << EOF > "$PROJPATH/session/rec.eca"
 ecasound -n "$PROJPATH/session/rec.eca" -b:512 -t:24.0 -f:16,2,48000 \\
-     -a:synth -i playat,4.8,audioloop,select,0,4.8,"$HOME/audio/$ARTIST/$PROJ/stems/synth.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:1  \\
-     -a:bass  -i playat,4.8,audioloop,select,0,4.8,"$HOME/audio/$ARTIST/$PROJ/stems/bass.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -efl:80 -eadb:0 \\
-     -a:snare -i playat,4.8,audioloop,select,0,4.8,"$HOME/audio/$ARTIST/$PROJ/stems/snare.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:10700  -eadb:-20 \\
-     -a:hihat -i playat,4.8,audioloop,select,0,4.8,"$HOME/audio/$ARTIST/$PROJ/stems/hihat.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-35 \\
-     -a:kick  -i playat,4.8,audioloop,select,0,4.8,"$HOME/audio/$ARTIST/$PROJ/stems/kick.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -ea:10 -efl:200 \\
-     -a:brush -i playat,4.8,audioloop,select,0,4.8,"$HOME/audio/$ARTIST/$PROJ/stems/brush.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:2400  -eadb:-25 \\
+     -a:synth -i playat,4.8,audioloop,select,0,4.8,"$HOME/audio/$PROJ/stems/synth.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:1  \\
+     -a:bass  -i playat,4.8,audioloop,select,0,4.8,"$HOME/audio/$PROJ/stems/bass.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -efl:80 -eadb:0 \\
+     -a:snare -i playat,4.8,audioloop,select,0,4.8,"$HOME/audio/$PROJ/stems/snare.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:10700  -eadb:-20 \\
+     -a:hihat -i playat,4.8,audioloop,select,0,4.8,"$HOME/audio/$PROJ/stems/hihat.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -ete:70,60,5 -efh:7040.00 -eadb:-35 \\
+     -a:kick  -i playat,4.8,audioloop,select,0,4.8,"$HOME/audio/$PROJ/stems/kick.wav"  -y:"$START_TIME" -erc:1,2 -epp:50 -ea:10 -efl:200 \\
+     -a:brush -i playat,4.8,audioloop,select,0,4.8,"$HOME/audio/$PROJ/stems/brush.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -efl:2400  -eadb:-25 \\
      -a:2,3 -i jack,system,1,0 \\
-     -a:2 -o "$HOME/audio/$ARTIST/$PROJ/input.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:0 \\
+     -a:2 -o "$HOME/audio/$PROJ/input.wav" -y:"$START_TIME" -erc:1,2 -epp:50 -eadb:0 \\
      -a:met -i:null -pn:metronome,$tempo -eadb:-50 \\
      -a:3,synth,bass,snare,brush,hihat,kick,met -o jack,system
 EOF
