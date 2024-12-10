@@ -96,7 +96,11 @@ overlayImage(){
   mv $5 $1
 }
 
-overlayMedia() {                                                                
+overlayMediaCenter() {                                                                                 
+  ffmpeg -i $1 -i $2 -filter_complex "[0][1]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2" $3                                 
+}
+
+overlayMediaBottomRight() {                                                                
     ffmpeg -i $1 -i $2 -filter_complex [0][1]overlay=W-w:H-h $3
 
     #local input_video="$1"                                                      
@@ -203,16 +207,17 @@ multiPageImage() {
     local delays=("$@")                                                                     
     local images=()                                                                         
                                                                                             
-    for i in {0..11}; do                                                                    
+    for i in {0..4}; do                                                                    
         images+=("-delay" "${delays[$i]}" "$HOME/images/flux_$((i * 30)).png")              
     done                                                                                    
+    echo "Images array: ${images[@]}"
                                                                                             
     magick -size 360x360 "${images[@]}" -loop 0 $HOME/images/multi-page-image.gif           
 }                                                                                           
 
 appendImages3x3() {
   magick \( $3 $3 $3 +append \) \
-         \( $2 $3 $3 +append \) \
+         \( $2 $4 $3 +append \) \
          \( $3 $3 $3 +append \) \
          -background none -append $1 
 
@@ -284,8 +289,17 @@ processMidiCSV() {
                                                                                             
     # Return the array for the target track                                                 
     echo "${time_diffs[$target_track]}"                                                     
-}                                                                                           
+}
 
-                                                                                
+midiToGif() { 
+  csv_file=$2  # Replace with your actual CSV file  
+  midicsv $1 $csv_file 
+  track_number=$3 # Replace with the desired track number                                     
+  delays_str=$(processMidiCSV "$csv_file" "$track_number")                                  
+  echo "$delays_str"
+  IFS=' ' read -r -a delays <<< "$delays_str"                                                 
+  echo "$IFS"
+  multiPageImage "${delays[@]}"
+}
 
 "$@"
