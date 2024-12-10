@@ -47,13 +47,6 @@ displayProj(){
 }
 
 createProj(){
-  if [ -d "$PROJLOC" ]; then
-      echo "Project location directory exists"
-  else
-    mkdir -p "$PROJLOC"
-    echo " Project location directory created"
-  fi
-
   if [ -d "$PROJPATH" ]; then
     echo "Directory exists"
   else
@@ -65,6 +58,9 @@ createProj(){
         mkdir "$PROJPATH/session"
         mkdir "$PROJPATH/sound-design"
         mkdir "$PROJPATH/audio"
+        mkdir "$PROJPATH/images"
+        mkdir "$PROJPATH/images/stills"
+        mkdir "$PROJPATH/images/movies"
         mkdir "$PROJPATH/audio/mix"
         mkdir "$PROJPATH/audio/stems"
         mkdir "$PROJPATH/audio/stems/recorded/"

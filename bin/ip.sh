@@ -28,7 +28,7 @@ changekhakiCanvasColourToTomato(){
 }
 
 canvasxcSingleInput(){
-  convert 'xc:turquoise4[100x100!]' $1
+  magick 'xc:turquoise4[100x100!]' $1
 }
 
 canvasSolidColorwheatxc(){
@@ -36,7 +36,7 @@ canvasSolidColorwheatxc(){
 }
 
 canvasSolidColorKhaki(){
-  convert -size $2x$3  canvas:khaki $1
+  magick -size $2x$3  canvas:khaki $1
 }
 
 generateNoiseImage(){
