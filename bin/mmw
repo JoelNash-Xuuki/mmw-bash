@@ -64,7 +64,8 @@ createProj(){
         mkdir "$PROJPATH/audio/mix"
         mkdir "$PROJPATH/audio/stems"
         mkdir "$PROJPATH/audio/stems/recorded/"
-        ffmpeg -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=48000 -t 5 "$PROJPATH/audio/stems/recorded/input.wav"
+        ffmpeg -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=48000 -t 5 "$PROJPATH"/audio/stems/recorded/input.wav
+        touch $HOME/TEST
         echo "$PROJ created"
       else
         echo "$PROJ not created"

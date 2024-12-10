@@ -11,6 +11,7 @@ setup() {
   mmw-config addStartTimeDeclaration
   mmw setStartTime 0
   echo "y" | mmw createProj
+  source "$HOME/.config/mmw.config"
 }
 
 teardown() {
@@ -60,7 +61,8 @@ teardown() {
 
 @test "creates a new project" {
   [ -d "$(mmw displayProj)" ] 
-  [ -f $HOME/audio/Test-Artist/My-Test-MMW-Proj/stems/input.wav ]
+  [ -d "$PROJPATH" ]
+  [ -f "$PROJPATH/audio/stems/recorded/input.wav" ]
   [ -d "$(mmw displayProj)"/sound-design ]
   [ -d "$(mmw displayProj)"/session ]
   [ -d $HOME/images ]
