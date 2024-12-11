@@ -1,4 +1,10 @@
+#!/bin/bash
+
 DISPLAY=/var/www/display_video/display.png
+
+# shellcheck source=/dev/null
+source "$HOME/.config/mmw.config"
+
 help(){
   echo "Usage:"
   echo "  canvasSolidColorKhaki"
@@ -192,28 +198,17 @@ generateTestImage(){
 rawRandomNoise() {                                                              
   # As of IM v6.3.5 you can generate a purely random image from an existing 
   # image using Noise Generator, "+noise" method 'Random'.
-  magick -size 360x360 xc:   +noise Random  $1 
+  magick -size 360x360 xc: +noise Random $PROJPATH/images/stills/random.png 
 }
 
 randomFlux() {                                                              
   for i in `seq 0 30 359`; do
     magick $1 -channel G  -function Sinusoid 1,${i} \
             -virtual-pixel tile -blur 0x8 -auto-level -size 360x360 \
-            -separate $HOME/images/flux_${i}.png
+            -separate $PROJPATH/images/stills/flux_${i}.png
+ 
   done
 }
-
-multiPageImage() {                                                                          
-    local delays=("$@")                                                                     
-    local images=()                                                                         
-                                                                                            
-    for i in {0..4}; do                                                                    
-        images+=("-delay" "${delays[$i]}" "$HOME/images/flux_$((i * 30)).png")              
-    done                                                                                    
-    echo "Images array: ${images[@]}"
-                                                                                            
-    magick -size 360x360 "${images[@]}" -loop 0 $HOME/images/multi-page-image.gif           
-}                                                                                           
 
 appendImages3x3() {
   magick \( $3 $3 $3 +append \) \
@@ -295,11 +290,24 @@ midiToGif() {
   csv_file=$2  # Replace with your actual CSV file  
   midicsv $1 $csv_file 
   track_number=$3 # Replace with the desired track number                                     
+
   delays_str=$(processMidiCSV "$csv_file" "$track_number")                                  
   echo "$delays_str"
   IFS=' ' read -r -a delays <<< "$delays_str"                                                 
   echo "$IFS"
   multiPageImage "${delays[@]}"
 }
+
+multiPageImage() {                                                                          
+    local delays=("$@")                                                                     
+    local images=()                                                                         
+                                                                                            
+    for i in {0..4}; do                                                                    
+        images+=("-delay" "${delays[$i]}" "$PROJ/images/stills/flux_$((i * 30)).png")              
+    done                                                                                    
+    echo "Images array: ${images[@]}"
+                                                                                             
+    magick -size 360x360 "${images[@]}" -loop 0 "$PROJ"/images/movies/multi-page-image.gif
+}                                                                                           
 
 "$@"
