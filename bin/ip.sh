@@ -303,11 +303,11 @@ multiPageImage() {
     local images=()                                                                         
                                                                                             
     for i in {0..4}; do                                                                    
-        images+=("-delay" "${delays[$i]}" "$PROJ/images/stills/flux_$((i * 30)).png")              
+        images+=("-delay" "${delays[$i]}" "$PROJPATH/images/stills/flux_$((i * 30)).png")              
     done                                                                                    
     echo "Images array: ${images[@]}"
                                                                                              
-    magick -size 360x360 "${images[@]}" -loop 0 "$PROJ"/images/movies/multi-page-image.gif
+    magick -size 360x360 "${images[@]}" -loop 0 "$PROJPATH/images/movies/multi-page-image.gif"
 }                                                                                           
 
 "$@"
