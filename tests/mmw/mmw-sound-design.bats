@@ -14,13 +14,13 @@ setup() {
   mmw setDur 16
   mmw-config addScoreDeclarationAndDefinition
   echo "y" | mmw createProj
+  source $HOME/.config/mmw.config
   mmw writeLilyFile
   mmw createScorePDFAndMIDIFiles
   mmw buildInstrSoundDesignFiles
   mmw prodScoreAudio
   mmw makeTrack
   mmw createSessionFile
-  source $HOME/.config/mmw.config
   $PROJPATH/session/session.eca
 }
 

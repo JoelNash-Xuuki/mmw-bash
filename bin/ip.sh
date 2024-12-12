@@ -24,6 +24,7 @@ runTests(){
 listCanvasColours(){
   convert -list color
 }
+
 grabPixelFromBuiltInRose(){
   convert rose: -crop 1x1+40+30 +repage -scale 100x100\! $1 
 }
@@ -107,7 +108,10 @@ overlayMediaCenter() {
 }
 
 overlayMediaBottomRight() {                                                                
-    ffmpeg -i $1 -i $2 -filter_complex [0][1]overlay=W-w:H-h $3
+    ffmpeg -i $1 -i $2 -filter_complex "[0:v][1:v] overlay=0:0" -pix_fmt yuv420p -c:a copy $3
+    ffmpeg -i movies/output.mp4 -i stills/multi-page-image.gif -filter_complex "[0:v][1:v] overlay=0:0" -pix_fmt yuv420p -c:a copy output-overlay.mp4
+
+#    ffmpeg -i $1 -i $2 -filter_complex "[0][1]overlay=W-w:H-h" output-overlay.mp4
 
     #local input_video="$1"                                                      
     #local overlay_media="$2"                                                    
@@ -123,8 +127,6 @@ overlayMediaBottomRight() {
                                                                                  
  # Usage example:                                                                
  # overlayMedia input.mp4 overlay.gif output.mp4 "10:10" "200:200" ":enable='between(t,0,10)'"                                                     
- 
-
 getAudioInfo() {
   ffprobe -hide_banner $1 -select_streams a -show_format
 }
@@ -239,9 +241,6 @@ basicOverMultiplLines(){
          label:@$1 $2
 }
 
-
-
-
 processMidiCSV() {                                                                        
     local csv_file="$1"                                                                     
     local target_track="$2"                                                                 
@@ -286,6 +285,35 @@ processMidiCSV() {
     echo "${time_diffs[$target_track]}"                                                     
 }
 
+countNotesOn() {                                                                                                       
+  local csv_file="$1"                                                                                                
+  local channel="$2"                                                                                                 
+  awk -F, -v channel="$channel" '$3 ~ /Note_on_c/ && $4 == channel && $6 > 0 {count++} END {print count}' "$csv_file"
+}
+
+countNotesOnOff() {                                                                                                       
+  local csv_file="$1"                                                                                                
+  local channel="$2"                                                                                                 
+  awk -F, -v channel="$channel" '$3 ~ /Note_on_c/ && $4 == channel {count++} END {print count}' "$csv_file"
+}                                                                                                                    
+                                                                                                                     
+# Usage                                                                                                              
+# note_count=$(countNotes "path/to/your.csv" "desired_channel")                                                        
+# echo "Number of notes: $note_count"                                                                                  
+ 
+
+multiPageImage() {                                                                          
+    local delays=("$@")                                                                     
+    local images=()                                                                         
+                                                                                            
+    for i in {0..2}; do                                                                    
+        images+=("-delay" "${delays[$i]}" "$PROJPATH/images/stills/flux_$((i * 30)).png")              
+    done                                                                                    
+    echo "Images array: ${images[@]}"
+                                                                                             
+    magick -size 360x360 "${images[@]}" -loop 0 "$PROJPATH/images/stills/multi-page-image.gif"
+}                                                                                           
+
 midiToGif() { 
   csv_file=$2  # Replace with your actual CSV file  
   midicsv $1 $csv_file 
@@ -298,16 +326,9 @@ midiToGif() {
   multiPageImage "${delays[@]}"
 }
 
-multiPageImage() {                                                                          
-    local delays=("$@")                                                                     
-    local images=()                                                                         
-                                                                                            
-    for i in {0..4}; do                                                                    
-        images+=("-delay" "${delays[$i]}" "$PROJPATH/images/stills/flux_$((i * 30)).png")              
-    done                                                                                    
-    echo "Images array: ${images[@]}"
-                                                                                             
-    magick -size 360x360 "${images[@]}" -loop 0 "$PROJPATH/images/movies/multi-page-image.gif"
-}                                                                                           
+
 
 "$@"
+                                                                                                                     
+                                                                                                                      
+                                                                                                                    
