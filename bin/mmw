@@ -590,7 +590,6 @@ syncdb(){
   # database. Adjust the script as needed for your specific setup.
 }
 
-
 syncdb2(){                                                                                                          
   USERNAME="$USER"                                                                                                 
   PASSWORD="x"                                                                                                     
