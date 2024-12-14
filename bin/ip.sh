@@ -241,6 +241,12 @@ basicOverMultiplLines(){
          label:@$1 $2
 }
 
+# The read command in the line while IFS=, read -r track time event_type channel note velocity; do is used to read   
+# lines from a file or input, splitting each line into variables based on a specified delimiter. In this case, IFS=, 
+# sets the Internal Field Separator to a comma, meaning the line is split at each comma. The -r option prevents      
+# backslashes from being interpreted as escape characters. Each line from the CSV file is read into the variables    
+# track, time, event_type, channel, note, and velocity, which are then used within the loop to process MIDI events.  
+
 processMidiCSV() {                                                                        
     local csv_file="$1"                                                                     
     local target_track="$2"                                                                 
@@ -300,12 +306,10 @@ countNotesOnOff() {
 # Usage                                                                                                              
 # note_count=$(countNotes "path/to/your.csv" "desired_channel")                                                        
 # echo "Number of notes: $note_count"                                                                                  
- 
 
 multiPageImage() {                                                                          
     local delays=("$@")                                                                     
     local images=()                                                                         
-                                                                                            
     for i in {0..2}; do                                                                    
         images+=("-delay" "${delays[$i]}" "$PROJPATH/images/stills/flux_$((i * 30)).png")              
     done                                                                                    
@@ -315,20 +319,19 @@ multiPageImage() {
 }                                                                                           
 
 midiToGif() { 
-  csv_file=$2  # Replace with your actual CSV file  
-  midicsv $1 $csv_file 
+  csvFileName=$2  # Replace with your actual CSV file  
+  midicsv $1 $csvFileName 
   track_number=$3 # Replace with the desired track number                                     
 
-  delays_str=$(processMidiCSV "$csv_file" "$track_number")                                  
+  delays_str=$(processMidiCSV "$csvFileName" "$track_number")                                  
   echo "$delays_str"
   IFS=' ' read -r -a delays <<< "$delays_str"                                                 
   echo "$IFS"
   multiPageImage "${delays[@]}"
 }
 
-
-
 "$@"
                                                                                                                      
                                                                                                                       
-                                                                                                                    
+                                                                                   
+

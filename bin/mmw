@@ -608,8 +608,7 @@ WHERE project_name='$PROJ';")
   for session in $db_sessions; do                                                                                  
     if ! echo "$gdrive_sessions" | grep -q "$session"; then                                                        
       echo "Session $session not found on Google Drive. Removing from database."                                   
-      mariadb -u "$USERNAME" -p"$PASSWORD" -h "$HOST" "$DATABASE" -e "DELETE FROM projects WHERE                   
-project_name='$PROJ' AND session_date='$session';"                                                                 
+      mariadb -u "$USERNAME" -p"$PASSWORD" -h "$HOST" "$DATABASE" -e "DELETE FROM projects WHERE project_name='$PROJ' AND session_date='$session';"                                                                 
     fi                                                                                                             
   done                                                                                                             
 }
@@ -646,6 +645,3 @@ downLoad(){
 
 
 "$@"
-                                                                                                
-                                                                                                                  
-                                                                                                                  
