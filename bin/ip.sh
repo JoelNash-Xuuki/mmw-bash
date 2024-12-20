@@ -61,9 +61,8 @@ createTextPNG(){
   width=485
   height=155
   magick -background transparent -fill lightblue \
-         -extent $widthx$height\
-         -font ~/.fonts/xuukitype1.ttf -pointsize 36 label:$1\
-          $HOME/Xuuki/src/sites/public/output.png
+         -font /usr/share/fonts/truetype/custom/xuukitype1.ttf -pointsize 36 label:$1 \
+          $2
 }
 
 createMP4(){
