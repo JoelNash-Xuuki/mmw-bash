@@ -92,62 +92,62 @@ cat << EOF > "$SCORE"
 \score {
   <<
     \new StaffGroup << %Melody
-      \new Staff \with  { 
+      \new Staff \with  {
         instrumentName=  " "
         shortInstrumentName= " "
-      } 
+      }
         \relative {
         \time 4/4
         \tempo 4 = $TEMPO
         \clef treble
-        gis'4 a  
-        b2   
+        gis'4 a
+        b2
       }
-    >> 
+    >>
     \new StaffGroup << %Harmony
-      \new Staff \with  
-      { 
+      \new Staff \with
+      {
         instrumentName= "FM"
       } \relative {
         \time 4/4
         \tempo 4 = $TEMPO
         \clef treble
-        \key a \major 
+        \key a \major
          <a, e' gis cis>4 r2.
          r4 <a' cis e gis>4 r2
          <cis, gis' b dis>4 r2.
-         r4 <cis gis' b e> r8 
+         r4 <cis gis' b e> r8
          <cis gis' b dis>4 r8
 
-        
+
       }
-    >> 
+    >>
     \new StaffGroup << %Bass
-       \new Staff \with { 
+       \new Staff \with {
          instrumentName= " "
          shortInstrumentName= " "}
-        \relative  { 
+        \relative  {
          \time 4/4
          \tempo 4 = $TEMPO
          \clef bass
          \key a \major
          a,4\staccato a4\staccato r a4\staccato
-         r4 r4 r8 cis8 b4\staccato  
-         a4\staccato gis4\staccato r gis4\staccato 
-         r fis4\staccato r8 gis4\staccato 
+         r4 r4 r8 cis8 b4\staccato
+         a4\staccato gis4\staccato r gis4\staccato
+         r fis4\staccato r8 gis4\staccato
        }
     >>
     \new StaffGroup << %Percussion
        \new Staff \with { %Snare
          instrumentName= " "
          shortInstrumentName= " "
-       } 
+       }
        {
          \tempo 4 = $TEMPO
          \clef percussion
          \xNotesOn
          d4 d4 r4 r8 r
-         r2 r4 r8 r 
+         r2 r4 r8 r
          r2 r4 r4
          r2 r4 r8 d
        }
@@ -155,7 +155,7 @@ cat << EOF > "$SCORE"
       \new Staff \with { %Brush
         instrumentName= " "
         shortInstrumentName= " "
-      } 
+      }
       {
         \clef percussion
         \tempo 4 = $TEMPO
@@ -164,35 +164,35 @@ cat << EOF > "$SCORE"
          <a, e' gis cis>4 r2.
          r4 <a' cis e gis>4 r2
          <cis, gis' b dis>4 r2.
-         r4 <cis gis' b e> r8 
+         r4 <cis gis' b e> r8
          <cis gis' b dis>4 r8
       }
 
       \new Staff \with { % HiHat
           instrumentName= "Hi Hat"
-          shortInstrumentName= "HH" 
+          shortInstrumentName= "HH"
         }
-        { 
+        {
           \clef percussion
           \tempo 4 = $TEMPO
           \xNotesOn
-          d8 r d r d d d d 
+          d8 r d r d d d d
           r r r r d d d d
           d r d r d d d d
-          r r d r d d d d   
+          r r d r d d d d
         }
 
         \new Staff \with { %Kick
           instrumentName= "Kick"
-          shortInstrumentName= "Kk" 
+          shortInstrumentName= "Kk"
         }
-        \relative { 
+        \relative {
           \clef percussion
           \tempo 4 = $TEMPO
-         d4 r4   r2 
-         d4 r4   r2 
-         d4 r8 d r2 
-         d4 r4   r2 
+         d4 r4   r2
+         d4 r4   r2
+         d4 r8 d r2
+         d4 r4   r2
         }
     >>
   >>
@@ -205,7 +205,7 @@ EOF
 }
 
 createScorePDFAndMIDIFiles(){
-  if [ ! -d "$HOME/Documents" ]; then 
+  if [ ! -d "$HOME/Documents" ]; then
     mkdir "$HOME/Documents"
   fi
 
@@ -220,10 +220,10 @@ buildInstrSoundDesignFiles(){
   ksmps	  = 10
   nchnls    = 9
   0dbfs	  = 1
-  
+
   ; gah	  init 0
   ; gahh	  init 0
-  
+
   ; Instr Definitions
   ; score stave names
   #define   smelody #1#
@@ -235,42 +235,42 @@ buildInstrSoundDesignFiles(){
   #define   skick #7#
 
   #define   voice #1#
-  #define   harmony #2# 
+  #define   harmony #2#
   #define   bass #3#
   #define   snare #4#
   #define   brush #5#
   #define   hihat #6#
   #define   kick #7#
-  
+
   ; Map Midi Channels
   massign   \$voice, \$smelody
   massign   \$harmony, \$sharmony
   massign   \$bass, \$bass
   massign   \$snare, \$snare
-  massign   \$brush, \$sbrush ; why does changing \$sharmony to \$sbrush looses chords? 
+  massign   \$brush, \$sbrush ; why does changing \$sharmony to \$sbrush looses chords?
   massign   \$hihat, \$hihat
-  massign   \$kick, \$kick 
-  
+  massign   \$kick, \$kick
+
   ; Globals
   gicps  	  init 256
-  
+
             instr \$voice
   ivibdel   = 0.114
   iamp      veloc 0, 0.25
   kfrq      cpsmidib 2
   kenv      linsegr 0.001, 0.950, iamp, 0.950, 0.001
   kvibenv   linseg 0.001, ivibdel, 0.1, ivibdel, 0.001
-  
+
   kfrq      = kfrq*1
-  
+
   klfo      oscil kvibenv, 0.714, 1
   kindex    expon 1, 0.2, 0.30
-  
+
   asig1     oscili  kenv*iamp, kfrq, 1
   asig2     oscili  kenv*iamp, kfrq*1.005, 1
   asig3     oscili  kenv*iamp, kfrq*.995, 2
   asig4     foscil  kenv, kfrq, 3.5, 2.5, kindex
-  
+
   amix      = (asig1+(asig2*0.015)+(asig3*0.015)+(asig4*0.00006))*6
   anoise    rand kfrq
   ;afilt     tone adis+(anoise*0.0000005*klfo), 1000
@@ -278,41 +278,41 @@ buildInstrSoundDesignFiles(){
   ahpf      butterhp alpf, 105  ; pass fres above
             outch \$voice, (ahpf*kenv)
             endin
-  
+
             instr \$harmony ;character
   ivibdel   = 0.714
   iamp      veloc 0, 0.25
   kfrq      cpsmidib 0.95
   kenv      linsegr 0.001, 0.614, iamp, 0.614, 0.001
   kvibenv   linseg 0.001, ivibdel, 1, ivibdel, 0.001
-  
+
   klfo      oscil kvibenv, 0.714, 1
   kindex    expon 1, 0.2, 0.30
-  
+
   asig1     oscili  kenv*iamp, kfrq, 1
   asig2     oscili  kenv*iamp, kfrq*1.001, 1
   asig3     oscili  kenv*iamp, kfrq*.999, 2
   asig4     foscil  kenv, kfrq, 3.5, 2.5, kindex
-  
+
   amix      = (asig1+(asig2*0.5)+(asig3*0.01)+(asig4*0.005))*6
   anoise    rand kfrq
   ;afilt     tone adis+(anoise*0.0000025klfo), 1000
   alpf     butterlp amix, 300 ;cut freqs above
   ahpf     butterhp alpf, 100 ;pass freqs above
-  
+
             outch \$harmony, (ahpf*kenv)
             endin
-  
-    instr \$bass 
+
+    instr \$bass
   idec 	  = 3
-  iamp 	  veloc 0, 1 
+  iamp 	  veloc 0, 1
   kfrq 	  cpsmidib 1
   kenv 	  expsegr 0.9, idec, 0.01, 0.5, 0.001
-  
-  asig 	  oscili  kenv*iamp, kfrq, 1 
-  
+
+  asig 	  oscili  kenv*iamp, kfrq, 1
+
   afilt	  tone asig, 150
-  
+
   	      outch \$bass, afilt
   		  endin
     instr \$snare
@@ -332,7 +332,7 @@ buildInstrSoundDesignFiles(){
   kbw		  line	ibw1, idur, ibw2
   afilt	  reson	asig*0.01, kcf, kbw, 2
   	      outch \$snare, (afilt*kenv)*ipan
-  
+
   		  endin
   instr \$brush
   idur 	= 2.000
@@ -353,8 +353,8 @@ buildInstrSoundDesignFiles(){
   klfo	oscil   1.000, 0.200, 1
   		outch   \$brush, ((afilt*klfo)*kenv)*ipan
   		endin
-  
-  
+
+
             instr \$hihat
   idur      = 0.001
   iamp      veloc 0, 1
@@ -367,7 +367,7 @@ buildInstrSoundDesignFiles(){
   ibw2      =                7140
   ipan      =                0.5
   kenv      expseg        .001, iatk, iamp, idur/6, iamp*.4, idur-(iatk+irel+idur/6), iamp*.6, irel,.01
-  
+
   ; ;kenv linsegr 0, .1, 1, .05, .75, .2, 0
   ;; generate a modulation signal that follows the pitch of the note
   ;  kmod = foscil(kenv, ifrq, 1) * 500
@@ -376,34 +376,34 @@ buildInstrSoundDesignFiles(){
   ;; VCO
   asig      rand ifrq
   ;
-  
+
   kcf               expon icf1, idur, icf2
   kbw               line  ibw1, idur, ibw2
   afilt     reson asig, kcf, kbw, 2
-  
+
   ;min_value = 400
   ;max_value = 2000
   ;min_ifrq = 400
   ;max_ifrq = 2000
   ;s_ifrq = min_value + (ifrq - min_ifrq) * (max_value - min_value) / (max_ifrq - min_ifrq)
-  
+
   ;afilp_lp   lowres  afilt, s_ifrq, 90
-  
+
   ;
   ;
   ;;
   ;
               outch \$hihat, ((afilt*kenv)*ipan) * .02
                   endin
-  
+
   instr \$kick
-  idur		=	 0.2	
+  idur		=	 0.2
   imaxamp 	veloc 	0, 0.7
   icarrfreq	=		32.7
   imodfreq	=		40
   ilowndx		=		0.1
   indxdiff	=		5-0
-  
+
    ;PARAMETERS DEFINING THE ADSR AMPLITUDE ENVELOPE
    ;TIMES ARE A PERCENTAGE OF p3
    ;  attack amp  = p9     attack length  = p14
@@ -411,7 +411,7 @@ buildInstrSoundDesignFiles(){
    ;  sustain amp = p11    sustain length = p16
    ;  release amp = p12    release length = p17
    ;  end amp     = p13
-  
+
    ;;PARAMETERS DEFINING THE ADSR FREQ DEVIATION ENVELOPE
    ;;TIMES ARE A PERCENTAGE OF p3
    ;  attack amp  = p18    attack length  = p23
@@ -419,7 +419,7 @@ buildInstrSoundDesignFiles(){
    ;  sustain amp = p20    sustain length = p25
    ;  release amp = p21    release length = p26
    ;  end amp     = p22
-  
+
   aampenv		linseg	.75, .125*idur, .8, .125*idur, 1.0, .25*idur, .15, .5*idur, .0
   adevenv		linseg	1.0, .125*idur, .0, .25*idur, .0, .25*idur, .0, .25*idur, .0
   amodosc		oscili	(ilowndx+indxdiff*adevenv)*imodfreq, imodfreq, 1
@@ -427,9 +427,9 @@ buildInstrSoundDesignFiles(){
   			outch \$kick, acarosc
   			endin
   "
-  
+
   echo "$projOrc" > "$PROJPATH/sound-design/$PROJ.orc"
-  
+
   projSco="
   f0 $LENGTH
   t 0 $TEMPO
@@ -437,9 +437,9 @@ buildInstrSoundDesignFiles(){
   f1 0 1024 10 1
   f2 0 1024 10 1 0.5 0.3 0.25 0.2 0.167 0.14 0.125 .111
   f3 0 1024 10 1 0   0.3 0    0.2 0     0.14 0     .111   ; Square with a small amount of data
-  f4 0 1024 10 1 1   1   1    0.7 0.5   0.3  0.1      
+  f4 0 1024 10 1 1   1   1    0.7 0.5   0.3  0.1
   "
-  
+
   echo "$projSco" > "$PROJPATH/sound-design/$PROJ.sco"
 }
 
@@ -453,13 +453,13 @@ prodScoreAudio(){
 makeTrack(){
   # Define the input file
   input_file="$PROJPATH/audio/stems/$PROJ.wav"
-  
+
   # Define the output directory
   output_dir="$PROJPATH/audio/stems/"
-  
+
   # Define an array of instrument names corresponding to each channel
   instruments=( "vocal" "synth" "bass" "snare" "brush" "hihat" "kick" )
-  
+
   # Loop through each instrument and channel number
   for i in "${!instruments[@]}"; do
     channel=$((i + 1))
@@ -483,13 +483,13 @@ EOF
   "$PROJPATH/session/session.eca"
 
   exit_code=$?
-  
+
   if [ $exit_code -eq 0 ]; then
     echo "Ecasound command executed successfully with exit code $exit_code."
   else
     echo "Ecasound command failed with exit code $exit_code."
   fi
-  
+
   return $exit_code
 }
 
@@ -532,116 +532,140 @@ getVolume() {
 }
 
 saveProject() {
-  # Define variables                                                                       
-  PROJ="$1"                                                                  
-  project_name="$PROJ"                                                                     
-  session_date="$2" #"$(date +"%Y%m%d-%H%M%S")"                                                  
-  gdrive_path="gdrive:Source/Projects/$project_name/$session_date/"                           
-  
-  # Create the directory structure on Google Drive                                         
-  rclone mkdir "$gdrive_path"                                                              
-  rclone copy "$HOME/$PROJLOC/$PROJ" "$gdrive_path"                         
-  rclone ls "$gdrive_path"                                                                 
-   
-  # Database credentials                                                                   
-  USERNAME="$USER"                                                                         
-  PASSWORD="x"                                                                             
-  HOST="localhost"                                                                         
-  DATABASE="xuuki"                                                                         
-                                                                                             
-  # SQL command                                                                            
-  SQL_COMMAND="INSERT INTO projects (project_name, session_date, gdrive_path) VALUES       
-  ('$project_name', '$session_date', '$gdrive_path');"                                     
-                                                                                           
-  # Execute SQL command                                                                    
-  echo "$SQL_COMMAND" | mariadb -u "$USERNAME" -p"$PASSWORD" -h "$HOST" "$DATABASE"        
+  # Define variables
+  PROJ="$1"
+  project_name="$PROJ"
+  session_date="$2" #"$(date +"%Y%m%d-%H%M%S")"
+  gdrive_path="gdrive:Source/Projects/$project_name/$session_date/"
+
+  # Create the directory structure on Google Drive
+  rclone mkdir "$gdrive_path"
+  rclone copy "$HOME/$PROJLOC/$PROJ" "$gdrive_path"
+  rclone ls "$gdrive_path"
+
+  # Database credentials
+  USERNAME="$USER"
+  PASSWORD="x"
+  HOST="localhost"
+  DATABASE="xuuki"
+
+  # SQL command
+  SQL_COMMAND="INSERT INTO projects (project_name, session_date, gdrive_path) VALUES
+  ('$project_name', '$session_date', '$gdrive_path');"
+
+  # Execute SQL command
+  echo "$SQL_COMMAND" | mariadb -u "$USERNAME" -p"$PASSWORD" -h "$HOST" "$DATABASE"
 }
 
 syncdb(){
-  # Database credentials                                                                                               
-  USERNAME="$USER"  
-  PASSWORD="x"                                                                                                         
-  HOST="localhost"                                                                                                     
-  DATABASE="xuuki"                                                                                                     
-                                                                                                                       
-  # Project name                                                                                                       
-  PROJ="$1"                                                                                              
-                                                                                                                       
-  # Get list of sessions from Google Drive                                                                             
-  gdrive_sessions=$(rclone lsf "gdrive:Source/Projects/" | tr -d '/')                                                
-                                                                                                                       
-  # Get list of sessions from the database                                                                             
-  db_sessions=$(mariadb -u "$USERNAME" -p"$PASSWORD" -h "$HOST" "$DATABASE" -se "SELECT session_date FROM projects WHERE project_name='$PROJ';")                                                                                              
-                                                                                                                       
-  # Compare and delete missing sessions from the database                                                              
-  for session in $db_sessions; do                                                                                      
-    if ! echo "$gdrive_sessions" | grep -q "$session"; then                                                            
-      echo "Session $session not found on Google Drive. Removing from database."                                       
-      mysql -u "$USERNAME" -p"$PASSWORD" -h "$HOST" "$DATABASE" -e "DELETE FROM projects WHERE project_name='$PROJ' AND session_date='$session';"                                                                                            
-    fi                                                                                                                 
-  done                                                                                                                 
-  
-  # Instructions:                                                                                                         
-  # 
-  #  1 Save the script to a file, e.g., sync_gdrive_db.sh.                                                                
-  #  2 Make it executable: chmod +x sync_gdrive_db.sh.                                                                    
-  #  3 Run the script: ./sync_gdrive_db.sh.                                                                               
-  # 
-  # This script will check for any sessions in the database that are not present on Google Drive and remove them from the 
+  # Database credentials
+  USERNAME="$USER"
+  PASSWORD="x"
+  HOST="localhost"
+  DATABASE="xuuki"
+
+  # Project name
+  PROJ="$1"
+
+  # Get list of sessions from Google Drive
+  gdrive_sessions=$(rclone lsf "gdrive:Source/Projects/" | tr -d '/')
+
+  # Get list of sessions from the database
+  db_sessions=$(mariadb -u "$USERNAME" -p"$PASSWORD" -h "$HOST" "$DATABASE" -se "SELECT session_date FROM projects WHERE project_name='$PROJ';")
+
+  # Compare and delete missing sessions from the database
+  for session in $db_sessions; do
+    if ! echo "$gdrive_sessions" | grep -q "$session"; then
+      echo "Session $session not found on Google Drive. Removing from database."
+      mysql -u "$USERNAME" -p"$PASSWORD" -h "$HOST" "$DATABASE" -e "DELETE FROM projects WHERE project_name='$PROJ' AND session_date='$session';"
+    fi
+  done
+
+  # Instructions:
+  #
+  #  1 Save the script to a file, e.g., sync_gdrive_db.sh.
+  #  2 Make it executable: chmod +x sync_gdrive_db.sh.
+  #  3 Run the script: ./sync_gdrive_db.sh.
+  #
+  # This script will check for any sessions in the database that are not present on Google Drive and remove them from the
   # database. Adjust the script as needed for your specific setup.
 }
 
-syncdb2(){                                                                                                          
-  USERNAME="$USER"                                                                                                 
-  PASSWORD="x"                                                                                                     
-  HOST="localhost"                                                                                                 
-  DATABASE="xuuki"                                                                                                 
-  PROJ="$1"                                                                                                        
-                                                                                                                   
-  # Get list of sessions from Google Drive for the specific project                                                
-  gdrive_sessions=$(rclone lsf "gdrive:Source/Projects/$PROJ/" | tr -d '/')                                        
-                                                                                                                   
-  # Get list of sessions from the database                                                                         
-  db_sessions=$(mariadb -u "$USERNAME" -p"$PASSWORD" -h "$HOST" "$DATABASE" -se "SELECT session_date FROM projects 
-WHERE project_name='$PROJ';")                                                                                      
-                                                                                                                   
-  # Compare and delete missing sessions from the database                                                          
-  for session in $db_sessions; do                                                                                  
-    if ! echo "$gdrive_sessions" | grep -q "$session"; then                                                        
-      echo "Session $session not found on Google Drive. Removing from database."                                   
-      mariadb -u "$USERNAME" -p"$PASSWORD" -h "$HOST" "$DATABASE" -e "DELETE FROM projects WHERE project_name='$PROJ' AND session_date='$session';"                                                                 
-    fi                                                                                                             
-  done                                                                                                             
+syncdb2(){
+  USERNAME="$USER"
+  PASSWORD="x"
+  HOST="localhost"
+  DATABASE="xuuki"
+  PROJ="$1"
+
+  # Get list of sessions from Google Drive for the specific project
+  gdrive_sessions=$(rclone lsf "gdrive:Source/Projects/$PROJ/" | tr -d '/')
+
+  # Get list of sessions from the database
+  db_sessions=$(mariadb -u "$USERNAME" -p"$PASSWORD" -h "$HOST" "$DATABASE" -se "SELECT session_date FROM projects
+WHERE project_name='$PROJ';")
+
+  # Compare and delete missing sessions from the database
+  for session in $db_sessions; do
+    if ! echo "$gdrive_sessions" | grep -q "$session"; then
+      echo "Session $session not found on Google Drive. Removing from database."
+      mariadb -u "$USERNAME" -p"$PASSWORD" -h "$HOST" "$DATABASE" -e "DELETE FROM projects WHERE project_name='$PROJ' AND session_date='$session';"
+    fi
+  done
 }
+
+syncdb3() {
+   USERNAME="$USER"
+   PASSWORD="x"
+   HOST="localhost"
+   DATABASE="xuuki"
+   PROJ="$1"
+
+   # Get list of sessions from Google Drive
+   gdrive_sessions=$(rclone lsf "gdrive:Source/Projects/$PROJ/" | tr -d '/')
+
+   # Get list of sessions from the database
+   db_sessions=$(mariadb -u "$USERNAME" -p"$PASSWORD" -h "$HOST" "$DATABASE" -se "SELECT
+ session_date FROM projects WHERE project_name='$PROJ';")
+
+   # Compare and delete missing sessions from the database
+   for session in $db_sessions; do
+     if ! echo "$gdrive_sessions" | grep -q "$session"; then
+       echo "Session $session not found on Google Drive. Removing from database."
+       mariadb -u "$USERNAME" -p"$PASSWORD" -h "$HOST" "$DATABASE" -e "DELETE FROM projects
+ WHERE project_name='$PROJ' AND session_date='$session';"
+     fi
+   done
+ }
 
 viewProjects() {
   echo "**********     Projects     **********"
   USERNAME="$USER"
-  PASSWORD="x" 
+  PASSWORD="x"
   HOST="localhost"
   DATABASE="xuuki"
-  
+
   mariadb -u $USERNAME -p$PASSWORD -h $HOST xuuki -e "SELECT * FROM projects;"
 }
 
 downLoad(){
-  # Prompt for project name and session date                                            
-  read -p "Enter project name: " project_name                                           
-  read -p "Enter session date (format: YYYYMMDD-HHMMSS): " session_date                 
-                                                                                        
-  # Define local path                                                                   
-  local_path="$HOME/$project_name/$session_date/"                     
-                                                                                        
-  # Define Google Drive path                                                            
-  gdrive_path="gdrive:Source/Projects/$project_name/$session_date/"                        
-                                                                                        
-  # Create local directory if it doesn't exist                                          
-  mkdir -p "$local_path"                                                                
-                                                                                        
-  # Use rclone to copy files from Google Drive to local path                            
-  rclone copy "$gdrive_path" "$local_path"                                              
-                                                                                        
-  echo "Download complete: $local_path"       
+  # Prompt for project name and session date
+  read -p "Enter project name: " project_name
+  read -p "Enter session date (format: YYYYMMDD-HHMMSS): " session_date
+
+  # Define local path
+  local_path="$HOME/$project_name/$session_date/"
+
+  # Define Google Drive path
+  gdrive_path="gdrive:Source/Projects/$project_name/$session_date/"
+
+  # Create local directory if it doesn't exist
+  mkdir -p "$local_path"
+
+  # Use rclone to copy files from Google Drive to local path
+  rclone copy "$gdrive_path" "$local_path"
+
+  echo "Download complete: $local_path"
 }
 
 
