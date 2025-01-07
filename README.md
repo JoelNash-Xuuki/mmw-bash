@@ -14,10 +14,10 @@ sudo pacman -S portmidi
 
 Install yay/midicsv:
 ```bash
-cd                                                                           
-git clone https://aur.archlinux.org/yay.git                                 
-cd yay/                                                                     
-makepkg -si                                                                 
+cd
+git clone https://aur.archlinux.org/yay.git
+cd yay/
+makepkg -si
 yay -S midicsv
 ```
 
@@ -29,8 +29,8 @@ sudo cp bin/mmw-config bin/mmw bin/ip.sh /usr/local/bin/
 Run tests in following order
 ```bash
 bats tests/mmw-config/mmw-config.bats
-bats tests/mmw/mmw.bats 
-bats tests/mmw/mmw-score.bats 
+bats tests/mmw/mmw.bats
+bats tests/mmw/mmw-score.bats
 bats tests/mmw/mmw-sound-design.bats
 ```
 
@@ -41,4 +41,14 @@ bats tests/ip/text-to-image-handling.bats
 bats tests/ip/random-images.bats
 bats tests/ip/moving-image.bats
 ```
+Install Autotalent:
+```
+yay -S autotalent
+```
 
+Verify Installation:
+Ensure the plugin is installed by listing LADSPA plugins:
+
+```
+listplugins | grep autotalent
+```
