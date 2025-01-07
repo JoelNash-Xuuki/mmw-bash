@@ -5,3 +5,5 @@ src/*.swp
 test/src/score/Test*
 tmp/config
 My_Test_MMW_project
+chat.txt
+message.sh
