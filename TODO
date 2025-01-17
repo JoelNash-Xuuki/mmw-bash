@@ -1,0 +1,13 @@
+- SFTP to send files between vyvn@192.168.1.220 and vyvn@192.168.1.230
+- [Bug] For now files to gdrive might only come from jnash@192.168.1.220
+- Audio metadata
+- rclone, need to easliy connect on arch
+- Lets ensure vyvn can run script then run record straight away
+- Rec eca and a Session eca, i want to hear the same mix. Audio dir
+  has new file layout. 
+- appending images...
+- Work test session and rec eca files into tests
+- Mention nginx needs to be configured, to view files, sudo user needs to
+  move them.
+- Updates to scripts in bin need moving to /usr/local/bin
+  for environment variable.
